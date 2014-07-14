@@ -7,7 +7,7 @@ public class _Mono : MonoBehaviour {
 
 	public float x {
 		set {
-			transform.position = new Vector2 (value, transform.position.y);
+			transform.position = new Vector3 (value, transform.position.y, transform.position.z);
 		}
 		get {
 			return transform.position.x;
@@ -16,7 +16,7 @@ public class _Mono : MonoBehaviour {
 
 	public float y {
 		set {
-			transform.position = new Vector2 (transform.position.x, value);
+			transform.position = new Vector3 (transform.position.x, value, transform.position.z);
 		}
 		get {
 			return transform.position.y;
@@ -44,7 +44,7 @@ public class _Mono : MonoBehaviour {
 
 	public float xs {
 		set {
-			transform.localScale = new Vector2 (value, transform.localScale.y);
+			transform.localScale = new Vector3 (value, transform.localScale.y, transform.localScale.z);
 		}
 		get {
 			return transform.localScale.x;
@@ -53,7 +53,7 @@ public class _Mono : MonoBehaviour {
 
 	public float ys {
 		set {
-			transform.localScale = new Vector2 (transform.localScale.x, value);
+			transform.localScale = new Vector3 (transform.localScale.x, value, transform.localScale.z);
 		}
 		get {
 			return transform.localScale.y;

@@ -8,5 +8,11 @@ public static class Utils {
 	}
 	
 	//public static 
-
+	
+	public static bool CloseValues(float v1, float v2, float tolerance){
+		if(Mathf.Abs(v1 - v2) < tolerance)
+			return true;
+		else 
+			return false;
+	}
 }

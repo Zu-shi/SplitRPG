@@ -5,6 +5,9 @@ TagManager:
   tags:
   - PlayerLeft
   - PlayerRight
+  - GameManager
+  - LeftCamera
+  - RightCamera
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

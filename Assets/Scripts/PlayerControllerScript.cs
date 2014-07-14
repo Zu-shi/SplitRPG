@@ -3,6 +3,11 @@ using System.Collections;
 
 public class PlayerControllerScript : _Mono {
 
+	public bool allowMovement{get;set;}
+
+	// Game Manager
+	GameManagerScript gameManager;
+
 	// Other player stuff
 	bool isLeftPlayer;
 	GameObject otherPlayer;
@@ -23,6 +28,14 @@ public class PlayerControllerScript : _Mono {
 	}
 
 	void Start () {
+		allowMovement = true;
+
+		// Game Manager
+		gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
+		if(gameManager == null){
+			Debug.Log ("Error: Game Manager not found.");
+		}
+
 		// Determine which player we are
 		if(gameObject.tag == "PlayerLeft"){
 			isLeftPlayer = true;
@@ -71,6 +84,8 @@ public class PlayerControllerScript : _Mono {
 
 		fallingBehavior.Reset();
 
+		// Reset Camera (currently a hack)
+		gameManager.Reset();
 	}
 
 	void ResetBothPlayers(){
@@ -88,10 +103,59 @@ public class PlayerControllerScript : _Mono {
 
 	}
 
-	public void GiveInputDirection(Direction direction){
-		if(!fallingBehavior.falling){
-			characterMovement.MoveInDirection(direction);
+	public bool WillMoveOffScreen(Direction direction){
+
+		switch(direction){
+		case Direction.NONE:
+			break;
+		case Direction.LEFT:
+			if(tileX == gameManager.roomLeft)
+				return true;
+			break;
+		case Direction.RIGHT:
+			if(tileX == gameManager.roomRight)
+				return true;
+			break;
+		case Direction.UP:
+			if(tileY == gameManager.roomTop)
+				return true;
+			break;
+		case Direction.DOWN:
+			if(tileY == gameManager.roomBot)
+				return true;
+			break;
+
 		}
+
+
+		return false;
+	}
+
+	public void GiveInputDirection(Direction direction){
+		if(fallingBehavior.falling || !allowMovement)
+			return;
+
+		if(WillMoveOffScreen(direction)){
+			if(otherPlayerController.WillMoveOffScreen(direction)){
+
+				gameManager.MoveScreen(direction);
+
+			} else {
+				return;
+			}
+		}
+
+		characterMovement.MoveInDirection(direction);
+	}
+
+	public void EnableMovement(){
+		allowMovement = true;
+	}
+
+	public void DisableMovement(float t){
+		allowMovement = false;
+		CancelInvoke("EnableMovement");
+		Invoke ("EnableMovement", t);
 	}
 
 }
