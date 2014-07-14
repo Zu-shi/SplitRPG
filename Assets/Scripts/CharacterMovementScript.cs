@@ -3,28 +3,35 @@ using System.Collections;
 
 public class CharacterMovementScript : _Mono {
 
-	public float moveSpeed;
+	// Time it takes to move on space in frames (at Unity's fixed time step aka 50 fps)
+	int moveTime = 12;
 
-	int moveTime;
 	int moveTimeLeft;
+	float moveSpeed;
 
-	bool isMoving;
+	bool _isMoving;
+	public bool isMoving{
+		get {
+			return _isMoving;
+		}
+	}
 
 	float xv, yv;
 
 	void Start () {
 
-		// Calculate move time based on movespeed
-		moveTime = (int)Mathf.Round(1 / (moveSpeed * Time.fixedDeltaTime));
 		moveTimeLeft = 0;
 
+		// Calculate moveSpeed based on moveTime
+		moveSpeed = 1f / (moveTime * Time.fixedDeltaTime);
+
 		xv = yv = 0;
-		isMoving = false;
+		_isMoving = false;
 	}
 	
 	void FixedUpdate () {
 
-		if(isMoving){
+		if(_isMoving){
 			// Set character velocity
 			rigidbody2D.velocity = new Vector2(xv, yv);
 
@@ -48,17 +55,17 @@ public class CharacterMovementScript : _Mono {
 		x = tileX;
 		y = tileY;
 
-		isMoving = false;
+		_isMoving = false;
 		xv = yv = 0;
 
 	}
 
 	public void MoveInDirection(Direction direction){
-		if(isMoving || direction == Direction.NONE){
+		if(_isMoving || direction == Direction.NONE){
 			return;
 		}
 
-		isMoving = true;
+		_isMoving = true;
 		moveTimeLeft = moveTime;
 
 		switch(direction){
