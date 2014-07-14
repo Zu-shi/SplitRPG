@@ -23,6 +23,25 @@ public class _Mono : MonoBehaviour {
 		}
 	}
 
+	public int tileX {
+		set {
+			x = value;
+		}
+		get {
+			return (int)Mathf.Round(x);
+		}
+	}
+
+	public int tileY {
+		set {
+			y = value;
+		}
+		get {
+			return (int)Mathf.Round(y);
+		}
+	}
+
+
 	public float xs {
 		set {
 			transform.localScale = new Vector2 (value, transform.localScale.y);
