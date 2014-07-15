@@ -15,4 +15,17 @@ public static class Utils {
 		else 
 			return false;
 	}
+
+	public static float MoveValueTowards(float value, float dest, float speed){
+		if(Utils.CloseValues(value, dest, speed +.000001f)){
+			value = dest;
+		} else if (value < dest){
+			value += speed;
+		} else if (value > dest){
+			value -= speed;
+		}
+		return value;
+	}
+
+	public delegate void VoidDelegate();
 }

@@ -87,6 +87,21 @@ public class _Mono : MonoBehaviour {
 		}
 	}
 
+	public float guiAlpha {
+		set {
+			if(guiTexture != null){
+				Color _color = guiTexture.color;
+				guiTexture.color = new Color(_color.r, _color.g, _color.b, value); 
+			}
+		}
+		get {
+			if(guiTexture != null){
+				return guiTexture.color.a;
+			}
+			else return 0;
+		}
+	}
+
 	public SpriteRenderer spriteRenderer{
 		get{
 			if(_spriteRenderer == null){

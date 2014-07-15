@@ -5,8 +5,8 @@ public class PlayerControllerScript : _Mono {
 
 	public bool allowMovement{get;set;}
 
-	// Game Manager
-	GameManagerScript gameManager;
+	// Room Manager
+	RoomManagerScript roomManager;
 
 	// Other player stuff
 	bool isLeftPlayer;
@@ -31,8 +31,8 @@ public class PlayerControllerScript : _Mono {
 		allowMovement = true;
 
 		// Game Manager
-		gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
-		if(gameManager == null){
+		roomManager = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManagerScript>();
+		if(roomManager == null){
 			Debug.Log ("Error: Game Manager not found.");
 		}
 
@@ -85,7 +85,7 @@ public class PlayerControllerScript : _Mono {
 		fallingBehavior.Reset();
 
 		// Reset Camera (currently a hack)
-		gameManager.Reset();
+		roomManager.Reset();
 	}
 
 	void ResetBothPlayers(){
@@ -109,19 +109,19 @@ public class PlayerControllerScript : _Mono {
 		case Direction.NONE:
 			break;
 		case Direction.LEFT:
-			if(tileX == gameManager.roomLeft)
+			if(tileX == roomManager.roomLeft)
 				return true;
 			break;
 		case Direction.RIGHT:
-			if(tileX == gameManager.roomRight)
+			if(tileX == roomManager.roomRight)
 				return true;
 			break;
 		case Direction.UP:
-			if(tileY == gameManager.roomTop)
+			if(tileY == roomManager.roomTop)
 				return true;
 			break;
 		case Direction.DOWN:
-			if(tileY == gameManager.roomBot)
+			if(tileY == roomManager.roomBot)
 				return true;
 			break;
 
@@ -138,7 +138,7 @@ public class PlayerControllerScript : _Mono {
 		if(WillMoveOffScreen(direction)){
 			if(otherPlayerController.WillMoveOffScreen(direction)){
 
-				gameManager.MoveScreen(direction);
+				roomManager.MoveScreen(direction);
 
 			} else {
 				return;
@@ -150,6 +150,11 @@ public class PlayerControllerScript : _Mono {
 
 	public void EnableMovement(){
 		allowMovement = true;
+	}
+
+	public void DisableMovement(){
+		allowMovement = false;
+
 	}
 
 	public void DisableMovement(float t){
