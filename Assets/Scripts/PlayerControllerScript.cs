@@ -77,32 +77,31 @@ public class PlayerControllerScript : _Mono {
 	}
 
 	public void ResetPlayer(){
-
 		// Move to spawn point
 		x = spawnX;
 		y = spawnY;
 
 		fallingBehavior.Reset();
 
-		// Reset Camera (currently a hack)
-		roomManager.Reset();
 	}
 
 	void ResetBothPlayers(){
+		// Temporary hack to reset camera
+		roomManager.Reset();
+
 		ResetPlayer();
 		otherPlayerController.ResetPlayer();
 	}
 	
 	void Update () {
-
-		// Check if fell
+		// Check if we fell
 		if(fallingBehavior.fell){
 			ResetBothPlayers();
 			return;
 		}
-
 	}
 
+	// Will moving in the indicated direction move the player out of the room?
 	public bool WillMoveOffScreen(Direction direction){
 
 		switch(direction){
@@ -127,7 +126,6 @@ public class PlayerControllerScript : _Mono {
 
 		}
 
-
 		return false;
 	}
 
@@ -135,11 +133,12 @@ public class PlayerControllerScript : _Mono {
 		if(fallingBehavior.falling || !allowMovement)
 			return;
 
+		// Check if we're trying to move off screen
 		if(WillMoveOffScreen(direction)){
+			// If the other player is too, move to the next room,
+			// otherwise return without moving
 			if(otherPlayerController.WillMoveOffScreen(direction)){
-
 				roomManager.MoveScreen(direction);
-
 			} else {
 				return;
 			}

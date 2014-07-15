@@ -43,8 +43,6 @@ public class CharacterMovementScript : _Mono {
 			}
 		}
 
-
-
 	}
 
 	void StopMoving(){
@@ -62,7 +60,7 @@ public class CharacterMovementScript : _Mono {
 	}
 
 	bool CanMoveInDirection(Direction direction){
-
+		// Might do some checking in the future to predict if we're going to run into stuff
 		return true;
 	}
 
