@@ -6,5 +6,6 @@ public class SpriteAnimationScript : _Mono {
 
 	public string animationName = "Animation";
 	public float rate = 10; // Frames per second
+	public bool loop = true;
 	public Sprite[] sprites;
 }
