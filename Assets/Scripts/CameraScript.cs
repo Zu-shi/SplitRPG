@@ -63,14 +63,11 @@ public class CameraScript : _Mono {
 
 		shakeDest = new Vector2(.07f, 0);
 		shakeSpeed = 8f;
-
-		// Cutscene test
-//		Invoke ("CutsceneTest1", 1f);
 	}
 
 	// This is just a quick test using callback functions
 	// Real cutscenes should use a more robust system
-	void CutsceneTest1(){
+	public void RunCutsceneTest(){
 		BeginCutscene();
 		fader.guiAlpha = 1;
 		BeginFadeUp(CutsceneTest2);

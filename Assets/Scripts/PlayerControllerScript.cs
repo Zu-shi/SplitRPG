@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerControllerScript : _Mono {
 
 	public bool allowMovement{get;set;}
+	public GameObject shadow;
 
 	// Room Manager
 	RoomManagerScript roomManager;
@@ -20,6 +21,8 @@ public class PlayerControllerScript : _Mono {
 	// Spawn point
 	int spawnX, spawnY;
 
+	// Disable
+	bool disableCharacter;
 
 	public bool readyForInput {
 		get {
@@ -69,6 +72,7 @@ public class PlayerControllerScript : _Mono {
 			Debug.Log ("Error: FallingBehaviorScript not found.");
 		}
 
+		disableCharacter = false;
 
 		// Set spawn point
 		spawnX = tileX;
@@ -84,7 +88,7 @@ public class PlayerControllerScript : _Mono {
 		fallingBehavior.Reset();
 
 	}
-
+	
 	void ResetBothPlayers(){
 		// Temporary hack to reset camera
 		roomManager.Reset();
@@ -94,6 +98,14 @@ public class PlayerControllerScript : _Mono {
 	}
 	
 	void Update () {
+
+		// Disabled char
+		if(disableCharacter){
+//			x = otherPlayerController.x;
+//			y = otherPlayerController.y;
+			return;
+		}
+
 		// Check if we fell
 		if(fallingBehavior.fell){
 			ResetBothPlayers();
@@ -101,9 +113,24 @@ public class PlayerControllerScript : _Mono {
 		}
 	}
 
+	// Make character essentially non-existant, used when one side is faded out
+	public void DisableCharacter(){
+		disableCharacter = true;
+		shadow.SetActive(false);
+	}
+
+	public void EnableCharacter(){
+		disableCharacter = false;
+		shadow.SetActive(true);
+	}
+
+
 	// Will moving in the indicated direction move the player out of the room?
 	public bool WillMoveOffScreen(Direction direction){
 
+		if(disableCharacter)
+			return true;
+		
 		switch(direction){
 		case Direction.NONE:
 			break;
@@ -130,6 +157,9 @@ public class PlayerControllerScript : _Mono {
 	}
 
 	public void GiveInputDirection(Direction direction){
+		if(disableCharacter)
+			return;
+
 		if(fallingBehavior.falling || !allowMovement)
 			return;
 

@@ -42,12 +42,6 @@ public class RoomManagerScript : MonoBehaviour {
 		cameraFinishes = 0;
 
 		SetBounds (-4, 4, 4, -5); // Standard
-
-		// Size Tests
-//		SetBounds(-1, 1, 0, 0); // Tiny
-//		SetBounds(-9, 10, 9, -10); // Big
-//		SetBounds(-4, 2, 10, -2); // Wide
-//		SetBounds(-2, 7, 2, -7); // Tall
 	}
 
 	// Temprary hack to reset the camera when the player falls off the level
@@ -57,7 +51,15 @@ public class RoomManagerScript : MonoBehaviour {
 
 		SetBounds (-4, 4, 4, -5);
 	}
-	
+
+	public void RunTinyRoomTest(){
+		SetBounds(-2, 2, 2, -2); 
+	}
+
+	public void RunBigRoomTest(){
+		SetBounds(-9, 10, 9, -10);
+	}
+
 	void SetCenter(float cx, float cy, float sx, float sy){
 		_roomSize = new Vector2(sx, sy);
 		_roomCenter = new Vector2(cx, cy);
