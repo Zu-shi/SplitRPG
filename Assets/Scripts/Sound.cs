@@ -13,6 +13,18 @@ public static class Sound {
 		}
 	}
 
+	public static float musicVolume {
+		get {
+			return cam.GetComponent<MusicManagerScript>().volume;
+		}
+		set {
+			if(value == 0) {
+				cam.GetComponent<MusicManagerScript>().PauseMusic();
+			}
+			cam.GetComponent<MusicManagerScript>().volume = value;
+		}
+	}
+
 	public static void PlaySound(AudioClip sound) {
 		Vector3 point;
 		if(cam != null)
@@ -45,6 +57,14 @@ public static class Sound {
 			return;
 		}
 		cam.GetComponent<MusicManagerScript>().StopMusic();
+	}
+
+	public static void FadeOutMusic(float seconds, bool stopOnFade = false) {
+		if(cam == null) {
+			Debug.LogError("An object named SpecialCamera could not be found in the scene.");
+			return;
+		}
+		cam.GetComponent<MusicManagerScript>().FadeOutMusic(seconds, stopOnFade);
 	}
 
 }
