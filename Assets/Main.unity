@@ -1401,6 +1401,8 @@ GameObject:
   - 92: {fileID: 1811843086}
   - 124: {fileID: 1811843085}
   - 81: {fileID: 1811843084}
+  - 82: {fileID: 1811843090}
+  - 114: {fileID: 1811843089}
   m_Layer: 1
   m_Name: SpecialCamera
   m_TagString: MainCamera
@@ -1477,6 +1479,78 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!114 &1811843089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 3fe9d485d4f77c647a10eeb996b144ef,
+    type: 2}
+  m_PrefabInternal: {fileID: 724171283}
+  m_GameObject: {fileID: 1811843083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dec510d44c9af843a9c9bd986f32a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Music: []
+--- !u!82 &1811843090
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: 3fe9d485d4f77c647a10eeb996b144ef,
+    type: 2}
+  m_PrefabInternal: {fileID: 724171283}
+  m_GameObject: {fileID: 1811843083}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1868113089
 GameObject:
   m_ObjectHideFlags: 0
