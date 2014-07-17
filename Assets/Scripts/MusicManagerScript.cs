@@ -83,8 +83,11 @@ public class MusicManagerScript : _Mono {
 		if(stopped || paused || audio.isPlaying) { // We were told to stop playing or the current clip is still playing
 			return;
 		}
-		audio.clip = musicClips[Random.Range(0, musicClips.Count)];
-		if(audio.clip != null)
-			audio.Play();
+		if(musicClips.Count != 0){
+			audio.clip = musicClips[Random.Range(0, musicClips.Count)];
+			if(audio.clip != null)
+				audio.Play();
+		}
+
 	}
 }
