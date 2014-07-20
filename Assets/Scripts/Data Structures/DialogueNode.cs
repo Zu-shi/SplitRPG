@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogNode
+public class DialogueNode
 {
 
 	private struct option
@@ -16,7 +16,7 @@ public class DialogNode
 
 	private List<option> options;
 	
-	public DialogNode(string name, string speaker, string text)
+	public DialogueNode(string name, string speaker, string text)
 	{
 		this.name = name;
 		this.speaker = speaker;

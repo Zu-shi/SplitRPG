@@ -1,21 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogSequence
+public class DialogueSequence
 {
 	public int NumberOfNodes
 	{
 		get { return nodes.Count; }
 	}
 
-	private List<DialogNode> nodes;
+	private List<DialogueNode> nodes;
 
-	public DialogSequence()
+	public DialogueSequence()
 	{
-		this.nodes = new List<DialogNode>();
+		this.nodes = new List<DialogueNode>();
 	}
 
-	public DialogSequence(TextAsset nodeFile) : this()
+	public DialogueSequence(TextAsset nodeFile) : this()
 	{
 		System.IO.StringReader sr = new System.IO.StringReader(nodeFile.text);
 
@@ -29,7 +29,7 @@ public class DialogSequence
 			{
 				text += tmp + " ";
 			}
-			DialogNode newNode = new DialogNode(name, speaker, text);
+			DialogueNode newNode = new DialogueNode(name, speaker, text);
 			while( (tmp = sr.ReadLine().Trim()) == "OPTION:" )
 			{
 				name = sr.ReadLine().Trim();
@@ -41,14 +41,14 @@ public class DialogSequence
 		}
 	}
 
-	public void addNode(DialogNode node)
+	public void addNode(DialogueNode node)
 	{
 		nodes.Add(node);
 	}
 
 	public void addNode(string name, string speaker, string text, string[] optNames, string[] optTexts)
 	{
-		DialogNode tmp = new DialogNode(name, speaker, text);
+		DialogueNode tmp = new DialogueNode(name, speaker, text);
 		if (optNames != null && optTexts != null)
 		{
 			for(int i = 0; i < optNames.Length; i++)
@@ -64,7 +64,7 @@ public class DialogSequence
 		this.addNode(name, speaker, text, null, null);
 	}
 
-	private DialogNode findNode(string name)
+	private DialogueNode findNode(string name)
 	{
 		for(int i = 0; i < this.nodes.Count; i++)
 		{
@@ -78,7 +78,7 @@ public class DialogSequence
 
 	public void addOptionToNode(string nodeName, string optName, string optText)
 	{
-		DialogNode tmp = this.findNode(nodeName);
+		DialogueNode tmp = this.findNode(nodeName);
 		if (tmp == null) 
 		{
 			Debug.LogError("In DialogSequence.addOptionToNode: Could not find node " + nodeName);
@@ -105,14 +105,14 @@ public class DialogSequence
 
 	}
 
-	public DialogNode getNode(string name)
+	public DialogueNode getNode(string name)
 	{
 		return this.findNode(name);
 	}
 
-	public DialogNode getStartingNode()
+	public DialogueNode getStartingNode()
 	{
-		DialogNode tmp = this.findNode("Start");
+		DialogueNode tmp = this.findNode("Start");
 		if (tmp == null)
 			return nodes[0];
 		else
