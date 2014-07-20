@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class NodeEditor : EditorWindow {
 	
 	private List<Rect> windows = new List<Rect>();
-	private DialogSequence seq = new DialogSequence();
+	private DialogueSequence seq = new DialogueSequence();
 	private List<string> nodeNames = new List<string>();
 
 	private bool createNode = false;
@@ -24,7 +24,7 @@ public class NodeEditor : EditorWindow {
 
 		if(seq.NumberOfNodes != nodeNames.Count) // Everything is broken, panic
 		{
-			seq = new DialogSequence();
+			seq = new DialogueSequence();
 			nodeNames = new List<string>();
 			windows = new List<Rect>();
 		}
@@ -220,7 +220,7 @@ public class NodeEditor : EditorWindow {
 
 	private void DrawNodeWindow(int id) {
 
-		DialogNode tmp = seq.getNode(nodeNames[id]);
+		DialogueNode tmp = seq.getNode(nodeNames[id]);
 		GUILayout.BeginVertical();
 
 		GUILayout.BeginHorizontal();
