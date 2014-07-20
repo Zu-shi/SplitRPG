@@ -26,7 +26,7 @@ public class MusicManagerScript : _Mono {
 	}
 
 	public void Start () {
-		//TODO get saved volume setting
+		maxVolume = PlayerPrefs.GetInt("MusicVolume", 100) /100.0f;
 		musicClips = new List<AudioClip>();
 		foreach(AudioClip ac in Music)
 			musicClips.Add(ac);
