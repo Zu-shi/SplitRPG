@@ -31,7 +31,7 @@ public static class Sound {
 			point = cam.transform.position;
 		else
 			point = new Vector3(0,0,0);
-		AudioSource.PlayClipAtPoint(sound, point);
+		AudioSource.PlayClipAtPoint(sound, point, PlayerPrefs.GetInt("SoundEffectsVolume", 100) / 100.0f);
 		// TODO: add volume adjustment from options
 	}
 
