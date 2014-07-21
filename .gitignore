@@ -29,4 +29,5 @@ obj/
 ehthumbs.db
 Thumbs.db
 
-Assets/Music/
+Assets/Music/tmp/
+Assets/Music/tmp.meta
