@@ -15,7 +15,7 @@ public class CharacterMovementScript : _Mono {
 			return _isMoving;
 		}
 	}
-
+	
 	float xv, yv;
 
 	void Start () {
@@ -27,6 +27,7 @@ public class CharacterMovementScript : _Mono {
 
 		xv = yv = 0;
 		_isMoving = false;
+
 	}
 	
 	void FixedUpdate () {
@@ -41,8 +42,6 @@ public class CharacterMovementScript : _Mono {
 				StopMoving();
 			}
 		}
-
-
 
 	}
 
@@ -60,6 +59,11 @@ public class CharacterMovementScript : _Mono {
 
 	}
 
+	bool CanMoveInDirection(Direction direction){
+		// Might do some checking in the future to predict if we're going to run into stuff
+		return true;
+	}
+
 	public void MoveInDirection(Direction direction){
 		if(_isMoving || direction == Direction.NONE){
 			return;
@@ -68,19 +72,22 @@ public class CharacterMovementScript : _Mono {
 		_isMoving = true;
 		moveTimeLeft = moveTime;
 
-		switch(direction){
-		case Direction.LEFT:
-			xv = -moveSpeed;
-			break;
-		case Direction.RIGHT:
-			xv = moveSpeed;
-			break;
-		case Direction.UP:
-			yv = moveSpeed;
-			break;
-		case Direction.DOWN:
-			yv = -moveSpeed;
-			break;
+		if(CanMoveInDirection(direction)){
+			switch(direction){
+			case Direction.LEFT:
+				xv = -moveSpeed;
+				break;
+			case Direction.RIGHT:
+				xv = moveSpeed;
+				break;
+			case Direction.UP:
+				yv = moveSpeed;
+				break;
+			case Direction.DOWN:
+				yv = -moveSpeed;
+				break;
+			}
 		}
+
 	}
 }

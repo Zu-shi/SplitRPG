@@ -3,6 +3,12 @@ using System.Collections;
 
 public class PlayerControllerScript : _Mono {
 
+	public bool allowMovement{get;set;}
+	public GameObject shadow;
+
+	// Room Manager
+	RoomManagerScript roomManager;
+
 	// Other player stuff
 	bool isLeftPlayer;
 	GameObject otherPlayer;
@@ -15,6 +21,8 @@ public class PlayerControllerScript : _Mono {
 	// Spawn point
 	int spawnX, spawnY;
 
+	// Disable
+	bool disableCharacter;
 
 	public bool readyForInput {
 		get {
@@ -23,6 +31,14 @@ public class PlayerControllerScript : _Mono {
 	}
 
 	void Start () {
+		allowMovement = true;
+
+		// Game Manager
+		roomManager = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManagerScript>();
+		if(roomManager == null){
+			Debug.Log ("Error: Game Manager not found.");
+		}
+
 		// Determine which player we are
 		if(gameObject.tag == "PlayerLeft"){
 			isLeftPlayer = true;
@@ -56,6 +72,7 @@ public class PlayerControllerScript : _Mono {
 			Debug.Log ("Error: FallingBehaviorScript not found.");
 		}
 
+		disableCharacter = false;
 
 		// Set spawn point
 		spawnX = tileX;
@@ -64,7 +81,6 @@ public class PlayerControllerScript : _Mono {
 	}
 
 	public void ResetPlayer(){
-
 		// Move to spawn point
 		x = spawnX;
 		y = spawnY;
@@ -72,26 +88,108 @@ public class PlayerControllerScript : _Mono {
 		fallingBehavior.Reset();
 
 	}
-
+	
 	void ResetBothPlayers(){
+		// Temporary hack to reset camera
+		roomManager.Reset();
+
 		ResetPlayer();
 		otherPlayerController.ResetPlayer();
 	}
 	
 	void Update () {
 
-		// Check if fell
+		// Disabled char
+		if(disableCharacter){
+//			x = otherPlayerController.x;
+//			y = otherPlayerController.y;
+			return;
+		}
+
+		// Check if we fell
 		if(fallingBehavior.fell){
 			ResetBothPlayers();
 			return;
 		}
+	}
 
+	// Make character essentially non-existant, used when one side is faded out
+	public void DisableCharacter(){
+		disableCharacter = true;
+		shadow.SetActive(false);
+	}
+
+	public void EnableCharacter(){
+		disableCharacter = false;
+		shadow.SetActive(true);
+	}
+
+
+	// Will moving in the indicated direction move the player out of the room?
+	public bool WillMoveOffScreen(Direction direction){
+
+		if(disableCharacter)
+			return true;
+		
+		switch(direction){
+		case Direction.NONE:
+			break;
+		case Direction.LEFT:
+			if(tileX == roomManager.roomLeft)
+				return true;
+			break;
+		case Direction.RIGHT:
+			if(tileX == roomManager.roomRight)
+				return true;
+			break;
+		case Direction.UP:
+			if(tileY == roomManager.roomTop)
+				return true;
+			break;
+		case Direction.DOWN:
+			if(tileY == roomManager.roomBot)
+				return true;
+			break;
+
+		}
+
+		return false;
 	}
 
 	public void GiveInputDirection(Direction direction){
-		if(!fallingBehavior.falling){
-			characterMovement.MoveInDirection(direction);
+		if(disableCharacter)
+			return;
+
+		if(fallingBehavior.falling || !allowMovement)
+			return;
+
+		// Check if we're trying to move off screen
+		if(WillMoveOffScreen(direction)){
+			// If the other player is too, move to the next room,
+			// otherwise return without moving
+			if(otherPlayerController.WillMoveOffScreen(direction)){
+				roomManager.MoveScreen(direction);
+			} else {
+				return;
+			}
 		}
+
+		characterMovement.MoveInDirection(direction);
+	}
+
+	public void EnableMovement(){
+		allowMovement = true;
+	}
+
+	public void DisableMovement(){
+		allowMovement = false;
+
+	}
+
+	public void DisableMovement(float t){
+		allowMovement = false;
+		CancelInvoke("EnableMovement");
+		Invoke ("EnableMovement", t);
 	}
 
 }
