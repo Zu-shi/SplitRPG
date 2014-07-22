@@ -1,0 +1,63 @@
+NODE:
+	NAME: Start
+	SPEAKER: Wallie
+	TEXT: Hello! I am the wall in front of you!
+	ENDTEXT
+	OPTION:
+		Friends
+		Do you want to be friends?
+	OPTION:
+		Monsters
+		Where are the monsters?
+	OPTION:
+		Exit
+		Goodbye.
+	ENDOPTS
+NODE:
+	NAME: Friends
+	SPEAKER: Wallie
+	TEXT: You want to be my friend?!
+	ENDTEXT
+	OPTION:
+		Happy
+		Yes.
+	OPTION:
+		Mean
+		No.
+	ENDOPTS
+NODE:
+	NAME: Monsters
+	SPEAKER: Wallie
+	TEXT: I haven't seen any monsters!
+	ENDTEXT
+	OPTION:
+		Friends
+		Do you want to be friends?
+	OPTION:
+		Exit
+		Goodbye.
+	ENDOPTS
+NODE:
+	NAME: Exit
+	SPEAKER: Speaker
+	TEXT: Text
+	ENDTEXT
+	ENDOPTS
+NODE:
+	NAME: Happy
+	SPEAKER: Wallie
+	TEXT: Yay!!!
+	ENDTEXT
+	OPTION:
+		Exit
+		Goodbye.
+	ENDOPTS
+NODE:
+	NAME: Mean
+	SPEAKER: Wallie
+	TEXT: You're a big dumb meanie-face!
+	ENDTEXT
+	OPTION:
+		Exit
+		Goodbye
+	ENDOPTS
