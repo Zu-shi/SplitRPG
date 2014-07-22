@@ -38,4 +38,8 @@ public static class Utils {
 			return value;
 	}
 
+	public static int Round(float value){
+		return (int)Mathf.Round(value);
+	}
+
 }

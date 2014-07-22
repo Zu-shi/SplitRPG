@@ -6,27 +6,29 @@ public class RoomManagerScript : MonoBehaviour {
 	CameraScript leftCamera, rightCamera;
 	PlayerControllerScript leftPlayer, rightPlayer;
 
-	// Center of room in tiles
-	Vector2 _roomCenter;
+	// Rect that defines the room (measured in tiles)
+	Rect _roomRect;
+
+
+	// "Helper" Properties
 	public Vector2 roomCenter{
-		get{
-			return _roomCenter;
-		}
+		get{ return _roomRect.center; }
 	}
-
-	// Size of room in tiles
-	Vector2 _roomSize;
 	public Vector2 roomSize{
-		get{
-			return _roomSize;
-		}
+		get{ return _roomRect.size; }
 	}
-
-	// Outer tile coords of a room
-	public int roomTop{get;set;}
-	public int roomBot{get;set;}
-	public int roomLeft{get;set;}
-	public int roomRight{get;set;}
+	public int roomTop{
+		get{ return Utils.Round(_roomRect.yMax); }
+	}
+	public int roomBot{
+		get{ return Utils.Round(_roomRect.yMin); }
+	}
+	public int roomLeft{
+		get{ return Utils.Round(_roomRect.xMin); }
+	}
+	public int roomRight{
+		get{ return Utils.Round(_roomRect.xMax); }
+	}
 
 	// Track how many cameras have finished their transition
 	int cameraFinishes;
@@ -41,7 +43,8 @@ public class RoomManagerScript : MonoBehaviour {
 
 		cameraFinishes = 0;
 
-		SetBounds (-4, 4, 4, -5); // Standard
+		// Standard 8 x 9 
+		SetBounds (-4, 4, 4, -5); 
 	}
 
 	// Temprary hack to reset the camera when the player falls off the level
@@ -57,42 +60,22 @@ public class RoomManagerScript : MonoBehaviour {
 	}
 
 	public void RunBigRoomTest(){
-		SetBounds(-9, 10, 9, -10);
+		SetBounds(-9, 10, 10, -10);
 	}
 
-	void SetCenter(float cx, float cy, float sx, float sy){
-		_roomSize = new Vector2(sx, sy);
-		_roomCenter = new Vector2(cx, cy);
-		UpdateRoomBounds();
+	void SetRoomRect(float left, float top, float width, float height){
+		// Rect objects use a GUI coordinate system where the y axis is opposite than in 3D view
+		// So we actually pass in (left, BOT, width, height) instead of (left, TOP...)
+		_roomRect = new Rect(left, top-height, width, height);
 	}
 
 	void SetBounds(int left, int top, int right, int bot){
-		roomLeft = left;
-		roomTop = top;
-		roomRight = right;
-		roomBot = bot;
-
-		_roomSize = new Vector2(right - left + 1, top - bot + 1);
-
-		UpdateRoomCenter();
-	}
-
-	void UpdateRoomBounds(){
-		roomTop = (int)Mathf.Floor(_roomCenter.y + _roomSize.y / 2);
-		roomBot = (int)Mathf.Ceil(_roomCenter.y - _roomSize.y / 2);
-		roomRight = (int)Mathf.Floor(_roomCenter.x + _roomSize.x / 2);
-		roomLeft = (int)Mathf.Ceil(_roomCenter.x - _roomSize.x / 2);
-	}
-
-	void UpdateRoomCenter(){
-		float cx = (roomLeft + roomRight)/2.0f;
-		float cy = (roomTop + roomBot)/2.0f;
-		_roomCenter = new Vector2(cx, cy);
+		SetRoomRect(left, top, right-left, top-bot);
 	}
 
 	void LogRoomInfo(){
-		Debug.Log("Room Center = (" + _roomCenter.x + ", " + _roomCenter.y + 
-		          ")   Size = " + _roomSize.x + " x " + _roomSize.y);
+		Debug.Log("Room Center = (" + roomCenter.x + ", " + roomCenter.y + 
+		          ")   Size = " + roomSize.x + " x " + roomSize.y);
 		Debug.Log ("Room Bounds: (" + roomLeft + ", " + roomTop + ") to (" + roomRight + ", " + roomBot + ")");
 	}
 
@@ -116,8 +99,6 @@ public class RoomManagerScript : MonoBehaviour {
 	}
 
 	// Called when both characters walk off the side of the screen
-	// In the future we'll read the room data from a file but right now
-	// it just moves over by one room width
 	public void MoveScreen(Direction direction){
 
 		// Need to wait a short bit before disable input
@@ -125,23 +106,34 @@ public class RoomManagerScript : MonoBehaviour {
 		CancelInvoke("DisablePlayerInput");
 		Invoke ("DisablePlayerInput", .1f);
 
-		// Move the room center in the correct direction
+
+		// Set room bounds to new room
+
+		// *** REPLACE THIS CODE *** // 
+
+		// We should read the room data from a file but right now
+		// we just move over by one room width
+		float dx = 0, dy = 0;
 		switch(direction){
 		case Direction.LEFT:
-			_roomCenter += new Vector2(-_roomSize.x, 0);
+			dx = -roomSize.x - 1;
 			break;
 		case Direction.RIGHT:
-			_roomCenter += new Vector2(_roomSize.x, 0);
+			dx = roomSize.x + 1;
 			break;
 		case Direction.UP:
-			_roomCenter += new Vector2(0, _roomSize.y);
+			dy = roomSize.y + 1;
 			break;
 		case Direction.DOWN:
-			_roomCenter += new Vector2(0, -_roomSize.y);
+			dy = -roomSize.y - 1;
 			break;
 		}
 
-		UpdateRoomBounds();
+		SetRoomRect(roomLeft + dx, roomTop + dy, roomSize.x, roomSize.y);
+
+		// *** STOP REPLACING *** /// 
+
+
 //		LogRoomInfo();
 
 		// Pan the cameras
