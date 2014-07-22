@@ -1,0 +1,24 @@
+NODE:
+	NAME: Start
+	SPEAKER: Wallie
+	TEXT: Hello
+	ENDTEXT
+	OPTION:
+		Friends
+		Let's be friends.
+	ENDOPTS
+NODE:
+	NAME: Friends
+	SPEAKER: Wallie
+	TEXT: Yay!!!
+	ENDTEXT
+	OPTION:
+		Exit
+		Goodbye.
+	ENDOPTS
+NODE:
+	NAME: Exit
+	SPEAKER: Speaker
+	TEXT: Text
+	ENDTEXT
+	ENDOPTS

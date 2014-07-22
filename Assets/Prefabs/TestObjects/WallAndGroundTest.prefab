@@ -237,7 +237,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueAsset: {fileID: 4900000, guid: 3121d1d6299a220458e73e293b461021, type: 3}
   showOnLeft: 0
-  showOnRight: 1
+  showOnRight: 0
+  textSpeed: 15
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
