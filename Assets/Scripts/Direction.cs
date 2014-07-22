@@ -3,6 +3,6 @@ using System.Collections;
 
 public enum Direction {
 
-	NONE, UP, DOWN, LEFT, RIGHT
+	NONE, UP, DOWN, LEFT, RIGHT, NUM_DIRECTIONS
 
 }
