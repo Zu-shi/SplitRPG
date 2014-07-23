@@ -34,7 +34,8 @@ public class CameraScript : _Mono {
 	
 	
 	RoomManagerScript roomManager;
-	
+
+	[Tooltip("Prefab of 'fader' object which controls fading the camera in and out.")]
 	public GameObject faderPrefab;
 	FaderScript fader;
 

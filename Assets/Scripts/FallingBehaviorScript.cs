@@ -3,14 +3,13 @@ using System.Collections;
 
 public class FallingBehaviorScript : _Mono {
 
-	// Object that is treated as the center of the object
-	// and the object that will be scaled down when it falls
+	[Tooltip ("Object that is treated as the center of the object and the object that will be scaled down when it falls.")]
 	public Transform locAndScaleObject;
 
-	// Radius of the circle to check against the ground plane
+	[Tooltip("Radius of the circle to check against the ground plane")]
 	public float radius = .1f;
 
-	// Destroy the object after it falls?
+	[Tooltip ("Destroy the object after it falls?")]
 	public bool destroyOnFall;
 
 	// Can set this to make the object unable to fall

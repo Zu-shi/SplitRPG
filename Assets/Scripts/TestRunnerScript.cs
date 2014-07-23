@@ -11,6 +11,7 @@ public class TestRunnerScript : MonoBehaviour {
 		BIG_ROOM
 	}
 
+	[Tooltip("Which test to run?")]
 	public TestType type;
 
 	CameraScript leftCamera, rightCamera;

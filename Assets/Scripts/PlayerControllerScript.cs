@@ -4,6 +4,8 @@ using System.Collections;
 public class PlayerControllerScript : _Mono {
 
 	public bool allowMovement{get;set;}
+
+	[Tooltip("Shadow object of the player")]
 	public GameObject shadow;
 
 	// Room Manager

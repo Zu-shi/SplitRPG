@@ -6,6 +6,16 @@ public static class Utils {
 	// Declaration of a simple delegate type
 	public delegate void VoidDelegate();
 
+	static PlayerControllerScript playerLeft = null;
+	static PlayerControllerScript playerRight = null;
+
+	static void FindPlayers(){
+		if(playerLeft == null){
+			playerLeft = GameObject.Find("PlayerLeft").GetComponent<PlayerControllerScript>();
+			playerRight = GameObject.Find("PlayerRight").GetComponent<PlayerControllerScript>();
+		}
+	}
+
 
 	public static GameObject Create(GameObject _go, float _x, float _y){
 		return (GameObject)(Object.Instantiate (_go, new Vector2 (_x, _y), Quaternion.identity));
@@ -40,6 +50,30 @@ public static class Utils {
 
 	public static int Round(float value){
 		return (int)Mathf.Round(value);
+	}
+
+
+	public static bool LayerIsLeft(int layer){
+		if(LayerMask.NameToLayer("Left") == layer){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static bool PlayerIsOnTile(int x, int y, bool leftPlayer){
+		FindPlayers();
+
+		PlayerControllerScript player = (leftPlayer ? playerLeft : playerRight);
+		if(player.tileX == x && player.tileY == y){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static bool PlayerIsOnTile(int x, int y, int leftOrRightLayer){
+		return PlayerIsOnTile(x, y, LayerIsLeft(leftOrRightLayer));
 	}
 
 }
