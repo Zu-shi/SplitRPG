@@ -4,6 +4,7 @@ using System.Collections.Generic;
 [RequireComponent(typeof(AudioSource))]
 public class MusicManagerScript : _Mono {
 
+	[Tooltip("This is a list of all the AudioClips that have music in them and should be played. Music is selected at random from this list.")]
 	public AudioClip[] Music;
 
 	private List<AudioClip> musicClips;
