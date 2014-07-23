@@ -5,9 +5,7 @@ public class PlayerInputScript : MonoBehaviour {
 
 
 	PlayerControllerScript pcLeft, pcRight;
-
-	InputManagerScript inputManager;
-
+	
 	Direction _inputDirection;
 
 	public Direction inputDirection {
@@ -30,9 +28,6 @@ public class PlayerInputScript : MonoBehaviour {
 		if(pcLeft == null || pcRight == null){
 			Debug.Log("Error: Couldn't find one or more players.");
 		}
-
-		// Find InputManager
-		inputManager = GameObject.Find("InputManager").GetComponent<InputManagerScript>();
 	}
 	
 	void Update () {
@@ -50,14 +45,14 @@ public class PlayerInputScript : MonoBehaviour {
 	void PollInput(){
 
 		// Direction stayed
-		if(inputManager.GetDirectionStay(_inputDirection)){
+		if(InputManager.GetDirectionStay(_inputDirection)){
 			return;
 		}
 
 		_inputDirection = Direction.NONE;
 
 		for(Direction d = Direction.NONE; d < Direction.NUM_DIRECTIONS; d++){
-			if(inputManager.GetDirection(d)){
+			if(InputManager.GetDirection(d)){
 				_inputDirection = d;
 			}
 		}
