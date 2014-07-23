@@ -3,11 +3,12 @@ using System.Collections;
 
 public class RoomManagerScript : MonoBehaviour {
 	
-	public BoxCollider2D cameraCollider, cameraColliderPrev;
 	CameraScript leftCamera, rightCamera;
 	PlayerControllerScript leftPlayer, rightPlayer;
+
+	BoxCollider2D cameraCollider, cameraColliderPrev;
 	private int cameraLayerMasks;
-	private int PIXELS_PER_TILE = 32;
+
 	// Rect that defines the room (measured in tiles)
 	Rect _roomRect;
 	
@@ -58,19 +59,10 @@ public class RoomManagerScript : MonoBehaviour {
 		                                             cameraLayerMasks).collider;
 
 		if (cameraCollider != cameraColliderPrev) {
-			SetBounds (Mathf.CeilToInt (cameraCollider.transform.position.x), 
-        	Mathf.CeilToInt (cameraCollider.transform.position.y) - PixelsToTiles (Mathf.CeilToInt (cameraCollider.size.y)),
-        	Mathf.CeilToInt (cameraCollider.transform.position.x) + PixelsToTiles (Mathf.CeilToInt (cameraCollider.size.x)) - 1,
-        	Mathf.CeilToInt (cameraCollider.transform.position.y) - 1);
 			MoveScreen();
 		}
 
 		cameraColliderPrev = cameraCollider;
-	}
-
-	//Since Tiled records camera box size in pixels, we multiply it by 1/32 to convert it back to tiles.
-	private int PixelsToTiles(int val){
-		return val / PIXELS_PER_TILE;
 	}
 
 	// Temprary hack to reset the camera when the player falls off the level
@@ -131,6 +123,12 @@ public class RoomManagerScript : MonoBehaviour {
 		// because one character will get stuck if he hasn't moved yet
 		CancelInvoke("DisablePlayerInput");
 		Invoke ("DisablePlayerInput", .1f);
+
+		// New room bounds
+		SetBounds (Mathf.CeilToInt (cameraCollider.transform.position.x), 
+		           Mathf.CeilToInt (cameraCollider.transform.position.y) - Utils.PixelsToTiles (Mathf.RoundToInt (cameraCollider.size.y)),
+		           Mathf.CeilToInt (cameraCollider.transform.position.x) + Utils.PixelsToTiles (Mathf.RoundToInt (cameraCollider.size.x)) - 1,
+		           Mathf.CeilToInt (cameraCollider.transform.position.y) - 1);
 
 		// Pan the cameras
 		leftCamera.BeginRoomTransitionPan(CameraTransitionFinished);

@@ -165,16 +165,13 @@ public class PlayerControllerScript : _Mono {
 		if(fallingBehavior.falling || !allowMovement)
 			return;
 
-		// Check if we're trying to move off screen
-		if(WillMoveOffScreen(direction)){
-			// If the other player is too, move to the next room,
-			// otherwise return without moving
-			if(!otherPlayerController.WillMoveOffScreen(direction)){
-				return;
-			}
+		// Check if we need to wait at the edge of the screen
+		bool needToWait = WillMoveOffScreen(direction) && !otherPlayerController.WillMoveOffScreen(direction);
+
+		if(!needToWait){
+			characterMovement.MoveInDirection(direction);
 		}
 
-		characterMovement.MoveInDirection(direction);
 	}
 
 	public void EnableMovement(){

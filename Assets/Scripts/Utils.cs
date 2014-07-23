@@ -82,4 +82,8 @@ public static class Utils {
 		return PlayerIsOnTile(x, y, LayerIsLeft(leftOrRightLayer));
 	}
 
+	public static int PixelsToTiles(int val){
+		return val / Globals.PIXELS_PER_TILE;
+	}
+
 }
