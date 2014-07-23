@@ -6,13 +6,21 @@ public static class Utils {
 	// Declaration of a simple delegate type
 	public delegate void VoidDelegate();
 
-	static PlayerControllerScript playerLeft = null;
-	static PlayerControllerScript playerRight = null;
+	static PlayerControllerScript _playerLeft = null;
+	static PlayerControllerScript playerLeft{
+		get{
+			if(_playerLeft == null)
+				_playerLeft = GameObject.Find("PlayerLeft").GetComponent<PlayerControllerScript>();
+			return _playerLeft;
+		}
+	}
 
-	static void FindPlayers(){
-		if(playerLeft == null){
-			playerLeft = GameObject.Find("PlayerLeft").GetComponent<PlayerControllerScript>();
-			playerRight = GameObject.Find("PlayerRight").GetComponent<PlayerControllerScript>();
+	static PlayerControllerScript _playerRight = null;
+	static PlayerControllerScript playerRight{
+		get{
+			if(_playerRight == null)
+				_playerRight = GameObject.Find("PlayerRight").GetComponent<PlayerControllerScript>();
+			return _playerRight;
 		}
 	}
 
@@ -68,8 +76,6 @@ public static class Utils {
 	}
 
 	public static bool PlayerIsOnTile(int x, int y, bool leftPlayer){
-		FindPlayers();
-
 		PlayerControllerScript player = (leftPlayer ? playerLeft : playerRight);
 		if(player.tileX == x && player.tileY == y){
 			return true;
