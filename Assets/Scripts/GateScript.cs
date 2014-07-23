@@ -3,7 +3,8 @@ using System.Collections;
 
 public class GateScript : _Mono {
 
-	public Switch trackedSwitch {get; set;}
+	// Gate determines whether it's open or closed based on the state of switchToWatch
+	public Switch switchToWatch {get; set;}
 
 	[Tooltip("Sprite shown when gate is open.")]
 	public Sprite closedSprite;
@@ -17,17 +18,16 @@ public class GateScript : _Mono {
 
 
 	void Update () {
-		bool open = trackedSwitch.on;
+		bool open = switchToWatch.on;
 		if(reverse)
 			open = !open;
 
 		if(open){
 			spriteRenderer.sprite = openSprite;
-			collider2D.isTrigger = true;
+			collider2D.isTrigger = true; // disable collision
 		} else {
 			spriteRenderer.sprite = closedSprite;
-			collider2D.isTrigger = false;
-
+			collider2D.isTrigger = false; // enable collision
 		}
 	}
 }

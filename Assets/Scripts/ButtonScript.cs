@@ -14,26 +14,31 @@ public class ButtonScript : _Mono {
 	[Tooltip("Springy buttons spring back to the off state when the player walks off.")]
 	public bool springy = false;
 
-	[Tooltip("Gates that will track the switch.")]
+	[Tooltip("Gates that will watch the switch.")]
 	public GateScript[] gates;
 	
 	void Start () {
 		_switch = new Switch();
 
+		// Tell each gate to watch our switch
 		foreach(GateScript gate in gates){
-			gate.trackedSwitch = _switch;
+			gate.switchToWatch = _switch;
 		}
 	}
 
 	void Update () {
+
+		// Is the player on us?
 		bool playerIsOnUs = Utils.PlayerIsOnTile(tileX, tileY, gameObject.layer);
 
+		// Switch the state of the switch if needed
 		if(_switch.on && springy && !playerIsOnUs){
 			_switch.TurnOff();
 		} else if (_switch.off && playerIsOnUs){
 			_switch.TurnOn();
 		}
 
+		// Update the sprite
 		if(_switch.on){
 			spriteRenderer.sprite = onSprite;
 		} else {

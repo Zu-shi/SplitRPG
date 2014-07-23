@@ -37,6 +37,11 @@ public class FaderScript : _Mono {
 		fadeCallback = callback;
 	}
 
+	public void Dim(Utils.VoidDelegate callback){
+		targetAlpha = .2f;
+		fadeCallback = callback;
+	}
+
 	public void FadeUp(Utils.VoidDelegate callback){
 		targetAlpha = 0;
 		fadeCallback = callback;

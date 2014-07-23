@@ -38,17 +38,13 @@ public class PlayerControllerScript : _Mono {
 		roomManager = Globals.roomManager;
 
 		// Determine which player we are
-		if(gameObject.tag == "PlayerLeft"){
-			isLeftPlayer = true;
-		} else {
-			isLeftPlayer = false;
-		}
+		isLeftPlayer = (this == Globals.playerLeft);
 
 		// Get other player
 		if(isLeftPlayer){
 			otherPlayer = Globals.playerRight;
 		} else {
-			otherPlayer = Globals.playerRight;
+			otherPlayer = Globals.playerLeft;
 		}
 
 		// Get scripts
@@ -74,6 +70,7 @@ public class PlayerControllerScript : _Mono {
 	
 	void ResetBothPlayers(){
 		// Temporary hack to reset camera
+		// Might not be needed now? 
 		roomManager.Reset();
 
 		ResetPlayer();
@@ -111,7 +108,11 @@ public class PlayerControllerScript : _Mono {
 
 		if(disableCharacter)
 			return true;
-		
+
+		Vector2 dest = new Vector2(tileX, tileY) + Utils.DirectionToVector(direction);
+		return !roomManager.ContainsTile(dest);
+
+		/* 
 		switch(direction){
 		case Direction.NONE:
 			break;
@@ -133,8 +134,8 @@ public class PlayerControllerScript : _Mono {
 			break;
 
 		}
-
 		return false;
+		*/
 	}
 
 	public void GiveInputDirection(Direction direction){

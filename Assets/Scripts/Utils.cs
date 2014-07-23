@@ -38,17 +38,6 @@ public static class Utils {
 			return value;
 	}
 
-	public static int Round(float value){
-		/*
-		if (value < Mathf.Floor (value) + 0.5f) {
-			return Mathf.FloorToInt (value);
-		} else {
-			return Mathf.FloorToInt (value);
-		}*/
-		return Mathf.CeilToInt (value - 0.5f);
-	}
-
-
 	public static bool LayerIsLeft(int layer){
 		if(LayerMask.NameToLayer("Left") == layer){
 			return true;
@@ -72,6 +61,22 @@ public static class Utils {
 
 	public static int PixelsToTiles(int val){
 		return val / Globals.PIXELS_PER_TILE;
+	}
+
+	// Left -> (-1, 0), Up -> (0, 1), etc
+	public static Vector2 DirectionToVector(Direction d){
+		switch(d){
+		case Direction.LEFT:
+			return new Vector2(-1, 0);
+		case Direction.RIGHT:
+			return new Vector2(1, 0);
+		case Direction.UP:
+			return new Vector2(0, 1);
+		case Direction.DOWN:
+			return new Vector2(0, -1);
+		default:
+			return new Vector2(0, 0);
+		}
 	}
 
 }
