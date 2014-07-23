@@ -103,8 +103,8 @@ public class PlayerControllerScript : _Mono {
 
 		// Disabled char
 		if(disableCharacter){
-//			x = otherPlayerController.x;
-//			y = otherPlayerController.y;
+			//x = otherPlayerController.x;
+			//y = otherPlayerController.y;
 			return;
 		}
 
@@ -169,9 +169,7 @@ public class PlayerControllerScript : _Mono {
 		if(WillMoveOffScreen(direction)){
 			// If the other player is too, move to the next room,
 			// otherwise return without moving
-			if(otherPlayerController.WillMoveOffScreen(direction)){
-				roomManager.MoveScreen(direction);
-			} else {
+			if(!otherPlayerController.WillMoveOffScreen(direction)){
 				return;
 			}
 		}
