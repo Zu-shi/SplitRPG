@@ -13,9 +13,8 @@ public class PlayerControllerScript : _Mono {
 
 	// Other player stuff
 	bool isLeftPlayer;
-	GameObject otherPlayer;
-	PlayerControllerScript otherPlayerController;
-	
+	PlayerControllerScript otherPlayer;
+
 	// Other scripts
 	CharacterMovementScript characterMovement;
 	FallingBehaviorScript fallingBehavior;
@@ -36,10 +35,7 @@ public class PlayerControllerScript : _Mono {
 		allowMovement = true;
 
 		// Game Manager
-		roomManager = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManagerScript>();
-		if(roomManager == null){
-			Debug.Log ("Error: Game Manager not found.");
-		}
+		roomManager = Globals.roomManager;
 
 		// Determine which player we are
 		if(gameObject.tag == "PlayerLeft"){
@@ -50,29 +46,14 @@ public class PlayerControllerScript : _Mono {
 
 		// Get other player
 		if(isLeftPlayer){
-			otherPlayer = GameObject.FindGameObjectWithTag("PlayerRight");
+			otherPlayer = Globals.playerRight;
 		} else {
-			otherPlayer = GameObject.FindGameObjectWithTag("PlayerLeft");
-		}
-		if(otherPlayer == null){
-			Debug.Log ("Error: Other player not found.");
-		}
-
-		// Get other player controller
-		otherPlayerController = otherPlayer.GetComponent<PlayerControllerScript>();
-		if(otherPlayerController == null){
-			Debug.Log ("Error: Other player controller not found.");
+			otherPlayer = Globals.playerRight;
 		}
 
 		// Get scripts
 		characterMovement = GetComponent<CharacterMovementScript>();
-		if(characterMovement == null){
-			Debug.Log ("Error: CharacterMovementScript not found.");
-		}
 		fallingBehavior = GetComponent<FallingBehaviorScript>();
-		if(fallingBehavior == null){
-			Debug.Log ("Error: FallingBehaviorScript not found.");
-		}
 
 		disableCharacter = false;
 
@@ -96,15 +77,13 @@ public class PlayerControllerScript : _Mono {
 		roomManager.Reset();
 
 		ResetPlayer();
-		otherPlayerController.ResetPlayer();
+		otherPlayer.ResetPlayer();
 	}
 	
 	void Update () {
 
 		// Disabled char
 		if(disableCharacter){
-			//x = otherPlayerController.x;
-			//y = otherPlayerController.y;
 			return;
 		}
 
@@ -166,7 +145,7 @@ public class PlayerControllerScript : _Mono {
 			return;
 
 		// Check if we need to wait at the edge of the screen
-		bool needToWait = WillMoveOffScreen(direction) && !otherPlayerController.WillMoveOffScreen(direction);
+		bool needToWait = WillMoveOffScreen(direction) && !otherPlayer.WillMoveOffScreen(direction);
 
 		if(!needToWait){
 			characterMovement.MoveInDirection(direction);

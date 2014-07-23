@@ -31,20 +31,18 @@ public class CameraScript : _Mono {
 	Vector2 shakeDest;
 	float shakeSpeed;
 	bool isShaking;
-	
-	
-	RoomManagerScript roomManager;
 
 	[Tooltip("Prefab of 'fader' object which controls fading the camera in and out.")]
 	public GameObject faderPrefab;
 	FaderScript fader;
 
 	GameObject player;
+	RoomManagerScript roomManager;
 
 
 	void Start () {
 
-		roomManager = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManagerScript>();
+		roomManager = Globals.roomManager;
 
 		// Instantiate a fader object for this camera
 		GameObject faderObject = (GameObject)Instantiate(faderPrefab);
@@ -52,8 +50,8 @@ public class CameraScript : _Mono {
 		fader = faderObject.GetComponent<FaderScript>();
 
 		// Find the player on our side of the screen
-		string ptag = (gameObject.layer == LayerMask.NameToLayer("Right") ? "PlayerRight" : "PlayerLeft");
-		player = (GameObject)GameObject.FindGameObjectWithTag(ptag);
+		player = (LayerMask.NameToLayer("Right") == gameObject.layer ? 
+		          Globals.playerRight.gameObject : Globals.playerLeft.gameObject);
 
 		mode = Mode.GAMEPLAY;
 		isShaking = false;

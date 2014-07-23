@@ -9,6 +9,8 @@ TagManager:
   - LeftCamera
   - RightCamera
   - 
+  - GameManager
+  - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
   Builtin Layer 2: Ignore Raycast
@@ -19,8 +21,8 @@ TagManager:
   Builtin Layer 7: 
   User Layer 8: Left
   User Layer 9: Right
-  User Layer 10: LeftGround
-  User Layer 11: RightGround
+  User Layer 10: GroundLeft
+  User Layer 11: GroundRight
   User Layer 12: 
   User Layer 13: 
   User Layer 14: 

@@ -36,11 +36,11 @@ public class RoomManagerScript : MonoBehaviour {
 	int cameraFinishes;
 
 	void Start () {
-		leftCamera = GameObject.FindGameObjectWithTag("LeftCamera").GetComponent<CameraScript>();
-		rightCamera = GameObject.FindGameObjectWithTag("RightCamera").GetComponent<CameraScript>();
+		leftCamera = Globals.cameraLeft;
+		rightCamera = Globals.cameraRight;
 
-		leftPlayer = GameObject.FindGameObjectWithTag("PlayerLeft").GetComponent<PlayerControllerScript>();
-		rightPlayer = GameObject.FindGameObjectWithTag("PlayerRight").GetComponent<PlayerControllerScript>();
+		leftPlayer = Globals.playerLeft;
+		rightPlayer = Globals.playerRight;
 
 		cameraFinishes = 0;
 
