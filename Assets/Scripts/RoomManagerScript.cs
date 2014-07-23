@@ -50,8 +50,8 @@ public class RoomManagerScript : MonoBehaviour {
 
 	void Update() {
 		//Check for only the left and right camera layers
-		cameraLayerMasks = ( (1 << LayerMask.NameToLayer("RightCamera")) | 
-		                    (1 << LayerMask.NameToLayer("LeftCamera")) );
+		cameraLayerMasks = ( (1 << LayerMask.NameToLayer("CameraRight")) | 
+		                    (1 << LayerMask.NameToLayer("CameraLeft")) );
 
 		cameraCollider = (BoxCollider2D) Physics2D.Raycast(new Vector2(leftPlayer.x, leftPlayer.y), 
 		                                             Vector2.zero, 
