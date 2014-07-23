@@ -3,13 +3,14 @@ using System.Collections;
 
 public class RoomManagerScript : MonoBehaviour {
 
+	public BoxCollider2D collider;
 	CameraScript leftCamera, rightCamera;
 	PlayerControllerScript leftPlayer, rightPlayer;
+	private int CameraLayerMasks;
 
 	// Rect that defines the room (measured in tiles)
 	Rect _roomRect;
-
-
+	
 	// "Helper" Properties
 	public Vector2 roomCenter{
 		get{ return _roomRect.center; }
@@ -45,6 +46,17 @@ public class RoomManagerScript : MonoBehaviour {
 
 		// Standard 8 x 9 
 		SetBounds (-4, 4, 4, -5); 
+	}
+
+	void Update() {
+		//CameraLayerMasks = ( (1 << LayerMask.NameToLayer("RightCamera")) | 
+		//                    (1 << LayerMask.NameToLayer("LeftCamera")) );
+		//collider = (BoxCollider2D)Physics2D.Raycast(new Vector2(leftPlayer.x, leftPlayer.y), Vector2.zero, 0f, CameraLayerMasks).collider;
+		//collider = (BoxCollider2D)Physics2D.Raycast(new Vector2(leftPlayer.x, leftPlayer.y), Vector2.zero, 0f).collider;
+		//Debug.Log (Physics2D.Raycast(new Vector2(leftPlayer.x, leftPlayer.y), Vector2.zero, 0f).collider, CameraLayerMasks);
+		//Debug.Log ("Collider center:" + collider.center);
+		//Debug.Log ("Collider position:" + collider.transform.position);
+		//Debug.Log ("Collider size:" + collider.size);
 	}
 
 	// Temprary hack to reset the camera when the player falls off the level
