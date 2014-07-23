@@ -3,10 +3,16 @@ using System.Collections.Generic;
 
 public class DialogueManagerScript : MonoBehaviour {
 
+	[Tooltip("The text file that contains the dialogue node information for this Game Object.")]
 	public TextAsset dialogueAsset;
 
+	[Tooltip("If set, this dialogue will show up on the left side. If showOnRight is not also set, then the right side will be dimmed.")]
 	public bool showOnLeft = false;
+	
+	[Tooltip("If set, this dialogue will show up on the right side. If showOnLeft is not also set, then the left side will be dimmed.")]
 	public bool showOnRight = false;
+
+	[Tooltip("The speed, in characters per second, that text will be written to the screen.")]
 	public float textSpeed = 5.0f;
 
 	private DialogueSequence seq;
@@ -66,29 +72,29 @@ public class DialogueManagerScript : MonoBehaviour {
 				GameObject.Find("PlayerLeft").GetComponent<PlayerControllerScript>().enabled = true;
 				GameObject.Find("PlayerRight").GetComponent<PlayerControllerScript>().enabled = true;
 				GameObject.Find("PlayerInputHandler").GetComponent<PlayerInputScript>().enabled = true;
+
+				scrolling = false;
 			}
 			GameObject.Find("GameManager").GetComponent<GameManagerScript>().FadeUpRightSide();
 			GameObject.Find("GameManager").GetComponent<GameManagerScript>().FadeUpLeftSide();
 		}
 
-		
-		if(!scrolling && (showOnLeft || showOnRight)) { // We are showing on at least one side but not scrolling.
+		if( (showOnLeft || showOnRight) && !scrolling && (displayText != current.getText()) ) {
 			scrolling = true;
-		}
-		if(scrolling && !(showOnLeft || showOnRight)) { // We are not showing on either side, but we are scrolling.
-			scrolling = false;
 		}
 
 		if(scrolling) {
 			scrollingTimer += Time.deltaTime;
-			if( displayText != current.getText() ){
-				if(scrollingTimer >= 1.0f/textSpeed){
-					scrollingTimer = 0;
-					displayText += current.getText()[displayText.Length];
-				}
 
-			} else {
-				scrolling = false;
+			while(scrollingTimer >= 1.0f/textSpeed) {
+				if( displayText != current.getText() ) {
+					scrollingTimer -= 1.0f/textSpeed;
+					displayText += current.getText()[displayText.Length];
+				} else {
+					scrolling = false;
+					scrollingTimer = 0;
+					break;
+				} 
 			}
 		}
 	}
@@ -174,7 +180,7 @@ public class DialogueManagerScript : MonoBehaviour {
 					if(GUILayout.Button(options[i], GUILayout.Height(20))){
 						SelectOption(i);
 						if(options.Count == 0){
-							showOnLeft = false;
+							showOnRight = false;
 							current = seq.getStartingNode();
 						}
 					}
