@@ -39,7 +39,13 @@ public static class Utils {
 	}
 
 	public static int Round(float value){
-		return (int)Mathf.Round(value);
+		/*
+		if (value < Mathf.Floor (value) + 0.5f) {
+			return Mathf.FloorToInt (value);
+		} else {
+			return Mathf.FloorToInt (value);
+		}*/
+		return Mathf.CeilToInt (value - 0.5f);
 	}
 
 }
