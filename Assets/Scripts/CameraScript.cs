@@ -9,13 +9,14 @@ public class CameraScript : _Mono {
 
 	Mode mode;
 
+
 	// Center - The location of the camera without the offset
 	public Vector2 center{get; set;}
 	public Vector2 offset{get; set;}
 
 	// Camera bounds in current room
-	float minX, minY, maxX, maxY;
-
+	Rect bounds;
+	
 	// Panning between rooms
 	Vector2 transitionDest;
 	float transitionSpeed;
@@ -118,16 +119,16 @@ public class CameraScript : _Mono {
 		float cw = Globals.SIDEWIDTH;
 		float ch = Globals.SIDEHEIGHT;
 
-		minX = roomManager.roomLeft -.5f + cw / 2;
-		minX = Mathf.Min (minX, rx);
-		maxX = roomManager.roomRight +.5f - cw / 2;
-		maxX = Mathf.Max (maxX, rx);
-		minY = roomManager.roomBot - .5f + ch / 2;
-		minY = Mathf.Min (minY, ry);
-		maxY = roomManager.roomTop + .5f - ch / 2;
-		maxY = Mathf.Max (maxY, ry);
+		bounds.xMin = roomManager.roomLeft -.5f + cw / 2;
+		bounds.xMin = Mathf.Min (bounds.xMin, rx);
+		bounds.xMax = roomManager.roomRight +.5f - cw / 2;
+		bounds.xMax = Mathf.Max (bounds.xMax, rx);
+		bounds.yMin = roomManager.roomBot - .5f + ch / 2;
+		bounds.yMin = Mathf.Min (bounds.yMin, ry);
+		bounds.yMax = roomManager.roomTop + .5f - ch / 2;
+		bounds.yMax = Mathf.Max (bounds.yMax, ry);
 
-//		Debug.Log (minX + ", " + maxX + ", " + minY + ", " + maxY);
+		//		Debug.Log (bounds.xMin + ", " + bounds.xMax + ", " + bounds.yMin + ", " + bounds.yMax);
 	}
 
 	// Returns the position of the camera that is closest to the object 
@@ -138,8 +139,8 @@ public class CameraScript : _Mono {
 		float ox = obj.transform.position.x;
 		float oy = obj.transform.position.y;
 
-		float fx = Utils.Clamp(ox, minX, maxX);
-		float fy = Utils.Clamp(oy, minY, maxY);
+		float fx = Utils.Clamp(ox, bounds.xMin, bounds.xMax);
+		float fy = Utils.Clamp(oy, bounds.yMin, bounds.yMax);
 
 		return new Vector2(fx, fy);
 	}
