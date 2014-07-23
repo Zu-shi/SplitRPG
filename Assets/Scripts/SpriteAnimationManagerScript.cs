@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class SpriteAnimationManagerScript : MonoBehaviour {
 
+	[Tooltip("If set, this sprite will revert to it's idle animation after it is told to play a one-shot animation.")]
 	public bool idleAfterOneTimeAnimations = false;
 
 	private List<SpriteAnimationScript> animations;
