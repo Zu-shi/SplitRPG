@@ -109,33 +109,9 @@ public class PlayerControllerScript : _Mono {
 		if(disableCharacter)
 			return true;
 
-		Vector2 dest = new Vector2(tileX, tileY) + Utils.DirectionToVector(direction);
+		Vector2 dest = new Vector2(tileX, tileY) + 2 * Utils.DirectionToVector(direction);
 		return !roomManager.ContainsTile(dest);
 
-		/* 
-		switch(direction){
-		case Direction.NONE:
-			break;
-		case Direction.LEFT:
-			if(tileX == roomManager.roomLeft)
-				return true;
-			break;
-		case Direction.RIGHT:
-			if(tileX == roomManager.roomRight)
-				return true;
-			break;
-		case Direction.UP:
-			if(tileY == roomManager.roomTop)
-				return true;
-			break;
-		case Direction.DOWN:
-			if(tileY == roomManager.roomBot)
-				return true;
-			break;
-
-		}
-		return false;
-		*/
 	}
 
 	public void GiveInputDirection(Direction direction){

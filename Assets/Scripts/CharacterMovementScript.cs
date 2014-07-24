@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CharacterMovementScript : _Mono {
 
-	// Time it takes to move on space in frames (at Unity's fixed time step aka 50 fps)
+	// Time it takes to move two spaces in frames (at Unity's fixed time step aka 50 fps)
 	int moveTime = 12;
 
 	int moveTimeLeft;
@@ -23,7 +23,7 @@ public class CharacterMovementScript : _Mono {
 		moveTimeLeft = 0;
 
 		// Calculate moveSpeed based on moveTime
-		moveSpeed = 1f / (moveTime * Time.fixedDeltaTime);
+		moveSpeed = 2f / (moveTime * Time.fixedDeltaTime);
 
 		moveVelocity = new Vector2(0,0);
 		_isMoving = false;

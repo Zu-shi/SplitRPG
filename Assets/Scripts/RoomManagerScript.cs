@@ -48,7 +48,7 @@ public class RoomManagerScript : MonoBehaviour {
 		cameraFinishes = 0;
 
 		// Standard 9 x 10 
-		SetBounds (-4, -5, 4, 4); 
+		SetBounds (-8, -10, 8, 8); 
 	}
 
 	void Update() {
@@ -73,14 +73,18 @@ public class RoomManagerScript : MonoBehaviour {
 		leftCamera.BeginRoomTransitionFade(CameraTransitionFinished);
 		rightCamera.BeginRoomTransitionFade(CameraTransitionFinished);
 
-		SetBounds (-4, -5, 4, 4);
+		SetBounds (-8, -10, 8, 8); 
 	}
 
-	public void RunTinyRoomTest(){SetBounds(-2, -2, 2, 2);}
-	public void RunBigRoomTest(){SetBounds(-9, -10, 10, 10);}
+	public void RunTinyRoomTest(){SetBounds(-4, -4, 4, 4);}
+	public void RunBigRoomTest(){SetBounds(-18, -20, 20, 20);}
 	
 	public bool ContainsTile(Vector2 tile){
-		return _roomRect.Contains(tile);
+		if(tile.x >= roomLeft && tile.x <= roomRight && tile.y >= roomBot && tile.y <= roomTop){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	void SetRoomRect(float left, float top, float width, float height){
