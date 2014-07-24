@@ -64,6 +64,10 @@ public class CharacterMovementScript : _Mono {
 		return true;
 	}
 
+	/// <summary>
+	/// Moves the character in the specified direction by 2 tiles
+	/// </summary>
+	/// <param name="direction">Direction.</param>
 	public void MoveInDirection(Direction direction){
 		if(_isMoving || direction == Direction.NONE){
 			return;

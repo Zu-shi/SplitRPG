@@ -112,7 +112,9 @@ public class CameraScript : _Mono {
 		center = CalculateFollowPosition(player);
 	}
 
-	// Calculate bounds of camera movement based on current room
+	/// <summary>
+	/// Calculate bounds of camera movement based on current room
+	/// </summary>
 	void UpdateGameplayCameraBounds(){
 		float rcx = roomManager.roomCenter.x;
 		float rcy = roomManager.roomCenter.y;
@@ -132,9 +134,11 @@ public class CameraScript : _Mono {
 
 		//		Debug.Log (bounds.xMin + ", " + bounds.xMax + ", " + bounds.yMin + ", " + bounds.yMax);
 	}
-
-	// Returns the position of the camera that is closest to the object 
-	// without going out of the bounds of the room
+	
+	/// <summary>
+	/// Returns the position of the camera that is closest to the object
+	/// without going out of bounds of the room
+	/// </summary>
 	Vector2 CalculateFollowPosition(GameObject obj){
 		UpdateGameplayCameraBounds();
 
@@ -146,7 +150,7 @@ public class CameraScript : _Mono {
 
 		return new Vector2(fx, fy);
 	}
-
+	
 	void TransitionModeUpdate(){
 		// Pan a bit towards the destination
 		float dx = transitionDest.x;
@@ -160,7 +164,10 @@ public class CameraScript : _Mono {
 		}
 	}
 
-	// Pan from the camera's current location to the new room
+	/// <summary>
+	/// Pan from the camera's current location to the new room
+	/// </summary>
+	/// <param name="callback">Callback.</param>
 	public void BeginRoomTransitionPan(Utils.VoidDelegate callback){
 		mode = Mode.TRANSITION;
 		transitionCallback = callback;
@@ -172,7 +179,10 @@ public class CameraScript : _Mono {
 		
 	}
 
-	// Fade out, then fade in on the new room
+	/// <summary>
+	/// Fade out, then fade in on the new room
+	/// </summary>
+	/// <param name="callback">Callback.</param>
 	public void BeginRoomTransitionFade(Utils.VoidDelegate callback){
 		mode = Mode.FADETRANSITION;
 		transitionCallback = callback;
@@ -209,40 +219,73 @@ public class CameraScript : _Mono {
 
 	}
 
+	/// <summary>
+	/// Enters cutscene mode, making the camera ready for cutscene commands
+	/// </summary>
 	public void BeginCutscene(){
 		mode = Mode.CUTSCENE;
 	}
 
+	/// <summary>
+	/// Begins a pan in a cutscene
+	/// </summary>
+	/// <param name="destX">Destination x.</param>
+	/// <param name="destY">Destination y.</param>
+	/// <param name="callback">Callback.</param>
 	public void BeginCutscenePan(float destX, float destY, Utils.VoidDelegate callback){
 		panCallback = callback;
 		panDest = new Vector2(destX, destY);
 	}
 
+	/// <summary>
+	/// Begins the fade up.
+	/// </summary>
+	/// <param name="callback">Callback.</param>
 	public void BeginFadeUp(Utils.VoidDelegate callback){
 		fader.FadeUp(callback);
 	}
+	/// <summary>
+	/// Begins the fade up.
+	/// </summary>
 	public void BeginFadeUp(){
 		BeginFadeUp(null);
 	}
 
+	/// <summary>
+	/// Begins the fade down.
+	/// </summary>
+	/// <param name="callback">Callback.</param>
 	public void BeginFadeDown(Utils.VoidDelegate callback){
 		fader.FadeDown(callback);
 	}
+	/// <summary>
+	/// Begins the fade down.
+	/// </summary>
 	public void BeginFadeDown(){
 		BeginFadeDown(null);
 	}
 
+	/// <summary>
+	/// Begins shaky cam.
+	/// </summary>
 	public void BeginShakyCam(){
 		isShaking = true;
 		StartNextShake();
 	}
 
+	/// <summary>
+	/// Begins shaky cam.
+	/// </summary>
+	/// <param name="duration">Duration.</param>
 	public void BeginShakyCam(float duration){
 		BeginShakyCam();
 		CancelInvoke("EndShakyCam");
 		Invoke ("EndShakyCam", duration);
 	}
 
+	/// <summary>
+	/// Ends the shaky cam.
+	/// </summary>
 	public void EndShakyCam(){
 		isShaking = false;
 		offset = new Vector2(0,0);
@@ -266,9 +309,14 @@ public class CameraScript : _Mono {
 		ty = Utils.MoveValueTowards(offset.y, shakeDest.y, ss);
 		offset = new Vector2(tx, ty);
 	}
-
-	// Helper method for panning
-	// XYPan means it pans the X and Y coordinates separately, so it isn't very cinematic 
+	
+	/// <summary>
+	/// Helper method for panning
+	/// XYPan means it pans the X and Y coordinates separately, so it isn't very cinematic 
+	/// </summary>
+	/// <param name="px">Px.</param>
+	/// <param name="py">Py.</param>
+	/// <param name="speed">Speed.</param>
 	void XYPanTo(float px, float py, float speed){
 		if(center.x == px && center.y == py){
 			return;

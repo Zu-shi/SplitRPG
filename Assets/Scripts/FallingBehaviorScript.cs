@@ -12,14 +12,22 @@ public class FallingBehaviorScript : _Mono {
 	[Tooltip ("Destroy the object after it falls?")]
 	public bool destroyOnFall;
 
-	// Can set this to make the object unable to fall
-	// For example if a character is jumping, set its inAir to true
+	/// <summary>
+	/// Object is unable to fall while inAir, e.g. if jumping or flying over a gap
+	/// </summary>
+	/// <value><c>true</c> if in air; otherwise, <c>false</c>.</value>
 	public bool inAir{get;set;}
 
-	// Object is currently falling down
+	/// <summary>
+	/// Object is currently falling
+	/// </summary>
+	/// <value><c>true</c> if falling; otherwise, <c>false</c>.</value>
 	public bool falling{get; set;}
 
-	// Object has fallen all the way down to invisible size
+	/// <summary>
+	/// Object has fallen all the way down to invisible size.
+	/// </summary>
+	/// <value><c>true</c> if fell; otherwise, <c>false</c>.</value>
 	public bool fell{get;set;}
 
 
@@ -44,7 +52,10 @@ public class FallingBehaviorScript : _Mono {
 
 		Reset();
 	}
-	
+
+	/// <summary>
+	/// Reset to not falling and regular size.
+	/// </summary>
 	public void Reset (){
 		falling = fell = false;
 		inAir = false;
