@@ -123,16 +123,17 @@ public class CameraScript : _Mono {
 		float sh = Globals.SIDEHEIGHT;
 
 		// Update bounds of camera
-		bounds.xMin = roomManager.roomLeft -.5f + sw / 2;
+		bounds.xMin = roomManager.roomLeftTile + sw / 2;
 		bounds.xMin = Mathf.Min (bounds.xMin, rcx);
-		bounds.xMax = roomManager.roomRight +.5f - sw / 2;
+		bounds.xMax = roomManager.roomRightTile + 1f - sw / 2;
 		bounds.xMax = Mathf.Max (bounds.xMax, rcx);
-		bounds.yMin = roomManager.roomBot - .5f + sh / 2;
-		bounds.yMin = Mathf.Min (bounds.yMin, rcy);
-		bounds.yMax = roomManager.roomTop + .5f - sh / 2;
-		bounds.yMax = Mathf.Max (bounds.yMax, rcy);
 
-		//		Debug.Log (bounds.xMin + ", " + bounds.xMax + ", " + bounds.yMin + ", " + bounds.yMax);
+		bounds.yMax = roomManager.roomTopTile - sh / 2;
+		bounds.yMax = Mathf.Max (bounds.yMax, rcy);
+		bounds.yMin = roomManager.roomBotTile - 1f + sh / 2;
+		bounds.yMin = Mathf.Min (bounds.yMin, rcy);
+
+//		Debug.Log (bounds.xMin + ", " + bounds.xMax + ", " + bounds.yMin + ", " + bounds.yMax);
 	}
 	
 	/// <summary>

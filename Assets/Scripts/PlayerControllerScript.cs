@@ -31,7 +31,7 @@ public class PlayerControllerScript : _Mono {
 	/// <value><c>true</c> if ready for input; otherwise, <c>false</c>.</value>
 	public bool readyForInput {
 		get {
-			return !characterMovement.isMoving && !fallingBehavior.falling;
+			return !characterMovement.isMoving && !fallingBehavior.falling && allowMovement;
 		}
 	}
 

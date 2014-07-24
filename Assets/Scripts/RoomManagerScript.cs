@@ -9,6 +9,8 @@ public class RoomManagerScript : MonoBehaviour {
 	BoxCollider2D roomCollider, roomColliderPrev;
 	private int roomLayerMasks;
 
+	bool needsTransition;
+
 	// Rect that defines the room (measured in tiles)
 	Rect _roomRect;
 	
@@ -19,35 +21,35 @@ public class RoomManagerScript : MonoBehaviour {
 		get{ return _roomRect.center; }
 	}
 	/// <summary>
-	/// The size of the current room
+	/// The dimensions of the current room in terms of how many tiles fit inside the room
 	/// </summary>
-	public Vector2 roomSize{
-		get{ return _roomRect.size; }
+	public Vector2 roomTileDimensions{
+		get{ return _roomRect.size + new Vector2(1,1); }
 	}
 
 
 	/// <summary>
 	/// The top-most tile that is inside the room.
 	/// </summary>
-	public int roomTop{
+	public int roomTopTile{
 		get{ return Mathf.RoundToInt(_roomRect.yMax); }
 	}
 	/// <summary>
 	/// The bottom-most tile that is inside the room.
 	/// </summary>
-	public int roomBot{
+	public int roomBotTile{
 		get{ return Mathf.RoundToInt(_roomRect.yMin); }
 	}
 	/// <summary>
 	/// The left-most tile that is inside the room.
 	/// </summary>
-	public int roomLeft{
+	public int roomLeftTile{
 		get{ return Mathf.RoundToInt(_roomRect.xMin); }
 	}
 	/// <summary>
 	/// The right-most tile that is inside the room.
 	/// </summary>
-	public int roomRight{
+	public int roomRightTile{
 		get{ return Mathf.RoundToInt(_roomRect.xMax); }
 	}
 
@@ -61,6 +63,7 @@ public class RoomManagerScript : MonoBehaviour {
 		leftPlayer = Globals.playerLeft;
 		rightPlayer = Globals.playerRight;
 
+		needsTransition = false;
 		cameraFinishes = 0;
 
 		// Standard 9 x 10 
@@ -68,6 +71,11 @@ public class RoomManagerScript : MonoBehaviour {
 	}
 
 	void Update() {
+		if(needsTransition){
+			BeginCameraTransition();
+			needsTransition = false;
+		}
+
 		//Check for only the left and right room layers
 		roomLayerMasks = ( (1 << LayerMask.NameToLayer("RoomsRight")) | 
 		                    (1 << LayerMask.NameToLayer("RoomsLeft")) );
@@ -99,7 +107,7 @@ public class RoomManagerScript : MonoBehaviour {
 	/// Whether the tile is inside the room
 	/// </summary>
 	public bool ContainsTile(Vector2 tile){
-		if(tile.x >= roomLeft && tile.x <= roomRight && tile.y >= roomBot && tile.y <= roomTop){
+		if(tile.x >= roomLeftTile && tile.x <= roomRightTile && tile.y >= roomBotTile && tile.y <= roomTopTile){
 			return true;
 		} else {
 			return false;
@@ -117,6 +125,7 @@ public class RoomManagerScript : MonoBehaviour {
 		// Rect objects use a GUI coordinate system where the y axis is opposite than in 3D view
 		// So we actually pass in (left, BOT, width, height) instead of (left, TOP...)
 		_roomRect = new Rect(left, top-height, width, height);
+//		LogRoomInfo();
 	}
 
 	/// <summary>
@@ -132,8 +141,8 @@ public class RoomManagerScript : MonoBehaviour {
 
 	void LogRoomInfo(){
 		Debug.Log("Room Center = (" + roomCenter.x + ", " + roomCenter.y + 
-		          ")   Size = " + roomSize.x + " x " + roomSize.y);
-		Debug.Log ("Room Bounds: (" + roomLeft + ", " + roomTop + ") to (" + roomRight + ", " + roomBot + ")");
+		          ")   Size = " + roomTileDimensions.x + " x " + roomTileDimensions.y);
+		Debug.Log ("Room Bounds: (" + roomLeftTile + ", " + roomTopTile + ") to (" + roomRightTile + ", " + roomBotTile + ")");
 	}
 
 	/// <summary>
@@ -142,8 +151,7 @@ public class RoomManagerScript : MonoBehaviour {
 	void MoveScreen(){
 		// Need to wait a short bit before transitioning 
 		// because one character will get stuck if he hasn't moved yet
-		CancelInvoke("BeginCameraTransition");
-		Invoke ("BeginCameraTransition", .1f);
+		needsTransition = true;
 	}
 
 	/// <summary>
