@@ -16,7 +16,7 @@ public class CharacterMovementScript : _Mono {
 		}
 	}
 	
-	float xv, yv;
+	Vector2 moveVelocity;
 
 	void Start () {
 
@@ -25,7 +25,7 @@ public class CharacterMovementScript : _Mono {
 		// Calculate moveSpeed based on moveTime
 		moveSpeed = 1f / (moveTime * Time.fixedDeltaTime);
 
-		xv = yv = 0;
+		moveVelocity = new Vector2(0,0);
 		_isMoving = false;
 
 	}
@@ -34,7 +34,7 @@ public class CharacterMovementScript : _Mono {
 
 		if(_isMoving){
 			// Set character velocity
-			rigidbody2D.velocity = new Vector2(xv, yv);
+			rigidbody2D.velocity = moveVelocity;
 
 			// Is move done yet?
 			moveTimeLeft--;
@@ -55,7 +55,7 @@ public class CharacterMovementScript : _Mono {
 		y = tileY;
 
 		_isMoving = false;
-		xv = yv = 0;
+		moveVelocity = new Vector2(0,0);
 
 	}
 
@@ -73,21 +73,7 @@ public class CharacterMovementScript : _Mono {
 		moveTimeLeft = moveTime;
 
 		if(CanMoveInDirection(direction)){
-			switch(direction){
-			case Direction.LEFT:
-				xv = -moveSpeed;
-				break;
-			case Direction.RIGHT:
-				xv = moveSpeed;
-				break;
-			case Direction.UP:
-				yv = moveSpeed;
-				break;
-			case Direction.DOWN:
-				yv = -moveSpeed;
-				break;
-			}
+			moveVelocity = Utils.DirectionToVector(direction) * moveSpeed;
 		}
-
 	}
 }

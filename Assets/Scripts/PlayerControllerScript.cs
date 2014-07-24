@@ -4,6 +4,8 @@ using System.Collections;
 public class PlayerControllerScript : _Mono {
 
 	public bool allowMovement{get;set;}
+
+	[Tooltip("Shadow object of the player")]
 	public GameObject shadow;
 
 	// Room Manager
@@ -11,9 +13,8 @@ public class PlayerControllerScript : _Mono {
 
 	// Other player stuff
 	bool isLeftPlayer;
-	GameObject otherPlayer;
-	PlayerControllerScript otherPlayerController;
-	
+	PlayerControllerScript otherPlayer;
+
 	// Other scripts
 	CharacterMovementScript characterMovement;
 	FallingBehaviorScript fallingBehavior;
@@ -34,43 +35,21 @@ public class PlayerControllerScript : _Mono {
 		allowMovement = true;
 
 		// Game Manager
-		roomManager = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManagerScript>();
-		if(roomManager == null){
-			Debug.Log ("Error: Game Manager not found.");
-		}
+		roomManager = Globals.roomManager;
 
 		// Determine which player we are
-		if(gameObject.tag == "PlayerLeft"){
-			isLeftPlayer = true;
-		} else {
-			isLeftPlayer = false;
-		}
+		isLeftPlayer = (this == Globals.playerLeft);
 
 		// Get other player
 		if(isLeftPlayer){
-			otherPlayer = GameObject.FindGameObjectWithTag("PlayerRight");
+			otherPlayer = Globals.playerRight;
 		} else {
-			otherPlayer = GameObject.FindGameObjectWithTag("PlayerLeft");
-		}
-		if(otherPlayer == null){
-			Debug.Log ("Error: Other player not found.");
-		}
-
-		// Get other player controller
-		otherPlayerController = otherPlayer.GetComponent<PlayerControllerScript>();
-		if(otherPlayerController == null){
-			Debug.Log ("Error: Other player controller not found.");
+			otherPlayer = Globals.playerLeft;
 		}
 
 		// Get scripts
 		characterMovement = GetComponent<CharacterMovementScript>();
-		if(characterMovement == null){
-			Debug.Log ("Error: CharacterMovementScript not found.");
-		}
 		fallingBehavior = GetComponent<FallingBehaviorScript>();
-		if(fallingBehavior == null){
-			Debug.Log ("Error: FallingBehaviorScript not found.");
-		}
 
 		disableCharacter = false;
 
@@ -91,18 +70,17 @@ public class PlayerControllerScript : _Mono {
 	
 	void ResetBothPlayers(){
 		// Temporary hack to reset camera
+		// Might not be needed now? 
 		roomManager.Reset();
 
 		ResetPlayer();
-		otherPlayerController.ResetPlayer();
+		otherPlayer.ResetPlayer();
 	}
 	
 	void Update () {
 
 		// Disabled char
 		if(disableCharacter){
-//			x = otherPlayerController.x;
-//			y = otherPlayerController.y;
 			return;
 		}
 
@@ -130,7 +108,11 @@ public class PlayerControllerScript : _Mono {
 
 		if(disableCharacter)
 			return true;
-		
+
+		Vector2 dest = new Vector2(tileX, tileY) + Utils.DirectionToVector(direction);
+		return !roomManager.ContainsTile(dest);
+
+		/* 
 		switch(direction){
 		case Direction.NONE:
 			break;
@@ -152,8 +134,8 @@ public class PlayerControllerScript : _Mono {
 			break;
 
 		}
-
 		return false;
+		*/
 	}
 
 	public void GiveInputDirection(Direction direction){
@@ -163,18 +145,13 @@ public class PlayerControllerScript : _Mono {
 		if(fallingBehavior.falling || !allowMovement)
 			return;
 
-		// Check if we're trying to move off screen
-		if(WillMoveOffScreen(direction)){
-			// If the other player is too, move to the next room,
-			// otherwise return without moving
-			if(otherPlayerController.WillMoveOffScreen(direction)){
-				roomManager.MoveScreen(direction);
-			} else {
-				return;
-			}
+		// Check if we need to wait at the edge of the screen
+		bool needToWait = WillMoveOffScreen(direction) && !otherPlayer.WillMoveOffScreen(direction);
+
+		if(!needToWait){
+			characterMovement.MoveInDirection(direction);
 		}
 
-		characterMovement.MoveInDirection(direction);
 	}
 
 	public void EnableMovement(){

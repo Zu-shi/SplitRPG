@@ -38,8 +38,45 @@ public static class Utils {
 			return value;
 	}
 
-	public static int Round(float value){
-		return (int)Mathf.Round(value);
+	public static bool LayerIsLeft(int layer){
+		if(LayerMask.NameToLayer("Left") == layer){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static bool PlayerIsOnTile(int x, int y, bool leftPlayer){
+		PlayerControllerScript player = (leftPlayer ? Globals.playerLeft : Globals.playerRight);
+		if(player.tileX == x && player.tileY == y){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static bool PlayerIsOnTile(int x, int y, int leftOrRightLayer){
+		return PlayerIsOnTile(x, y, LayerIsLeft(leftOrRightLayer));
+	}
+
+	public static int PixelsToTiles(int val){
+		return val / Globals.PIXELS_PER_TILE;
+	}
+
+	// Left -> (-1, 0), Up -> (0, 1), etc
+	public static Vector2 DirectionToVector(Direction d){
+		switch(d){
+		case Direction.LEFT:
+			return new Vector2(-1, 0);
+		case Direction.RIGHT:
+			return new Vector2(1, 0);
+		case Direction.UP:
+			return new Vector2(0, 1);
+		case Direction.DOWN:
+			return new Vector2(0, -1);
+		default:
+			return new Vector2(0, 0);
+		}
 	}
 
 }

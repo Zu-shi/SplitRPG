@@ -12,7 +12,7 @@ public class InputManagerScript : MonoBehaviour {
 		_lastInputs = new List<Button>();
 	}
 	
-	void Update () {
+	void LateUpdate () {
 		// Update variables
 		_lastInputs = _inputs;
 		_inputs = new List<Button>();

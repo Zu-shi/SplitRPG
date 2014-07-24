@@ -11,20 +11,10 @@ public class TestRunnerScript : MonoBehaviour {
 		BIG_ROOM
 	}
 
+	[Tooltip("Which test to run?")]
 	public TestType type;
-
-	CameraScript leftCamera, rightCamera;
-	GameManagerScript gameManager;
-	RoomManagerScript roomManager;
-
-
+	
 	void Start () {
-		leftCamera = GameObject.FindGameObjectWithTag("LeftCamera").GetComponent<CameraScript>();
-		rightCamera = GameObject.FindGameObjectWithTag("RightCamera").GetComponent<CameraScript>();
-
-		gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
-		roomManager = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManagerScript>();
-
 		Invoke ("RunTest", .5f);
 	}
 
@@ -32,17 +22,17 @@ public class TestRunnerScript : MonoBehaviour {
 
 		switch(type){
 		case TestType.CAMERA_CUTSCENE:
-			leftCamera.RunCutsceneTest();
-			rightCamera.RunCutsceneTest();
+			Globals.cameraLeft.RunCutsceneTest();
+			Globals.cameraRight.RunCutsceneTest();
 			break;
 		case TestType.DISABLE_SIDE:
-			gameManager.RunDisableTest();
+			Globals.gameManager.RunDisableTest();
 			break;
 		case TestType.SMALL_ROOM:
-			roomManager.RunTinyRoomTest();
+			Globals.roomManager.RunTinyRoomTest();
 			break;
 		case TestType.BIG_ROOM:
-			roomManager.RunBigRoomTest();
+			Globals.roomManager.RunBigRoomTest();
 			break;
 		}
 	}

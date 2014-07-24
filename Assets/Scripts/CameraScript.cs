@@ -12,6 +12,8 @@ public class CameraScript : _Mono {
 
 	// Center - The location of the camera without the offset
 	public Vector2 center{get; set;}
+
+	// Offset - Shifts the final position of the camera, used for shakycam 
 	public Vector2 offset{get; set;}
 
 	// Camera bounds in current room
@@ -31,19 +33,18 @@ public class CameraScript : _Mono {
 	Vector2 shakeDest;
 	float shakeSpeed;
 	bool isShaking;
-	
-	
-	RoomManagerScript roomManager;
-	
+
+	[Tooltip("Prefab of 'fader' object which controls fading the camera in and out.")]
 	public GameObject faderPrefab;
 	FaderScript fader;
 
 	GameObject player;
+	RoomManagerScript roomManager;
 
 
 	void Start () {
 
-		roomManager = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<RoomManagerScript>();
+		roomManager = Globals.roomManager;
 
 		// Instantiate a fader object for this camera
 		GameObject faderObject = (GameObject)Instantiate(faderPrefab);
@@ -51,8 +52,8 @@ public class CameraScript : _Mono {
 		fader = faderObject.GetComponent<FaderScript>();
 
 		// Find the player on our side of the screen
-		string ptag = (gameObject.layer == LayerMask.NameToLayer("Right") ? "PlayerRight" : "PlayerLeft");
-		player = (GameObject)GameObject.FindGameObjectWithTag(ptag);
+		player = (LayerMask.NameToLayer("Right") == gameObject.layer ? 
+		          Globals.playerRight.gameObject : Globals.playerLeft.gameObject);
 
 		mode = Mode.GAMEPLAY;
 		isShaking = false;
@@ -113,20 +114,21 @@ public class CameraScript : _Mono {
 
 	// Calculate bounds of camera movement based on current room
 	void UpdateGameplayCameraBounds(){
-		float rx = roomManager.roomCenter.x;
-		float ry = roomManager.roomCenter.y;
+		float rcx = roomManager.roomCenter.x;
+		float rcy = roomManager.roomCenter.y;
 
-		float cw = Globals.SIDEWIDTH;
-		float ch = Globals.SIDEHEIGHT;
+		float sw = Globals.SIDEWIDTH;
+		float sh = Globals.SIDEHEIGHT;
 
-		bounds.xMin = roomManager.roomLeft -.5f + cw / 2;
-		bounds.xMin = Mathf.Min (bounds.xMin, rx);
-		bounds.xMax = roomManager.roomRight +.5f - cw / 2;
-		bounds.xMax = Mathf.Max (bounds.xMax, rx);
-		bounds.yMin = roomManager.roomBot - .5f + ch / 2;
-		bounds.yMin = Mathf.Min (bounds.yMin, ry);
-		bounds.yMax = roomManager.roomTop + .5f - ch / 2;
-		bounds.yMax = Mathf.Max (bounds.yMax, ry);
+		// Update bounds of camera
+		bounds.xMin = roomManager.roomLeft -.5f + sw / 2;
+		bounds.xMin = Mathf.Min (bounds.xMin, rcx);
+		bounds.xMax = roomManager.roomRight +.5f - sw / 2;
+		bounds.xMax = Mathf.Max (bounds.xMax, rcx);
+		bounds.yMin = roomManager.roomBot - .5f + sh / 2;
+		bounds.yMin = Mathf.Min (bounds.yMin, rcy);
+		bounds.yMax = roomManager.roomTop + .5f - sh / 2;
+		bounds.yMax = Mathf.Max (bounds.yMax, rcy);
 
 		//		Debug.Log (bounds.xMin + ", " + bounds.xMax + ", " + bounds.yMin + ", " + bounds.yMax);
 	}

@@ -5,14 +5,12 @@ public class GameManagerScript : MonoBehaviour {
 
 	CameraScript leftCamera, rightCamera;
 	PlayerControllerScript leftPlayer, rightPlayer;
-
-
+	
 	void Start () {
-		leftCamera = GameObject.FindGameObjectWithTag("LeftCamera").GetComponent<CameraScript>();
-		rightCamera = GameObject.FindGameObjectWithTag("RightCamera").GetComponent<CameraScript>();
-		
-		leftPlayer = GameObject.FindGameObjectWithTag("PlayerLeft").GetComponent<PlayerControllerScript>();
-		rightPlayer = GameObject.FindGameObjectWithTag("PlayerRight").GetComponent<PlayerControllerScript>();
+		leftCamera = Globals.cameraLeft;
+		rightCamera = Globals.cameraRight;
+		leftPlayer = Globals.playerLeft;
+		rightPlayer = Globals.playerRight;
 	}
 
 	public void RunDisableTest(){

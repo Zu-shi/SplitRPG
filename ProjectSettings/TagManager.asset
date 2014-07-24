@@ -6,6 +6,13 @@ TagManager:
   - PlayerLeft
   - PlayerRight
   - RoomManager
+  - CameraLeft
+  - CameraRight
+  - 
+  - GameManager
+  - 
+  - 
+  - 
   - LeftCamera
   - RightCamera
   - 
@@ -19,10 +26,10 @@ TagManager:
   Builtin Layer 7: 
   User Layer 8: Left
   User Layer 9: Right
-  User Layer 10: LeftGround
-  User Layer 11: RightGround
-  User Layer 12: 
-  User Layer 13: 
+  User Layer 10: GroundLeft
+  User Layer 11: GroundRight
+  User Layer 12: RoomsLeft
+  User Layer 13: RoomsRight
   User Layer 14: 
   User Layer 15: 
   User Layer 16: 
