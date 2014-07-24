@@ -213,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingOrder: 1
   height: 0
+  editModeRefresh: 0
 --- !u!4 &455258798
 Transform:
   m_ObjectHideFlags: 0
@@ -1546,6 +1547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingOrder: 3
   height: 1
+  editModeRefresh: 0
 --- !u!1 &1272470758
 GameObject:
   m_ObjectHideFlags: 0
@@ -1576,6 +1578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingOrder: 3
   height: 0
+  editModeRefresh: 0
 --- !u!4 &1272470760
 Transform:
   m_ObjectHideFlags: 0
@@ -1992,6 +1995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingOrder: 3
   height: 0
+  editModeRefresh: 0
 --- !u!1001 &1532365721
 Prefab:
   m_ObjectHideFlags: 0
@@ -2324,6 +2328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingOrder: 3
   height: 0
+  editModeRefresh: 0
 --- !u!4 &1822722817
 Transform:
   m_ObjectHideFlags: 0
@@ -2536,6 +2541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingOrder: 1
   height: 1
+  editModeRefresh: 0
 --- !u!1 &1981422750
 GameObject:
   m_ObjectHideFlags: 0
