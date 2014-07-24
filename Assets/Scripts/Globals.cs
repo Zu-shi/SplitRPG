@@ -72,5 +72,14 @@ public class Globals {
 		}
 	}
 
+	static HeightSorterScript _heightSorter = null;
+	public static HeightSorterScript heightSorter{
+		get{
+			if(_heightSorter == null)
+				_heightSorter = GameObject.Find("HeightSorter").GetComponent<HeightSorterScript>();
+			return _heightSorter;
+		}
+	}
+
 
 }
