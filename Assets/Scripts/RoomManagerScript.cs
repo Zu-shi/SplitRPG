@@ -24,32 +24,47 @@ public class RoomManagerScript : MonoBehaviour {
 	/// The dimensions of the current room in terms of how many tiles fit inside the room
 	/// </summary>
 	public Vector2 roomTileDimensions{
-		get{ return _roomRect.size + new Vector2(1,1); }
+		get{ return _roomRect.size; }
 	}
 
 
 	/// <summary>
 	/// The top-most tile that is inside the room.
 	/// </summary>
-	public int roomTopTile{
+	public int roomTop{
 		get{ return Mathf.RoundToInt(_roomRect.yMax); }
 	}
 	/// <summary>
 	/// The bottom-most tile that is inside the room.
 	/// </summary>
 	public int roomBotTile{
+		get{ return Mathf.RoundToInt(_roomRect.yMin + 1); }
+	}
+
+	/// <summary>
+	/// Bot bound of the room (one unit down from the bottom tile)
+	/// </summary>
+	public int roomBot{
 		get{ return Mathf.RoundToInt(_roomRect.yMin); }
 	}
+
 	/// <summary>
 	/// The left-most tile that is inside the room.
 	/// </summary>
-	public int roomLeftTile{
+	public int roomLeft{
 		get{ return Mathf.RoundToInt(_roomRect.xMin); }
 	}
 	/// <summary>
 	/// The right-most tile that is inside the room.
 	/// </summary>
 	public int roomRightTile{
+		get{ return Mathf.RoundToInt(_roomRect.xMax - 1); }
+	}
+
+	/// <summary>
+	/// Right bound of the room (one unit right of the far right tile)
+	/// </summary>
+	public int roomRight{
 		get{ return Mathf.RoundToInt(_roomRect.xMax); }
 	}
 
@@ -67,7 +82,7 @@ public class RoomManagerScript : MonoBehaviour {
 		cameraFinishes = 0;
 
 		// Standard 9 x 10 
-		SetBounds (-8, -10, 8, 8); 
+//		SetBounds (-8, -10, 8, 8); 
 	}
 
 	void Update() {
@@ -97,7 +112,7 @@ public class RoomManagerScript : MonoBehaviour {
 		leftCamera.BeginRoomTransitionFade(CameraTransitionFinished);
 		rightCamera.BeginRoomTransitionFade(CameraTransitionFinished);
 
-		SetBounds (-8, -10, 8, 8); 
+//		SetBounds (-8, -10, 8, 8); 
 	}
 
 	public void RunTinyRoomTest(){SetBounds(-4, -4, 4, 4);}
@@ -106,8 +121,8 @@ public class RoomManagerScript : MonoBehaviour {
 	/// <summary>
 	/// Whether the tile is inside the room
 	/// </summary>
-	public bool ContainsTile(Vector2 tile){
-		if(tile.x >= roomLeftTile && tile.x <= roomRightTile && tile.y >= roomBotTile && tile.y <= roomTopTile){
+	public bool RoomContainsTile(Vector2 tile){
+		if(tile.x >= roomLeft && tile.x <= roomRightTile && tile.y >= roomBotTile && tile.y <= roomTop){
 			return true;
 		} else {
 			return false;
@@ -119,13 +134,13 @@ public class RoomManagerScript : MonoBehaviour {
 	/// </summary>
 	/// <param name="left">Left-most tile.</param>
 	/// <param name="top">Top-most tile.</param>
-	/// <param name="width">Number of tiles wide e.g. 8 if there are 8 spaces the player can be</param>
-	/// <param name="height">Number of tiles tall e.g. 8 if there are 8 spaces the player can be</param>
+	/// <param name="width">Width e.g. 9 if there are 8 spaces the player can be</param>
+	/// <param name="height">Height e.g. 9 if there are 8 spaces the player can be</param>
 	void SetRoomRect(float left, float top, float width, float height){
 		// Rect objects use a GUI coordinate system where the y axis is opposite than in 3D view
 		// So we actually pass in (left, BOT, width, height) instead of (left, TOP...)
 		_roomRect = new Rect(left, top-height, width, height);
-//		LogRoomInfo();
+		LogRoomInfo();
 	}
 
 	/// <summary>
@@ -141,8 +156,8 @@ public class RoomManagerScript : MonoBehaviour {
 
 	void LogRoomInfo(){
 		Debug.Log("Room Center = (" + roomCenter.x + ", " + roomCenter.y + 
-		          ")   Size = " + roomTileDimensions.x + " x " + roomTileDimensions.y);
-		Debug.Log ("Room Bounds: (" + roomLeftTile + ", " + roomTopTile + ") to (" + roomRightTile + ", " + roomBotTile + ")");
+		          ")   Tile Dimensions = " + roomTileDimensions.x + " x " + roomTileDimensions.y);
+		Debug.Log ("Room Bounds: (" + roomLeft + ", " + roomTop + ") to (" + roomRight + ", " + roomBot + ")");
 	}
 
 	/// <summary>
@@ -159,10 +174,10 @@ public class RoomManagerScript : MonoBehaviour {
 	/// </summary>
 	void BeginCameraTransition(){
 		// New room bounds
-		int left = Mathf.CeilToInt (roomCollider.transform.position.x);
-		int top = Mathf.FloorToInt (roomCollider.transform.position.y);
-		int width = Utils.PixelsToTiles (Mathf.RoundToInt (roomCollider.size.x)) - 1;
-		int height = Utils.PixelsToTiles (Mathf.RoundToInt (roomCollider.size.y)) - 1;
+		int left = Mathf.RoundToInt (roomCollider.transform.position.x);
+		int top = Mathf.RoundToInt (roomCollider.transform.position.y);
+		int width = Utils.PixelsToTiles (Mathf.RoundToInt (roomCollider.size.x));
+		int height = Utils.PixelsToTiles (Mathf.RoundToInt (roomCollider.size.y));
 		
 		SetRoomRect(left, top, width, height);
 

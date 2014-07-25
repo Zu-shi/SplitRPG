@@ -62,6 +62,7 @@ public class CameraScript : _Mono {
 		panSpeed = 3f;
 
 		center = new Vector2(x, y);
+		offset = new Vector2(0,0);
 
 		shakeDest = new Vector2(.07f, 0);
 		shakeSpeed = 8f;
@@ -123,17 +124,17 @@ public class CameraScript : _Mono {
 		float sh = Globals.SIDEHEIGHT;
 
 		// Update bounds of camera
-		bounds.xMin = roomManager.roomLeftTile + sw / 2;
+		bounds.xMin = roomManager.roomLeft + sw / 2;
 		bounds.xMin = Mathf.Min (bounds.xMin, rcx);
-		bounds.xMax = roomManager.roomRightTile + 1f - sw / 2;
+		bounds.xMax = roomManager.roomRight - sw / 2;
 		bounds.xMax = Mathf.Max (bounds.xMax, rcx);
 
-		bounds.yMax = roomManager.roomTopTile - sh / 2;
+		bounds.yMax = roomManager.roomTop - sh / 2;
 		bounds.yMax = Mathf.Max (bounds.yMax, rcy);
-		bounds.yMin = roomManager.roomBotTile - 1f + sh / 2;
+		bounds.yMin = roomManager.roomBot + sh / 2;
 		bounds.yMin = Mathf.Min (bounds.yMin, rcy);
 
-//		Debug.Log (bounds.xMin + ", " + bounds.xMax + ", " + bounds.yMin + ", " + bounds.yMax);
+		Debug.Log (bounds.xMin + ", " + bounds.xMax + ", " + bounds.yMin + ", " + bounds.yMax);
 	}
 	
 	/// <summary>
@@ -149,7 +150,8 @@ public class CameraScript : _Mono {
 		float fx = Utils.Clamp(ox, bounds.xMin, bounds.xMax);
 		float fy = Utils.Clamp(oy, bounds.yMin, bounds.yMax);
 
-		return new Vector2(fx, fy);
+		Vector2 fp = new Vector2(fx, fy);
+		return fp;
 	}
 	
 	void TransitionModeUpdate(){

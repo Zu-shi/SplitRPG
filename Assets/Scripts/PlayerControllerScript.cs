@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PlayerControllerScript : _Mono {
@@ -124,7 +124,7 @@ public class PlayerControllerScript : _Mono {
 			return true;
 
 		Vector2 dest = new Vector2(tileX, tileY) + 2 * Utils.DirectionToVector(direction);
-		return !roomManager.ContainsTile(dest);
+		return !roomManager.RoomContainsTile(dest);
 
 	}
 
