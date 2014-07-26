@@ -1,129 +1,188 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueSequence
-{
-	public int NumberOfNodes
-	{
-		get { return nodes.Count; }
-	}
+/// <summary>
+/// Dialogue sequence.
+/// </summary>
+public class DialogueSequence {
 
+	public struct Option {
+		public string from;
+		public string to;
+		public string description;
+
+		public static bool operator ==(Option left, Option right) {
+			return (left.from == right.from) && (left.to == right.to) && (left.description == right.description);
+		}
+
+		public static bool operator !=(Option left, Option right) {
+			return !(left == right);
+		}
+	}
+	
 	private List<DialogueNode> nodes;
+	private List<Option> options;
 
-	public DialogueSequence()
-	{
-		this.nodes = new List<DialogueNode>();
+	public int numberOfNodes {
+		get{
+			return nodes.Count;
+		}
+	}
+	
+	public string startingNodeName {
+		get{
+			if( FindNode("Start") == null) {
+				if(nodes.Count > 0){
+					return nodes[0].name;
+				}
+				else {
+					return null;
+				}
+			}
+			else {
+				return "Start";
+			}
+		}
 	}
 
-	public DialogueSequence(TextAsset nodeFile) : this()
-	{
+	public DialogueSequence() {
+		this.nodes = new List<DialogueNode>();
+		this.options = new List<Option>();
+	}
+
+	public DialogueSequence(TextAsset nodeFile) : this() {
 		System.IO.StringReader sr = new System.IO.StringReader(nodeFile.text);
 
-		while(sr.Peek() != -1 && sr.ReadLine().Trim().Equals("NODE:"))  // Read each node in.
-		{
+		while(sr.Peek() != -1 && sr.ReadLine().Trim().Equals("NODE:")) {  // Read each node in.
 			string name = sr.ReadLine().Trim().Substring(6);
 			string speaker = sr.ReadLine().Trim().Substring(9);
 			string text = sr.ReadLine().Trim().Substring(6);
 			string tmp;
-			while( (tmp = sr.ReadLine().Trim()) != "ENDTEXT")
-			{
+
+			while( (tmp = sr.ReadLine().Trim()) != "ENDTEXT") {
 				text += tmp + " ";
 			}
+
 			DialogueNode newNode = new DialogueNode(name, speaker, text);
-			while( (tmp = sr.ReadLine().Trim()) == "OPTION:" )
-			{
+
+			while( (tmp = sr.ReadLine().Trim()) == "OPTION:" ) {
 				name = sr.ReadLine().Trim();
 				text = sr.ReadLine().Trim();
-				newNode.addOption(name, text);
+				options.Add( new Option{ from = newNode.name, to = name, description = text } );
 			}
-			this.addNode(newNode);
+			this.AddNode(newNode);
+		}
 
+		//TODO Verify that all options are valid.
+	}
+
+	public string GetText(string node) {
+		DialogueNode tmp = FindNode(node);
+		if(tmp != null) {
+			return tmp.text;
+		}
+		else {
+			return null;
 		}
 	}
 
-	public void addNode(DialogueNode node)
-	{
+	public string GetSpeaker(string node) {
+		DialogueNode tmp = FindNode(node);
+		if(tmp != null) {
+			return tmp.speaker;
+		}
+		else {
+			return null;
+		}
+	}
+
+	/// <summary>
+	/// Gets the node with the given name. This method should only be used
+	/// when the returned node needs to be modified; the string based methods of this
+	/// class are the intended interface for read-only operations.
+	/// </summary>
+	/// <returns>The node.</returns>
+	/// <param name="name">The name of the node to search for.</param>
+	public DialogueNode GetNode(string name) {
+		return FindNode(name);
+	}
+
+	public bool AddNode(DialogueNode node) {
 		nodes.Add(node);
+		return true;
 	}
 
-	public void addNode(string name, string speaker, string text, string[] optNames, string[] optTexts)
-	{
-		DialogueNode tmp = new DialogueNode(name, speaker, text);
-		if (optNames != null && optTexts != null)
-		{
-			for(int i = 0; i < optNames.Length; i++)
-			{
-				tmp.addOption(optNames[i], optTexts[i]);
-			}
-		}
-		this.addNode(tmp);
+	public bool AddNode(string name, string speaker, string text) {
+		return AddNode( new DialogueNode(name, speaker, text) );
 	}
 
-	public void addNode(string name, string speaker, string text)
-	{
-		this.addNode(name, speaker, text, null, null);
-	}
-
-	private DialogueNode findNode(string name)
-	{
-		for(int i = 0; i < this.nodes.Count; i++)
-		{
-			if(this.nodes[i].getName().Equals(name))
+	private DialogueNode FindNode(string name) {
+		for(int i = 0; i < this.nodes.Count; i++) {
+			if(this.nodes[i].name == name)
 				return this.nodes[i];
 		}
-		Debug.LogError("Could not find node: " + name);
 
 		return null;
 	}
 
-	public void addOptionToNode(string nodeName, string optName, string optText)
-	{
-		DialogueNode tmp = this.findNode(nodeName);
-		if (tmp == null) 
-		{
-			Debug.LogError("In DialogSequence.addOptionToNode: Could not find node " + nodeName);
-			ListNodes();
-			return;
+	public bool AddOption(string fromNode, string toNode, string optText) {
+		if( FindNode(fromNode) == null || FindNode(toNode) == null) {
+			return false;
 		}
-		else
-		{
-			tmp.addOption(optName, optText);
+		else {
+			options.Add( new Option { from = fromNode, to = toNode, description = optText } );
+			return true;
 		}
 	}
 
-	public void removeNode(string name)
-	{
-		for(int i = 0; i < nodes.Count; i++) 
-		{
-			if(nodes[i].getName().Equals(name))
-			{
-				nodes.RemoveAt(i);
-				continue;
+	public bool RemoveOption(Option opt) {
+		for(int i = 0; i < options.Count; i++) {
+			if(options[i] == opt) {
+				options.RemoveAt(i);
+				return true;
 			}
-			nodes[i].removeOption(name);
+		}
+		return false;
+	}
+
+	public bool RemoveNode(string name) {
+		bool rv = false;
+		for(int i = 0; i < nodes.Count; i++) {
+			if(nodes[i].name == name) {
+				nodes.RemoveAt(i);
+				rv = true;
+				break;
+			}
 		}
 
+		if(rv) {
+			for(int i = 0; i < options.Count; i++) {
+				if(options[i].to == name || options[i].from == name) {
+					options.RemoveAt(i);
+				}
+			}
+		}
+
+		return rv;
 	}
 
-	public DialogueNode getNode(string name)
-	{
-		return this.findNode(name);
-	}
-
-	public DialogueNode getStartingNode()
-	{
-		DialogueNode tmp = this.findNode("Start");
-		if (tmp == null)
-			return nodes[0];
-		else
-			return tmp;
-	}
-
-	public void ListNodes()
-	{
+	public void ListNodes() {
 		Debug.Log("Known nodes: ");
 		for(int i = 0; i < nodes.Count; i++)
-			Debug.Log(nodes[i].getName());
+			Debug.Log(nodes[i].name);
 	}
-	
+
+	public List<DialogueSequence.Option> GetOptions(string name) {
+		List<Option> opts = new List<Option>();
+
+		for(int i = 0; i < options.Count; i++) {
+			if(options[i].from == name) {
+				opts.Add(options[i]);
+			}
+		}
+
+		return opts;
+	}
+
+
 }

@@ -2,7 +2,6 @@
 using UnityEditor;
 using System.Collections.Generic;
 
-
 public class NodeEditor : EditorWindow {
 	
 	private List<Rect> windows = new List<Rect>();
@@ -22,7 +21,7 @@ public class NodeEditor : EditorWindow {
 
 	public void OnGUI() {
 
-		if(seq.NumberOfNodes != nodeNames.Count) // Everything is broken, panic
+		if(seq.numberOfNodes != nodeNames.Count) // Everything is broken, panic
 		{
 			seq = new DialogueSequence();
 			nodeNames = new List<string>();
@@ -63,7 +62,7 @@ public class NodeEditor : EditorWindow {
 			GUILayout.FlexibleSpace();
 			if(GUILayout.Button("Create"))
 			{
-				seq.addOptionToNode(fromNode, toNode, optText);
+				seq.AddOption(fromNode, toNode, optText);
 				fromNode = toNode = optText = null;
 				createOpt = false;
 			}
@@ -92,7 +91,7 @@ public class NodeEditor : EditorWindow {
 			{
 				if(!nodeNames.Contains(newNodeName))
 				{
-					seq.addNode(newNodeName, "Speaker", "Text");
+					seq.AddNode(newNodeName, "Speaker", "Text");
 					windows.Add( new Rect(30,30, 200, 150));
 					nodeNames.Add(newNodeName);
 				}
@@ -173,18 +172,17 @@ public class NodeEditor : EditorWindow {
 	{
 		string tmp = "NODE:\n";
 		tmp += "\tNAME: " + node + "\n";
-		tmp += "\tSPEAKER: " + seq.getNode(node).getSpeaker() + "\n";
-		tmp += "\tTEXT: " + seq.getNode(node).getText() + "\n";
+		tmp += "\tSPEAKER: " + seq.GetSpeaker(node) + "\n";
+		tmp += "\tTEXT: " + seq.GetText(node) + "\n";
 		tmp += "\tENDTEXT\n";
 
-		List<string> optNames, optTexts;
-		seq.getNode(node).getOptions(out optNames, out optTexts);
+		List<DialogueSequence.Option> opts = seq.GetOptions(node);
 
-		for(int i = 0; i < optNames.Count; i++)
+		for(int i = 0; i < opts.Count; i++)
 		{
 			tmp += "\tOPTION:\n";
-			tmp += "\t\t" + optNames[i] + "\n";
-			tmp += "\t\t" + optTexts[i] + "\n";
+			tmp += "\t\t" + opts[i].to + "\n";
+			tmp += "\t\t" + opts[i].description + "\n";
 		}
 
 		tmp += "\tENDOPTS\n";
@@ -196,23 +194,22 @@ public class NodeEditor : EditorWindow {
 	{
 		for(int i = 0; i < nodeNames.Count; i++)
 		{
-			List<string> optNames, optTexts;
-			seq.getNode(nodeNames[i]).getOptions(out optNames, out optTexts);
+			List<DialogueSequence.Option> opts = seq.GetOptions(nodeNames[i]);
 
 			Rect sourceRect = windows[i];
 
-			for(int j = 0; j < optNames.Count; j++)
+			for(int j = 0; j < opts.Count; j++)
 			{
-				int index = FindIndexOf(optNames[j]);
+				int index = FindIndexOf(opts[j].to);
 				if(index >= 0 && index < nodeNames.Count)
 				{
-					Rect targetRect = windows[FindIndexOf(optNames[j])];
+					Rect targetRect = windows[index];
 					DrawNodeCurve(sourceRect, targetRect);
 				}
 				else
 				{
 					Debug.Log("Index: " + index);
-					Debug.Log("Name: " + optNames[j]);
+					Debug.Log("Name: " + opts[j].to);
 				}
 			}
 		}
@@ -220,20 +217,19 @@ public class NodeEditor : EditorWindow {
 
 	private void DrawNodeWindow(int id) {
 
-		DialogueNode tmp = seq.getNode(nodeNames[id]);
+		DialogueNode tmp = seq.GetNode(nodeNames[id]);
 		GUILayout.BeginVertical();
 
 		GUILayout.BeginHorizontal();
 		GUILayout.Label("Speaker", GUILayout.ExpandWidth(false));
-		tmp.setSpeaker( GUILayout.TextField(tmp.getSpeaker()));
+		tmp.speaker = GUILayout.TextField(tmp.speaker);
 		GUILayout.EndHorizontal();
 
 		GUILayout.Label("Text");
 
-		tmp.setText( GUILayout.TextArea(tmp.getText(), GUILayout.MinHeight(40)));
+		tmp.text = GUILayout.TextArea(tmp.text, GUILayout.MinHeight(40));
 
-		List<string> optNames, optTexts;
-		tmp.getOptions(out optNames, out optTexts);
+		List<DialogueSequence.Option> opts = seq.GetOptions(tmp.name);
 
 		GUILayout.BeginHorizontal();
 		GUILayout.Label("Options", GUILayout.ExpandWidth(false));
@@ -247,7 +243,7 @@ public class NodeEditor : EditorWindow {
 		}
 		GUILayout.EndHorizontal();
 
-		for(int i = 0; i < optNames.Count; i++)
+		for(int i = 0; i < opts.Count; i++)
 		{
 			GUILayout.BeginHorizontal();
 
@@ -259,17 +255,17 @@ public class NodeEditor : EditorWindow {
 			GUILayout.BeginVertical();
 			GUILayout.BeginHorizontal();
 			GUILayout.FlexibleSpace();
-			GUILayout.Label(optNames[i]);
+			GUILayout.Label(opts[i].to);
 			GUILayout.EndHorizontal();
 			GUILayout.BeginHorizontal();
 			GUILayout.FlexibleSpace();
-			GUILayout.Label(optTexts[i]);
+			GUILayout.Label(opts[i].description);
 			GUILayout.EndHorizontal();
 			GUILayout.EndVertical();
 
 			if(GUILayout.Button("Delete", GUILayout.ExpandHeight(true)))
 			{
-				seq.getNode(nodeNames[id]).removeOption(optNames[i]);
+				seq.RemoveOption(opts[i]);
 			}
 
 			GUILayout.EndHorizontal();
@@ -280,7 +276,7 @@ public class NodeEditor : EditorWindow {
 
 		if(GUILayout.Button("Delete this Node"))
 		{
-			seq.removeNode(nodeNames[id]);
+			seq.RemoveNode(nodeNames[id]);
 			windows.RemoveAt(id);
 			nodeNames.RemoveAt(id);
 		}

@@ -16,37 +16,11 @@ public class DialogueManagerScript : MonoBehaviour {
 	public float textSpeed = 5.0f;
 
 	private DialogueSequence seq;
-	private DialogueNode current;
+	private string current;
 	private string displayText = "";
 	private bool scrolling = false;
 	private float scrollingTimer = 0;
 	private bool fading = false;
-
-	public string nodeName {
-		get{
-			return current.getName();
-		}
-	}
-
-	public string text {
-		get{
-			return current.getText();
-		}
-	}
-
-	public string speaker {
-		get{
-			return current.getSpeaker();
-		}
-	}
-
-	public List<string> options {
-		get{
-			List<string> nodes, texts;
-			current.getOptions(out nodes, out texts);
-			return texts;
-		}
-	}
 
 	public void Update() {
 		if( (showOnLeft != showOnRight) && !fading ) { // We have been told to become visible on one side, but we are not fading a side out.
@@ -79,7 +53,7 @@ public class DialogueManagerScript : MonoBehaviour {
 			GameObject.Find("GameManager").GetComponent<GameManagerScript>().FadeUpLeftSide();
 		}
 
-		if( (showOnLeft || showOnRight) && !scrolling && (displayText != current.getText()) ) {
+		if( (showOnLeft || showOnRight) && !scrolling && (displayText != text) ) {
 			scrolling = true;
 		}
 
@@ -87,15 +61,33 @@ public class DialogueManagerScript : MonoBehaviour {
 			scrollingTimer += Time.deltaTime;
 
 			while(scrollingTimer >= 1.0f/textSpeed) {
-				if( displayText != current.getText() ) {
+				if( displayText != this.text ) {
 					scrollingTimer -= 1.0f/textSpeed;
-					displayText += current.getText()[displayText.Length];
+					displayText += this.text[displayText.Length];
 				} else {
 					scrolling = false;
 					scrollingTimer = 0;
 					break;
 				} 
 			}
+		}
+	}
+
+	private string text {
+		get{
+			return seq.GetText(current);
+		}
+	}
+
+	private string speaker {
+		get{
+			return seq.GetSpeaker(current);
+		}
+	}
+
+	private List<DialogueSequence.Option> options {
+		get{
+			return seq.GetOptions(current);
 		}
 	}
 
@@ -107,7 +99,7 @@ public class DialogueManagerScript : MonoBehaviour {
 			return;
 		}
 		seq = new DialogueSequence(dialogueAsset);
-		current = seq.getStartingNode();
+		current = seq.startingNodeName;
 	}
 
 	public void NewDialogueTree(TextAsset nodes){
@@ -116,20 +108,16 @@ public class DialogueManagerScript : MonoBehaviour {
 	}
 
 	public void SelectOption(int index) {
-		List<string> nodes, texts;
-		current.getOptions(out nodes, out texts);
-		current = seq.getNode(nodes[index]);
+		current = options[index].to;
 		displayText = "";
 		scrolling = true;
 	}
 
-	public void SelectOption(string optionText) {
-		List<string> nodes, texts;
-		current.getOptions(out nodes, out texts);
-
-		for(int i = 0; i < nodes.Count; i++) {
-			if(texts[i] == optionText) {
-				current = seq.getNode(nodes[i]);
+	public void SelectOption(string description) {
+		List<DialogueSequence.Option> opts = options;
+		for(int i = 0; i < opts.Count; i++) {
+			if(opts[i].description == description) {
+				current = opts[i].to;
 				break;
 			}
 		}
@@ -151,11 +139,11 @@ public class DialogueManagerScript : MonoBehaviour {
 				if(scrolling){
 					GUILayout.Space(20);
 				} else {
-					if(GUILayout.Button(options[i], GUILayout.Height(20))){
+					if(GUILayout.Button(options[i].description, GUILayout.Height(20))){
 						SelectOption(i);
 						if(options.Count == 0){
 							showOnLeft = false;
-							current = seq.getStartingNode();
+							current = seq.startingNodeName;
 						}
 					}
 				}
@@ -177,11 +165,11 @@ public class DialogueManagerScript : MonoBehaviour {
 				if(scrolling){
 					GUILayout.Space(20);
 				} else {
-					if(GUILayout.Button(options[i], GUILayout.Height(20))){
+					if(GUILayout.Button(options[i].description, GUILayout.Height(20))){
 						SelectOption(i);
 						if(options.Count == 0){
 							showOnRight = false;
-							current = seq.getStartingNode();
+							current = seq.startingNodeName;
 						}
 					}
 				}
