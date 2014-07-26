@@ -27,7 +27,6 @@ public class RoomManagerScript : MonoBehaviour {
 		get{ return _roomRect.size; }
 	}
 
-
 	/// <summary>
 	/// The top-most tile that is inside the room.
 	/// </summary>
@@ -82,7 +81,7 @@ public class RoomManagerScript : MonoBehaviour {
 		cameraFinishes = 0;
 
 		// Standard 9 x 10 
-//		SetBounds (-8, -10, 8, 8); 
+		SetRoomRect(0,0,0,0);
 	}
 
 	void Update() {
@@ -111,13 +110,8 @@ public class RoomManagerScript : MonoBehaviour {
 	public void Reset(){
 		leftCamera.BeginRoomTransitionFade(CameraTransitionFinished);
 		rightCamera.BeginRoomTransitionFade(CameraTransitionFinished);
-
-//		SetBounds (-8, -10, 8, 8); 
 	}
-
-	public void RunTinyRoomTest(){SetBounds(-4, -4, 4, 4);}
-	public void RunBigRoomTest(){SetBounds(-18, -20, 20, 20);}
-
+	
 	/// <summary>
 	/// Whether the tile is inside the room
 	/// </summary>
@@ -141,17 +135,6 @@ public class RoomManagerScript : MonoBehaviour {
 		// So we actually pass in (left, BOT, width, height) instead of (left, TOP...)
 		_roomRect = new Rect(left, top-height, width, height);
 		LogRoomInfo();
-	}
-
-	/// <summary>
-	/// Sets the bounds.
-	/// </summary>
-	/// <param name="left">Left-most tile inside the room.</param>
-	/// <param name="bot">Bot-most tile inside the room.</param>
-	/// <param name="right">Right-most tile inside the room.</param>
-	/// <param name="top">Top-most tile inside the room.</param>
-	void SetBounds(int left, int bot, int right, int top){
-		SetRoomRect(left, top, right-left, top-bot);
 	}
 
 	void LogRoomInfo(){

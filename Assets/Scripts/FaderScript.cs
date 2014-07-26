@@ -31,8 +31,9 @@ public class FaderScript : _Mono {
 
 		} else {
 			if(fadeCallback != null){
-				fadeCallback();
+				Utils.VoidDelegate tmp = fadeCallback;
 				fadeCallback = null;
+				tmp();
 			}
 		}
 	}

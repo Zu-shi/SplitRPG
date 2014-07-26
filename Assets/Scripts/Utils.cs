@@ -102,4 +102,12 @@ public static class Utils {
 		}
 	}
 
+	/// <summary>
+	/// Returns a new GameObject with the script as a component.
+	/// </summary>
+	public static T CreateScript<T>() where T: Component {
+		T o = new GameObject().AddComponent<T>();
+		o.name = o.GetType().Name;
+		return o;
+	}
 }
