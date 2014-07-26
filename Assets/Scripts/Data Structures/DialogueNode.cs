@@ -1,68 +1,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueNode
-{
+/// <summary>
+/// A data carrier class for a simple branching dialogue system.
+/// A node carries information about who is currently speaking and what they are saying.
+/// </summary>
+public class DialogueNode {
 
-	private struct option
-	{
-		public string nodeName;
-		public string optionText;
-	}
+	/// <summary>
+	/// The name of this node.
+	/// </summary>
+	public readonly string name;
 
-	private string name;
-	private string speaker;
-	private string text;
+	/// <summary>
+	/// The person or entity that is speaking in this node.
+	/// </summary>
+	public string speaker;
 
-	private List<option> options;
-	
-	public DialogueNode(string name, string speaker, string text)
-	{
+	/// <summary>
+	/// The main contents of this node. This represents the piece of dialogue that the speaker
+	/// is delivering in this node.
+	/// </summary>
+	public string text;
+
+	/// <summary>
+	/// Initializes a new instance of the <see cref="DialogueNode"/> class.
+	/// </summary>
+	/// <param name="name">The name of this DialogueNode.</param>
+	/// <param name="speaker">The person or entity speaking in this DialogueNode.</param>
+	/// <param name="text">The piece of dialogue that the speaker is dilivering in this DialogueNode.</param>
+	public DialogueNode(string name, string speaker, string text) {
 		this.name = name;
 		this.speaker = speaker;
 		this.text = text;
-		this.options = new List<option>();
 	}
-
-	public void addOption(string nodeName, string text)
-	{
-		option tmp = new option();
-		tmp.nodeName = nodeName;
-		tmp.optionText = text;
-		this.options.Add(tmp);
-	}
-
-	public string getSpeaker() { return this.speaker; }
-	public string getName() { return this.name; }
-	public string getText() { return this.text; }
-	public int getNumOptions() { return options.Count; }
-
-	public void setSpeaker(string speaker) { this.speaker = speaker; }
-	public void setText(string text) { this.text = text; }
-
-	public void getOptions(out List<string> nodeNames, out List<string> optionTexts)
-	{
-		nodeNames = new List<string>(this.options.Count);
-		optionTexts = new List<string>(this.options.Count);
-
-
-		for(int i = 0; i < options.Count; i++)
-		{
-			nodeNames.Insert(i, options[i].nodeName);
-			optionTexts.Insert(i, options[i].optionText);
-		}
-	}
-
-	public void removeOption(string name)
-	{
-		for(int i = 0; i < options.Count; i++)
-		{
-			if(options[i].nodeName.Equals(name))
-				options.RemoveAt(i);
-		}
-	}
-
-
-
-
+		
 }
