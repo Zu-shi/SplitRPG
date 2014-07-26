@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PlayerControllerScript : _Mono {
 
-	public bool allowMovement{get;set;}
+	bool allowMovement{get;set;}
 
 	[Tooltip("Shadow object of the player")]
 	public GameObject shadow;
@@ -25,9 +25,13 @@ public class PlayerControllerScript : _Mono {
 	// Disable
 	bool disableCharacter;
 
+	/// <summary>
+	/// Whether Player is ready to recieve input
+	/// </summary>
+	/// <value><c>true</c> if ready for input; otherwise, <c>false</c>.</value>
 	public bool readyForInput {
 		get {
-			return !characterMovement.isMoving && !fallingBehavior.falling;
+			return !characterMovement.isMoving && !fallingBehavior.falling && allowMovement;
 		}
 	}
 
@@ -59,6 +63,9 @@ public class PlayerControllerScript : _Mono {
 
 	}
 
+	/// <summary>
+	/// Resets the player to his spawn point
+	/// </summary>
 	public void ResetPlayer(){
 		// Move to spawn point
 		x = spawnX;
@@ -91,29 +98,40 @@ public class PlayerControllerScript : _Mono {
 		}
 	}
 
-	// Make character essentially non-existant, used when one side is faded out
+	/// <summary>
+	/// Make character essentially non-existant, used when one side is faded out
+	/// </summary>
 	public void DisableCharacter(){
 		disableCharacter = true;
 		shadow.SetActive(false);
 	}
 
+	/// <summary>
+	/// Make the character function again after disabling
+	/// </summary>
 	public void EnableCharacter(){
 		disableCharacter = false;
 		shadow.SetActive(true);
 	}
 
 
-	// Will moving in the indicated direction move the player out of the room?
+	/// <summary>
+	/// Will moving in the indicated direction move the player out of the room?
+	/// </summary>
 	public bool WillMoveOffScreen(Direction direction){
 
 		if(disableCharacter)
 			return true;
 
 		Vector2 dest = new Vector2(tileX, tileY) + 2 * Utils.DirectionToVector(direction);
-		return !roomManager.ContainsTile(dest);
+		return !roomManager.RoomContainsTile(dest);
 
 	}
 
+	/// <summary>
+	/// Tells the player to move in a direction
+	/// </summary>
+	/// <param name="direction">Direction.</param>
 	public void GiveInputDirection(Direction direction){
 		if(disableCharacter)
 			return;
@@ -130,15 +148,25 @@ public class PlayerControllerScript : _Mono {
 
 	}
 
+	/// <summary>
+	/// Enables the ability to accept movement commands.
+	/// </summary>
 	public void EnableMovement(){
 		allowMovement = true;
 	}
 
+	/// <summary>
+	/// Disables the ability to accept movement commands.
+	/// </summary>
 	public void DisableMovement(){
 		allowMovement = false;
 
 	}
 
+	/// <summary>
+	/// Disables the ability to accept movement commands for a duration.
+	/// </summary>
+	/// <param name="t">Duration in seconds.</param>
 	public void DisableMovement(float t){
 		allowMovement = false;
 		CancelInvoke("EnableMovement");

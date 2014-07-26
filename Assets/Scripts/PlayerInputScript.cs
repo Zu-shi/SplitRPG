@@ -4,7 +4,10 @@ using System.Collections;
 public class PlayerInputScript : MonoBehaviour {
 	
 	Direction _inputDirection;
-	
+
+	/// <summary>
+	/// The direction that is currently indicated by the player
+	/// </summary>
 	public Direction inputDirection {
 		get {
 			return _inputDirection;

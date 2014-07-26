@@ -11,6 +11,9 @@ public static class Utils {
 		return (GameObject)(Object.Instantiate (_go, new Vector2 (_x, _y), Quaternion.identity));
 	}
 
+	/// <summary>
+	/// Are the values equal within the tolerance
+	/// </summary>
 	public static bool CloseValues(float v1, float v2, float tolerance){
 		if(Mathf.Abs(v1 - v2) < tolerance)
 			return true;
@@ -18,6 +21,9 @@ public static class Utils {
 			return false;
 	}
 
+	/// <summary>
+	/// Move a value towards a destination value by speed.
+	/// </summary>
 	public static float MoveValueTowards(float value, float dest, float speed){
 		if(Utils.CloseValues(value, dest, speed +.000001f)){
 			value = dest;
@@ -29,6 +35,9 @@ public static class Utils {
 		return value;
 	}
 
+	/// <summary>
+	/// Clamp the specified value to between min and max.
+	/// </summary>
 	public static float Clamp(float value, float min, float max){
 		if(value <= min)
 			return min;
@@ -38,14 +47,20 @@ public static class Utils {
 			return value;
 	}
 
-	public static bool LayerIsLeft(int layer){
-		if(LayerMask.NameToLayer("Left") == layer){
+	/// <summary>
+	/// Is the layer's name equal to 'name'?
+	/// </summary>
+	public static bool LayerIs(int layer, string name){
+		if(LayerMask.NameToLayer(name) == layer){
 			return true;
 		} else {
 			return false;
 		}
 	}
 
+	/// <summary>
+	/// Is the player on the specified tile?
+	/// </summary>
 	public static bool PlayerIsOnTile(int x, int y, bool leftPlayer){
 		PlayerControllerScript player = (leftPlayer ? Globals.playerLeft : Globals.playerRight);
 		if(player.tileX == x && player.tileY == y){
@@ -55,15 +70,23 @@ public static class Utils {
 		}
 	}
 
+	/// <summary>
+	/// Is the player on the specified tile?
+	/// </summary>
 	public static bool PlayerIsOnTile(int x, int y, int leftOrRightLayer){
-		return PlayerIsOnTile(x, y, LayerIsLeft(leftOrRightLayer));
+		return PlayerIsOnTile(x, y, LayerIs(leftOrRightLayer, "Left"));
 	}
 
+	/// <summary>
+	/// Convert pixels to tiles
+	/// </summary>
 	public static int PixelsToTiles(int val){
 		return val / Globals.PIXELS_PER_TILE;
 	}
 
-	// Left -> (-1, 0), Up -> (0, 1), etc
+	/// <summary>
+	/// Returns a vector that points in the specified direction e.g. Left -> (-1, 0)
+	/// </summary>
 	public static Vector2 DirectionToVector(Direction d){
 		switch(d){
 		case Direction.LEFT:
@@ -79,4 +102,12 @@ public static class Utils {
 		}
 	}
 
+	/// <summary>
+	/// Returns a new GameObject with the script as a component.
+	/// </summary>
+	public static T CreateScript<T>() where T: Component {
+		T o = new GameObject().AddComponent<T>();
+		o.name = o.GetType().Name;
+		return o;
+	}
 }

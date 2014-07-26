@@ -2,11 +2,20 @@
 using System.Collections;
 
 public class Globals {
-
-	// Width and height of one side of the screen in tiles
+	
+	/// <summary>
+	/// Width of one side in tiles
+	/// </summary>
 	public const int SIDEWIDTH = 18;
+
+	/// <summary>
+	/// Height of one side in tiles
+	/// </summary>
 	public const int SIDEHEIGHT = 20;
 
+	/// <summary>
+	/// Number of pixels per tile (assuming you imported from Tiled)
+	/// </summary>
 	public const int PIXELS_PER_TILE = 32;
 
 	static PlayerControllerScript _playerLeft = null;
@@ -60,6 +69,15 @@ public class Globals {
 			if(_roomManager == null)
 				_roomManager = GameObject.Find("RoomManager").GetComponent<RoomManagerScript>();
 			return _roomManager;
+		}
+	}
+
+	static HeightSorterScript _heightSorter = null;
+	public static HeightSorterScript heightSorter{
+		get{
+			if(_heightSorter == null)
+				_heightSorter = GameObject.Find("HeightSorter").GetComponent<HeightSorterScript>();
+			return _heightSorter;
 		}
 	}
 
