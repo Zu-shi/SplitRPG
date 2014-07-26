@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class HeightSorterScript : MonoBehaviour {
 
-	const float MIN_Z = 0;
+	const float MAX_Z = 0;
 	const float HEIGHT_FAC = 1f;
 	const float DRAWING_ORDER_FAC = .1f;
 	const float YCAM_FAC = .001f;
@@ -19,7 +19,7 @@ public class HeightSorterScript : MonoBehaviour {
 		float doOffs = DRAWING_ORDER_FAC * (int)obj.drawingOrder;
 		float yOffs = YCAM_FAC * (cam.y + 20 - obj.y);
 		
-		obj.z = MIN_Z - (heightOffs + doOffs + yOffs);
+		obj.z = MAX_Z - (heightOffs + doOffs + yOffs);
 		if(obj.z < cam.z){
 			Debug.LogError("Sorting error: Object placed behind camera");
 		}
