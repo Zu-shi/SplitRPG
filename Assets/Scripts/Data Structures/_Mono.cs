@@ -50,6 +50,15 @@ public class _Mono : MonoBehaviour {
 		}
 	}
 
+	public Vector2 tileVector {
+		set {
+			x = value.x;
+			y = value.y;
+		}
+		get {
+			return new Vector2(tileX, tileY);
+		}
+	}
 
 	public float xs {
 		set {

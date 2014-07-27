@@ -8,12 +8,12 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 114: {fileID: 11400000}
   - 212: {fileID: 21200000}
   - 61: {fileID: 6100000}
+  - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
   m_Layer: 0
-  m_Name: Switch
+  m_Name: PushBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 4, z: -1.21599996}
+  m_LocalPosition: {x: 0, y: 4, z: -1.31599998}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -50,13 +50,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1572ef54fbdf418a8d9d81b14359831, type: 3}
+  m_Script: {fileID: 11500000, guid: 0885849291e5f4f98b40b81d5a71b1f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onSprite: {fileID: 21300108, guid: c0bc9cf3475ed4223bfc4ed7a1008945, type: 3}
-  offSprite: {fileID: 21300086, guid: c0bc9cf3475ed4223bfc4ed7a1008945, type: 3}
-  springy: 0
-  gates: []
+  blocking: 1
+  activatable: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -68,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ed6fcccaffe45a88b33b3f933d44ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawingOrder: 2
+  drawingOrder: 3
   height: 1
   editModeRefresh: 0
 --- !u!212 &21200000
@@ -91,7 +89,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300086, guid: c0bc9cf3475ed4223bfc4ed7a1008945, type: 3}
+  m_Sprite: {fileID: 21300042, guid: c0bc9cf3475ed4223bfc4ed7a1008945, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

@@ -60,7 +60,18 @@ public class CharacterMovementScript : _Mono {
 	}
 
 	bool CanMoveInDirection(Direction direction){
-		// Might do some checking in the future to predict if we're going to run into stuff
+
+		// Look for blocking tile
+		ColliderScript blocker = Globals.CollisionManager.TileBlocker(tileVector + 2 * Utils.DirectionToVector(direction));
+
+		// If we found one, try to push it
+		if(blocker != null){
+			if(!blocker.TryToPush(gameObject, direction)){
+				// If we can't push it, we can't move
+				return false;
+			}
+		}
+
 		return true;
 	}
 

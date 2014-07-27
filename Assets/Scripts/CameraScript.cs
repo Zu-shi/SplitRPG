@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CameraScript : _Mono {
 
-	public const float TRANSITION_SPEED = 20f;
+	public const float TRANSITION_SPEED = 14f;
 	public const float CUTSCENE_PAN_SPEED = 6f;
 
 	// Currently in gameplay mode / following player

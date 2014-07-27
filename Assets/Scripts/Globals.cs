@@ -16,7 +16,7 @@ public class Globals {
 	/// <summary>
 	/// Number of pixels per tile (assuming you imported from Tiled)
 	/// </summary>
-	public const int PIXELS_PER_TILE = 32;
+	public const int PIXELS_PER_TILE = 64;
 
 	static PlayerControllerScript _playerLeft = null;
 	public static PlayerControllerScript playerLeft{
@@ -78,6 +78,15 @@ public class Globals {
 			if(_heightSorter == null)
 				_heightSorter = GameObject.Find("HeightSorter").GetComponent<HeightSorterScript>();
 			return _heightSorter;
+		}
+	}
+
+	static CollisionManagerScript _collisionManager = null;
+	public static CollisionManagerScript CollisionManager{
+		get{
+			if(_collisionManager == null)
+				_collisionManager = GameObject.Find("CollisionManager").GetComponent<CollisionManagerScript>();
+			return _collisionManager;
 		}
 	}
 
