@@ -8,29 +8,6 @@ public class CollisionManagerScript : MonoBehaviour {
 	public LayerMask collidingLayers;
 
 	/// <summary>
-	/// Gets a list of Collider2D's on a tile.
-	/// </summary>
-	public Collider2D[] ObjectsOnTile(Vector2 tileCoords){
-		Collider2D[] cols = Physics2D.OverlapPointAll(tileCoords, collidingLayers);
-		return cols;
-	}
-
-	/// <summary>
-	/// Gets a list of ColliderScripts's on a tile.
-	/// </summary>
-	public ColliderScript[] ColliderScriptsOnTile(Vector2 tileCoords){
-		Collider2D[] cols = ObjectsOnTile(tileCoords);
-		List<ColliderScript> scripts = new List<ColliderScript>();
-		foreach(Collider2D c in cols){
-			ColliderScript cs = c.GetComponent<ColliderScript>();
-			if(cs != null){
-				scripts.Add(cs);
-			}
-		}
-		return scripts.ToArray();
-	}
-
-	/// <summary>
 	/// Gets the ColliderScript of the object that's blocking a tile
 	/// </summary>
 	public ColliderScript TileBlocker(Vector2 tileCoords){
@@ -48,6 +25,33 @@ public class CollisionManagerScript : MonoBehaviour {
 		return TileBlocker(tileCoords) != null;
 	}
 
+	/// <summary>
+	/// Is the tile in the given direction in your movement?
+	/// </summary>
+	public bool TileBlockingInDirection(Vector2 tileCoords, Direction d){
+		return TileBlocking (tileCoords + Utils.DirectionToVector (d) * 2);
+	}
 
-
+	/// <summary>
+	/// Gets a list of Collider2Ds on a tile.
+	/// </summary>
+	private Collider2D[] ObjectsOnTile(Vector2 tileCoords){
+		Collider2D[] cols = Physics2D.OverlapPointAll(tileCoords, collidingLayers);
+		return cols;
+	}
+	
+	/// <summary>
+	/// Gets a list of ColliderScripts on a tile.
+	/// </summary>
+	private ColliderScript[] ColliderScriptsOnTile(Vector2 tileCoords){
+		Collider2D[] cols = ObjectsOnTile(tileCoords);
+		List<ColliderScript> scripts = new List<ColliderScript>();
+		foreach(Collider2D c in cols){
+			ColliderScript cs = c.GetComponent<ColliderScript>();
+			if(cs != null){
+				scripts.Add(cs);
+			}
+		}
+		return scripts.ToArray();
+	}
 }
