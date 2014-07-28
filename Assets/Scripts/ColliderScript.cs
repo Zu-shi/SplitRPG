@@ -9,6 +9,9 @@ public class ColliderScript : _Mono {
 	[Tooltip("Player can interact with this by pressing the action button")]
 	public bool activatable;
 
+	[Tooltip("Players/objects can fall in")]
+	public bool pit;
+
 	/// <summary>
 	/// Called when something enters the collider, e.g. block was pushed onto it, player stepped into it
 	/// </summary>

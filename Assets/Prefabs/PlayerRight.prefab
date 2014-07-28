@@ -29,7 +29,6 @@ GameObject:
   - 58: {fileID: 5800000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
-  - 114: {fileID: 11400004}
   m_Layer: 9
   m_Name: PlayerRight
   m_TagString: PlayerRight
@@ -141,19 +140,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canPush: 1
---- !u!114 &11400004
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f24c2a20caa34e1fa7e12cdc8f52478, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locAndScaleObject: {fileID: 400000}
-  radius: .200000003
+  canFall: 1
+  fallObject: {fileID: 400000}
   destroyOnFall: 0
 --- !u!114 &11400006
 MonoBehaviour:

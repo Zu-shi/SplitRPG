@@ -17,7 +17,6 @@ public class PlayerControllerScript : _Mono {
 
 	// Other scripts
 	CharacterMovementScript characterMovement;
-	FallingBehaviorScript fallingBehavior;
 
 	// Spawn point
 	int spawnX, spawnY;
@@ -31,7 +30,7 @@ public class PlayerControllerScript : _Mono {
 	/// <value><c>true</c> if ready for input; otherwise, <c>false</c>.</value>
 	public bool readyForInput {
 		get {
-			return !characterMovement.isMoving && !fallingBehavior.falling && allowMovement;
+			return !characterMovement.isMoving && !characterMovement.falling && allowMovement;
 		}
 	}
 
@@ -53,7 +52,6 @@ public class PlayerControllerScript : _Mono {
 
 		// Get scripts
 		characterMovement = GetComponent<CharacterMovementScript>();
-		fallingBehavior = GetComponent<FallingBehaviorScript>();
 
 		disableCharacter = false;
 
@@ -71,7 +69,7 @@ public class PlayerControllerScript : _Mono {
 		x = spawnX;
 		y = spawnY;
 
-		fallingBehavior.Reset();
+		characterMovement.Reset();
 
 	}
 	
@@ -92,7 +90,7 @@ public class PlayerControllerScript : _Mono {
 		}
 
 		// Check if we fell
-		if(fallingBehavior.fell){
+		if(characterMovement.fell){
 			ResetBothPlayers();
 			return;
 		}
@@ -136,7 +134,7 @@ public class PlayerControllerScript : _Mono {
 		if(disableCharacter)
 			return;
 
-		if(fallingBehavior.falling || !allowMovement)
+		if(characterMovement.falling || !allowMovement)
 			return;
 
 		// Check if we need to wait at the edge of the screen
