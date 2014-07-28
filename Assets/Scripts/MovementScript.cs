@@ -11,6 +11,9 @@ public class MovementScript : _Mono {
 
 	[Tooltip ("Destroy the object after it falls?")]
 	public bool destroyOnFall = true;
+	
+	[Tooltip ("Sound to play when the object falls.")]
+	public AudioClip fallingSound;
 
 	/// <summary>
 	/// Object is unable to fall while inAir, e.g. if jumping or flying over a gap
@@ -90,14 +93,10 @@ public class MovementScript : _Mono {
 				} else {
 					
 					// Figure out if still on ground
-					bool onGround = false;
 					bool collidingWithPit = Globals.CollisionManager.TileIsPit(xy);
-					if (inAir || !collidingWithPit) {
-						onGround = true;
-					}
-					
-					if (!onGround) {
+					if (!inAir && collidingWithPit) {
 						falling = true;
+						Sound.PlaySound(fallingSound);
 						rigidbody2D.velocity = new Vector2 (0f, 0f);
 					}
 				}
