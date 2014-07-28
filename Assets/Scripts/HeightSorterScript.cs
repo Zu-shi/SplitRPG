@@ -12,16 +12,33 @@ public class HeightSorterScript : MonoBehaviour {
 
 	}
 
+	public float MaxZAtHeight(int height){
+		return MAX_Z - height * HEIGHT_FAC;
+	}
+
+	public float MinZAtHeight(int height){
+		return MaxZAtHeight(height + 1) + YCAM_FAC;
+	}
+
 	public void SetZForObject(HeightScript obj){
 		CameraScript cam = Globals.cameraLeft;
 
 		float heightOffs = HEIGHT_FAC * obj.height;
 		float doOffs = DRAWING_ORDER_FAC * (int)obj.drawingOrder;
 		float yOffs = YCAM_FAC * (cam.y + 20 - obj.y);
-		
-		obj.z = MAX_Z - (heightOffs + doOffs + yOffs);
+
+		// Objects off camera might try to make their yOffs too big or too small,
+		// so we clamp it to reasonable values
+		yOffs = Utils.Clamp(yOffs, 0, DRAWING_ORDER_FAC - YCAM_FAC); 
+
+		obj.z = MAX_Z - heightOffs - doOffs - yOffs;
 		if(obj.z < cam.z){
 			Debug.LogError("Sorting error: Object placed behind camera");
+		}
+		if(obj.z < MinZAtHeight(obj.height)){
+			Debug.LogError("Sorting error: Object placed below z bounds");
+		} else if (obj.z > MaxZAtHeight(obj.height)){
+			Debug.LogError("Sorting error: Object placed above z bounds");
 		}
 		
 		/*
