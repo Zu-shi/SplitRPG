@@ -89,8 +89,15 @@ public class RoomManagerScript : MonoBehaviour {
 		_roomRect = new Rect(left, top-height, width, height);
 	}
 
+	/// <summary>
+	/// Sets the bounds.
+	/// </summary>
+	/// <param name="left">Left, a.</param>
+	/// <param name="bot">Bot, a.</param>
+	/// <param name="right">Right, a.</param>
+	/// <param name="top">Top, a.</param>
 	void SetBounds(int left, int bot, int right, int top){
-		SetRoomRect(left, top, right-left, top-bot);
+		SetRoomRect(left, top, right - left, top - bot);
 	}
 
 	void LogRoomInfo(){
