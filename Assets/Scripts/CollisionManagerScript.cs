@@ -30,6 +30,14 @@ public class CollisionManagerScript : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Is there a pit tile in the given direction in your movement?
+	/// </summary>
+	public bool TileBlockingInDirection(Vector2 tileCoords, Direction d){
+		return Pit (tileCoords + Utils.DirectionToVector (d) * 2);
+	}
+
+
+	/// <summary>
 	/// Is the tile blocking movement?
 	/// </summary>
 	public bool TileBlocking(Vector2 tileCoords){
@@ -37,9 +45,9 @@ public class CollisionManagerScript : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Is the tile in the given direction in your movement?
+	/// Is there a blocking tile in the given direction in your movement?
 	/// </summary>
-	public bool TileBlockingInDirection(Vector2 tileCoords, Direction d){
+	public bool TilePitInDirection(Vector2 tileCoords, Direction d){
 		return TileBlocking (tileCoords + Utils.DirectionToVector (d) * 2);
 	}
 
