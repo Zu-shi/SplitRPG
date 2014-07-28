@@ -12,7 +12,6 @@ public class NodeEditor : EditorWindow {
 	private bool createOpt = false;
 	private string newNodeName, fromNode, toNode, optText;
 	private string export = "Export To";
-	private Vector2 scrollPos = new Vector2(0,0);
 
 	[MenuItem("Window/Node editor")]
 	static void ShowEditor() {
@@ -161,7 +160,6 @@ public class NodeEditor : EditorWindow {
 		Debug.Log("Exporting nodes to: " + fileName);
 		if(System.IO.File.Exists(Application.dataPath + "/" + fileName))
 			System.IO.File.Delete(Application.dataPath + "/" +fileName);
-		List<string> exportedNodes = new List<string>();
 		for(int i = 0; i < nodeNames.Count; i++)
 		{
 			PrintNodeToFile(nodeNames[i], fileName);
