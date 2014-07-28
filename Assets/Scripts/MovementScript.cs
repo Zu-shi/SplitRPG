@@ -93,7 +93,7 @@ public class MovementScript : _Mono {
 				} else {
 					
 					// Figure out if still on ground
-					bool collidingWithPit = Globals.CollisionManager.TileIsPit(xy);
+					bool collidingWithPit = Globals.CollisionManager.TileIsPit(xy, gameObject.layer);
 					if (!inAir && collidingWithPit) {
 						falling = true;
 						Sound.PlaySound(fallingSound);
@@ -145,7 +145,7 @@ public class MovementScript : _Mono {
 	bool CanMoveInDirection(Direction direction){
 		
 		// Look for blocking tile
-		ColliderScript blocker = Globals.CollisionManager.TileBlocker(tileVector + 2 * Utils.DirectionToVector(direction));
+		ColliderScript blocker = Globals.CollisionManager.TileBlocker(tileVector + 2 * Utils.DirectionToVector(direction), gameObject.layer);
 	
 		// If we found one, try to push it
 		if(blocker != null){

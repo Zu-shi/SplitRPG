@@ -132,6 +132,7 @@ MonoBehaviour:
   canFall: 1
   fallObject: {fileID: 400002}
   destroyOnFall: 0
+  fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
