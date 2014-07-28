@@ -32,6 +32,15 @@ public class _Mono : MonoBehaviour {
 		}
 	}
 
+	public Vector2 xy {
+		set {
+			transform.position = new Vector3(value.x, value.y, transform.position.z);
+		}
+		get {
+			return new Vector2(x, y);
+		}
+	}
+
 	public int tileX {
 		set {
 			x = value;

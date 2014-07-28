@@ -19,6 +19,17 @@ public class CollisionManagerScript : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Gets the ColliderScript of the object that's a pit
+	/// </summary>
+	public ColliderScript Pit(Vector2 tileCoords){
+		foreach(ColliderScript cs in ColliderScriptsOnTile(tileCoords)){
+			if(cs.pit)
+				return cs;
+		}
+		return null;
+	}
+
+	/// <summary>
 	/// Is the tile blocking movement?
 	/// </summary>
 	public bool TileBlocking(Vector2 tileCoords){
@@ -30,6 +41,12 @@ public class CollisionManagerScript : MonoBehaviour {
 	/// </summary>
 	public bool TileBlockingInDirection(Vector2 tileCoords, Direction d){
 		return TileBlocking (tileCoords + Utils.DirectionToVector (d) * 2);
+	}
+
+	/// Is the tile a pit?
+	/// </summary>
+	public bool TileIsPit(Vector2 tileCoords){
+		return Pit(tileCoords) != null;
 	}
 
 	/// <summary>
