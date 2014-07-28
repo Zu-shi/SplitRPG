@@ -29,7 +29,7 @@ public class ButtonScript : _Mono {
 	void Update () {
 
 		// Is the player on us?
-		bool playerIsOnUs = Utils.PlayerIsOnTile(tileX, tileY, gameObject.layer);
+		bool playerIsOnUs = Globals.CollisionManager.PlayerIsOnTile(tileVector, gameObject.layer);
 
 		// Switch the state of the switch if needed
 		if(_switch.on && springy && !playerIsOnUs){

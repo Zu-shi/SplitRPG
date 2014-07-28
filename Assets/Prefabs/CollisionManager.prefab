@@ -39,9 +39,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd084568b1ff47f89ed14b30a20b6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidingLayers:
+  defaultLayers:
     serializedVersion: 2
     m_Bits: 769
+  leftLayers:
+    serializedVersion: 2
+    m_Bits: 257
+  rightLayers:
+    serializedVersion: 2
+    m_Bits: 513
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

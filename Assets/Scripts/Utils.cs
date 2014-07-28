@@ -59,22 +59,11 @@ public static class Utils {
 	}
 
 	/// <summary>
-	/// Is the player on the specified tile?
+	/// Returns the player on the layer passed in (left or right)
 	/// </summary>
-	public static bool PlayerIsOnTile(int x, int y, bool leftPlayer){
-		PlayerControllerScript player = (leftPlayer ? Globals.playerLeft : Globals.playerRight);
-		if(player.tileX == x && player.tileY == y){
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/// <summary>
-	/// Is the player on the specified tile?
-	/// </summary>
-	public static bool PlayerIsOnTile(int x, int y, int leftOrRightLayer){
-		return PlayerIsOnTile(x, y, LayerIs(leftOrRightLayer, "Left"));
+	public static PlayerControllerScript PlayerOnLayer(int layer){
+		PlayerControllerScript player = (layer == LayerMask.NameToLayer("Left") ? Globals.playerLeft : Globals.playerRight);
+		return player;
 	}
 
 	/// <summary>

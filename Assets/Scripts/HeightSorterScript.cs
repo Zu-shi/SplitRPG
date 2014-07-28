@@ -8,9 +8,6 @@ public class HeightSorterScript : MonoBehaviour {
 	const float DRAWING_ORDER_FAC = .1f;
 	const float YCAM_FAC = .001f;
 
-	void Update(){
-
-	}
 
 	public float MaxZAtHeight(int height){
 		return MAX_Z - height * HEIGHT_FAC;
@@ -21,7 +18,14 @@ public class HeightSorterScript : MonoBehaviour {
 	}
 
 	public void SetZForObject(HeightScript obj){
-		CameraScript cam = Globals.cameraLeft;
+
+		CameraScript cam = null;
+
+		if(obj.gameObject.layer == LayerMask.NameToLayer("Right")){
+			cam = Globals.cameraRight;
+		} else {
+			cam = Globals.cameraLeft;
+		}
 
 		float heightOffs = HEIGHT_FAC * obj.height;
 		float doOffs = DRAWING_ORDER_FAC * (int)obj.drawingOrder;
