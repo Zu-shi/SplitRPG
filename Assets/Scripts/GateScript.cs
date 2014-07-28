@@ -15,7 +15,11 @@ public class GateScript : _Mono {
 	[Tooltip("Make the gate OPEN when its switch is off.")]
 	public bool reverse = false;
 
+	ColliderScript colliderScript;
 
+	void Start(){
+		colliderScript = GetComponent<ColliderScript>();
+	}
 
 	void Update () {
 		bool open = switchToWatch.on;
@@ -24,10 +28,13 @@ public class GateScript : _Mono {
 
 		if(open){
 			spriteRenderer.sprite = openSprite;
-			collider2D.isTrigger = true; // disable collision
+			// disable collision
+			colliderScript.blocking = false;
 		} else {
 			spriteRenderer.sprite = closedSprite;
-			collider2D.isTrigger = false; // enable collision
+			// enable collision
+			colliderScript.blocking = true;
+
 		}
 	}
 }
