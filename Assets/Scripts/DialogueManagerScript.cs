@@ -15,38 +15,36 @@ public class DialogueManagerScript : MonoBehaviour {
 	[Tooltip("The speed, in characters per second, that text will be written to the screen.")]
 	public float textSpeed = 5.0f;
 
+	/// <summary>
+	/// The DialogueSequence that contains the data for the current conversation.
+	/// </summary>
 	private DialogueSequence seq;
-	private DialogueNode current;
+
+	/// <summary>
+	/// The name of the current node.
+	/// </summary>
+	private string current;
+
+	/// <summary>
+	/// The text that is currently being displayed for the current node.
+	/// This is updated as more text scrolls onto the screen.
+	/// </summary>
 	private string displayText = "";
+
+	/// <summary>
+	/// True if we are scrolling text 'typewriter-style' onto the screen.
+	/// </summary>
 	private bool scrolling = false;
+
+	/// <summary>
+	/// How long until we update the display text.
+	/// </summary>
 	private float scrollingTimer = 0;
+
+	/// <summary>
+	/// True if one side of the screen is fading out.
+	/// </summary>
 	private bool fading = false;
-
-	public string nodeName {
-		get{
-			return current.getName();
-		}
-	}
-
-	public string text {
-		get{
-			return current.getText();
-		}
-	}
-
-	public string speaker {
-		get{
-			return current.getSpeaker();
-		}
-	}
-
-	public List<string> options {
-		get{
-			List<string> nodes, texts;
-			current.getOptions(out nodes, out texts);
-			return texts;
-		}
-	}
 
 	public void Update() {
 		if( (showOnLeft != showOnRight) && !fading ) { // We have been told to become visible on one side, but we are not fading a side out.
@@ -79,7 +77,7 @@ public class DialogueManagerScript : MonoBehaviour {
 			GameObject.Find("GameManager").GetComponent<GameManagerScript>().FadeUpLeftSide();
 		}
 
-		if( (showOnLeft || showOnRight) && !scrolling && (displayText != current.getText()) ) {
+		if( (showOnLeft || showOnRight) && !scrolling && (displayText != text) ) {
 			scrolling = true;
 		}
 
@@ -87,15 +85,45 @@ public class DialogueManagerScript : MonoBehaviour {
 			scrollingTimer += Time.deltaTime;
 
 			while(scrollingTimer >= 1.0f/textSpeed) {
-				if( displayText != current.getText() ) {
+				if( displayText != this.text ) {
 					scrollingTimer -= 1.0f/textSpeed;
-					displayText += current.getText()[displayText.Length];
+					displayText += this.text[displayText.Length];
 				} else {
 					scrolling = false;
 					scrollingTimer = 0;
 					break;
 				} 
 			}
+		}
+	}
+
+	/// <summary>
+	/// Gets the text of the current node.
+	/// </summary>
+	/// <value>The text.</value>
+	private string text {
+		get{
+			return seq.GetText(current);
+		}
+	}
+
+	/// <summary>
+	/// Gets the speaker of the current node.
+	/// </summary>
+	/// <value>The speaker.</value>
+	private string speaker {
+		get{
+			return seq.GetSpeaker(current);
+		}
+	}
+
+	/// <summary>
+	/// Gets the options for the current node.
+	/// </summary>
+	/// <value>The options.</value>
+	private List<DialogueSequence.Option> options {
+		get{
+			return seq.GetOptions(current);
 		}
 	}
 
@@ -107,29 +135,39 @@ public class DialogueManagerScript : MonoBehaviour {
 			return;
 		}
 		seq = new DialogueSequence(dialogueAsset);
-		current = seq.getStartingNode();
+		current = seq.startingNodeName;
 	}
 
+	/// <summary>
+	/// Load new a new dialogue sequence from the given asset.
+	/// </summary>
+	/// <param name="nodes">Nodes.</param>
 	public void NewDialogueTree(TextAsset nodes){
 		dialogueAsset = nodes;
 		Start();
 	}
 
+	/// <summary>
+	/// Selects the dialogue option at the specified index in the list of current options.
+	/// </summary>
+	/// <param name="index">Index.</param>
 	public void SelectOption(int index) {
-		List<string> nodes, texts;
-		current.getOptions(out nodes, out texts);
-		current = seq.getNode(nodes[index]);
+		current = options[index].to;
 		displayText = "";
 		scrolling = true;
 	}
 
-	public void SelectOption(string optionText) {
-		List<string> nodes, texts;
-		current.getOptions(out nodes, out texts);
-
-		for(int i = 0; i < nodes.Count; i++) {
-			if(texts[i] == optionText) {
-				current = seq.getNode(nodes[i]);
+	/// <summary>
+	/// Selects the option with the given description from the list of current options.
+	/// If more than one option has the same description, this is probably a mistake and 
+	/// the first option is the only one returned.
+	/// </summary>
+	/// <param name="description">Description.</param>
+	public void SelectOption(string description) {
+		List<DialogueSequence.Option> opts = options;
+		for(int i = 0; i < opts.Count; i++) {
+			if(opts[i].description == description) {
+				current = opts[i].to;
 				break;
 			}
 		}
@@ -151,11 +189,11 @@ public class DialogueManagerScript : MonoBehaviour {
 				if(scrolling){
 					GUILayout.Space(20);
 				} else {
-					if(GUILayout.Button(options[i], GUILayout.Height(20))){
+					if(GUILayout.Button(options[i].description, GUILayout.Height(20))){
 						SelectOption(i);
 						if(options.Count == 0){
 							showOnLeft = false;
-							current = seq.getStartingNode();
+							current = seq.startingNodeName;
 						}
 					}
 				}
@@ -177,11 +215,11 @@ public class DialogueManagerScript : MonoBehaviour {
 				if(scrolling){
 					GUILayout.Space(20);
 				} else {
-					if(GUILayout.Button(options[i], GUILayout.Height(20))){
+					if(GUILayout.Button(options[i].description, GUILayout.Height(20))){
 						SelectOption(i);
 						if(options.Count == 0){
 							showOnRight = false;
-							current = seq.getStartingNode();
+							current = seq.startingNodeName;
 						}
 					}
 				}

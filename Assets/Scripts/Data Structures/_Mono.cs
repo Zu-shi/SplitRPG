@@ -23,6 +23,15 @@ public class _Mono : MonoBehaviour {
 		}
 	}
 
+	public float z {
+		set {
+			transform.position = new Vector3 (transform.position.x, transform.position.y, value);
+		}
+		get {
+			return transform.position.z;
+		}
+	}
+
 	public int tileX {
 		set {
 			x = value;
@@ -41,6 +50,15 @@ public class _Mono : MonoBehaviour {
 		}
 	}
 
+	public Vector2 tileVector {
+		set {
+			x = value.x;
+			y = value.y;
+		}
+		get {
+			return new Vector2(tileX, tileY);
+		}
+	}
 
 	public float xs {
 		set {

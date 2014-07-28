@@ -4,6 +4,11 @@ using System.Collections;
 public class FaderScript : _Mono {
 
 	float targetAlpha{get; set;}
+
+	/// <summary>
+	/// Gets or sets the fade rate.
+	/// </summary>
+	/// <value>The fade rate.</value>
 	public float fadeRate{get;set;}
 
 	Utils.VoidDelegate fadeCallback;
@@ -26,22 +31,35 @@ public class FaderScript : _Mono {
 
 		} else {
 			if(fadeCallback != null){
-				fadeCallback();
+				Utils.VoidDelegate tmp = fadeCallback;
 				fadeCallback = null;
+				tmp();
 			}
 		}
 	}
 
+	/// <summary>
+	/// Fades down.
+	/// </summary>
+	/// <param name="callback">Callback.</param>
 	public void FadeDown(Utils.VoidDelegate callback){
 		targetAlpha = 1;
 		fadeCallback = callback;
 	}
 
+	/// <summary>
+	/// Dims (partial fade down).
+	/// </summary>
+	/// <param name="callback">Callback.</param>
 	public void Dim(Utils.VoidDelegate callback){
 		targetAlpha = .2f;
 		fadeCallback = callback;
 	}
 
+	/// <summary>
+	/// Fades up.
+	/// </summary>
+	/// <param name="callback">Callback.</param>
 	public void FadeUp(Utils.VoidDelegate callback){
 		targetAlpha = 0;
 		fadeCallback = callback;

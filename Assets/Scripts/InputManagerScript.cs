@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 
 public class InputManagerScript : MonoBehaviour {
+	/*
+	 * Probably don't use this script, use InputManager's static methods instead
+	 */
 
 	List<Button> _inputs;
 	List<Button> _lastInputs;

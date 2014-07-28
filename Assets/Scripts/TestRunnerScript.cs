@@ -7,8 +7,7 @@ public class TestRunnerScript : MonoBehaviour {
 		NONE,
 		CAMERA_CUTSCENE,
 		DISABLE_SIDE,
-		SMALL_ROOM,
-		BIG_ROOM
+		ACTION_TEST
 	}
 
 	[Tooltip("Which test to run?")]
@@ -27,14 +26,15 @@ public class TestRunnerScript : MonoBehaviour {
 			break;
 		case TestType.DISABLE_SIDE:
 			Globals.gameManager.RunDisableTest();
-			break;
-		case TestType.SMALL_ROOM:
-			Globals.roomManager.RunTinyRoomTest();
-			break;
-		case TestType.BIG_ROOM:
-			Globals.roomManager.RunBigRoomTest();
+			break;;
+		case TestType.ACTION_TEST:
+			TimerAction.Create(2, TimerCallback).StartAction();
 			break;
 		}
+	}
+
+	void TimerCallback(){
+		Debug.Log ("Action test successful.");
 	}
 	
 
