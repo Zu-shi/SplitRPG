@@ -15,11 +15,35 @@ public class DialogueManagerScript : MonoBehaviour {
 	[Tooltip("The speed, in characters per second, that text will be written to the screen.")]
 	public float textSpeed = 5.0f;
 
+	/// <summary>
+	/// The DialogueSequence that contains the data for the current conversation.
+	/// </summary>
 	private DialogueSequence seq;
+
+	/// <summary>
+	/// The name of the current node.
+	/// </summary>
 	private string current;
+
+	/// <summary>
+	/// The text that is currently being displayed for the current node.
+	/// This is updated as more text scrolls onto the screen.
+	/// </summary>
 	private string displayText = "";
+
+	/// <summary>
+	/// True if we are scrolling text 'typewriter-style' onto the screen.
+	/// </summary>
 	private bool scrolling = false;
+
+	/// <summary>
+	/// How long until we update the display text.
+	/// </summary>
 	private float scrollingTimer = 0;
+
+	/// <summary>
+	/// True if one side of the screen is fading out.
+	/// </summary>
 	private bool fading = false;
 
 	public void Update() {
@@ -73,18 +97,30 @@ public class DialogueManagerScript : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Gets the text of the current node.
+	/// </summary>
+	/// <value>The text.</value>
 	private string text {
 		get{
 			return seq.GetText(current);
 		}
 	}
 
+	/// <summary>
+	/// Gets the speaker of the current node.
+	/// </summary>
+	/// <value>The speaker.</value>
 	private string speaker {
 		get{
 			return seq.GetSpeaker(current);
 		}
 	}
 
+	/// <summary>
+	/// Gets the options for the current node.
+	/// </summary>
+	/// <value>The options.</value>
 	private List<DialogueSequence.Option> options {
 		get{
 			return seq.GetOptions(current);
@@ -102,17 +138,31 @@ public class DialogueManagerScript : MonoBehaviour {
 		current = seq.startingNodeName;
 	}
 
+	/// <summary>
+	/// Load new a new dialogue sequence from the given asset.
+	/// </summary>
+	/// <param name="nodes">Nodes.</param>
 	public void NewDialogueTree(TextAsset nodes){
 		dialogueAsset = nodes;
 		Start();
 	}
 
+	/// <summary>
+	/// Selects the dialogue option at the specified index in the list of current options.
+	/// </summary>
+	/// <param name="index">Index.</param>
 	public void SelectOption(int index) {
 		current = options[index].to;
 		displayText = "";
 		scrolling = true;
 	}
 
+	/// <summary>
+	/// Selects the option with the given description from the list of current options.
+	/// If more than one option has the same description, this is probably a mistake and 
+	/// the first option is the only one returned.
+	/// </summary>
+	/// <param name="description">Description.</param>
 	public void SelectOption(string description) {
 		List<DialogueSequence.Option> opts = options;
 		for(int i = 0; i < opts.Count; i++) {
