@@ -11,6 +11,9 @@ public class MovementScript : _Mono {
 
 	[Tooltip ("Destroy the object after it falls?")]
 	public bool destroyOnFall = true;
+	
+	[Tooltip ("Sound to play when the object falls.")]
+	public AudioClip fallingSound;
 
 	/// <summary>
 	/// Object is unable to fall while inAir, e.g. if jumping or flying over a gap
@@ -90,14 +93,10 @@ public class MovementScript : _Mono {
 				} else {
 					
 					// Figure out if still on ground
-					bool onGround = false;
-					bool collidingWithPit = Globals.CollisionManager.TileIsPit(xy);
-					if (inAir || !collidingWithPit) {
-						onGround = true;
-					}
-					
-					if (!onGround) {
+					bool collidingWithPit = Globals.CollisionManager.TileIsPit(xy, gameObject.layer);
+					if (!inAir && collidingWithPit) {
 						falling = true;
+						Sound.PlaySound(fallingSound);
 						rigidbody2D.velocity = new Vector2 (0f, 0f);
 					}
 				}
@@ -146,7 +145,7 @@ public class MovementScript : _Mono {
 	bool CanMoveInDirection(Direction direction){
 		
 		// Look for blocking tile
-		ColliderScript blocker = Globals.CollisionManager.TileBlocker(tileVector + 2 * Utils.DirectionToVector(direction));
+		ColliderScript blocker = Globals.CollisionManager.TileBlocker(tileVector + 2 * Utils.DirectionToVector(direction), gameObject.layer);
 	
 		// If we found one, try to push it
 		if(blocker != null){

@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
   - 50: {fileID: 5000000}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PushBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: -1.31799996}
+  m_LocalPosition: {x: 0, y: -2, z: -1.31799996}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -72,6 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blocking: 1
   activatable: 0
+  pit: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,6 +102,7 @@ MonoBehaviour:
   canFall: 1
   fallObject: {fileID: 400000}
   destroyOnFall: 1
+  fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

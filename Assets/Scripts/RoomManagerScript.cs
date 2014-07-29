@@ -136,7 +136,6 @@ public class RoomManagerScript : MonoBehaviour {
 		// Rect objects use a GUI coordinate system where the y axis is opposite than in 3D view
 		// So we actually pass in (left, BOT, width, height) instead of (left, TOP...)
 		_roomRect = new Rect(left, top-height, width, height);
-		LogRoomInfo();
 	}
 
 	void LogRoomInfo(){

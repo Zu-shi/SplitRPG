@@ -27,7 +27,7 @@ public class FaderScript : _Mono {
 
 		// Fade towards the target alpha
 		if(guiAlpha != targetAlpha){
-			guiAlpha = Utils.MoveValueTowards(guiAlpha, targetAlpha, fadeRate);
+			guiAlpha = fadeFunc(guiAlpha, targetAlpha, fadeRate);
 
 		} else {
 			if(fadeCallback != null){
@@ -63,5 +63,15 @@ public class FaderScript : _Mono {
 	public void FadeUp(Utils.VoidDelegate callback){
 		targetAlpha = 0;
 		fadeCallback = callback;
+	}
+
+	/// <summary>
+	/// Helper function that makes the correct fading curve
+	/// </summary>
+	float fadeFunc(float value, float dest, float rate){
+		// make the fade faster when closer to 1, otherwise it will look slow
+		float bonus = Utils.Clamp(1 / (1 - value), 1, 40);
+		value = Utils.MoveValueTowards(value, dest, rate * bonus);
+		return value;
 	}
 }

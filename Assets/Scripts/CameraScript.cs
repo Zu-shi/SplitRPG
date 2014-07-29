@@ -27,7 +27,7 @@ public class CameraScript : _Mono {
 	public FaderScript fader{get; set;}
 	Utils.VoidDelegate transitionCallback;
 
-	public GameObject player;
+	public GameObject player{get; set;}
 	RoomManagerScript roomManager;
 
 
