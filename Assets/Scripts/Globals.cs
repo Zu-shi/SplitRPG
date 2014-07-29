@@ -90,5 +90,14 @@ public class Globals {
 		}
 	}
 
+	static SoundManagerScript _soundManager = null;
+	public static SoundManagerScript soundManager {
+		get{
+			if(_soundManager == null)
+				_soundManager = gameManager.GetComponent<SoundManagerScript>();
+			return _soundManager;
+		}
+	}
+
 
 }
