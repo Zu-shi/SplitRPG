@@ -26,11 +26,15 @@ public static class Utils {
 	/// </summary>
 	public static float MoveValueTowards(float value, float dest, float speed){
 		if(Utils.CloseValues(value, dest, speed +.000001f)){
-			value = dest;
+			return dest;
 		} else if (value < dest){
-			value += speed;
+			value = value + speed;
+			if(value >= dest)
+				return dest;
 		} else if (value > dest){
-			value -= speed;
+			value = value - speed;
+			if(value <= dest)
+				return dest;
 		}
 		return value;
 	}

@@ -9,15 +9,19 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 	private static List<string> receivers = new List<string>();
 	
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props){
-		if(gameObject.transform.parent.name.Contains("UnidirectionalPortals") && props.ContainsKey("target")) {
+		Transform parent = gameObject.transform.parent;
+		if(parent == null)
+			return;
+
+		if(parent.name.Contains("UnidirectionalPortals") && props.ContainsKey("target")) {
 			GetSender(gameObject);
 			senders.Add(gameObject.name);
 			receivers.Add(props["target"]);
 		}
-		if(gameObject.transform.parent.name.Contains("UnidirectionalPortals") && !props.ContainsKey("target")) {
+		if(parent.name.Contains("UnidirectionalPortals") && !props.ContainsKey("target")) {
 			GetReceiver(gameObject);
 		}
-		if(gameObject.transform.parent.name.Contains("BidirectionalPortals")) {
+		if(parent.name.Contains("BidirectionalPortals")) {
 			GetReceiver(gameObject);
 			GetSender(gameObject);
 			senders.Add(gameObject.name);
