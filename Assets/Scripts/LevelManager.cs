@@ -34,11 +34,37 @@ public class LevelManager : _Mono{
 		if(go != null) {
 			GameObject.DestroyImmediate(currentLevelPrefab);
 			currentLevelPrefab = go;
+
+			Globals.roomManager.fadeTransition = true;
+			
+			GameObject spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
+			if(spawnPoint != null) {
+				Globals.cameraLeft.FadeTransition(MovePlayersToSpawnPoint, FinishedLoading);
+				Globals.cameraRight.FadeTransition(MovePlayersToSpawnPoint, FinishedLoading);
+			}
+			else {
+				Debug.LogError("No spawn point set for level: " + prefab.name);
+			}
+
 			return true;
 		}
 		else
 			return false;
 
+	}
+
+	private static void MovePlayersToSpawnPoint() {
+		GameObject spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
+		GameObject.FindGameObjectWithTag("PlayerLeft").transform.position = spawnPoint.transform.position;
+		GameObject.FindGameObjectWithTag("PlayerRight").transform.position = spawnPoint.transform.position;
+	}
+
+	private static void FinishedLoading() {
+		Globals.roomManager.fadeTransition = false;
+	}
+
+	private void _Load() {
+		LoadLevel(_levelPrefabs[0]);
 	}
 
 	public void Start() {
@@ -48,7 +74,7 @@ public class LevelManager : _Mono{
 		}
 
 		if(levelPrefabs.Length > 0) {
-			LoadLevel(_levelPrefabs[0]);
+			Invoke( "_Load" , 0.5f );
 		}
 		else
 			Debug.LogError("No level prefabs assigned!");

@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class RoomManagerScript : MonoBehaviour {
-	
+
+	public bool fadeTransition = false;
+
 	CameraScript leftCamera, rightCamera;
 	PlayerControllerScript leftPlayer, rightPlayer;
 
@@ -165,8 +167,14 @@ public class RoomManagerScript : MonoBehaviour {
 		SetRoomRect(left, top, width, height);
 
 		// Pan the cameras
-		leftCamera.BeginRoomTransitionPan(CameraTransitionFinished);
-		rightCamera.BeginRoomTransitionPan(CameraTransitionFinished);
+		if(!fadeTransition) {
+			leftCamera.BeginRoomTransitionPan(CameraTransitionFinished);
+			rightCamera.BeginRoomTransitionPan(CameraTransitionFinished);
+		}
+		else {
+			leftCamera.BeginRoomTransitionFade(CameraTransitionFinished);
+			rightCamera.BeginRoomTransitionFade(CameraTransitionFinished);
+		}
 
 		// Disable player movement
 		leftPlayer.DisableMovement();
