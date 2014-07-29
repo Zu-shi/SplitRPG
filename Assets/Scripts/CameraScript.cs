@@ -137,7 +137,7 @@ public class CameraScript : _Mono {
 
 	public void BeginRoomTransitionPan(Utils.VoidDelegate callback){
 		if(currPanAction != null)
-			Destroy (currPanAction.gameObject);
+			currPanAction.Destroy();
 
 		gameplayCamera = false;
 
@@ -156,7 +156,7 @@ public class CameraScript : _Mono {
 
 	public void FadeTransition(Utils.VoidDelegate middleCode, Utils.VoidDelegate callback){
 		if(currFadeAction != null)
-			Destroy (currFadeAction);
+			currFadeAction.Destroy();
 		currFadeAction = CameraFadeTransitionAction.Create(this, middleCode, callback).StartAction();
 	}
 
@@ -214,7 +214,7 @@ public class CameraScript : _Mono {
 	/// </summary>
 	public void BeginShakyCam(){
 		if(currShakeAction != null)
-			Destroy (currShakeAction.gameObject);
+			currShakeAction.Destroy();
 		currShakeAction = CameraShakeAction.Create(this, 9999, null).StartAction();
 	}
 
@@ -224,7 +224,7 @@ public class CameraScript : _Mono {
 	/// <param name="duration">Duration.</param>
 	public void BeginShakyCam(float duration){
 		if(currShakeAction != null)
-			Destroy (currShakeAction.gameObject);
+			currShakeAction.Destroy();
 		currShakeAction = CameraShakeAction.Create(this, duration, ShakyCamEndedSelf).StartAction();
 	}
 

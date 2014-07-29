@@ -108,6 +108,18 @@ public class RoomManagerScript : MonoBehaviour {
 		roomColliderPrev = roomCollider;
 	}
 
+	public void MoveCamerasToPoint(Vector2 point) {
+		Update();
+		needsTransition = false;
+		int left, top, width, height;
+		CalculateRoomBounds(out left, out top, out width, out height);
+		
+		SetRoomRect(left, top, width, height);
+
+		leftCamera.transform.position = new Vector3(point.x, point.y, leftCamera.z);
+		rightCamera.transform.position = new Vector3(point.x, point.y, rightCamera.z);
+	}
+
 	// Temprary hack to reset the camera when the player falls off the level
 	public void Reset(){
 		leftCamera.BeginRoomTransitionFade(CameraTransitionFinished);
@@ -153,16 +165,21 @@ public class RoomManagerScript : MonoBehaviour {
 		needsTransition = true;
 	}
 
+	private void CalculateRoomBounds(out int left, out int top, out int width, out int height) {
+		left = Mathf.RoundToInt (roomCollider.transform.position.x);
+		top = Mathf.RoundToInt (roomCollider.transform.position.y);
+		width = Utils.PixelsToTiles (Mathf.RoundToInt (roomCollider.size.x));
+		height = Utils.PixelsToTiles (Mathf.RoundToInt (roomCollider.size.y));
+	}
+
 	/// <summary>
 	/// Resets the bounds of the room, moves the cameras, disables movement for players
 	/// </summary>
 	void BeginCameraTransition(){
 		// New room bounds
-		int left = Mathf.RoundToInt (roomCollider.transform.position.x);
-		int top = Mathf.RoundToInt (roomCollider.transform.position.y);
-		int width = Utils.PixelsToTiles (Mathf.RoundToInt (roomCollider.size.x));
-		int height = Utils.PixelsToTiles (Mathf.RoundToInt (roomCollider.size.y));
-		
+		int left, top, width, height;
+		CalculateRoomBounds(out left, out top, out width, out height);
+
 		SetRoomRect(left, top, width, height);
 
 		// Pan the cameras

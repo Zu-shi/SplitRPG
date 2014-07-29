@@ -5,11 +5,11 @@ public class LevelManager : _Mono{
 
 	public GameObject[] levelPrefabs;
 
-	private static List<GameObject> _levelPrefabs;
+	private List<GameObject> _levelPrefabs;
 
-	private static GameObject currentLevelPrefab;
+	private GameObject currentLevelPrefab;
 
-	public static string currentLevel {
+	public string currentLevel {
 		get {
 			if(currentLevelPrefab != null) {
 				return currentLevelPrefab.name;
@@ -19,7 +19,7 @@ public class LevelManager : _Mono{
 		}
 	}
 
-	public static bool LoadLevel(string name) {
+	public bool LoadLevel(string name) {
 		for(int i = 0; i < _levelPrefabs.Count; i++) {
 			if(_levelPrefabs[i].name == name) {
 				return LoadLevel(_levelPrefabs[i]);
@@ -28,14 +28,12 @@ public class LevelManager : _Mono{
 		return false;
 	}
 
-	public static bool LoadLevel(GameObject prefab) {
+	public bool LoadLevel(GameObject prefab) {
 		GameObject go = (GameObject)GameObject.Instantiate(prefab);
 
 		if(go != null) {
 			GameObject.DestroyImmediate(currentLevelPrefab);
 			currentLevelPrefab = go;
-
-			Globals.roomManager.fadeTransition = true;
 			
 			GameObject spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
 			if(spawnPoint != null) {
@@ -53,14 +51,15 @@ public class LevelManager : _Mono{
 
 	}
 
-	private static void MovePlayersToSpawnPoint() {
+	private void MovePlayersToSpawnPoint() {
 		GameObject spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
 		GameObject.FindGameObjectWithTag("PlayerLeft").transform.position = spawnPoint.transform.position;
 		GameObject.FindGameObjectWithTag("PlayerRight").transform.position = spawnPoint.transform.position;
+		Globals.roomManager.MoveCamerasToPoint( new Vector2(spawnPoint.transform.position.x, spawnPoint.transform.position.y));
 	}
 
-	private static void FinishedLoading() {
-		Globals.roomManager.fadeTransition = false;
+	public void FinishedLoading() {
+		Debug.Log("LevelManagerCallBack");
 	}
 
 	private void _Load() {
