@@ -67,7 +67,7 @@ public class Globals {
 	public static RoomManagerScript roomManager{
 		get{
 			if(_roomManager == null)
-				_roomManager = GameObject.Find("RoomManager").GetComponent<RoomManagerScript>();
+				_roomManager = gameManager.GetComponent<RoomManagerScript>();
 			return _roomManager;
 		}
 	}
@@ -76,16 +76,16 @@ public class Globals {
 	public static HeightSorterScript heightSorter{
 		get{
 			if(_heightSorter == null)
-				_heightSorter = GameObject.Find("HeightSorter").GetComponent<HeightSorterScript>();
+				_heightSorter = gameManager.GetComponent<HeightSorterScript>();
 			return _heightSorter;
 		}
 	}
 
 	static CollisionManagerScript _collisionManager = null;
-	public static CollisionManagerScript CollisionManager{
+	public static CollisionManagerScript collisionManager{
 		get{
 			if(_collisionManager == null)
-				_collisionManager = GameObject.Find("CollisionManager").GetComponent<CollisionManagerScript>();
+				_collisionManager = gameManager.GetComponent<CollisionManagerScript>();
 			return _collisionManager;
 		}
 	}

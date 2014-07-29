@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class SpriteAnimationManagerScript : MonoBehaviour {
 
 	[Tooltip("If set, this sprite will revert to it's idle animation after it is told to play a one-shot animation.")]

@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ButtonScript : _Mono {
 
-	Switch _switch;
+	Toggler _toggler;
+	public Toggler toggler{get{ return _toggler; }}
 
 	[Tooltip("Sprite for when the button is pressed.")]
 	public Sprite onSprite;
@@ -18,36 +19,34 @@ public class ButtonScript : _Mono {
 	public GateScript[] gates;
 	
 	void Start () {
-		_switch = new Switch();
+		_toggler = new Toggler();
 
 		// Tell each gate to watch our switch
 		foreach(GateScript gate in gates){
-			gate.switchToWatch = _switch;
+			gate.togglerToWatch = _toggler;
 		}
 	}
 
 	void Update () {
 
 		// Is the player on us?
-		bool playerIsOnUs = Globals.CollisionManager.PlayerIsOnTile(tileVector, gameObject.layer);
+		bool playerIsOnButton = Globals.collisionManager.IsPlayerOnTile(tileVector, gameObject.layer);
 
 		// Switch the state of the switch if needed
-		if(_switch.on && springy && !playerIsOnUs){
-			_switch.TurnOff();
-		} else if (_switch.off && playerIsOnUs){
-			_switch.TurnOn();
+		if(_toggler.on && springy && !playerIsOnButton){
+			_toggler.TurnOff();
+		} else if (_toggler.off && playerIsOnButton){
+			_toggler.TurnOn();
 		}
 
 		// Update the sprite
-		if(_switch.on){
+		if(_toggler.on){
 			spriteRenderer.sprite = onSprite;
 		} else {
 			spriteRenderer.sprite = offSprite;
 		}
 	}
 
-	public Switch GetSwitch(){
-		return _switch;
-	}
+
 	
 }

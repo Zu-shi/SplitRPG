@@ -8,7 +8,7 @@ public class InputManager {
 	public static InputManagerScript Instance{
 		get{
 			if(_inputManager == null)
-				_inputManager = GameObject.Find("InputManager").GetComponent<InputManagerScript>();
+				_inputManager = Globals.gameManager.GetComponent<InputManagerScript>();
 			return _inputManager;
 		}
 	}

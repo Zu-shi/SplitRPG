@@ -69,7 +69,7 @@ public class PlayerControllerScript : _Mono {
 		x = spawnX;
 		y = spawnY;
 
-		characterMovement.Reset();
+		characterMovement.ResetFalling();
 
 	}
 	
@@ -122,7 +122,7 @@ public class PlayerControllerScript : _Mono {
 			return true;
 
 		Vector2 dest = new Vector2(tileX, tileY) + 2 * Utils.DirectionToVector(direction);
-		return !roomManager.RoomContainsTile(dest);
+		return characterMovement.CanMoveInDirection(direction) && !roomManager.RoomContainsTile(dest);
 
 	}
 

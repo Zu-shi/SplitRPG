@@ -13,15 +13,15 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 		if(parent == null)
 			return;
 
-		if(parent.name.Contains("UnidirectionalPortals") && props.ContainsKey("target")) {
+		if(parent.name.Contains("Unidirectional Portals") && props.ContainsKey("target")) {
 			GetSender(gameObject);
 			senders.Add(gameObject.name);
 			receivers.Add(props["target"]);
 		}
-		if(parent.name.Contains("UnidirectionalPortals") && !props.ContainsKey("target")) {
+		if(parent.name.Contains("Unidirectional Portals") && !props.ContainsKey("target")) {
 			GetReceiver(gameObject);
 		}
-		if(parent.name.Contains("BidirectionalPortals")) {
+		if(parent.name.Contains("Bidirectional Portals")) {
 			GetReceiver(gameObject);
 			GetSender(gameObject);
 			senders.Add(gameObject.name);

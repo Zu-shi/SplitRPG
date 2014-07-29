@@ -29,7 +29,7 @@ public class HeightSorterScript : MonoBehaviour {
 
 		float heightOffs = HEIGHT_FAC * obj.height;
 		float doOffs = DRAWING_ORDER_FAC * (int)obj.drawingOrder;
-		float yOffs = YCAM_FAC * (cam.y + 20 - obj.y);
+		float yOffs = YCAM_FAC * (cam.y + 20 - obj.y); // written so that the number will be a reasonable positive number
 
 		// Objects off camera might try to make their yOffs too big or too small,
 		// so we clamp it to reasonable values

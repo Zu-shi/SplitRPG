@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Switch {
+public class Toggler {
 
-	bool _on;
+	private bool _on;
 
 	/// <summary>
 	/// Gets a value indicating whether this <see cref="Switch"/> is on.
@@ -20,7 +20,7 @@ public class Switch {
 		get { return !_on; }
 	}
 
-	public Switch(){
+	public Toggler(){
 		_on = false;
 	}
 

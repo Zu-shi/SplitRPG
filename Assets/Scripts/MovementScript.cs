@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class MovementScript : _Mono {
@@ -31,7 +31,7 @@ public class MovementScript : _Mono {
 	public bool fell{get;set;}
 
 	// Time it takes to move two spaces in frames (at Unity's fixed time step aka 50 fps)
-	int moveTime = 12;
+	const int moveTime = 12;
 
 	Vector3 startScale;
 	
@@ -58,13 +58,13 @@ public class MovementScript : _Mono {
 		_isMoving = false;
 
 		startScale = fallObject.localScale;
-		Reset();
+		ResetFalling();
 	}
 
 	/// <summary>
 	/// Reset to not falling and regular size.
 	/// </summary>
-	public void Reset (){
+	public void ResetFalling (){
 		falling = fell = false;
 		inAir = false;
 		fallObject.localScale = startScale;
@@ -93,7 +93,7 @@ public class MovementScript : _Mono {
 				} else {
 					
 					// Figure out if still on ground
-					bool collidingWithPit = Globals.CollisionManager.TileIsPit(xy, gameObject.layer);
+					bool collidingWithPit = Globals.collisionManager.IsTilePit(xy, gameObject.layer);
 					if (!inAir && collidingWithPit) {
 						falling = true;
 						Sound.PlaySound(fallingSound);
@@ -101,10 +101,7 @@ public class MovementScript : _Mono {
 					}
 				}
 			}
-			
-
 		}
-
 
 		if(_isMoving){
 			// Set character velocity
@@ -116,36 +113,12 @@ public class MovementScript : _Mono {
 				StopMoving();
 			}
 		}
-
-
-		
 	}
 
-	void StartMoving(Vector2 velocity){
-		collider2D.enabled = false;
-		moveVelocity = velocity;
-
-	}
-	
-	void StopMoving(){
-		collider2D.enabled = true;
-
-		// Cancel move velocity
-		rigidbody2D.velocity = new Vector2(0, 0);
-		
-		// Round location to nearest tile
-		x = tileX;
-		y = tileY;
-		
-		_isMoving = false;
-		moveVelocity = new Vector2(0,0);
-		
-	}
-	
-	bool CanMoveInDirection(Direction direction){
+	public bool CanMoveInDirection(Direction direction){
 		
 		// Look for blocking tile
-		ColliderScript blocker = Globals.CollisionManager.TileBlocker(tileVector + 2 * Utils.DirectionToVector(direction), gameObject.layer);
+		ColliderScript blocker = Globals.collisionManager.GetBlockingObject(tileVector + 2 * Utils.DirectionToVector(direction), gameObject.layer);
 	
 		// If we found one, try to push it
 		if(blocker != null){
@@ -179,5 +152,26 @@ public class MovementScript : _Mono {
 		} else {
 			return false;
 		}
+	}
+
+	void StartMoving(Vector2 velocity){
+		collider2D.enabled = false;
+		moveVelocity = velocity;
+		
+	}
+	
+	void StopMoving(){
+		collider2D.enabled = true;
+		
+		// Cancel move velocity
+		rigidbody2D.velocity = new Vector2(0, 0);
+		
+		// Round location to nearest tile
+		x = tileX;
+		y = tileY;
+		
+		_isMoving = false;
+		moveVelocity = new Vector2(0,0);
+		
 	}
 }

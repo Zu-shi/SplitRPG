@@ -13,7 +13,7 @@ public class MusicManagerScript : _Mono {
 	private bool fading = false;
 	private bool stopOnFade = false;
 	private float fadeTime = 0;
-	private float fadeRate = 0;
+	private float fadeRate = 0; // volume / sec
 	private float maxVolume = 1;
 
 	public float volume {
@@ -81,10 +81,10 @@ public class MusicManagerScript : _Mono {
 			}
 
 		}
-		if(stopped || paused || audio.isPlaying) { // We were told to stop playing or the current clip is still playing
-			return;
-		}
-		if(musicClips.Count != 0){
+
+		bool dontNeedNewSong = stopped || paused || audio.isPlaying;
+
+		if(!dontNeedNewSong && musicClips.Count != 0){
 			audio.clip = musicClips[Random.Range(0, musicClips.Count)];
 			if(audio.clip != null)
 				audio.Play();

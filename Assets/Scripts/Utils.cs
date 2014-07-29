@@ -103,4 +103,11 @@ public static class Utils {
 		o.name = o.GetType().Name;
 		return o;
 	}
+
+	/// <summary>
+	/// Round the specified value.
+	/// </summary>
+	public static int Round(float value){
+		return Mathf.FloorToInt(value + .5f);
+	}
 }
