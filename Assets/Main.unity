@@ -340,6 +340,10 @@ Prefab:
       propertyPath: m_Name
       value: CameraSpecial
       objectReference: {fileID: 0}
+    - target: {fileID: 8100000, guid: 3fe9d485d4f77c647a10eeb996b144ef, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fe9d485d4f77c647a10eeb996b144ef, type: 2}
   m_RootGameObject: {fileID: 1811843083}
@@ -1642,6 +1646,10 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8100000, guid: ea5f44d47a2869f489e9ff617550c300, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ea5f44d47a2869f489e9ff617550c300, type: 2}
   m_RootGameObject: {fileID: 1082328269}
@@ -2125,7 +2133,7 @@ AudioListener:
     type: 2}
   m_PrefabInternal: {fileID: 767943898}
   m_GameObject: {fileID: 1082328269}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!124 &1082328271
 Behaviour:
   m_ObjectHideFlags: 0
@@ -2757,6 +2765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62fba6a7ac8c4a168f4655fc572c7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeTransition: 0
 --- !u!4 &1338552596
 Transform:
   m_ObjectHideFlags: 0
@@ -3777,7 +3786,7 @@ AudioListener:
     type: 2}
   m_PrefabInternal: {fileID: 148370720}
   m_GameObject: {fileID: 1811843083}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!124 &1811843085
 Behaviour:
   m_ObjectHideFlags: 0

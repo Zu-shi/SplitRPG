@@ -82,7 +82,7 @@ public class Globals {
 	}
 
 	static CollisionManagerScript _collisionManager = null;
-	public static CollisionManagerScript CollisionManager{
+	public static CollisionManagerScript collisionManager{
 		get{
 			if(_collisionManager == null)
 				_collisionManager = GameObject.Find("CollisionManager").GetComponent<CollisionManagerScript>();

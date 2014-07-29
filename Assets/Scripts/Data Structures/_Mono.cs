@@ -3,7 +3,7 @@ using System.Collections;
 
 public class _Mono : MonoBehaviour {
 
-	protected SpriteRenderer _spriteRenderer;
+	private SpriteRenderer _spriteRenderer;
 
 	public float x {
 		set {
@@ -46,7 +46,7 @@ public class _Mono : MonoBehaviour {
 			x = value;
 		}
 		get {
-			return (int)Mathf.Round(x);
+			return Utils.Round(x);
 		}
 	}
 
@@ -55,14 +55,13 @@ public class _Mono : MonoBehaviour {
 			y = value;
 		}
 		get {
-			return (int)Mathf.Round(y);
+			return Utils.Round(y);
 		}
 	}
 
 	public Vector2 tileVector {
 		set {
-			x = value.x;
-			y = value.y;
+			transform.position = new Vector3(Utils.Round(value.x), Utils.Round(value.y), transform.position.z);
 		}
 		get {
 			return new Vector2(tileX, tileY);

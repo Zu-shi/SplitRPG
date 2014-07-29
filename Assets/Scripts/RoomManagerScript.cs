@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class RoomManagerScript : MonoBehaviour {
@@ -167,8 +167,8 @@ public class RoomManagerScript : MonoBehaviour {
 
 		// Pan the cameras
 		if(!fadeTransition) {
-			leftCamera.BeginRoomTransitionPan(CameraTransitionFinished);
-			rightCamera.BeginRoomTransitionPan(CameraTransitionFinished);
+			leftCamera.BeginNewRoomTransitionPan(CameraTransitionFinished);
+			rightCamera.BeginNewRoomTransitionPan(CameraTransitionFinished);
 		}
 		else {
 			leftCamera.BeginRoomTransitionFade(CameraTransitionFinished);

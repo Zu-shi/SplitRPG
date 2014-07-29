@@ -24,10 +24,13 @@ public class CameraScript : _Mono {
 
 	[Tooltip("Prefab of 'fader' object which controls fading the camera in and out.")]
 	public GameObject faderPrefab;
-	public FaderScript fader{get; set;}
-	Utils.VoidDelegate transitionCallback;
 
-	public GameObject player{get; set;}
+	FaderScript _fader;
+	public FaderScript fader{get {return _fader;} }
+
+	GameObject _player;
+	public GameObject player{get{return _player;}}
+
 	RoomManagerScript roomManager;
 
 
@@ -38,10 +41,10 @@ public class CameraScript : _Mono {
 		// Instantiate a fader object for this camera
 		GameObject faderObject = (GameObject)Instantiate(faderPrefab);
 		faderObject.layer = gameObject.layer;
-		fader = faderObject.GetComponent<FaderScript>();
+		_fader = faderObject.GetComponent<FaderScript>();
 
 		// Find the player on our side of the screen
-		player = (LayerMask.NameToLayer("Right") == gameObject.layer ? 
+		_player = (LayerMask.NameToLayer("Right") == gameObject.layer ? 
 		          Globals.playerRight.gameObject : Globals.playerLeft.gameObject);
 
 		gameplayCamera = true;
@@ -86,10 +89,10 @@ public class CameraScript : _Mono {
 		center = CalculateFollowPosition(player);
 	}
 
+	// These are methods so that they can be used as callbacks
 	public void DisableGameplayMode(){
 		gameplayCamera = false;
 	}
-
 	public void EnableGameplayMode(){
 		gameplayCamera = true;
 	}
@@ -122,11 +125,11 @@ public class CameraScript : _Mono {
 	/// Returns the position of the camera that is closest to the object
 	/// without going out of bounds of the room
 	/// </summary>
-	public Vector2 CalculateFollowPosition(GameObject obj){
+	public Vector2 CalculateFollowPosition(GameObject target){
 		UpdateGameplayCameraBounds();
 
-		float ox = obj.transform.position.x;
-		float oy = obj.transform.position.y;
+		float ox = target.transform.position.x;
+		float oy = target.transform.position.y;
 
 		float fx = Utils.Clamp(ox, bounds.xMin, bounds.xMax);
 		float fy = Utils.Clamp(oy, bounds.yMin, bounds.yMax);
@@ -135,7 +138,7 @@ public class CameraScript : _Mono {
 		return fp;
 	}
 
-	public void BeginRoomTransitionPan(Utils.VoidDelegate callback){
+	public void BeginNewRoomTransitionPan(Utils.VoidDelegate callback){
 		if(currPanAction != null)
 			Destroy (currPanAction.gameObject);
 
@@ -227,7 +230,7 @@ public class CameraScript : _Mono {
 			Destroy (currShakeAction.gameObject);
 		currShakeAction = CameraShakeAction.Create(this, duration, ShakyCamEndedSelf).StartAction();
 	}
-
+	
 	void ShakyCamEndedSelf(){
 		currShakeAction = null;
 		offset = new Vector2(0,0);
@@ -245,18 +248,15 @@ public class CameraScript : _Mono {
 	/// Helper method for panning
 	/// XYPan means it pans the X and Y coordinates separately, so it isn't very cinematic 
 	/// </summary>
-	/// <param name="px">Px.</param>
-	/// <param name="py">Py.</param>
-	/// <param name="speed">Speed.</param>
-	public void XYPanTo(float px, float py, float speed){
-		if(center.x == px && center.y == py){
+	public void XYPanTo(float targetX, float py, float speed){
+		if(center.x == targetX && center.y == py){
 			return;
 		}
 
 		// Pan center towards (px, py)
 		float ms = speed * Time.deltaTime;
 		float tx, ty;
-		tx = Utils.MoveValueTowards(center.x, px, ms);
+		tx = Utils.MoveValueTowards(center.x, targetX, ms);
 		ty = Utils.MoveValueTowards(center.y, py, ms);
 		center = new Vector2(tx, ty);
 	}

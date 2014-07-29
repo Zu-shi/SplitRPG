@@ -20,8 +20,8 @@ public class FaderScript : _Mono {
 	
 	void Update () {
 		// Resize the gui element to fit the screen
-		int w = Screen.width+5;
-		int h = Screen.height+5;
+		int w = Screen.width + 5;
+		int h = Screen.height + 5;
 		Rect r = new Rect(-w/2, -h/2, w, h);
 		guiTexture.pixelInset = r;
 

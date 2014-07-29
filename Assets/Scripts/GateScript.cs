@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class GateScript : _Mono {
 
 	// Gate determines whether it's open or closed based on the state of switchToWatch
-	public Switch switchToWatch {get; set;}
+	public Toggler togglerToWatch {get; set;}
 
 	[Tooltip("Sprite shown when gate is open.")]
 	public Sprite closedSprite;
@@ -22,7 +22,7 @@ public class GateScript : _Mono {
 	}
 
 	void Update () {
-		bool open = switchToWatch.on;
+		bool open = togglerToWatch.on;
 		if(reverse)
 			open = !open;
 

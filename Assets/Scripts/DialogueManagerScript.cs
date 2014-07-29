@@ -51,14 +51,14 @@ public class DialogueManagerScript : MonoBehaviour {
 			fading = true;
 
 			// Disable movement
-			GameObject.Find("PlayerLeft").GetComponent<PlayerControllerScript>().enabled = false;
-			GameObject.Find("PlayerRight").GetComponent<PlayerControllerScript>().enabled = false;
+			Globals.playerLeft.enabled = false;
+			Globals.playerRight.enabled = false;
 			GameObject.Find("PlayerInputHandler").GetComponent<PlayerInputScript>().enabled = false;
 
 			if(showOnLeft)
-				GameObject.Find("GameManager").GetComponent<GameManagerScript>().FadeDownRightSide();
+				Globals.gameManager.FadeDownRightSide();
 			else
-				GameObject.Find("GameManager").GetComponent<GameManagerScript>().FadeDownLeftSide();
+				Globals.gameManager.FadeDownLeftSide();
 
 		}
 
@@ -67,14 +67,14 @@ public class DialogueManagerScript : MonoBehaviour {
 			if(!showOnLeft){
 				// Enable Movement
 				// TODO Make a centralized way of doing this
-				GameObject.Find("PlayerLeft").GetComponent<PlayerControllerScript>().enabled = true;
-				GameObject.Find("PlayerRight").GetComponent<PlayerControllerScript>().enabled = true;
+				Globals.playerLeft.enabled = true;
+				Globals.playerRight.enabled = true;
 				GameObject.Find("PlayerInputHandler").GetComponent<PlayerInputScript>().enabled = true;
 
 				scrolling = false;
 			}
-			GameObject.Find("GameManager").GetComponent<GameManagerScript>().FadeUpRightSide();
-			GameObject.Find("GameManager").GetComponent<GameManagerScript>().FadeUpLeftSide();
+			Globals.gameManager.FadeUpRightSide();
+			Globals.gameManager.FadeUpLeftSide();
 		}
 
 		if( (showOnLeft || showOnRight) && !scrolling && (displayText != text) ) {

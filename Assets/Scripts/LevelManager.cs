@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class LevelManager : _Mono{
 
+	// Only used in editor, copied to _levelPrefabs at start
 	public GameObject[] levelPrefabs;
 
 	private static List<GameObject> _levelPrefabs;
@@ -48,9 +49,10 @@ public class LevelManager : _Mono{
 
 			return true;
 		}
-		else
+		else{
+			Debug.LogError("Failed to instantiate level prefab");
 			return false;
-
+		}
 	}
 
 	private static void MovePlayersToSpawnPoint() {

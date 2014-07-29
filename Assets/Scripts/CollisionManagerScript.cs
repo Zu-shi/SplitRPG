@@ -11,8 +11,7 @@ public class CollisionManagerScript : MonoBehaviour {
 
 	[Tooltip("Layers checked for left side")]
 	public LayerMask rightLayers;
-
-
+	
 	/*
 	 * Note about the "layerOfObject" parameter:
 	 * 
@@ -25,9 +24,57 @@ public class CollisionManagerScript : MonoBehaviour {
 	 */
 
 	/// <summary>
+	/// Gets the ColliderScript of the object that's blocking a tile
+	/// </summary>
+	public ColliderScript GetBlockingObject(Vector2 tileCoords, int layerOfObject){
+		foreach(ColliderScript cs in GetColliderScriptsOnTile(tileCoords, layerOfObject)){
+			if(cs.blocking)
+				return cs;
+		}
+		return null;
+	}
+	
+	/// <summary>
+	/// Gets the ColliderScript of the object that's a pit
+	/// </summary>
+	public ColliderScript GetPitObject(Vector2 tileCoords, int layerOfObject){
+		foreach(ColliderScript cs in GetColliderScriptsOnTile(tileCoords, layerOfObject)){
+			if(cs.pit)
+				return cs;
+		}
+		return null;
+	}
+	
+	/// <summary>
+	/// Is the tile blocking movement?
+	/// </summary>
+	public bool IsTileBlocking(Vector2 tileCoords, int layerOfObject){
+		return GetBlockingObject(tileCoords, layerOfObject) != null;
+	}
+	
+	/// <summary>
+	/// Is the tile a pit?
+	/// </summary>
+	public bool IsTilePit(Vector2 tileCoords, int layerOfObject){
+		return GetPitObject(tileCoords, layerOfObject) != null;
+	}
+	
+	/// <summary>
+	/// Returns whether the player is on the specified tile
+	/// </summary>
+	public bool IsPlayerOnTile(Vector2 tileCoords, int layerOfObject){
+		PlayerControllerScript player = Utils.PlayerOnLayer(layerOfObject);
+		if(player.tileVector.Equals(tileCoords)){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/// <summary>
 	/// Gets a list of Collider2D's on a tile.
 	/// </summary>
-	public Collider2D[] ObjectsOnTile(Vector2 tileCoords, int layerOfObject){
+	private Collider2D[] GetObjectsOnTile(Vector2 tileCoords, int layerOfObject){
 		LayerMask mask = defaultLayers;
 		if(layerOfObject == LayerMask.NameToLayer("Left")){
 			mask = leftLayers;
@@ -41,8 +88,8 @@ public class CollisionManagerScript : MonoBehaviour {
 	/// <summary>
 	/// Gets a list of ColliderScripts's on a tile.
 	/// </summary>
-	public ColliderScript[] ColliderScriptsOnTile(Vector2 tileCoords, int layerOfObject){
-		Collider2D[] cols = ObjectsOnTile(tileCoords, layerOfObject);
+	private ColliderScript[] GetColliderScriptsOnTile(Vector2 tileCoords, int layerOfObject){
+		Collider2D[] cols = GetObjectsOnTile(tileCoords, layerOfObject);
 		List<ColliderScript> scripts = new List<ColliderScript>();
 		foreach(Collider2D c in cols){
 			ColliderScript cs = c.GetComponent<ColliderScript>();
@@ -53,52 +100,6 @@ public class CollisionManagerScript : MonoBehaviour {
 		return scripts.ToArray();
 	}
 	
-	/// <summary>
-	/// Gets the ColliderScript of the object that's blocking a tile
-	/// </summary>
-	public ColliderScript TileBlocker(Vector2 tileCoords, int layerOfObject){
-		foreach(ColliderScript cs in ColliderScriptsOnTile(tileCoords, layerOfObject)){
-			if(cs.blocking)
-				return cs;
-		}
-		return null;
-	}
-	
-	/// <summary>
-	/// Gets the ColliderScript of the object that's a pit
-	/// </summary>
-	public ColliderScript Pit(Vector2 tileCoords, int layerOfObject){
-		foreach(ColliderScript cs in ColliderScriptsOnTile(tileCoords, layerOfObject)){
-			if(cs.pit)
-				return cs;
-		}
-		return null;
-	}
-	
-	/// <summary>
-	/// Is the tile blocking movement?
-	/// </summary>
-	public bool TileBlocking(Vector2 tileCoords, int layerOfObject){
-		return TileBlocker(tileCoords, layerOfObject) != null;
-	}
 
-	/// <summary>
-	/// Is the tile a pit?
-	/// </summary>
-	public bool TileIsPit(Vector2 tileCoords, int layerOfObject){
-		return Pit(tileCoords, layerOfObject) != null;
-	}
-
-	/// <summary>
-	/// Returns whether the player is on the specified tile
-	/// </summary>
-	public bool PlayerIsOnTile(Vector2 tileCoords, int layerOfObject){
-		PlayerControllerScript player = Utils.PlayerOnLayer(layerOfObject);
-		if(player.tileVector.Equals(tileCoords)){
-			return true;
-		} else {
-			return false;
-		}
-	}
 
 }

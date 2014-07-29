@@ -32,7 +32,7 @@ public class PlayerInputScript : MonoBehaviour {
 
 	void PollInput(){
 
-		// Direction stayed
+		// Direction stayed, in case another button is pressed, keep moving in same direction
 		if(InputManager.GetDirectionStay(_inputDirection)){
 			return;
 		}
