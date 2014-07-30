@@ -5,6 +5,7 @@ public class LevelManagerScript : _Mono{
 
 	// Only used in editor, copied to _levelPrefabs at start
 	public GameObject[] levelPrefabs;
+	public bool loadOnStart;
 
 	private List<GameObject> _levelPrefabs;
 
@@ -132,7 +133,8 @@ public class LevelManagerScript : _Mono{
 		}
 
 		if(levelPrefabs.Length > 1) {
-			Invoke( "_Load" , 0.5f );
+			if(loadOnStart)
+				Invoke( "_Load" , 0.5f );
 		}
 		else
 			Debug.LogError("Not enough level prefabs assigned!");
