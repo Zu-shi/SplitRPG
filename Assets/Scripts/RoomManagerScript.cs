@@ -65,10 +65,6 @@ public class RoomManagerScript : MonoBehaviour {
 		}
 	}
 
-	public void MoveCameraToPoint(CameraScript camera, Vector2 point){
-
-	}
-
 	public void MoveCamerasToPoint(Vector2 point) {
 		Update();
 		needsTransition = false;
@@ -77,12 +73,6 @@ public class RoomManagerScript : MonoBehaviour {
 
 		leftCamera.transform.position = new Vector3(point.x, point.y, leftCamera.z);
 		rightCamera.transform.position = new Vector3(point.x, point.y, rightCamera.z);
-	}
-
-	// Temprary hack to reset the camera when the player falls off the level
-	public void Reset(){
-		Debug.Log("Resetting...");
-		Globals.levelManager.ReloadCurrentLevels();
 	}
 
 	/// <summary>
@@ -132,6 +122,10 @@ public class RoomManagerScript : MonoBehaviour {
 		rightPlayer.DisableMovement();
 	}
 
+	void SaveCheckpoint() {
+		Globals.levelManager.SaveCheckpoint();
+	}
+
 	void EndCameraTransition(){
 		leftPlayer.EnableMovement();
 		rightPlayer.EnableMovement();
@@ -142,6 +136,7 @@ public class RoomManagerScript : MonoBehaviour {
 		cameraFinishes++;
 		if(cameraFinishes == 2){
 			cameraFinishes = 0;
+			SaveCheckpoint();
 			EndCameraTransition();
 		}
 	}
