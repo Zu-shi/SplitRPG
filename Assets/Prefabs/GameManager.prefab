@@ -203,12 +203,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdb44f135b21b7d4f9440d26a5fc01c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 1743bb8ac4c3ff844bf200c6c160043a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   levelPrefabs:
-  - {fileID: 100012, guid: 821cb9807b23847ffa43a5dce565456e, type: 2}
-  - {fileID: 100012, guid: 7f3f57d1dfb3e4c919d34b11bd5d2cc1, type: 2}
+  - {fileID: 100016, guid: 62be08d5db6c94c3abb4062eb4751060, type: 2}
+  - {fileID: 100024, guid: 22b766b9fb2eb463988892a8bc145500, type: 2}
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1

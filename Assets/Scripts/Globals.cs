@@ -99,5 +99,14 @@ public class Globals {
 		}
 	}
 
+	static LevelManagerScript _levelManager = null;
+	public static LevelManagerScript levelManager {
+		get{
+			if(_levelManager == null)
+				_levelManager = gameManager.GetComponent<LevelManagerScript>();
+			return _levelManager;
+		}
+	}
+
 
 }
