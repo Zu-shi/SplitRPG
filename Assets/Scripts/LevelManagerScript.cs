@@ -10,6 +10,9 @@ public class LevelManagerScript : _Mono{
 	private List<GameObject> _levelPrefabs;
 
 	private GameObject currentLeftLevelPrefab, currentRightLevelPrefab;
+	private GameObject savedLeftLevel, savedRightLevel;
+	private Vector3 savedLeftPlayerPos, savedRightPlayerPos;
+
 	private Transform leftSpawn, rightSpawn;
 
 	private string _currentLeftLevel;
@@ -23,6 +26,42 @@ public class LevelManagerScript : _Mono{
 	public string currentRightLevel {
 		get {
 			return _currentRightLevel;
+		}
+	}
+
+	public bool SaveCheckpoint(GameObject leftLevel, GameObject rightLevel) {
+		if(leftLevel == null || rightLevel == null) {
+			Debug.LogError("Attempted to load null level.");
+			return false;
+		}
+		savedLeftPlayerPos = Globals.playerLeft.transform.position;
+		savedRightPlayerPos = Globals.playerRight.transform.position;
+		
+		Destroy(savedLeftLevel);
+		Destroy(savedRightLevel);
+
+		savedLeftLevel = (GameObject)Instantiate(leftLevel);
+		savedLeftLevel.name = leftLevel.name;
+		savedLeftLevel.SetActive(false);
+
+		savedRightLevel = (GameObject)Instantiate(rightLevel);
+		savedRightLevel.name = rightLevel.name;
+		savedRightLevel.SetActive(false);
+
+		return true;
+	}
+
+	public void SaveCheckpoint() {
+		SaveCheckpoint(currentLeftLevelPrefab, currentRightLevelPrefab);
+	}
+
+	public void LoadLastCheckpoint() {
+		if(savedLeftLevel == null || savedRightLevel == null) {
+			LoadLevels(currentLeftLevel, currentRightLevel);
+		} else {
+			savedLeftLevel.transform.FindChild("SpawnPoint").position = savedLeftPlayerPos;
+			savedRightLevel.transform.FindChild("SpawnPoint").position = savedRightPlayerPos;
+			LoadLevels(savedLeftLevel, savedRightLevel);
 		}
 	}
 
@@ -57,6 +96,7 @@ public class LevelManagerScript : _Mono{
 		Globals.roomManager.enabled = false;
 		// Left level
 		if(left != null) {
+			left.name = leftLevel.name;
 			GameObject.DestroyImmediate(currentLeftLevelPrefab);
 			currentLeftLevelPrefab = left;
 
@@ -76,6 +116,7 @@ public class LevelManagerScript : _Mono{
 
 		// Right level
 		if(right != null) {
+			right.name = rightLevel.name;
 			GameObject.DestroyImmediate(currentRightLevelPrefab);
 			currentRightLevelPrefab = right;
 			

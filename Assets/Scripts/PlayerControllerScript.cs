@@ -20,9 +20,6 @@ public class PlayerControllerScript : _Mono {
 	// Other scripts
 	CharacterMovementScript characterMovement;
 
-	// Spawn point
-	int spawnX, spawnY;
-
 	// Disable
 	bool disableCharacter;
 
@@ -57,28 +54,19 @@ public class PlayerControllerScript : _Mono {
 
 		disableCharacter = false;
 
-		// Set spawn point
-		spawnX = tileX;
-		spawnY = tileY;
-
 	}
 
 	/// <summary>
 	/// Resets the player to his spawn point
 	/// </summary>
 	public void ResetPlayer(){
-		// Move to spawn point
-		x = spawnX;
-		y = spawnY;
-
 		characterMovement.ResetFalling();
-
 	}
 	
 	void ResetBothPlayers(){
 		// Temporary hack to reset camera
 		// Might not be needed now? 
-		roomManager.Reset();
+		// roomManager.Reset();
 
 		ResetPlayer();
 		otherPlayer.ResetPlayer();
@@ -102,6 +90,7 @@ public class PlayerControllerScript : _Mono {
 		// Check if we fell
 		if(characterMovement.fell){
 			ResetBothPlayers();
+			Globals.levelManager.LoadLastCheckpoint();
 			return;
 		}
 
