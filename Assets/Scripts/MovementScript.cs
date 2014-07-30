@@ -96,7 +96,7 @@ public class MovementScript : _Mono {
 					bool collidingWithPit = Globals.collisionManager.IsTilePit(xy, gameObject.layer);
 					if (!inAir && collidingWithPit) {
 						falling = true;
-						Sound.PlaySound(fallingSound);
+						Globals.soundManager.PlaySound(fallingSound);
 						rigidbody2D.velocity = new Vector2 (0f, 0f);
 					}
 				}

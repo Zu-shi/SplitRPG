@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 [RequireComponent(typeof(AudioSource))]
-public class MusicManagerScript : _Mono {
+public class SoundManagerScript : _Mono {
 
 	[Tooltip("This is a list of all the AudioClips that have music in them and should be played. Music is selected at random from this list.")]
 	public AudioClip[] Music;
@@ -65,6 +65,10 @@ public class MusicManagerScript : _Mono {
 		fadeTime = seconds;
 		stopOnFade = stopMusic;
 		fadeRate = maxVolume / seconds;
+	}
+
+	public void PlaySound(AudioClip sound) {
+		AudioSource.PlayClipAtPoint(sound, transform.position, PlayerPrefs.GetInt("SoundEffectsVolume", 100) / 100.0f);
 	}
 
 	public void Update() {
