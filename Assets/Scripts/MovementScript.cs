@@ -47,17 +47,6 @@ public class MovementScript : _Mono {
 	
 	Vector2 moveVelocity;
 	public Direction moveDirection = Direction.NONE;
-	/*
-	public Direction moveDirection{
-		get{
-			Direction result = Direction.NONE;
-			for(Direction d = Direction.NONE; d != Direction.NUM_DIRECTIONS; d++){
-				if( Utils.DirectionToVector(d).normalized.Equals(moveVelocity) )
-					result = d;
-			}
-			return result;
-		}
-	}*/
 	
 	void Start () {
 		
@@ -168,13 +157,11 @@ public class MovementScript : _Mono {
 	}
 
 	void StartMoving(Vector2 velocity){
-		collider2D.enabled = false;
 		moveVelocity = velocity;
 		
 	}
 	
 	void StopMoving(){
-		collider2D.enabled = true;
 		
 		// Cancel move velocity
 		rigidbody2D.velocity = new Vector2(0, 0);
