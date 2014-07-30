@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 7/29/2014 3:50:59 PM-->
+<!--Last exported: 7/29/2014 5:08:40 PM-->
 <Tiled2Unity version="0.9.4.2">
   <AssignMaterial mesh="Background_1_00+GrassTileset" material="GrassTileset" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="Bushes_01+BushAndFlowers" material="BushAndFlowers" sortingLayerName="" sortingOrder="1" />
@@ -12,6 +12,88 @@
     </GameObject>
     <GameObject name="Bushes_01">
       <GameObject copy="Bushes_01+BushAndFlowers" />
+    </GameObject>
+    <GameObject name="Pits 1">
+      <GameObject name="RectangleObject" x="1536" y="-6656">
+        <BoxCollider2D width="256" height="1280" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1792" y="-7296">
+        <BoxCollider2D width="128" height="640" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1920" y="-7424">
+        <BoxCollider2D width="128" height="512" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2048" y="-7552">
+        <BoxCollider2D width="640" height="384" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2176" y="-7424">
+        <BoxCollider2D width="512" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2304" y="-7296">
+        <BoxCollider2D width="384" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2432" y="-6656">
+        <BoxCollider2D width="128" height="640" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2432" y="-6400">
+        <BoxCollider2D width="256" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2560" y="-6528">
+        <BoxCollider2D width="128" height="768" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1536" y="-6528">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1536" y="-6144">
+        <BoxCollider2D width="384" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2176" y="-6272">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1792" y="-5632">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2048" y="-5760">
+        <BoxCollider2D width="384" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2304" y="-5888">
+        <BoxCollider2D width="128" height="256" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1536" y="-4480">
+        <BoxCollider2D width="128" height="896" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1664" y="-4480">
+        <BoxCollider2D width="384" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2304" y="-4480">
+        <BoxCollider2D width="256" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2432" y="-4096">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2560" y="-4096">
+        <BoxCollider2D width="128" height="1280" />
+      </GameObject>
+    </GameObject>
+    <GameObject name="Collisions 1">
+      <GameObject name="RectangleObject" x="1536" y="-4096">
+        <BoxCollider2D width="896" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1664" y="-4608">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2304" y="-5120">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1536" y="-5376">
+        <BoxCollider2D width="128" height="768" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1536" y="-6272">
+        <BoxCollider2D width="128" height="256" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2560" y="-5376">
+        <BoxCollider2D width="128" height="1024" />
+      </GameObject>
     </GameObject>
     <GameObject name="Rooms">
       <GameObject name="RectangleObject" x="1536" y="-6656">

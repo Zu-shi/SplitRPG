@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 7/29/2014 3:50:51 PM-->
+<!--Last exported: 7/29/2014 5:08:01 PM-->
 <Tiled2Unity version="0.9.4.2">
   <AssignMaterial mesh="Background_1_00+TempCyberpunkTileset" material="TempCyberpunkTileset" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="Background_1_00+Cylinder" material="Cylinder" sortingLayerName="" sortingOrder="0" />
@@ -32,6 +32,39 @@
       </GameObject>
       <GameObject name="RectangleObject" x="1472" y="-2880">
         <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
+    </GameObject>
+    <GameObject name="Pits 1" />
+    <GameObject name="Collisions 1">
+      <GameObject name="RectangleObject" x="1600" y="-7232">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1728" y="-7360">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1856" y="-7488">
+        <BoxCollider2D width="384" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2240" y="-7360">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2368" y="-7232">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1472" y="-3264">
+        <BoxCollider2D width="128" height="3968" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2496" y="-2880">
+        <BoxCollider2D width="128" height="4352" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1472" y="-2880">
+        <BoxCollider2D width="1024" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1600" y="-3264">
+        <BoxCollider2D width="640" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2368" y="-3264">
+        <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>
   </Prefab>
