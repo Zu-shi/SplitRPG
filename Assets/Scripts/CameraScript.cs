@@ -31,12 +31,13 @@ public class CameraScript : _Mono {
 	GameObject _player;
 	public GameObject player{get{return _player;}}
 
-	RoomManagerScript roomManager;
+	Room room;
 
 
 	void Start () {
+		bool isLeft = LayerMask.NameToLayer("Left") == gameObject.layer;
 
-		roomManager = Globals.roomManager;
+		room = (isLeft ? Globals.roomManager.leftRoom : Globals.roomManager.rightRoom);
 
 		// Instantiate a fader object for this camera
 		GameObject faderObject = (GameObject)Instantiate(faderPrefab);
@@ -44,8 +45,7 @@ public class CameraScript : _Mono {
 		_fader = faderObject.GetComponent<FaderScript>();
 
 		// Find the player on our side of the screen
-		_player = (LayerMask.NameToLayer("Right") == gameObject.layer ? 
-		          Globals.playerRight.gameObject : Globals.playerLeft.gameObject);
+		_player = (isLeft ? Globals.playerLeft.gameObject : Globals.playerRight.gameObject);
 
 		gameplayCamera = true;
 		currPanAction = currShakeAction = currFadeAction = null;
@@ -101,21 +101,21 @@ public class CameraScript : _Mono {
 	/// Calculate bounds of camera movement based on current room
 	/// </summary>
 	void UpdateGameplayCameraBounds(){
-		float rcx = roomManager.roomCenter.x;
-		float rcy = roomManager.roomCenter.y;
+		float rcx = room.roomCenter.x;
+		float rcy = room.roomCenter.y;
 
 		float sw = Globals.SIDEWIDTH;
 		float sh = Globals.SIDEHEIGHT;
 
 		// Update bounds of camera
-		bounds.xMin = roomManager.roomLeft + sw / 2;
+		bounds.xMin = room.roomLeft + sw / 2;
 		bounds.xMin = Mathf.Min (bounds.xMin, rcx);
-		bounds.xMax = roomManager.roomRight - sw / 2;
+		bounds.xMax = room.roomRight - sw / 2;
 		bounds.xMax = Mathf.Max (bounds.xMax, rcx);
 
-		bounds.yMax = roomManager.roomTop - sh / 2;
+		bounds.yMax = room.roomTop - sh / 2;
 		bounds.yMax = Mathf.Max (bounds.yMax, rcy);
-		bounds.yMin = roomManager.roomBot + sh / 2;
+		bounds.yMin = room.roomBot + sh / 2;
 		bounds.yMin = Mathf.Min (bounds.yMin, rcy);
 
 //		Debug.Log (bounds.xMin + ", " + bounds.xMax + ", " + bounds.yMin + ", " + bounds.yMax);

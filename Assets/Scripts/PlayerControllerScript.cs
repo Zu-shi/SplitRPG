@@ -8,6 +8,8 @@ public class PlayerControllerScript : _Mono {
 	[Tooltip("Shadow object of the player")]
 	public GameObject shadow;
 
+	bool walkingOutOfRoom;
+	
 	// Room Manager
 	RoomManagerScript roomManager;
 
@@ -89,12 +91,36 @@ public class PlayerControllerScript : _Mono {
 			return;
 		}
 
+		// Walking out of room?
+		if(walkingOutOfRoom && !characterMovement.isMoving){
+			// This code doesn't work at all unless the characters are synced! Yay!
+			shadow.transform.position = otherPlayer.transform.position;
+
+			walkingOutOfRoom = false;
+		}
+
 		// Check if we fell
 		if(characterMovement.fell){
 			ResetBothPlayers();
 			return;
 		}
+
 	}
+
+//	void LateUpdate(){
+//		// Update shadow
+//		// needs work, but sort of functional
+//		if(characterMovement.isMoving)
+//			return;
+//		if(Time.time < 1)
+//			return;
+//		Room room = roomManager.GetRoom(shadow.layer);
+//		float sx = shadow.transform.position.x;
+//		float sy = shadow.transform.position.y;
+//		sx = Utils.Clamp(sx, room.roomLeft, room.roomRightTile);
+//		sy = Utils.Clamp(sy, room.roomBotTile, room.roomTop);
+//		shadow.transform.position = new Vector3(sx, sy, shadow.transform.position.z);
+//	}
 
 	/// <summary>
 	/// Make character essentially non-existant, used when one side is faded out
@@ -122,7 +148,8 @@ public class PlayerControllerScript : _Mono {
 			return true;
 
 		Vector2 dest = new Vector2(tileX, tileY) + 2 * Utils.DirectionToVector(direction);
-		return characterMovement.CanMoveInDirection(direction) && !roomManager.RoomContainsTile(dest);
+		Room room = roomManager.GetRoom(gameObject.layer);
+		return characterMovement.CanMoveInDirection(direction) && !room.ContainsTile(dest);
 
 	}
 
@@ -140,8 +167,13 @@ public class PlayerControllerScript : _Mono {
 		// Check if we need to wait at the edge of the screen
 		bool needToWait = WillMoveOffScreen(direction) && !otherPlayer.WillMoveOffScreen(direction);
 
+
 		if(!needToWait){
+			if(WillMoveOffScreen(direction))
+				walkingOutOfRoom = true;
+
 			characterMovement.MoveInDirection(direction);
+
 		}
 
 	}

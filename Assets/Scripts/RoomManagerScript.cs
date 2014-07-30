@@ -8,66 +8,15 @@ public class RoomManagerScript : MonoBehaviour {
 	CameraScript leftCamera, rightCamera;
 	PlayerControllerScript leftPlayer, rightPlayer;
 
-	BoxCollider2D roomCollider, roomColliderPrev;
-	private int roomLayerMasks;
+	BoxCollider2D roomColliderLeft, roomColliderLeftPrev;
+	BoxCollider2D roomColliderRight, roomColliderRightPrev;
+	private int roomRightLayer;
+	private int roomLeftLayer;
 
 	bool needsTransition;
 
-	// Rect that defines the room (measured in tiles)
-	Rect _roomRect;
-	
-	/// <summary>
-	/// The center of the current room
-	/// </summary>
-	public Vector2 roomCenter{
-		get{ return _roomRect.center; }
-	}
-	/// <summary>
-	/// The dimensions of the current room in terms of how many tiles fit inside the room
-	/// </summary>
-	public Vector2 roomTileDimensions{
-		get{ return _roomRect.size; }
-	}
-
-	/// <summary>
-	/// The top-most tile that is inside the room.
-	/// </summary>
-	public int roomTop{
-		get{ return Mathf.RoundToInt(_roomRect.yMax); }
-	}
-	/// <summary>
-	/// The bottom-most tile that is inside the room.
-	/// </summary>
-	public int roomBotTile{
-		get{ return Mathf.RoundToInt(_roomRect.yMin + 1); }
-	}
-
-	/// <summary>
-	/// Bot bound of the room (one unit down from the bottom tile)
-	/// </summary>
-	public int roomBot{
-		get{ return Mathf.RoundToInt(_roomRect.yMin); }
-	}
-
-	/// <summary>
-	/// The left-most tile that is inside the room.
-	/// </summary>
-	public int roomLeft{
-		get{ return Mathf.RoundToInt(_roomRect.xMin); }
-	}
-	/// <summary>
-	/// The right-most tile that is inside the room.
-	/// </summary>
-	public int roomRightTile{
-		get{ return Mathf.RoundToInt(_roomRect.xMax - 1); }
-	}
-
-	/// <summary>
-	/// Right bound of the room (one unit right of the far right tile)
-	/// </summary>
-	public int roomRight{
-		get{ return Mathf.RoundToInt(_roomRect.xMax); }
-	}
+	public Room leftRoom {get; set;}
+	public Room rightRoom {get; set;}
 
 	// Track how many cameras have finished their transition
 	int cameraFinishes;
@@ -82,8 +31,11 @@ public class RoomManagerScript : MonoBehaviour {
 		needsTransition = false;
 		cameraFinishes = 0;
 
-		// Standard 9 x 10 
-		SetRoomRect(0,0,0,0);
+		leftRoom = new Room();
+		rightRoom = new Room();
+
+		roomLeftLayer = LayerMask.NameToLayer("RoomsLeft");
+		roomRightLayer = LayerMask.NameToLayer("RoomsRight");
 	}
 
 	void Update() {
@@ -91,30 +43,37 @@ public class RoomManagerScript : MonoBehaviour {
 			BeginCameraTransition();
 			needsTransition = false;
 		}
+	
+		roomColliderLeft = (BoxCollider2D) Physics2D.OverlapPoint(leftPlayer.xy, 1 << roomLeftLayer);
+		roomColliderRight = (BoxCollider2D) Physics2D.OverlapPoint(rightPlayer.xy, 1 << roomRightLayer);
 
-		//Check for only the left and right room layers
-		roomLayerMasks = ( (1 << LayerMask.NameToLayer("RoomsRight")) | 
-		                    (1 << LayerMask.NameToLayer("RoomsLeft")) );
-
-		roomCollider = (BoxCollider2D) Physics2D.Raycast(new Vector2(leftPlayer.x, leftPlayer.y), 
-		                                             Vector2.zero, 
-		                                             0f, 
-		                                             roomLayerMasks).collider;
-
-		if (roomCollider != roomColliderPrev && roomCollider != null) {
-			MoveScreen();
+		if (roomColliderLeft != roomColliderLeftPrev || roomColliderRight != roomColliderRightPrev) {
+			if(roomColliderLeft != null && roomColliderRight != null){
+				MoveScreen();
+			}
 		}
 
-		roomColliderPrev = roomCollider;
+		roomColliderLeftPrev = roomColliderLeft;
+		roomColliderRightPrev = roomColliderRight;
+	}
+
+	public Room GetRoom(int layer){
+		if(LayerMask.NameToLayer("Left") == layer){
+			return leftRoom;
+		} else {
+			return rightRoom;
+		}
+	}
+
+	public void MoveCameraToPoint(CameraScript camera, Vector2 point){
+
 	}
 
 	public void MoveCamerasToPoint(Vector2 point) {
 		Update();
 		needsTransition = false;
-		int left, top, width, height;
-		CalculateRoomBounds(out left, out top, out width, out height);
-		
-		SetRoomRect(left, top, width, height);
+
+		RecalculateRoomBounds();
 
 		leftCamera.transform.position = new Vector3(point.x, point.y, leftCamera.z);
 		rightCamera.transform.position = new Vector3(point.x, point.y, rightCamera.z);
@@ -124,36 +83,6 @@ public class RoomManagerScript : MonoBehaviour {
 	public void Reset(){
 		leftCamera.BeginRoomTransitionFade(CameraTransitionFinished);
 		rightCamera.BeginRoomTransitionFade(CameraTransitionFinished);
-	}
-	
-	/// <summary>
-	/// Whether the tile is inside the room
-	/// </summary>
-	public bool RoomContainsTile(Vector2 tile){
-		if(tile.x >= roomLeft && tile.x <= roomRightTile && tile.y >= roomBotTile && tile.y <= roomTop){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	/// <summary>
-	/// Sets the room rect.
-	/// </summary>
-	/// <param name="left">Left-most tile.</param>
-	/// <param name="top">Top-most tile.</param>
-	/// <param name="width">Width e.g. 9 if there are 8 spaces the player can be</param>
-	/// <param name="height">Height e.g. 9 if there are 8 spaces the player can be</param>
-	void SetRoomRect(float left, float top, float width, float height){
-		// Rect objects use a GUI coordinate system where the y axis is opposite than in 3D view
-		// So we actually pass in (left, BOT, width, height) instead of (left, TOP...)
-		_roomRect = new Rect(left, top-height, width, height);
-	}
-
-	void LogRoomInfo(){
-		Debug.Log("Room Center = (" + roomCenter.x + ", " + roomCenter.y + 
-		          ")   Tile Dimensions = " + roomTileDimensions.x + " x " + roomTileDimensions.y);
-		Debug.Log ("Room Bounds: (" + roomLeft + ", " + roomTop + ") to (" + roomRight + ", " + roomBot + ")");
 	}
 
 	/// <summary>
@@ -165,7 +94,17 @@ public class RoomManagerScript : MonoBehaviour {
 		needsTransition = true;
 	}
 
-	private void CalculateRoomBounds(out int left, out int top, out int width, out int height) {
+	private void RecalculateRoomBounds(){
+		int left, top, width, height;
+
+		CalculateRoomBounds(roomColliderLeft, out left, out top, out width, out height);
+		leftRoom.SetRect(left, top, width, height);
+
+		CalculateRoomBounds(roomColliderRight, out left, out top, out width, out height);
+		rightRoom.SetRect(left, top, width, height);
+	}
+
+	private void CalculateRoomBounds(BoxCollider2D roomCollider, out int left, out int top, out int width, out int height) {
 		left = Mathf.RoundToInt (roomCollider.transform.position.x);
 		top = Mathf.RoundToInt (roomCollider.transform.position.y);
 		width = Utils.PixelsToTiles (Mathf.RoundToInt (roomCollider.size.x));
@@ -176,11 +115,7 @@ public class RoomManagerScript : MonoBehaviour {
 	/// Resets the bounds of the room, moves the cameras, disables movement for players
 	/// </summary>
 	void BeginCameraTransition(){
-		// New room bounds
-		int left, top, width, height;
-		CalculateRoomBounds(out left, out top, out width, out height);
-
-		SetRoomRect(left, top, width, height);
+		RecalculateRoomBounds();
 
 		// Pan the cameras
 		if(!fadeTransition) {
