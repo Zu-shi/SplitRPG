@@ -6,6 +6,12 @@ public class SpriteAnimationManagerScript : MonoBehaviour {
 
 	[Tooltip("If set, this sprite will revert to it's idle animation after it is told to play a one-shot animation.")]
 	public bool idleAfterOneTimeAnimations = false;
+	public bool playOnAwake = true;
+	public string currentAnimationName{
+		get{
+			return currentAnim.animationName;
+		}
+	}
 
 	private List<SpriteAnimationScript> animations;
 	private SpriteAnimationScript currentAnim;
@@ -21,12 +27,18 @@ public class SpriteAnimationManagerScript : MonoBehaviour {
 			animations.Add(anim);
 		}
 		sr = gameObject.GetComponent<SpriteRenderer>();
-		if(animations.Count > 0) {
-			PlayAnimation(animations[0].animationName);
+
+		if (animations.Count > 0) {
+			PlayAnimation (animations [0].animationName);
+			if(!playOnAwake){PauseAnimation();}
 		}
 	}
 
 	public void PlayAnimation(string animationName = null, int startFrame = 0) {
+		
+		frameTimer = 0;
+		paused = false;
+
 		if(animationName == null) {
 			currentAnim = animations[0];
 			currentFrame = startFrame;
@@ -45,8 +57,18 @@ public class SpriteAnimationManagerScript : MonoBehaviour {
 		Debug.LogError("No SpriteAnimationScript with name " + animationName + " found on GameObject named " + gameObject.name);
 	}
 
+	public void SetCurrentFrame( int frame ){
+		frameTimer = 0;
+		currentFrame = frame % currentAnim.sprites.Length;
+		sr.sprite = currentAnim.sprites[currentFrame];
+	}
+
 	public void PauseAnimation(bool pauseAnimation = true){
 		paused = pauseAnimation;
+	}
+
+	public void ResumeAnimation(){
+		PauseAnimation (false);
 	}
 
 	public void Update() {

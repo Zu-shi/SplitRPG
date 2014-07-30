@@ -106,7 +106,7 @@ Transform:
   - {fileID: 1131032085}
   - {fileID: 664998665}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
 --- !u!1 &25136741
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,6 +885,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: dd2a93b30af52407d9324f58e8ef7196, type: 2}
+      propertyPath: animationName
+      value: WalkDownAnimation
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: dd2a93b30af52407d9324f58e8ef7196, type: 2}
+      propertyPath: rate
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd2a93b30af52407d9324f58e8ef7196, type: 2}
   m_RootGameObject: {fileID: 516045933}
@@ -1400,7 +1408,7 @@ Transform:
   - {fileID: 2074526499}
   - {fileID: 142286938}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!1 &349449226
 GameObject:
   m_ObjectHideFlags: 0
@@ -2042,7 +2050,7 @@ Transform:
   - {fileID: 1361838052}
   - {fileID: 1476076471}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!114 &516045935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2075,6 +2083,7 @@ MonoBehaviour:
   fallObject: {fileID: 1361838052}
   destroyOnFall: 0
   fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}
+  moveDirection: 0
 --- !u!114 &516045937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2231,7 +2240,7 @@ Transform:
   - {fileID: 1622883943}
   - {fileID: 1189019705}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &628946019
 GameObject:
   m_ObjectHideFlags: 0
@@ -2410,6 +2419,7 @@ MonoBehaviour:
   fallObject: {fileID: 844761425}
   destroyOnFall: 0
   fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}
+  moveDirection: 0
 --- !u!114 &641578078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2622,6 +2632,7 @@ MonoBehaviour:
   fallObject: {fileID: 656548914}
   destroyOnFall: 1
   fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}
+  moveDirection: 0
 --- !u!50 &656548917
 Rigidbody2D:
   m_ObjectHideFlags: 0
@@ -4849,6 +4860,10 @@ GameObject:
   - 212: {fileID: 1361838051}
   - 114: {fileID: 1361838054}
   - 114: {fileID: 1361838053}
+  - 114: {fileID: 1361838057}
+  - 114: {fileID: 1361838056}
+  - 114: {fileID: 1361838055}
+  - 114: {fileID: 1361838058}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
@@ -4903,7 +4918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationName: Animation
+  animationName: WalkDownAnimation
   rate: 10
   loop: 1
   sprites:
@@ -4924,6 +4939,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idleAfterOneTimeAnimations: 1
+--- !u!114 &1361838055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1361838050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationName: WalkUpAnimation
+  rate: 10
+  loop: 1
+  sprites:
+  - {fileID: 21300012, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300014, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300016, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300014, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+--- !u!114 &1361838056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1361838050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationName: WalkRightAnimation
+  rate: 10
+  loop: 1
+  sprites:
+  - {fileID: 21300018, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300020, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300022, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300020, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+--- !u!114 &1361838057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1361838050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationName: WalkLeftAnimation
+  rate: 10
+  loop: 1
+  sprites:
+  - {fileID: 21300006, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300008, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300010, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300008, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+--- !u!114 &1361838058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1361838050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c1e0e7b83484cd8b218ed51212510a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1390220571
 GameObject:
   m_ObjectHideFlags: 0
@@ -5151,6 +5234,7 @@ MonoBehaviour:
   fallObject: {fileID: 1434736880}
   destroyOnFall: 1
   fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}
+  moveDirection: 0
 --- !u!50 &1434736884
 Rigidbody2D:
   m_ObjectHideFlags: 0
@@ -5238,7 +5322,7 @@ Transform:
   - {fileID: 656548914}
   - {fileID: 2041275876}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1 &1476076469
 GameObject:
   m_ObjectHideFlags: 0

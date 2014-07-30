@@ -46,6 +46,18 @@ public class MovementScript : _Mono {
 	}
 	
 	Vector2 moveVelocity;
+	public Direction moveDirection = Direction.NONE;
+	/*
+	public Direction moveDirection{
+		get{
+			Direction result = Direction.NONE;
+			for(Direction d = Direction.NONE; d != Direction.NUM_DIRECTIONS; d++){
+				if( Utils.DirectionToVector(d).normalized.Equals(moveVelocity) )
+					result = d;
+			}
+			return result;
+		}
+	}*/
 	
 	void Start () {
 		
@@ -145,7 +157,8 @@ public class MovementScript : _Mono {
 		
 		_isMoving = true;
 		moveTimeLeft = moveTime;
-		
+		moveDirection = direction;
+
 		if(CanMoveInDirection(direction)){
 			StartMoving(Utils.DirectionToVector(direction) * moveSpeed);
 			return true;
