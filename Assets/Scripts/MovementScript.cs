@@ -157,12 +157,13 @@ public class MovementScript : _Mono {
 	}
 
 	void StartMoving(Vector2 velocity){
+		collider2D.enabled = false;
 		moveVelocity = velocity;
 		
 	}
 	
 	void StopMoving(){
-		
+		collider2D.enabled = true;
 		// Cancel move velocity
 		rigidbody2D.velocity = new Vector2(0, 0);
 		
