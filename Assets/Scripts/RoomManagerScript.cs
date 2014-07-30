@@ -81,8 +81,8 @@ public class RoomManagerScript : MonoBehaviour {
 
 	// Temprary hack to reset the camera when the player falls off the level
 	public void Reset(){
-		leftCamera.BeginRoomTransitionFade(CameraTransitionFinished);
-		rightCamera.BeginRoomTransitionFade(CameraTransitionFinished);
+		Debug.Log("Resetting...");
+		Globals.levelManager.ReloadCurrentLevels();
 	}
 
 	/// <summary>

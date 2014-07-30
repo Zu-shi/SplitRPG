@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class LevelManager : _Mono{
+public class LevelManagerScript : _Mono{
 
 	// Only used in editor, copied to _levelPrefabs at start
 	public GameObject[] levelPrefabs;
@@ -11,23 +11,17 @@ public class LevelManager : _Mono{
 	private GameObject currentLeftLevelPrefab, currentRightLevelPrefab;
 	private Transform leftSpawn, rightSpawn;
 
+	private string _currentLeftLevel;
 	public string currentLeftLevel {
 		get {
-			if(currentLeftLevelPrefab != null) {
-				return currentLeftLevelPrefab.name;
-			}
-			else
-				return null;
+			return _currentLeftLevel;
 		}
 	}
 
+	private string _currentRightLevel;
 	public string currentRightLevel {
 		get {
-			if(currentRightLevelPrefab != null) {
-				return currentRightLevelPrefab.name;
-			}
-			else
-				return null;
+			return _currentRightLevel;
 		}
 	}
 
@@ -46,13 +40,14 @@ public class LevelManager : _Mono{
 			return LoadLevels(left, right);
 		}
 		else{
+			Debug.Log("Failed to load levels: " + leftLevelName + ", " + rightLevelName);
 			return false;
 		}
 	}
 
-	public bool LoadLevels(GameObject leftLevel, GameObject RightLevel) {
+	public bool LoadLevels(GameObject leftLevel, GameObject rightLevel) {
 		GameObject left = (GameObject)GameObject.Instantiate(leftLevel, Vector3.zero, Quaternion.identity);
-		GameObject right = (GameObject)GameObject.Instantiate(RightLevel, Vector3.zero, Quaternion.identity);
+		GameObject right = (GameObject)GameObject.Instantiate(rightLevel, Vector3.zero, Quaternion.identity);
 		left.SetActive(false);
 		right.SetActive(false);
 		Globals.playerLeft.gameObject.SetActive(false);
@@ -97,6 +92,9 @@ public class LevelManager : _Mono{
 			return false;
 		}
 
+		_currentLeftLevel = leftLevel.name;
+		_currentRightLevel = rightLevel.name;
+
 		return true;
 
 	}
@@ -115,9 +113,12 @@ public class LevelManager : _Mono{
 
 	}
 
-	public void FinishedLoading() {
-		Debug.Log("LevelManagerCallBack");
+	private void FinishedLoading() {
 		Globals.roomManager.enabled = true;
+	}
+
+	public void ReloadCurrentLevels() {
+		LoadLevels(currentLeftLevel, currentRightLevel);
 	}
 
 	private void _Load() {

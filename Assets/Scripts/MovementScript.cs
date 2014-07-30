@@ -118,7 +118,7 @@ public class MovementScript : _Mono {
 	public bool CanMoveInDirection(Direction direction){
 		
 		// Look for blocking tile
-		ColliderScript blocker = Globals.collisionManager.GetBlockingObject(tileVector + 2 * Utils.DirectionToVector(direction), gameObject.layer);
+		ColliderScript blocker = Globals.collisionManager.GetBlockingObject(this, direction);
 	
 		// If we found one, try to push it
 		if(blocker != null){

@@ -11,7 +11,7 @@ public class CollisionManagerScript : MonoBehaviour {
 
 	[Tooltip("Layers checked for left side")]
 	public LayerMask rightLayers;
-	
+
 	/*
 	 * Note about the "layerOfObject" parameter:
 	 * 
@@ -28,10 +28,23 @@ public class CollisionManagerScript : MonoBehaviour {
 	/// </summary>
 	public ColliderScript GetBlockingObject(Vector2 tileCoords, int layerOfObject){
 		foreach(ColliderScript cs in GetColliderScriptsOnTile(tileCoords, layerOfObject)){
-			if(cs.blocking)
-				return cs;
+			if(cs.blocking) return cs;
 		}
 		return null;
+	}
+
+	/// <summary>
+	/// Gets the ColliderScript of the object that's blocking a tile. Overload that takes a coordinate, a direction, and a layer
+	/// </summary>
+	public ColliderScript GetBlockingObject(Vector2 tileCoords, Direction direction, int layerOfObject){
+		return GetBlockingObject(tileCoords + 2 * Utils.DirectionToVector(direction), layerOfObject);
+	}
+
+	/// <summary>
+	/// Gets the ColliderScript of the object that's blocking a tile. Overload that takes an mono and a direction.
+	/// </summary>
+	public ColliderScript GetBlockingObject(_Mono mono, Direction direction){
+		return GetBlockingObject(mono.tileVector + 2 * Utils.DirectionToVector(direction), mono.gameObject.layer);
 	}
 	
 	/// <summary>
@@ -39,24 +52,65 @@ public class CollisionManagerScript : MonoBehaviour {
 	/// </summary>
 	public ColliderScript GetPitObject(Vector2 tileCoords, int layerOfObject){
 		foreach(ColliderScript cs in GetColliderScriptsOnTile(tileCoords, layerOfObject)){
-			if(cs.pit)
-				return cs;
+			if(cs.pit) return cs;
 		}
 		return null;
 	}
+
+	/// <summary>
+	/// Gets the ColliderScript of the object that's a pit. Overload that takes a coordinate, a direction, and a layer
+	/// </summary>
+	public ColliderScript GetPitObject(Vector2 tileCoords, Direction direction, int layerOfObject){
+		return GetPitObject(tileCoords + 2 * Utils.DirectionToVector(direction), layerOfObject);
+	}
 	
+	/// <summary>
+	/// GGets the ColliderScript of the object that's a pit. Overload that takes an mono and a direction.
+	/// </summary>
+	public ColliderScript GetPitObject(_Mono mono, Direction direction){
+		return GetPitObject(mono.tileVector + 2 * Utils.DirectionToVector(direction), mono.gameObject.layer);
+	}
+
 	/// <summary>
 	/// Is the tile blocking movement?
 	/// </summary>
 	public bool IsTileBlocking(Vector2 tileCoords, int layerOfObject){
 		return GetBlockingObject(tileCoords, layerOfObject) != null;
 	}
-	
+
+	/// <summary>
+	/// Is the tile blocking movement? Overload that takes coordinates, direction, and layer of object.
+	/// </summary>
+	public bool IsTileBlocking(Vector2 tileCoords, Direction direction, int layerOfObject){
+		return IsTileBlocking(tileCoords + 2 * Utils.DirectionToVector(direction), layerOfObject) != null;
+	}
+
+	/// <summary>
+	/// Is the tile blocking movement? Overload that takes a mono and a direction.
+	/// </summary>
+	public bool IsTileBlocking(_Mono mono, Direction direction){
+		return IsTileBlocking(mono.tileVector + 2 * Utils.DirectionToVector(direction), mono.gameObject.layer) != null;
+	}
+
 	/// <summary>
 	/// Is the tile a pit?
 	/// </summary>
 	public bool IsTilePit(Vector2 tileCoords, int layerOfObject){
 		return GetPitObject(tileCoords, layerOfObject) != null;
+	}
+
+	/// <summary>
+	/// Is the tile a pit? Overload that takes coordinates, direction, and layer of object.
+	/// </summary>
+	public bool IsTilePit(Vector2 tileCoords, Direction direction, int layerOfObject){
+		return IsTilePit(tileCoords + 2 * Utils.DirectionToVector(direction), layerOfObject) != null;
+	}
+	
+	/// <summary>
+	/// Is the tile a pit? Overload that takes a mono and a direction.
+	/// </summary>
+	public bool IsTilePit(_Mono mono, Direction direction){
+		return IsTilePit(mono.tileVector + 2 * Utils.DirectionToVector(direction), mono.gameObject.layer) != null;
 	}
 	
 	/// <summary>
