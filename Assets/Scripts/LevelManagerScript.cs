@@ -59,7 +59,7 @@ public class LevelManagerScript : _Mono{
 			GameObject.DestroyImmediate(currentLeftLevelPrefab);
 			currentLeftLevelPrefab = left;
 
-			leftSpawn = left.transform.FindChild("SpawnPoint");
+			leftSpawn = left.transform.FindChild("Starting").GetChild(0);
 			if(leftSpawn != null) {
 				Globals.cameraLeft.FadeTransition(MoveLeftCharacterToSpawnPoint, FinishedLoading);
 			}
@@ -78,7 +78,7 @@ public class LevelManagerScript : _Mono{
 			GameObject.DestroyImmediate(currentRightLevelPrefab);
 			currentRightLevelPrefab = right;
 			
-			rightSpawn = right.transform.FindChild("SpawnPoint");
+			rightSpawn = right.transform.FindChild("Starting").GetChild(0);
 			if(rightSpawn != null) {
 				Globals.cameraRight.FadeTransition(MoveRightCharacterToSpawnPoint, FinishedLoading);
 			}
@@ -102,13 +102,13 @@ public class LevelManagerScript : _Mono{
 	private void MoveLeftCharacterToSpawnPoint() {
 		currentLeftLevelPrefab.SetActive(true);
 		Globals.playerLeft.gameObject.SetActive(true);
-		GameObject.FindGameObjectWithTag("PlayerLeft").transform.position = leftSpawn.position;
+		GameObject.FindGameObjectWithTag("PlayerLeft").transform.position = leftSpawn.position + new Vector3(1, 1, 0);
 	}
 
 	private void MoveRightCharacterToSpawnPoint() {
 		currentRightLevelPrefab.SetActive(true);
 		Globals.playerRight.gameObject.SetActive(true);
-		GameObject.FindGameObjectWithTag("PlayerRight").transform.position = rightSpawn.position;
+		GameObject.FindGameObjectWithTag("PlayerRight").transform.position = rightSpawn.position + new Vector3(1, 1, 0);
 		Globals.roomManager.MoveCamerasToPoint( new Vector2(rightSpawn.transform.position.x, rightSpawn.transform.position.y));
 
 	}
