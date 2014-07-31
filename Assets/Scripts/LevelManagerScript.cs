@@ -7,6 +7,9 @@ public class LevelManagerScript : _Mono{
 	public GameObject[] levelPrefabs;
 	public bool loadOnStart;
 
+	[Tooltip("You must assign these if you do not want to load on start.")]
+	public GameObject preloadedLeftLevel, preloadedRightLevel;
+
 	private List<GameObject> _levelPrefabs;
 
 	private GameObject currentLeftLevelPrefab, currentRightLevelPrefab;
@@ -52,15 +55,17 @@ public class LevelManagerScript : _Mono{
 	}
 
 	public void SaveCheckpoint() {
+		Debug.Log("Saving Checkpoint.");
 		SaveCheckpoint(currentLeftLevelPrefab, currentRightLevelPrefab);
 	}
 
 	public void LoadLastCheckpoint() {
+		Debug.Log("Loading Checkpoint.");
 		if(savedLeftLevel == null || savedRightLevel == null) {
 			LoadLevels(currentLeftLevel, currentRightLevel);
 		} else {
-			savedLeftLevel.transform.FindChild("SpawnPoint").position = savedLeftPlayerPos;
-			savedRightLevel.transform.FindChild("SpawnPoint").position = savedRightPlayerPos;
+			savedLeftLevel.transform.FindChild("Starting").GetChild(0).position = savedLeftPlayerPos;
+			savedRightLevel.transform.FindChild("Starting").GetChild(0).position = savedRightPlayerPos;
 			LoadLevels(savedLeftLevel, savedRightLevel);
 		}
 	}
@@ -144,13 +149,13 @@ public class LevelManagerScript : _Mono{
 	private void MoveLeftCharacterToSpawnPoint() {
 		currentLeftLevelPrefab.SetActive(true);
 		Globals.playerLeft.gameObject.SetActive(true);
-		GameObject.FindGameObjectWithTag("PlayerLeft").transform.position = leftSpawn.position + new Vector3(1, 1, 0);
+		GameObject.FindGameObjectWithTag("PlayerLeft").transform.position = leftSpawn.position;
 	}
 
 	private void MoveRightCharacterToSpawnPoint() {
 		currentRightLevelPrefab.SetActive(true);
 		Globals.playerRight.gameObject.SetActive(true);
-		GameObject.FindGameObjectWithTag("PlayerRight").transform.position = rightSpawn.position + new Vector3(1, 1, 0);
+		GameObject.FindGameObjectWithTag("PlayerRight").transform.position = rightSpawn.position;
 		Globals.roomManager.MoveCamerasToPoint( new Vector2(rightSpawn.transform.position.x, rightSpawn.transform.position.y));
 
 	}
@@ -174,8 +179,22 @@ public class LevelManagerScript : _Mono{
 		}
 
 		if(levelPrefabs.Length > 1) {
-			if(loadOnStart)
+			if(loadOnStart) {
 				Invoke( "_Load" , 0.5f );
+			}
+			else {
+				if(preloadedLeftLevel == null || preloadedRightLevel == null) {
+					// Checkpoint system fails if levelmanager doesn't get access to the game objects.
+					Debug.LogError("Preloaded levels not assigned in editor!");
+				}
+				else {
+					currentLeftLevelPrefab = preloadedLeftLevel;
+					currentRightLevelPrefab = preloadedRightLevel;
+					_currentLeftLevel = currentLeftLevelPrefab.name;
+					_currentRightLevel = currentRightLevelPrefab.name;
+				}
+
+			}
 		}
 		else
 			Debug.LogError("Not enough level prefabs assigned!");
