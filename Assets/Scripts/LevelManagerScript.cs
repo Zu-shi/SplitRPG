@@ -212,7 +212,12 @@ public class LevelManagerScript : _Mono{
 	}
 
 	private void _Load() {
-		LoadLevels(_levelPrefabs[0], _levelPrefabs[1]);
+		if(PlayerPrefs.GetString("LoadGame") == "true") {
+			LoadSerializedGame();
+		}
+		else {
+			LoadLevels(_levelPrefabs[0], _levelPrefabs[1]);
+		}
 	}
 
 	public void Start() {
