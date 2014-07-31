@@ -1640,6 +1640,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739422769bb31aa44a5cf6a09abcce1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startSound: {fileID: 8300000, guid: 21ae538482d95450a853559e68e8c7c1, type: 3}
+  optionSkin: {fileID: 11400000, guid: 9f05f02ef30e345e3b44cc68da936d15, type: 2}
 --- !u!114 &464160810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1862,9 +1864,9 @@ GameObject:
   - 4: {fileID: 516045934}
   - 50: {fileID: 516045938}
   - 58: {fileID: 516045940}
-  - 114: {fileID: 516045937}
-  - 114: {fileID: 516045936}
-  - 114: {fileID: 516045935}
+  - 114: {fileID: 1361838056}
+  - 114: {fileID: 1361838055}
+  - 114: {fileID: 1361838058}
   - 58: {fileID: 516045939}
   m_Layer: 8
   m_Name: PlayerLeft
@@ -1893,46 +1895,54 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 11400008, guid: dd2a93b30af52407d9324f58e8ef7196,
     type: 2}
   m_PrefabInternal: {fileID: 1689389086}
-  m_GameObject: {fileID: 516045933}
+  m_GameObject: {fileID: 1361838050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1ed6fcccaffe45a88b33b3f933d44ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 9961582ec383d1b4e80a55c31a8564b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawingOrder: 3
-  height: 1
-  editModeRefresh: 0
+  idleAfterOneTimeAnimations: 1
+  playOnAwake: 0
 --- !u!114 &516045936
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400010, guid: dd2a93b30af52407d9324f58e8ef7196,
     type: 2}
   m_PrefabInternal: {fileID: 1689389086}
-  m_GameObject: {fileID: 516045933}
+  m_GameObject: {fileID: 1361838050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e5f83cc8f02e4e12a99ac105af8aecd, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canPush: 1
-  canFall: 1
-  fallObject: {fileID: 1361838052}
-  destroyOnFall: 0
-  fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}
-  moveDirection: 0
+  animationName: WalkUpAnimation
+  rate: 10
+  loop: 1
+  sprites:
+  - {fileID: 21300014, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300016, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300014, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300012, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
 --- !u!114 &516045937
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400012, guid: dd2a93b30af52407d9324f58e8ef7196,
     type: 2}
   m_PrefabInternal: {fileID: 1689389086}
-  m_GameObject: {fileID: 516045933}
+  m_GameObject: {fileID: 1361838050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f102ead1728a4239b5d5b774f86ad14, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadow: {fileID: 1476076469}
+  animationName: WalkRightAnimation
+  rate: 10
+  loop: 1
+  sprites:
+  - {fileID: 21300020, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300022, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300020, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300018, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
 --- !u!50 &516045938
 Rigidbody2D:
   m_ObjectHideFlags: 0
@@ -2210,11 +2220,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 641578075}
   - 50: {fileID: 641578080}
-  - 58: {fileID: 641578079}
-  - 114: {fileID: 641578078}
-  - 114: {fileID: 641578077}
-  - 114: {fileID: 641578076}
   - 58: {fileID: 641578081}
+  - 114: {fileID: 844761428}
+  - 114: {fileID: 844761427}
+  - 114: {fileID: 844761431}
+  - 58: {fileID: 641578079}
   m_Layer: 9
   m_Name: PlayerRight
   m_TagString: PlayerRight
@@ -2242,46 +2252,60 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 11400010, guid: 222379b234d4444a9b088d32f8e371ff,
     type: 2}
   m_PrefabInternal: {fileID: 1039259597}
-  m_GameObject: {fileID: 641578074}
+  m_GameObject: {fileID: 844761423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1ed6fcccaffe45a88b33b3f933d44ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawingOrder: 3
-  height: 1
-  editModeRefresh: 0
+  animationName: WalkRightAnimation
+  rate: 10
+  loop: 1
+  sprites:
+  - {fileID: 21300020, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
+  - {fileID: 21300022, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
+  - {fileID: 21300020, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
+  - {fileID: 21300018, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
 --- !u!114 &641578077
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400012, guid: 222379b234d4444a9b088d32f8e371ff,
     type: 2}
   m_PrefabInternal: {fileID: 1039259597}
-  m_GameObject: {fileID: 641578074}
+  m_GameObject: {fileID: 844761423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e5f83cc8f02e4e12a99ac105af8aecd, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canPush: 1
-  canFall: 1
-  fallObject: {fileID: 844761425}
-  destroyOnFall: 0
-  fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}
-  moveDirection: 0
+  animationName: WalkLeftAnimation
+  rate: 10
+  loop: 1
+  sprites:
+  - {fileID: 21300008, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
+  - {fileID: 21300010, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
+  - {fileID: 21300008, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
+  - {fileID: 21300006, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
 --- !u!114 &641578078
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400014, guid: 222379b234d4444a9b088d32f8e371ff,
     type: 2}
   m_PrefabInternal: {fileID: 1039259597}
-  m_GameObject: {fileID: 641578074}
+  m_GameObject: {fileID: 844761423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f102ead1728a4239b5d5b774f86ad14, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadow: {fileID: 2097195028}
+  animationName: WalkDownAnimation
+  rate: 10
+  loop: 1
+  sprites:
+  - {fileID: 21300002, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
+  - {fileID: 21300004, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
+  - {fileID: 21300002, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
+  - {fileID: 21300000, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
 --- !u!58 &641578079
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2292,7 +2316,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Radius: .499000013
+  m_Radius: .5
   m_Center: {x: 0, y: 0}
 --- !u!50 &641578080
 Rigidbody2D:
@@ -2320,7 +2344,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Radius: .5
+  m_Radius: .499000013
   m_Center: {x: 0, y: 0}
 --- !u!1 &650490671
 GameObject:
@@ -3035,12 +3059,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 844761425}
   - 212: {fileID: 844761424}
-  - 114: {fileID: 844761426}
-  - 114: {fileID: 844761430}
   - 114: {fileID: 844761429}
-  - 114: {fileID: 844761428}
-  - 114: {fileID: 844761427}
-  - 114: {fileID: 844761431}
+  - 114: {fileID: 641578078}
+  - 114: {fileID: 641578077}
+  - 114: {fileID: 641578076}
+  - 114: {fileID: 844761430}
+  - 114: {fileID: 844761426}
   m_Layer: 9
   m_Name: Sprite
   m_TagString: Untagged
@@ -3092,15 +3116,60 @@ MonoBehaviour:
   m_GameObject: {fileID: 844761423}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c1e0e7b83484cd8b218ed51212510a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &844761427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 222379b234d4444a9b088d32f8e371ff,
+    type: 2}
+  m_PrefabInternal: {fileID: 1039259597}
+  m_GameObject: {fileID: 641578074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e5f83cc8f02e4e12a99ac105af8aecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canPush: 1
+  canFall: 1
+  fallObject: {fileID: 844761425}
+  destroyOnFall: 0
+  fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}
+  moveDirection: 0
+  walkingSound: {fileID: 8300000, guid: fe55a75936473435f8eba8b5b8c6fa5a, type: 3}
+  wrongBeep: {fileID: 8300000, guid: 3576cfb536e8f4c52a19ff695d19d99a, type: 3}
+--- !u!114 &844761428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400004, guid: 222379b234d4444a9b088d32f8e371ff,
+    type: 2}
+  m_PrefabInternal: {fileID: 1039259597}
+  m_GameObject: {fileID: 641578074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f102ead1728a4239b5d5b774f86ad14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadow: {fileID: 2097195028}
+--- !u!114 &844761429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400006, guid: 222379b234d4444a9b088d32f8e371ff,
+    type: 2}
+  m_PrefabInternal: {fileID: 1039259597}
+  m_GameObject: {fileID: 844761423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9961582ec383d1b4e80a55c31a8564b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   idleAfterOneTimeAnimations: 0
   playOnAwake: 0
---- !u!114 &844761427
+--- !u!114 &844761430
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: 222379b234d4444a9b088d32f8e371ff,
+  m_PrefabParentObject: {fileID: 11400008, guid: 222379b234d4444a9b088d32f8e371ff,
     type: 2}
   m_PrefabInternal: {fileID: 1039259597}
   m_GameObject: {fileID: 844761423}
@@ -3117,78 +3186,21 @@ MonoBehaviour:
   - {fileID: 21300016, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
   - {fileID: 21300014, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
   - {fileID: 21300012, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
---- !u!114 &844761428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400004, guid: 222379b234d4444a9b088d32f8e371ff,
-    type: 2}
-  m_PrefabInternal: {fileID: 1039259597}
-  m_GameObject: {fileID: 844761423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationName: WalkRightAnimation
-  rate: 10
-  loop: 1
-  sprites:
-  - {fileID: 21300020, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300022, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300020, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300018, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
---- !u!114 &844761429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400006, guid: 222379b234d4444a9b088d32f8e371ff,
-    type: 2}
-  m_PrefabInternal: {fileID: 1039259597}
-  m_GameObject: {fileID: 844761423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationName: WalkLeftAnimation
-  rate: 10
-  loop: 1
-  sprites:
-  - {fileID: 21300008, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300010, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300008, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300006, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
---- !u!114 &844761430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400008, guid: 222379b234d4444a9b088d32f8e371ff,
-    type: 2}
-  m_PrefabInternal: {fileID: 1039259597}
-  m_GameObject: {fileID: 844761423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationName: WalkDownAnimation
-  rate: 10
-  loop: 1
-  sprites:
-  - {fileID: 21300002, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300004, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300002, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300000, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
 --- !u!114 &844761431
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400000, guid: 222379b234d4444a9b088d32f8e371ff,
     type: 2}
   m_PrefabInternal: {fileID: 1039259597}
-  m_GameObject: {fileID: 844761423}
+  m_GameObject: {fileID: 641578074}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8c1e0e7b83484cd8b218ed51212510a, type: 3}
+  m_Script: {fileID: 11500000, guid: f1ed6fcccaffe45a88b33b3f933d44ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drawingOrder: 3
+  height: 1
+  editModeRefresh: 0
 --- !u!1 &852480748
 GameObject:
   m_ObjectHideFlags: 0
@@ -3593,6 +3605,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 222379b234d4444a9b088d32f8e371ff, type: 2}
+      propertyPath: wrongBeep
+      value: 
+      objectReference: {fileID: 8300000, guid: 3576cfb536e8f4c52a19ff695d19d99a, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 222379b234d4444a9b088d32f8e371ff, type: 2}
   m_RootGameObject: {fileID: 641578074}
@@ -4717,12 +4733,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 1361838052}
   - 212: {fileID: 1361838051}
-  - 114: {fileID: 1361838054}
-  - 114: {fileID: 1361838053}
+  - 114: {fileID: 516045935}
   - 114: {fileID: 1361838057}
-  - 114: {fileID: 1361838056}
-  - 114: {fileID: 1361838055}
-  - 114: {fileID: 1361838058}
+  - 114: {fileID: 1361838053}
+  - 114: {fileID: 516045937}
+  - 114: {fileID: 516045936}
+  - 114: {fileID: 1361838054}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
@@ -4777,14 +4793,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationName: WalkDownAnimation
+  animationName: WalkLeftAnimation
   rate: 10
   loop: 1
   sprites:
-  - {fileID: 21300002, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300004, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300002, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300000, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300008, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300010, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300008, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300006, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
 --- !u!114 &1361838054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4794,51 +4810,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 1361838050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9961582ec383d1b4e80a55c31a8564b7, type: 3}
+  m_Script: {fileID: 11500000, guid: a8c1e0e7b83484cd8b218ed51212510a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleAfterOneTimeAnimations: 1
-  playOnAwake: 0
 --- !u!114 &1361838055
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400002, guid: dd2a93b30af52407d9324f58e8ef7196,
     type: 2}
   m_PrefabInternal: {fileID: 1689389086}
-  m_GameObject: {fileID: 1361838050}
+  m_GameObject: {fileID: 516045933}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e5f83cc8f02e4e12a99ac105af8aecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationName: WalkUpAnimation
-  rate: 10
-  loop: 1
-  sprites:
-  - {fileID: 21300014, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300016, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300014, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300012, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  canPush: 1
+  canFall: 1
+  fallObject: {fileID: 1361838052}
+  destroyOnFall: 0
+  fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}
+  moveDirection: 0
+  walkingSound: {fileID: 8300000, guid: 9a863da87eecb41678b341ce726376f8, type: 3}
+  wrongBeep: {fileID: 8300000, guid: 3576cfb536e8f4c52a19ff695d19d99a, type: 3}
 --- !u!114 &1361838056
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400004, guid: dd2a93b30af52407d9324f58e8ef7196,
     type: 2}
   m_PrefabInternal: {fileID: 1689389086}
-  m_GameObject: {fileID: 1361838050}
+  m_GameObject: {fileID: 516045933}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f102ead1728a4239b5d5b774f86ad14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationName: WalkRightAnimation
-  rate: 10
-  loop: 1
-  sprites:
-  - {fileID: 21300020, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300022, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300020, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300018, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  shadow: {fileID: 1476076469}
 --- !u!114 &1361838057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4851,26 +4858,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationName: WalkLeftAnimation
+  animationName: WalkDownAnimation
   rate: 10
   loop: 1
   sprites:
-  - {fileID: 21300008, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300010, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300008, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300006, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300002, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300004, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300002, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300000, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
 --- !u!114 &1361838058
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400000, guid: dd2a93b30af52407d9324f58e8ef7196,
     type: 2}
   m_PrefabInternal: {fileID: 1689389086}
-  m_GameObject: {fileID: 1361838050}
+  m_GameObject: {fileID: 516045933}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8c1e0e7b83484cd8b218ed51212510a, type: 3}
+  m_Script: {fileID: 11500000, guid: f1ed6fcccaffe45a88b33b3f933d44ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drawingOrder: 3
+  height: 1
+  editModeRefresh: 0
 --- !u!1 &1390220571
 GameObject:
   m_ObjectHideFlags: 0
@@ -6145,6 +6155,10 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: dd2a93b30af52407d9324f58e8ef7196, type: 2}
+      propertyPath: wrongBeep
+      value: 
+      objectReference: {fileID: 8300000, guid: 3576cfb536e8f4c52a19ff695d19d99a, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd2a93b30af52407d9324f58e8ef7196, type: 2}
   m_RootGameObject: {fileID: 516045933}
