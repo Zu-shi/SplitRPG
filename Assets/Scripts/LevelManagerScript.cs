@@ -21,6 +21,8 @@ public class LevelManagerScript : _Mono{
 
 	private Transform leftSpawn, rightSpawn;
 
+	private bool loadSerialized = false;
+
 	private string _currentLeftLevel;
 	public string currentLeftLevel {
 		get {
@@ -170,6 +172,7 @@ public class LevelManagerScript : _Mono{
 		rightSpawn.position = new Vector3(PlayerPrefs.GetFloat("RightX"), PlayerPrefs.GetFloat("RightY"), rightSpawn.position.z);
 		leftSpawn.GetComponent<BoxCollider2D>().center = Vector3.zero;
 		rightSpawn.GetComponent<BoxCollider2D>().center = Vector3.zero;
+		loadSerialized = true;
 	}
 
 	private void MoveLeftCharacterToSpawnPoint() {
@@ -183,6 +186,10 @@ public class LevelManagerScript : _Mono{
 		Globals.playerRight.gameObject.SetActive(true);
 		GameObject.FindGameObjectWithTag("PlayerRight").transform.position = rightSpawn.TransformPoint(rightSpawn.gameObject.GetComponent<BoxCollider2D>().center);
 		Globals.roomManager.MoveCamerasToPoint( new Vector2(rightSpawn.transform.position.x, rightSpawn.transform.position.y));
+		if(loadSerialized){
+			loadSerialized = false;
+			SaveCheckpoint();
+		}
 
 	}
 
