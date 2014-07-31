@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// A fancy type of bool.
+/// </summary>
+/// <author>Mark Gardner</author>
 public class Toggler {
 
 	private bool _on;

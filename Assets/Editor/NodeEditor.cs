@@ -15,7 +15,9 @@ public class NodeEditor : EditorWindow {
 
 	[MenuItem("Window/Node editor")]
 	static void ShowEditor() {
+		#pragma warning disable 0219
 		NodeEditor editor = EditorWindow.GetWindow<NodeEditor>();
+		#pragma warning restore 0219
 	}
 
 	public void OnGUI() {

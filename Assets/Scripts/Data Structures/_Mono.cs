@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Basic utility class that extends the built-in Unity MonoBehavior.
+/// </summary>
+/// <author>Mark Gardner, Zuoming Shi, Tyler Wallace</author>
 public class _Mono : MonoBehaviour {
 
 	private SpriteRenderer _spriteRenderer;

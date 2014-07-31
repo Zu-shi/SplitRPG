@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Pan the camera from one location to another. Provides a callback after the pan is completed.
+/// </summary>
+/// <author>Mark Gardner</author>
 public class CameraPanTransitionAction : Action {
 
 	CameraScript cameraScript;

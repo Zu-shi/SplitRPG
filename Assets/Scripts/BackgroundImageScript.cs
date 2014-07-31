@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Provides basic paralax functionality to an object in the scene.
+/// </summary>
+/// <author>Mark Gardner</author>
 [ExecuteInEditMode]
 public class BackgroundImageScript : _Mono {
 

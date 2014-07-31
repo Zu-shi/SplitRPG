@@ -6,11 +6,14 @@ public class InputManagerScript : MonoBehaviour {
 	 * Probably don't use this script, use InputManager's static methods instead
 	 */
 
+	public bool ignoreInput;
+
 	List<Button> _inputs;
 	List<Button> _lastInputs;
 
 
 	void Start () {
+		ignoreInput = false;
 		_inputs = new List<Button>();
 		_lastInputs = new List<Button>();
 	}
@@ -37,6 +40,11 @@ public class InputManagerScript : MonoBehaviour {
 			_inputs.Add(Button.UP);
 		else if (vIn < -threshhold)
 			_inputs.Add(Button.DOWN);
+
+
+		if(ignoreInput){
+			_inputs.Clear();
+		}
 
 	}
 

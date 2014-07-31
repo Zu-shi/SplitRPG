@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Fade the camera out and then back in. Provides callbacks for after the fade out and after the fade in.
+/// </summary>
+/// <author>Mark Gardner</author>
 public class CameraFadeTransitionAction : Action {
 
 	CameraScript cameraScript;

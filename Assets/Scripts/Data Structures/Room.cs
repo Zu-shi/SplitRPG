@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Numerical description of a room with some methods for ease of use.
+/// </summary>
+/// <author>Mark Gardner</author>
 public class Room {
 
 	// Rect that defines the room (measured in tiles)

@@ -6,6 +6,8 @@ using UnityEngine;
 /// consisting of a list of options and a list of DialogueNodes. Clients are intended to use the string interfaces that this
 /// class provides for read-only operations.
 /// </summary>
+/// 
+/// <author>Tyler Wallace</author>
 public class DialogueSequence {
 	
 	public struct Option {
@@ -17,8 +19,16 @@ public class DialogueSequence {
 			return (left.from == right.from) && (left.to == right.to) && (left.description == right.description);
 		}
 
+		public override bool Equals(System.Object obj){
+			return this == (Option)obj;
+		} 
+
 		public static bool operator !=(Option left, Option right) {
 			return !(left == right);
+		}
+
+		public override int GetHashCode(){
+			return 9000;
 		}
 	}
 

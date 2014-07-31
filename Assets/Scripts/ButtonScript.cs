@@ -1,6 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// An in-game button that can be stepped on to toggle a target, such as a gate.
+/// </summary>
+/// <author>Mark Gardner</author>
 public class ButtonScript : _Mono {
 
 	Toggler _toggler;
