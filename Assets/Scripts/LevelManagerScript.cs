@@ -41,19 +41,23 @@ public class LevelManagerScript : _Mono{
 			Debug.LogError("Attempted to load null level.");
 			return false;
 		}
-		savedLeftPlayerPos = Globals.playerLeft.transform.position;
-		savedRightPlayerPos = Globals.playerRight.transform.position;
-		
 		Destroy(savedLeftLevel);
 		Destroy(savedRightLevel);
 
 		savedLeftLevel = (GameObject)Instantiate(leftLevel);
 		savedLeftLevel.name = leftLevel.name;
+		Transform lsp = savedLeftLevel.transform.FindChild("Starting").GetChild(0);
+		lsp.position = Globals.playerLeft.transform.position;
+		lsp.GetComponent<BoxCollider2D>().center = Vector3.zero;
 		savedLeftLevel.SetActive(false);
 
 		savedRightLevel = (GameObject)Instantiate(rightLevel);
 		savedRightLevel.name = rightLevel.name;
+		Transform rsp = savedRightLevel.transform.FindChild("Starting").GetChild(0);
+		rsp.position = Globals.playerRight.transform.position;
+		rsp.GetComponent<BoxCollider2D>().center = Vector3.zero;
 		savedRightLevel.SetActive(false);
+
 
 		return true;
 	}
@@ -61,6 +65,7 @@ public class LevelManagerScript : _Mono{
 	public void SaveCheckpoint() {
 		Debug.Log("Saving Checkpoint.");
 		SaveCheckpoint(currentLeftLevelPrefab, currentRightLevelPrefab);
+
 	}
 
 	public void LoadLastCheckpoint() {
@@ -68,8 +73,6 @@ public class LevelManagerScript : _Mono{
 		if(savedLeftLevel == null || savedRightLevel == null) {
 			LoadLevels(currentLeftLevel, currentRightLevel);
 		} else {
-			savedLeftLevel.transform.FindChild("Starting").GetChild(0).position = savedLeftPlayerPos;
-			savedRightLevel.transform.FindChild("Starting").GetChild(0).position = savedRightPlayerPos;
 			LoadLevels(savedLeftLevel, savedRightLevel);
 		}
 	}
