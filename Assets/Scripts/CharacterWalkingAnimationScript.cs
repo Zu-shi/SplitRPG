@@ -47,7 +47,7 @@ public class CharacterWalkingAnimationScript : MonoBehaviour {
 	private void AccountForDirectionChange(){
 		if( getDirectionToAnimationName() !=  sprAnimMan.currentAnimationName){
 			sprAnimMan.PlayAnimation(getDirectionToAnimationName(), 0);
-			Debug.Log(getDirectionToAnimationName() + " " + sprAnimMan.currentAnimationName);
+//			Debug.Log(getDirectionToAnimationName() + " " + sprAnimMan.currentAnimationName);
 		}
 	}
 
@@ -73,7 +73,7 @@ public class CharacterWalkingAnimationScript : MonoBehaviour {
 		sprAnimMan.PauseAnimation();
 		sprAnimMan.SetCurrentFrame(0); //0 is the idle animation.
 		playingAnimation = false;
-		Debug.Log("Animation Stopped");
+//		Debug.Log("Animation Stopped");
 	}
 
 	private string getDirectionToAnimationName(){

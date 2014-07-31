@@ -8,8 +8,9 @@ using System.Collections;
 public class BackgroundScrollingTextureScript : _Mono {
 
 	public float parralaxDepth = 1;
+	public Vector2 passiveMove;
 	public bool runInEditor = false;
-	
+
 	bool started = false;
 	Vector3 lastCameraPosition;
 	
@@ -42,6 +43,9 @@ public class BackgroundScrollingTextureScript : _Mono {
 
 			xy = cameraScript.xy; // keep in front of the camera
 		}
+
+		renderer.sharedMaterial.mainTextureOffset += Time.deltaTime * passiveMove;
+
 		
 		lastCameraPosition = cameraScript.transform.position;
 	}
