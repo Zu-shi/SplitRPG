@@ -157,13 +157,13 @@ public class LevelManagerScript : _Mono{
 	private void MoveLeftCharacterToSpawnPoint() {
 		currentLeftLevelPrefab.SetActive(true);
 		Globals.playerLeft.gameObject.SetActive(true);
-		GameObject.FindGameObjectWithTag("PlayerLeft").transform.position = leftSpawn.position;
+		GameObject.FindGameObjectWithTag("PlayerLeft").transform.position = leftSpawn.TransformPoint(leftSpawn.gameObject.GetComponent<BoxCollider2D>().center);
 	}
 
 	private void MoveRightCharacterToSpawnPoint() {
 		currentRightLevelPrefab.SetActive(true);
 		Globals.playerRight.gameObject.SetActive(true);
-		GameObject.FindGameObjectWithTag("PlayerRight").transform.position = rightSpawn.position;
+		GameObject.FindGameObjectWithTag("PlayerRight").transform.position = rightSpawn.TransformPoint(rightSpawn.gameObject.GetComponent<BoxCollider2D>().center);
 		Globals.roomManager.MoveCamerasToPoint( new Vector2(rightSpawn.transform.position.x, rightSpawn.transform.position.y));
 
 	}
