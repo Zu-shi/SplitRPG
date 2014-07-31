@@ -79,42 +79,42 @@ public class CollisionManagerScript : MonoBehaviour {
 	/// Is the tile blocking movement?
 	/// </summary>
 	public bool IsTileBlocking(Vector2 tileCoords, int layerOfObject){
-		return GetBlockingObject(tileCoords, layerOfObject) != null;
+		return GetBlockingObject(tileCoords, layerOfObject);
 	}
 
 	/// <summary>
 	/// Is the tile blocking movement? Overload that takes coordinates, direction, and layer of object.
 	/// </summary>
 	public bool IsTileBlocking(Vector2 tileCoords, Direction direction, int layerOfObject){
-		return IsTileBlocking(tileCoords + 2 * Utils.DirectionToVector(direction), layerOfObject) != null;
+		return IsTileBlocking(tileCoords + 2 * Utils.DirectionToVector(direction), layerOfObject);
 	}
 
 	/// <summary>
 	/// Is the tile blocking movement? Overload that takes a mono and a direction.
 	/// </summary>
 	public bool IsTileBlocking(_Mono mono, Direction direction){
-		return IsTileBlocking(mono.tileVector + 2 * Utils.DirectionToVector(direction), mono.gameObject.layer) != null;
+		return IsTileBlocking(mono.tileVector + 2 * Utils.DirectionToVector(direction), mono.gameObject.layer);
 	}
 
 	/// <summary>
 	/// Is the tile a pit?
 	/// </summary>
 	public bool IsTilePit(Vector2 tileCoords, int layerOfObject){
-		return GetPitObject(tileCoords, layerOfObject) != null;
+		return GetPitObject(tileCoords, layerOfObject);
 	}
 
 	/// <summary>
 	/// Is the tile a pit? Overload that takes coordinates, direction, and layer of object.
 	/// </summary>
 	public bool IsTilePit(Vector2 tileCoords, Direction direction, int layerOfObject){
-		return IsTilePit(tileCoords + 2 * Utils.DirectionToVector(direction), layerOfObject) != null;
+		return IsTilePit(tileCoords + 2 * Utils.DirectionToVector(direction), layerOfObject);
 	}
 	
 	/// <summary>
 	/// Is the tile a pit? Overload that takes a mono and a direction.
 	/// </summary>
 	public bool IsTilePit(_Mono mono, Direction direction){
-		return IsTilePit(mono.tileVector + 2 * Utils.DirectionToVector(direction), mono.gameObject.layer) != null;
+		return IsTilePit(mono.tileVector + 2 * Utils.DirectionToVector(direction), mono.gameObject.layer);
 	}
 	
 	/// <summary>
