@@ -1,6 +1,7 @@
-﻿
-
-
+﻿/// <summary>
+/// The order in which objects are to be drawn; objects with a lower order (first on the list) are drawn first.
+/// </summary>
+/// <author>Mark Gardner</author>
 public enum DrawingOrder {
 
 	NONE = -1,

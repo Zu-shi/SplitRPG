@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// Main component for the dialogue system.
+/// </summary>
+/// <author>Tyler Wallace</author>
 public class DialogueManagerScript : MonoBehaviour {
 
 	[Tooltip("The text file that contains the dialogue node information for this Game Object.")]

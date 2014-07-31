@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Base class for Actions that occur over time.
+/// </summary>
+/// <author>Mark Gardner</author>
 public abstract class Action : _Mono {
 
 	bool _started;

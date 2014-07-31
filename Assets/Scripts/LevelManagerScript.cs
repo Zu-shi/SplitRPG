@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// Level loading and saving.
+/// </summary>
+/// <cauthor>Tyler Wallace</authorc>
 public class LevelManagerScript : _Mono{
 
 	// Only used in editor, copied to _levelPrefabs at start
@@ -146,6 +150,10 @@ public class LevelManagerScript : _Mono{
 
 	}
 
+	public void LoadMainMenu() {
+		Application.LoadLevel(0);
+	}
+
 	private void MoveLeftCharacterToSpawnPoint() {
 		currentLeftLevelPrefab.SetActive(true);
 		Globals.playerLeft.gameObject.SetActive(true);
@@ -158,6 +166,10 @@ public class LevelManagerScript : _Mono{
 		GameObject.FindGameObjectWithTag("PlayerRight").transform.position = rightSpawn.position;
 		Globals.roomManager.MoveCamerasToPoint( new Vector2(rightSpawn.transform.position.x, rightSpawn.transform.position.y));
 
+	}
+
+	public void SaveGame() {
+		// TODO JSON serialization?
 	}
 
 	private void FinishedLoading() {

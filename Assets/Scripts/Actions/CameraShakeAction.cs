@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Cause the camera to shake. Provides a callback after the shake is finished.
+/// </summary>
+/// <author>Mark Gardner</author>
 public class CameraShakeAction : Action {
 
 	CameraScript cameraScript;

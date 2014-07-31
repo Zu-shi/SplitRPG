@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// Tests if a tile is a certain kind of collider, i.e. a pit or wall.
+/// </summary>
+/// <author>Mark Gardner</author>
 public class CollisionManagerScript : MonoBehaviour {
 
 	[Tooltip("Layers checked when no side or layer is specified")]
