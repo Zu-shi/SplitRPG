@@ -21,6 +21,9 @@ public class LevelManagerScript : _Mono{
 
 	private Transform leftSpawn, rightSpawn;
 
+	private bool loadSerialized = false;
+	private bool firstLoad = true;
+
 	private string _currentLeftLevel;
 	public string currentLeftLevel {
 		get {
@@ -170,6 +173,7 @@ public class LevelManagerScript : _Mono{
 		rightSpawn.position = new Vector3(PlayerPrefs.GetFloat("RightX"), PlayerPrefs.GetFloat("RightY"), rightSpawn.position.z);
 		leftSpawn.GetComponent<BoxCollider2D>().center = Vector3.zero;
 		rightSpawn.GetComponent<BoxCollider2D>().center = Vector3.zero;
+		loadSerialized = true;
 	}
 
 	private void MoveLeftCharacterToSpawnPoint() {
@@ -183,6 +187,15 @@ public class LevelManagerScript : _Mono{
 		Globals.playerRight.gameObject.SetActive(true);
 		GameObject.FindGameObjectWithTag("PlayerRight").transform.position = rightSpawn.TransformPoint(rightSpawn.gameObject.GetComponent<BoxCollider2D>().center);
 		Globals.roomManager.MoveCamerasToPoint( new Vector2(rightSpawn.transform.position.x, rightSpawn.transform.position.y));
+		if(loadSerialized){
+			loadSerialized = false;
+			SaveCheckpoint();
+		}
+		if(firstLoad) {
+			firstLoad = false;
+			Globals.playerLeft.transform.FindChild("Sprite").GetComponent<SpriteRenderer>().enabled = true;
+			Globals.playerRight.transform.FindChild("Sprite").GetComponent<SpriteRenderer>().enabled = true;
+		}
 
 	}
 
@@ -199,7 +212,12 @@ public class LevelManagerScript : _Mono{
 	}
 
 	private void _Load() {
-		LoadLevels(_levelPrefabs[0], _levelPrefabs[1]);
+		if(PlayerPrefs.GetString("LoadGame") == "true") {
+			LoadSerializedGame();
+		}
+		else {
+			LoadLevels(_levelPrefabs[0], _levelPrefabs[1]);
+		}
 	}
 
 	public void Start() {
@@ -207,6 +225,9 @@ public class LevelManagerScript : _Mono{
 		for(int i = 0; i < levelPrefabs.Length; i++) {
 			_levelPrefabs.Add(levelPrefabs[i]);
 		}
+
+		Globals.playerLeft.transform.FindChild("Sprite").GetComponent<SpriteRenderer>().enabled = false;
+		Globals.playerRight.transform.FindChild("Sprite").GetComponent<SpriteRenderer>().enabled = false;
 
 		if(levelPrefabs.Length > 1) {
 			if(loadOnStart) {
