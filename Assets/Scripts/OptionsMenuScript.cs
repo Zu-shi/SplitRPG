@@ -88,12 +88,14 @@ public class OptionsMenuScript : MonoBehaviour {
 
 		GUILayout.BeginHorizontal(); GUILayout.FlexibleSpace();
 		if(GUILayout.Button("Save Game", GUILayout.MaxWidth(150))) {
-			Debug.Log("Saving game...");
+			Debug.Log("Game saves automatically.");
 		}
 		GUILayout.FlexibleSpace(); GUILayout.EndHorizontal();
 		GUILayout.BeginHorizontal(); GUILayout.FlexibleSpace();
 		if(GUILayout.Button("Load Game", GUILayout.MaxWidth(150))) {
-			Debug.Log("Loading game...");
+			Debug.Log("Loading serialized game.");
+			Pause(false);
+			Globals.levelManager.LoadSerializedGame();
 		}
 		GUILayout.FlexibleSpace(); GUILayout.EndHorizontal();
 		GUILayout.BeginHorizontal(); GUILayout.FlexibleSpace();

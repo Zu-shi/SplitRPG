@@ -18,7 +18,6 @@ public class LevelManagerScript : _Mono{
 
 	private GameObject currentLeftLevelPrefab, currentRightLevelPrefab;
 	private GameObject savedLeftLevel, savedRightLevel;
-	private Vector3 savedLeftPlayerPos, savedRightPlayerPos;
 
 	private Transform leftSpawn, rightSpawn;
 
@@ -49,6 +48,8 @@ public class LevelManagerScript : _Mono{
 		Transform lsp = savedLeftLevel.transform.FindChild("Starting").GetChild(0);
 		lsp.position = Globals.playerLeft.transform.position;
 		lsp.GetComponent<BoxCollider2D>().center = Vector3.zero;
+		PlayerPrefs.SetFloat("LeftX", lsp.position.x);
+		PlayerPrefs.SetFloat("LeftY", lsp.position.y);
 		savedLeftLevel.SetActive(false);
 
 		savedRightLevel = (GameObject)Instantiate(rightLevel);
@@ -56,7 +57,13 @@ public class LevelManagerScript : _Mono{
 		Transform rsp = savedRightLevel.transform.FindChild("Starting").GetChild(0);
 		rsp.position = Globals.playerRight.transform.position;
 		rsp.GetComponent<BoxCollider2D>().center = Vector3.zero;
+		PlayerPrefs.SetFloat("RightX", rsp.position.x);
+		PlayerPrefs.SetFloat("RightY", rsp.position.y);
 		savedRightLevel.SetActive(false);
+
+		
+		PlayerPrefs.SetString("LeftLevel", Globals.levelManager.currentLeftLevel);
+		PlayerPrefs.SetString("RightLevel", Globals.levelManager.currentRightLevel);
 
 
 		return true;
@@ -155,6 +162,14 @@ public class LevelManagerScript : _Mono{
 
 	public void LoadMainMenu() {
 		Application.LoadLevel(0);
+	}
+
+	public void LoadSerializedGame() {
+		LoadLevels(PlayerPrefs.GetString("LeftLevel"), PlayerPrefs.GetString("RightLevel"));
+		leftSpawn.position = new Vector3(PlayerPrefs.GetFloat("LeftX"), PlayerPrefs.GetFloat("LeftY"), leftSpawn.position.z);
+		rightSpawn.position = new Vector3(PlayerPrefs.GetFloat("RightX"), PlayerPrefs.GetFloat("RightY"), rightSpawn.position.z);
+		leftSpawn.GetComponent<BoxCollider2D>().center = Vector3.zero;
+		rightSpawn.GetComponent<BoxCollider2D>().center = Vector3.zero;
 	}
 
 	private void MoveLeftCharacterToSpawnPoint() {
