@@ -22,6 +22,7 @@ public class LevelManagerScript : _Mono{
 	private Transform leftSpawn, rightSpawn;
 
 	private bool loadSerialized = false;
+	private bool firstLoad = true;
 
 	private string _currentLeftLevel;
 	public string currentLeftLevel {
@@ -190,6 +191,11 @@ public class LevelManagerScript : _Mono{
 			loadSerialized = false;
 			SaveCheckpoint();
 		}
+		if(firstLoad) {
+			firstLoad = false;
+			Globals.playerLeft.transform.FindChild("Sprite").GetComponent<SpriteRenderer>().enabled = true;
+			Globals.playerRight.transform.FindChild("Sprite").GetComponent<SpriteRenderer>().enabled = true;
+		}
 
 	}
 
@@ -214,6 +220,9 @@ public class LevelManagerScript : _Mono{
 		for(int i = 0; i < levelPrefabs.Length; i++) {
 			_levelPrefabs.Add(levelPrefabs[i]);
 		}
+
+		Globals.playerLeft.transform.FindChild("Sprite").GetComponent<SpriteRenderer>().enabled = false;
+		Globals.playerRight.transform.FindChild("Sprite").GetComponent<SpriteRenderer>().enabled = false;
 
 		if(levelPrefabs.Length > 1) {
 			if(loadOnStart) {
