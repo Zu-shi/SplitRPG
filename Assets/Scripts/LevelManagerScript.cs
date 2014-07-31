@@ -24,6 +24,8 @@ public class LevelManagerScript : _Mono{
 	private bool loadSerialized = false;
 	private bool firstLoad = true;
 
+	private bool lockFadeDown = true;
+
 	private string _currentLeftLevel;
 	public string currentLeftLevel {
 		get {
@@ -193,8 +195,7 @@ public class LevelManagerScript : _Mono{
 		}
 		if(firstLoad) {
 			firstLoad = false;
-			Globals.playerLeft.transform.FindChild("Sprite").GetComponent<SpriteRenderer>().enabled = true;
-			Globals.playerRight.transform.FindChild("Sprite").GetComponent<SpriteRenderer>().enabled = true;
+			lockFadeDown = false;
 		}
 
 	}
@@ -226,14 +227,14 @@ public class LevelManagerScript : _Mono{
 			_levelPrefabs.Add(levelPrefabs[i]);
 		}
 
-		Globals.playerLeft.transform.FindChild("Sprite").GetComponent<SpriteRenderer>().enabled = false;
-		Globals.playerRight.transform.FindChild("Sprite").GetComponent<SpriteRenderer>().enabled = false;
+		lockFadeDown = true;
 
 		if(levelPrefabs.Length > 1) {
 			if(loadOnStart) {
 				Invoke( "_Load" , 0.5f );
 			}
 			else {
+				lockFadeDown = false;
 				if(preloadedLeftLevel == null || preloadedRightLevel == null) {
 					// Checkpoint system fails if levelmanager doesn't get access to the game objects.
 					Debug.LogError("Preloaded levels not assigned in editor!");
@@ -249,5 +250,13 @@ public class LevelManagerScript : _Mono{
 		}
 		else
 			Debug.LogError("Not enough level prefabs assigned!");
+	}
+
+	void Update(){
+		if(lockFadeDown){
+			// Force the cameras to be faded down
+			Globals.cameraLeft.fader.guiAlpha = 1;
+			Globals.cameraRight.fader.guiAlpha = 1;
+		}
 	}
 }
