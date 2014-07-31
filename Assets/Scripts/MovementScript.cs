@@ -71,7 +71,29 @@ public class MovementScript : _Mono {
 		fallObject.localScale = startScale;
 		
 	}
-	
+
+	protected void fallAnimation(){	
+		Vector3 s = fallObject.localScale;
+		s *= .9f;
+		y -= 0.05f;
+		fallObject.localScale = s;
+		
+		checkAndSetFell ();
+	}
+
+	protected void checkAndSetFell(){
+		Vector3 s = fallObject.localScale;
+		if (s.magnitude < .03f) {
+			fell = true;
+		}
+	}
+
+	protected virtual void StartFall(){	
+		falling = true;
+		Globals.soundManager.PlaySound(fallingSound);
+		rigidbody2D.velocity = new Vector2 (0f, 0f);
+	}
+
 	void FixedUpdate () {
 
 		if(canFall){
@@ -83,22 +105,13 @@ public class MovementScript : _Mono {
 			if(!fell && !inAir){
 				if (falling) {
 					// Fall animation
-					Vector3 s = fallObject.localScale;
-					s *= .9f;
-					fallObject.localScale = s;
-					
-					if (s.magnitude < .03f) {
-						fell = true;
-					}
-					
+					fallAnimation();
 				} else {
 					
 					// Figure out if still on ground
 					bool collidingWithPit = Globals.collisionManager.IsTilePit(xy, gameObject.layer);
 					if (!inAir && collidingWithPit) {
-						falling = true;
-						Globals.soundManager.PlaySound(fallingSound);
-						rigidbody2D.velocity = new Vector2 (0f, 0f);
+						StartFall();
 					}
 				}
 			}
@@ -156,13 +169,12 @@ public class MovementScript : _Mono {
 		}
 	}
 
-	void StartMoving(Vector2 velocity){
+	protected virtual void StartMoving(Vector2 velocity){
 		collider2D.enabled = false;
 		moveVelocity = velocity;
-		
 	}
 	
-	void StopMoving(){
+	protected void StopMoving(){
 		collider2D.enabled = true;
 		// Cancel move velocity
 		rigidbody2D.velocity = new Vector2(0, 0);

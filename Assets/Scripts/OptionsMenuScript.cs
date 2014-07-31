@@ -3,6 +3,9 @@ using System.Collections;
 
 public class OptionsMenuScript : MonoBehaviour {
 
+	public AudioClip startSound;
+	public GUISkin optionSkin;
+
 	private enum State {
 		NONE,
 		MENU,
@@ -24,7 +27,8 @@ public class OptionsMenuScript : MonoBehaviour {
 	}
 
 	public void OnGUI() {
-		GUILayout.BeginArea(new Rect(0,0,Screen.width,Screen.height));
+		GUI.skin = optionSkin;
+		GUILayout.BeginArea(new Rect(0,-30,Screen.width,Screen.height));
 		GUILayout.BeginVertical();
 		GUILayout.FlexibleSpace();
 		GUILayout.BeginHorizontal();
@@ -56,16 +60,18 @@ public class OptionsMenuScript : MonoBehaviour {
 	}
 
 	private void Pause(bool pause = true) {
+		Globals.soundManager.PlaySound (startSound);
+
 		if(pause){
 			s = State.MENU;
 			GameObject.Find("PlayerLeft").GetComponent<PlayerControllerScript>().enabled = false;
 			GameObject.Find("PlayerRight").GetComponent<PlayerControllerScript>().enabled = false;
-			GameObject.Find("PlayerInputHandler").GetComponent<PlayerInputScript>().enabled = false;
+			GameObject.Find("GameManager").GetComponent<PlayerInputScript>().enabled = false;
 		} else {
 			s = State.NONE;
 			GameObject.Find("PlayerLeft").GetComponent<PlayerControllerScript>().enabled = true;
 			GameObject.Find("PlayerRight").GetComponent<PlayerControllerScript>().enabled = true;
-			GameObject.Find("PlayerInputHandler").GetComponent<PlayerInputScript>().enabled = true;
+			GameObject.Find("GameManager").GetComponent<PlayerInputScript>().enabled = true;
 		}
 	}
 
@@ -103,6 +109,11 @@ public class OptionsMenuScript : MonoBehaviour {
 		if(GUILayout.Button("Back to Game", GUILayout.MaxWidth(150))) {
 			Pause(false);
 		}
+		GUILayout.FlexibleSpace();
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.FlexibleSpace();
 		if(GUILayout.Button("Quit Game", GUILayout.MaxWidth(150))) {
 			s = State.QUIT;
 		}
