@@ -10,6 +10,8 @@ ModelImporter:
     100008: //RootNode
     100010: mesh_[00]_[00]
     100012: mesh_[01]_[01]
+    100014: mesh_[01]_[00]
+    100016: mesh_[01]_[02]
     400000: Background_1_00+Cylinder
     400002: Background_1_00+TempCyberpunkTileset
     400004: Blocks_01+Cylinder
@@ -17,30 +19,40 @@ ModelImporter:
     400008: //RootNode
     400010: mesh_[00]_[00]
     400012: mesh_[01]_[01]
+    400014: mesh_[01]_[00]
+    400016: mesh_[01]_[02]
     2300000: Background_1_00+Cylinder
     2300002: Background_1_00+TempCyberpunkTileset
     2300004: Blocks_01+Cylinder
     2300006: Blocks_01+TempCyberpunkTileset
     2300008: mesh_[00]_[00]
     2300010: mesh_[01]_[01]
+    2300012: mesh_[01]_[00]
+    2300014: mesh_[01]_[02]
     3300000: Background_1_00+Cylinder
     3300002: Background_1_00+TempCyberpunkTileset
     3300004: Blocks_01+Cylinder
     3300006: Blocks_01+TempCyberpunkTileset
     3300008: mesh_[00]_[00]
     3300010: mesh_[01]_[01]
+    3300012: mesh_[01]_[00]
+    3300014: mesh_[01]_[02]
     4300000: Background_1_00+Cylinder
     4300002: Background_1_00+TempCyberpunkTileset
     4300004: Blocks_01+Cylinder
     4300006: Blocks_01+TempCyberpunkTileset
     4300008: mesh_[00]_[00]
     4300010: mesh_[01]_[01]
+    4300012: mesh_[01]_[00]
+    4300014: mesh_[01]_[02]
     11400000: Background_1_00+Cylinder
     11400002: Background_1_00+TempCyberpunkTileset
     11400004: Blocks_01+Cylinder
     11400006: Blocks_01+TempCyberpunkTileset
     11400008: mesh_[00]_[00]
     11400010: mesh_[01]_[01]
+    11400012: mesh_[01]_[00]
+    11400014: mesh_[01]_[02]
   materials:
     importMaterials: 0
     materialName: 0
