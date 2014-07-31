@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Handles animating the player characters in coordination with their given inputs.
+/// </summary>
+/// <author>Zuoming Shi</author>
 [RequireComponent(typeof(SpriteAnimationManagerScript))]
 public class CharacterWalkingAnimationScript : MonoBehaviour {
 

@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// Level loading and saving.
+/// </summary>
+/// <cauthor>Tyler Wallace</authorc>
 public class LevelManagerScript : _Mono{
 
 	// Only used in editor, copied to _levelPrefabs at start
@@ -37,19 +41,23 @@ public class LevelManagerScript : _Mono{
 			Debug.LogError("Attempted to load null level.");
 			return false;
 		}
-		savedLeftPlayerPos = Globals.playerLeft.transform.position;
-		savedRightPlayerPos = Globals.playerRight.transform.position;
-		
 		Destroy(savedLeftLevel);
 		Destroy(savedRightLevel);
 
 		savedLeftLevel = (GameObject)Instantiate(leftLevel);
 		savedLeftLevel.name = leftLevel.name;
+		Transform lsp = Utils.FindChildRecursive(savedLeftLevel, "Starting").GetChild(0);
+		lsp.position = Globals.playerLeft.transform.position;
+		lsp.GetComponent<BoxCollider2D>().center = Vector3.zero;
 		savedLeftLevel.SetActive(false);
 
 		savedRightLevel = (GameObject)Instantiate(rightLevel);
 		savedRightLevel.name = rightLevel.name;
+		Transform rsp = Utils.FindChildRecursive(savedRightLevel, "Starting").GetChild(0);
+		rsp.position = Globals.playerRight.transform.position;
+		rsp.GetComponent<BoxCollider2D>().center = Vector3.zero;
 		savedRightLevel.SetActive(false);
+
 
 		return true;
 	}
@@ -57,6 +65,7 @@ public class LevelManagerScript : _Mono{
 	public void SaveCheckpoint() {
 		Debug.Log("Saving Checkpoint.");
 		SaveCheckpoint(currentLeftLevelPrefab, currentRightLevelPrefab);
+
 	}
 
 	public void LoadLastCheckpoint() {
@@ -64,8 +73,6 @@ public class LevelManagerScript : _Mono{
 		if(savedLeftLevel == null || savedRightLevel == null) {
 			LoadLevels(currentLeftLevel, currentRightLevel);
 		} else {
-			FindSpawnPoint(savedLeftLevel).position = savedLeftPlayerPos;
-			FindSpawnPoint(savedRightLevel).position = savedRightPlayerPos;
 			LoadLevels(savedLeftLevel, savedRightLevel);
 		}
 	}
@@ -105,7 +112,7 @@ public class LevelManagerScript : _Mono{
 			GameObject.DestroyImmediate(currentLeftLevelPrefab);
 			currentLeftLevelPrefab = left;
 
-			leftSpawn = FindSpawnPoint(left);
+			leftSpawn = Utils.FindChildRecursive(left, "Starting").GetChild(0);
 			if(leftSpawn != null) {
 				Globals.cameraLeft.FadeTransition(MoveLeftCharacterToSpawnPoint, FinishedLoading);
 			}
@@ -125,7 +132,7 @@ public class LevelManagerScript : _Mono{
 			GameObject.DestroyImmediate(currentRightLevelPrefab);
 			currentRightLevelPrefab = right;
 			
-			rightSpawn = FindSpawnPoint(right);
+			rightSpawn = Utils.FindChildRecursive(right, "Starting").GetChild(0);
 			if(rightSpawn != null) {
 				Globals.cameraRight.FadeTransition(MoveRightCharacterToSpawnPoint, FinishedLoading);
 			}
@@ -146,22 +153,26 @@ public class LevelManagerScript : _Mono{
 
 	}
 
-	private Transform FindSpawnPoint(GameObject level){
-		return Utils.FindChildRecursive(level, "Starting").GetChild(0);
+	public void LoadMainMenu() {
+		Application.LoadLevel(0);
 	}
 
 	private void MoveLeftCharacterToSpawnPoint() {
 		currentLeftLevelPrefab.SetActive(true);
 		Globals.playerLeft.gameObject.SetActive(true);
-		GameObject.FindGameObjectWithTag("PlayerLeft").transform.position = leftSpawn.position;
+		GameObject.FindGameObjectWithTag("PlayerLeft").transform.position = leftSpawn.TransformPoint(leftSpawn.gameObject.GetComponent<BoxCollider2D>().center);
 	}
 
 	private void MoveRightCharacterToSpawnPoint() {
 		currentRightLevelPrefab.SetActive(true);
 		Globals.playerRight.gameObject.SetActive(true);
-		GameObject.FindGameObjectWithTag("PlayerRight").transform.position = rightSpawn.position;
+		GameObject.FindGameObjectWithTag("PlayerRight").transform.position = rightSpawn.TransformPoint(rightSpawn.gameObject.GetComponent<BoxCollider2D>().center);
 		Globals.roomManager.MoveCamerasToPoint( new Vector2(rightSpawn.transform.position.x, rightSpawn.transform.position.y));
 
+	}
+
+	public void SaveGame() {
+		// TODO JSON serialization?
 	}
 
 	private void FinishedLoading() {

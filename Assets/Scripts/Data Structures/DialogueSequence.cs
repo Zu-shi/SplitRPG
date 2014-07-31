@@ -6,6 +6,8 @@ using UnityEngine;
 /// consisting of a list of options and a list of DialogueNodes. Clients are intended to use the string interfaces that this
 /// class provides for read-only operations.
 /// </summary>
+/// 
+/// <author>Tyler Wallace</author>
 public class DialogueSequence {
 	
 	public struct Option {

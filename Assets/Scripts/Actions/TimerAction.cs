@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Wait for an amount of time. Provides a callback when the wait is over.
+/// </summary>
+/// <author>Mark Gardner</author>
 public class TimerAction : Action {
 
 	float timeLeft;

@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Allows camera movement from a top-down perspective that is bound to certain rooms.
+/// Can use provided methods to transiton from one room to another.
+/// </summary>
+/// <author>Mark Gardner</author>
 public class CameraScript : _Mono {
 
 	public const float TRANSITION_SPEED = 14f;

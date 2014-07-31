@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Flags the object we are attached to as a collision object for the purposes of the CollisionManager.
+/// </summary>
+/// <author>Mark Gardner</author>
 public class ColliderScript : _Mono {
 
 	[Tooltip("Blocks objects from being on top of them e.g. walls are blocking, buttons are not")]

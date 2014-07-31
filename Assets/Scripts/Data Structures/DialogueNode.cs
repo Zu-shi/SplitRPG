@@ -5,6 +5,8 @@ using UnityEngine;
 /// A data carrier class for a simple branching dialogue system.
 /// A node carries information about who is currently speaking and what they are saying.
 /// </summary>
+/// 
+/// <author>Tyler Wallace</author>
 public class DialogueNode {
 
 	/// <summary>
