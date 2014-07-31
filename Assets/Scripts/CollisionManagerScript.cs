@@ -130,6 +130,14 @@ public class CollisionManagerScript : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Returns whether a player is inside a collider
+	/// </summary>
+	public bool IsPlayerCollidingWith(Collider2D aCollider, int layerOfObject){
+		PlayerControllerScript player = Utils.PlayerOnLayer(layerOfObject);
+		return aCollider.OverlapPoint(player.xy);
+	}
+
+	/// <summary>
 	/// Gets a list of Collider2D's on a tile.
 	/// </summary>
 	private Collider2D[] GetObjectsOnTile(Vector2 tileCoords, int layerOfObject){

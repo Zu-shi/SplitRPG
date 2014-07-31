@@ -110,4 +110,21 @@ public static class Utils {
 	public static int Round(float value){
 		return Mathf.FloorToInt(value + .5f);
 	}
+
+	/// <summary>
+	/// Finds the child anywhere under an object
+	/// </summary>
+	public static Transform FindChildRecursive(GameObject obj, string child){
+		Transform o = obj.transform.FindChild(child);
+		if(o != null){
+			return o;
+		} else {
+			foreach(Transform t in obj.transform){
+				Transform o2 = t.transform.FindChild(child);
+				if(o2 != null)
+					return o2;
+			}
+		}
+		return null;
+	}
 }

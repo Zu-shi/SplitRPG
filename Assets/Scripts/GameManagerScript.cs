@@ -37,6 +37,15 @@ public class GameManagerScript : MonoBehaviour {
 		rightCamera.BeginFadeUp(EnableRightCharacter);
 	}
 
+	/// <summary>
+	/// Fade out everything, for switching to another scene (menu)
+	/// </summary>
+	public void FadeOut(Utils.VoidDelegate callback){
+		InputManager.Instance.ignoreInput = true;
+		leftCamera.BeginFadeDown(callback);
+		rightCamera.BeginFadeDown(callback);
+	}
+
 	void EnableRightCharacter(){
 		rightPlayer.x = leftPlayer.x;
 		rightPlayer.y = leftPlayer.y;

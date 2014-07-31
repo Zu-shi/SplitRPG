@@ -45,7 +45,7 @@ public class LevelManagerScript : _Mono{
 
 		savedLeftLevel = (GameObject)Instantiate(leftLevel);
 		savedLeftLevel.name = leftLevel.name;
-		Transform lsp = savedLeftLevel.transform.FindChild("Starting").GetChild(0);
+		Transform lsp = Utils.FindChildRecursive(savedLeftLevel, "Starting").GetChild(0);
 		lsp.position = Globals.playerLeft.transform.position;
 		lsp.GetComponent<BoxCollider2D>().center = Vector3.zero;
 		PlayerPrefs.SetFloat("LeftX", lsp.position.x);
@@ -54,7 +54,7 @@ public class LevelManagerScript : _Mono{
 
 		savedRightLevel = (GameObject)Instantiate(rightLevel);
 		savedRightLevel.name = rightLevel.name;
-		Transform rsp = savedRightLevel.transform.FindChild("Starting").GetChild(0);
+		Transform rsp = Utils.FindChildRecursive(savedRightLevel, "Starting").GetChild(0);
 		rsp.position = Globals.playerRight.transform.position;
 		rsp.GetComponent<BoxCollider2D>().center = Vector3.zero;
 		PlayerPrefs.SetFloat("RightX", rsp.position.x);
@@ -119,7 +119,7 @@ public class LevelManagerScript : _Mono{
 			GameObject.DestroyImmediate(currentLeftLevelPrefab);
 			currentLeftLevelPrefab = left;
 
-			leftSpawn = left.transform.FindChild("Starting").GetChild(0);
+			leftSpawn = Utils.FindChildRecursive(left, "Starting").GetChild(0);
 			if(leftSpawn != null) {
 				Globals.cameraLeft.FadeTransition(MoveLeftCharacterToSpawnPoint, FinishedLoading);
 			}
@@ -139,7 +139,7 @@ public class LevelManagerScript : _Mono{
 			GameObject.DestroyImmediate(currentRightLevelPrefab);
 			currentRightLevelPrefab = right;
 			
-			rightSpawn = right.transform.FindChild("Starting").GetChild(0);
+			rightSpawn = Utils.FindChildRecursive(right, "Starting").GetChild(0);
 			if(rightSpawn != null) {
 				Globals.cameraRight.FadeTransition(MoveRightCharacterToSpawnPoint, FinishedLoading);
 			}
