@@ -64,8 +64,8 @@ public class LevelManagerScript : _Mono{
 		if(savedLeftLevel == null || savedRightLevel == null) {
 			LoadLevels(currentLeftLevel, currentRightLevel);
 		} else {
-			savedLeftLevel.transform.FindChild("Starting").GetChild(0).position = savedLeftPlayerPos;
-			savedRightLevel.transform.FindChild("Starting").GetChild(0).position = savedRightPlayerPos;
+			FindSpawnPoint(savedLeftLevel).position = savedLeftPlayerPos;
+			FindSpawnPoint(savedRightLevel).position = savedRightPlayerPos;
 			LoadLevels(savedLeftLevel, savedRightLevel);
 		}
 	}
@@ -105,7 +105,7 @@ public class LevelManagerScript : _Mono{
 			GameObject.DestroyImmediate(currentLeftLevelPrefab);
 			currentLeftLevelPrefab = left;
 
-			leftSpawn = left.transform.FindChild("Starting").GetChild(0);
+			leftSpawn = FindSpawnPoint(left);
 			if(leftSpawn != null) {
 				Globals.cameraLeft.FadeTransition(MoveLeftCharacterToSpawnPoint, FinishedLoading);
 			}
@@ -125,7 +125,7 @@ public class LevelManagerScript : _Mono{
 			GameObject.DestroyImmediate(currentRightLevelPrefab);
 			currentRightLevelPrefab = right;
 			
-			rightSpawn = right.transform.FindChild("Starting").GetChild(0);
+			rightSpawn = FindSpawnPoint(right);
 			if(rightSpawn != null) {
 				Globals.cameraRight.FadeTransition(MoveRightCharacterToSpawnPoint, FinishedLoading);
 			}
@@ -144,6 +144,10 @@ public class LevelManagerScript : _Mono{
 
 		return true;
 
+	}
+
+	private Transform FindSpawnPoint(GameObject level){
+		return Utils.FindChildRecursive(level, "Starting").GetChild(0);
 	}
 
 	private void MoveLeftCharacterToSpawnPoint() {

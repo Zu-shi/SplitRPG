@@ -14,10 +14,14 @@ public class MainMenuScript : _Mono {
 	private State state;
 
 	GameObject cloud;
+	FaderScript fader;
 
 	public void Start () {
 		this.state = State.Menu;
 		cloud = GameObject.Find ("BGCloud");
+		fader = GameObject.Find("Fader").GetComponent<FaderScript>();
+		fader.guiAlpha = 1;
+		fader.FadeUp(null);
 	}
 
 	public void Update(){
@@ -98,6 +102,10 @@ public class MainMenuScript : _Mono {
 	}
 
 	private void OnStartGame () {
+		fader.FadeDown(LoadMainScene);
+	}
+
+	private void LoadMainScene(){
 		Application.LoadLevel( "Main" );
 	}
 

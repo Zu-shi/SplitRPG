@@ -16,6 +16,9 @@ public class FaderScript : _Mono {
 	void Start () {
 		targetAlpha = guiAlpha;
 		fadeRate = .01f;
+
+		// Center on screen
+		x = y = .5f;
 	}
 	
 	void Update () {
