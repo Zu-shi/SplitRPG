@@ -136,7 +136,9 @@ public class RoomManagerScript : MonoBehaviour {
 		cameraFinishes++;
 		if(cameraFinishes == 2){
 			cameraFinishes = 0;
-			SaveCheckpoint();
+			if(!fadeTransition) {
+				SaveCheckpoint();
+			}
 			EndCameraTransition();
 		}
 	}

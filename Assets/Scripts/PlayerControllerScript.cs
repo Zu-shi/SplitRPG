@@ -64,9 +64,8 @@ public class PlayerControllerScript : _Mono {
 	}
 	
 	void ResetBothPlayers(){
-		// Temporary hack to reset camera
-		// Might not be needed now? 
-		// roomManager.Reset();
+		Globals.levelManager.LoadLastCheckpoint();
+
 
 		ResetPlayer();
 		otherPlayer.ResetPlayer();
@@ -90,7 +89,6 @@ public class PlayerControllerScript : _Mono {
 		// Check if we fell
 		if(characterMovement.fell){
 			ResetBothPlayers();
-			Globals.levelManager.LoadLastCheckpoint();
 			return;
 		}
 
