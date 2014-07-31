@@ -13,8 +13,15 @@ public class MainMenuScript : _Mono {
 
 	private State state;
 
+	GameObject cloud;
+
 	public void Start () {
 		this.state = State.Menu;
+		cloud = GameObject.Find ("BGCloud");
+	}
+
+	public void Update(){
+		cloud.renderer.material.mainTextureOffset += new Vector2(0, .0004f);
 	}
 
 	public void OnGUI () {
@@ -43,7 +50,7 @@ public class MainMenuScript : _Mono {
 	// ----------------------
 
 	private void StartCentering () {
-		GUILayout.BeginArea( new Rect(0, 0, Screen.width, Screen.height) );
+		GUILayout.BeginArea( new Rect(0, Screen.height / 4, Screen.width, Screen.height) );
 		GUILayout.FlexibleSpace();
 		GUILayout.BeginHorizontal();
 		GUILayout.FlexibleSpace();
