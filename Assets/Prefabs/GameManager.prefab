@@ -446,8 +446,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelPrefabs:
-  - {fileID: 100002, guid: 524a65a0b0f6747b9a0700817c2c21e6, type: 2}
-  - {fileID: 100026, guid: 155678b710f974a6e947131a95f2a26c, type: 2}
   - {fileID: 100016, guid: 62be08d5db6c94c3abb4062eb4751060, type: 2}
   - {fileID: 100024, guid: 22b766b9fb2eb463988892a8bc145500, type: 2}
   loadOnStart: 1
