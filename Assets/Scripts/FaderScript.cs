@@ -9,11 +9,15 @@ public class FaderScript : _Mono {
 	/// Gets or sets the fade rate.
 	/// </summary>
 	/// <value>The fade rate.</value>
-	public float fadeRate{get;set;}
+	public float fadeRate {get; set;}
+
+	public bool lockFade {get; set;}
 
 	Utils.VoidDelegate fadeCallback;
 
 	void Start () {
+		guiAlpha = 1;
+		lockFade = false;
 		targetAlpha = guiAlpha;
 		fadeRate = .01f;
 
@@ -28,6 +32,9 @@ public class FaderScript : _Mono {
 		Rect r = new Rect(-w/2, -h/2, w, h);
 		guiTexture.pixelInset = r;
 
+		if(lockFade) {
+			return;
+		}
 		// Fade towards the target alpha
 		if(guiAlpha != targetAlpha){
 			guiAlpha = fadeFunc(guiAlpha, targetAlpha, fadeRate);
@@ -45,7 +52,7 @@ public class FaderScript : _Mono {
 	/// Fades down.
 	/// </summary>
 	/// <param name="callback">Callback.</param>
-	public void FadeDown(Utils.VoidDelegate callback){
+	public void FadeDown(Utils.VoidDelegate callback = null){
 		targetAlpha = 1;
 		fadeCallback = callback;
 	}
@@ -54,7 +61,7 @@ public class FaderScript : _Mono {
 	/// Dims (partial fade down).
 	/// </summary>
 	/// <param name="callback">Callback.</param>
-	public void Dim(Utils.VoidDelegate callback){
+	public void Dim(Utils.VoidDelegate callback = null){
 		targetAlpha = .2f;
 		fadeCallback = callback;
 	}
@@ -63,7 +70,7 @@ public class FaderScript : _Mono {
 	/// Fades up.
 	/// </summary>
 	/// <param name="callback">Callback.</param>
-	public void FadeUp(Utils.VoidDelegate callback){
+	public void FadeUp(Utils.VoidDelegate callback = null){
 		targetAlpha = 0;
 		fadeCallback = callback;
 	}
