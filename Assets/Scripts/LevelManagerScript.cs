@@ -9,22 +9,15 @@ public class LevelManagerScript : _Mono{
 
 	// Only used in editor, copied to _levelPrefabs at start
 	public GameObject[] levelPrefabs;
+	private List<GameObject> _levelPrefabs;
+
 	public bool loadOnStart;
 
 	[Tooltip("You must assign these if you do not want to load on start.")]
 	public GameObject preloadedLeftLevel, preloadedRightLevel;
-
-	private List<GameObject> _levelPrefabs;
-
+	
 	private GameObject currentLeftLevelPrefab, currentRightLevelPrefab;
 	private GameObject savedLeftLevel, savedRightLevel;
-
-	private Transform leftSpawn, rightSpawn;
-
-	private bool loadSerialized = false;
-	private bool firstLoad = true;
-
-	private bool lockFadeDown = true;
 
 	private string _currentLeftLevel;
 	public string currentLeftLevel {
@@ -40,9 +33,21 @@ public class LevelManagerScript : _Mono{
 		}
 	}
 
+	private Transform leftSpawn {
+		get {
+			return Utils.FindChildRecursive(currentLeftLevelPrefab, "Starting").GetChild(0);
+		}
+	}
+	
+	private Transform rightSpawn {
+		get {
+			return Utils.FindChildRecursive(currentRightLevelPrefab, "Starting").GetChild(0);
+		}
+	}
+
 	public bool SaveCheckpoint(GameObject leftLevel, GameObject rightLevel) {
 		if(leftLevel == null || rightLevel == null) {
-			Debug.LogError("Attempted to load null level.");
+			Debug.LogError("Attempted to save null level.");
 			return false;
 		}
 		Destroy(savedLeftLevel);
@@ -66,27 +71,40 @@ public class LevelManagerScript : _Mono{
 		PlayerPrefs.SetFloat("RightY", rsp.position.y);
 		savedRightLevel.SetActive(false);
 
-		
-		PlayerPrefs.SetString("LeftLevel", Globals.levelManager.currentLeftLevel);
-		PlayerPrefs.SetString("RightLevel", Globals.levelManager.currentRightLevel);
-
+		PlayerPrefs.SetString("LeftLevel", currentLeftLevel);
+		PlayerPrefs.SetString("RightLevel", currentRightLevel);
 
 		return true;
 	}
 
 	public void SaveCheckpoint() {
-		Debug.Log("Saving Checkpoint.");
 		SaveCheckpoint(currentLeftLevelPrefab, currentRightLevelPrefab);
-
 	}
 
 	public void LoadLastCheckpoint() {
-		Debug.Log("Loading Checkpoint.");
 		if(savedLeftLevel == null || savedRightLevel == null) {
 			LoadLevels(currentLeftLevel, currentRightLevel);
 		} else {
 			LoadLevels(savedLeftLevel, savedRightLevel);
 		}
+	}
+
+	public void ReloadCurrentLevels() {
+		LoadLevels(currentLeftLevel, currentRightLevel);
+	}
+
+	public void LoadMainMenu() {
+		Application.LoadLevel(0);
+	}
+	
+	public void LoadSerializedGame() {
+		LoadLevels(PlayerPrefs.GetString("LeftLevel"), PlayerPrefs.GetString("RightLevel"));
+
+		// Current levels are set in the above call to LoadLevels
+		leftSpawn.position = new Vector3(PlayerPrefs.GetFloat("LeftX"), PlayerPrefs.GetFloat("LeftY"), leftSpawn.position.z);
+		rightSpawn.position = new Vector3(PlayerPrefs.GetFloat("RightX"), PlayerPrefs.GetFloat("RightY"), rightSpawn.position.z);
+		leftSpawn.GetComponent<BoxCollider2D>().center = Vector3.zero;
+		rightSpawn.GetComponent<BoxCollider2D>().center = Vector3.zero;
 	}
 
 	public bool LoadLevels(string leftLevelName, string rightLevelName) {
@@ -110,6 +128,11 @@ public class LevelManagerScript : _Mono{
 	}
 
 	public bool LoadLevels(GameObject leftLevel, GameObject rightLevel) {
+		if(leftLevel == null || rightLevel == null) {
+			Debug.LogError("Cannont load null level.");
+			return false;
+		}
+
 		GameObject left = (GameObject)GameObject.Instantiate(leftLevel, Vector3.zero, Quaternion.identity);
 		GameObject right = (GameObject)GameObject.Instantiate(rightLevel, Vector3.zero, Quaternion.identity);
 		left.SetActive(false);
@@ -117,99 +140,56 @@ public class LevelManagerScript : _Mono{
 		Globals.playerLeft.gameObject.SetActive(false);
 		Globals.playerRight.gameObject.SetActive(false);
 
-		Globals.roomManager.enabled = false;
 		// Left level
-		if(left != null) {
-			left.name = leftLevel.name;
-			GameObject.DestroyImmediate(currentLeftLevelPrefab);
-			currentLeftLevelPrefab = left;
+		left.name = leftLevel.name;
+		GameObject.DestroyImmediate(currentLeftLevelPrefab);
+		currentLeftLevelPrefab = left;
+		_currentLeftLevel = left.name;
 
-			leftSpawn = Utils.FindChildRecursive(left, "Starting").GetChild(0);
-			if(leftSpawn != null) {
-				Globals.cameraLeft.FadeTransition(MoveLeftCharacterToSpawnPoint, FinishedLoading);
-			}
-			else {
-				Debug.LogError("No spawn point set for level: " + left.name);
-			}
+		if(leftSpawn != null) {
+			Globals.cameraLeft.FadeTransition(MoveLeftCharacterToSpawnPoint, null);
 		}
-		else{
-			Debug.LogError("Failed to instantiate level prefab");
-			Globals.roomManager.enabled = true;
-			return false;
+		else {
+			Debug.LogError("No spawn point set for level: " + left.name);
 		}
 
 		// Right level
-		if(right != null) {
-			right.name = rightLevel.name;
-			GameObject.DestroyImmediate(currentRightLevelPrefab);
-			currentRightLevelPrefab = right;
-			
-			rightSpawn = Utils.FindChildRecursive(right, "Starting").GetChild(0);
-			if(rightSpawn != null) {
-				Globals.cameraRight.FadeTransition(MoveRightCharacterToSpawnPoint, FinishedLoading);
-			}
-			else {
-				Debug.LogError("No spawn point set for level: " + right.name);
-			}
+		right.name = rightLevel.name;
+		GameObject.DestroyImmediate(currentRightLevelPrefab);
+		currentRightLevelPrefab = right;
+		_currentRightLevel = right.name;
+	
+		if(rightSpawn != null) {
+			Globals.cameraRight.FadeTransition( (Utils.VoidDelegate)MoveRightCharacterToSpawnPoint + (Utils.VoidDelegate)FinishMoving, null);
 		}
-		else{
-			Debug.LogError("Failed to instantiate level prefab");
-			Globals.roomManager.enabled = true;
-			return false;
+		else {
+			Debug.LogError("No spawn point set for level: " + right.name);
 		}
-
-		_currentLeftLevel = leftLevel.name;
-		_currentRightLevel = rightLevel.name;
 
 		return true;
-
 	}
 
-	public void LoadMainMenu() {
-		Application.LoadLevel(0);
-	}
-
-	public void LoadSerializedGame() {
-		LoadLevels(PlayerPrefs.GetString("LeftLevel"), PlayerPrefs.GetString("RightLevel"));
-		leftSpawn.position = new Vector3(PlayerPrefs.GetFloat("LeftX"), PlayerPrefs.GetFloat("LeftY"), leftSpawn.position.z);
-		rightSpawn.position = new Vector3(PlayerPrefs.GetFloat("RightX"), PlayerPrefs.GetFloat("RightY"), rightSpawn.position.z);
-		leftSpawn.GetComponent<BoxCollider2D>().center = Vector3.zero;
-		rightSpawn.GetComponent<BoxCollider2D>().center = Vector3.zero;
-		loadSerialized = true;
-	}
-
+	// Used as a callback
 	private void MoveLeftCharacterToSpawnPoint() {
 		currentLeftLevelPrefab.SetActive(true);
 		Globals.playerLeft.gameObject.SetActive(true);
 		GameObject.FindGameObjectWithTag("PlayerLeft").transform.position = leftSpawn.TransformPoint(leftSpawn.gameObject.GetComponent<BoxCollider2D>().center);
 	}
 
+	// Used as a callback
 	private void MoveRightCharacterToSpawnPoint() {
 		currentRightLevelPrefab.SetActive(true);
 		Globals.playerRight.gameObject.SetActive(true);
 		GameObject.FindGameObjectWithTag("PlayerRight").transform.position = rightSpawn.TransformPoint(rightSpawn.gameObject.GetComponent<BoxCollider2D>().center);
-		Globals.roomManager.MoveCamerasToPoint( new Vector2(rightSpawn.transform.position.x, rightSpawn.transform.position.y));
-		if(loadSerialized){
-			loadSerialized = false;
+	}
+
+	// Helper function for callback
+	private void FinishMoving() {
+		Globals.roomManager.MoveCamerasToPoint( new Vector2(rightSpawn.position.x, rightSpawn.position.y));
+		if(PlayerPrefs.GetString("LoadGame") == "true") {
+			PlayerPrefs.SetString("LoadGame", "false");
 			SaveCheckpoint();
 		}
-		if(firstLoad) {
-			firstLoad = false;
-			lockFadeDown = false;
-		}
-
-	}
-
-	public void SaveGame() {
-		// TODO JSON serialization?
-	}
-
-	private void FinishedLoading() {
-		Globals.roomManager.enabled = true;
-	}
-
-	public void ReloadCurrentLevels() {
-		LoadLevels(currentLeftLevel, currentRightLevel);
 	}
 
 	private void _Load() {
@@ -227,14 +207,11 @@ public class LevelManagerScript : _Mono{
 			_levelPrefabs.Add(levelPrefabs[i]);
 		}
 
-		lockFadeDown = true;
-
 		if(levelPrefabs.Length > 1) {
 			if(loadOnStart) {
-				Invoke( "_Load" , 0.5f );
+				Invoke( "_Load" , 0.1f );
 			}
 			else {
-				lockFadeDown = false;
 				if(preloadedLeftLevel == null || preloadedRightLevel == null) {
 					// Checkpoint system fails if levelmanager doesn't get access to the game objects.
 					Debug.LogError("Preloaded levels not assigned in editor!");
@@ -250,13 +227,5 @@ public class LevelManagerScript : _Mono{
 		}
 		else
 			Debug.LogError("Not enough level prefabs assigned!");
-	}
-
-	void Update(){
-		if(lockFadeDown){
-			// Force the cameras to be faded down
-			Globals.cameraLeft.fader.guiAlpha = 1;
-			Globals.cameraRight.fader.guiAlpha = 1;
-		}
 	}
 }
