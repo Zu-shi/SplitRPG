@@ -31,12 +31,19 @@ public class MovementScript : _Mono {
 	public bool fell{get;set;}
 
 	// Time it takes to move two spaces in frames (at Unity's fixed time step aka 50 fps)
-	const int moveTime = 12;
+	const int moveTime = 11;
+	
+	// Time it takes to change direction in frames (at Unity's fixed time step aka 50 fps)
+	const int changingDirectionTime = 5;
+
+	// Time since last movement in frames 
+	const int fastDirectionChangeThreshold = 12;
 
 	Vector3 startScale;
 	
 	int moveTimeLeft;
 	float moveSpeed;
+	int fastDirectionChangeTimeLeft = 0;
 	
 	bool _isMoving;
 	public bool isMoving{
@@ -45,6 +52,21 @@ public class MovementScript : _Mono {
 		}
 	}
 	
+	public bool justMoved{
+		get {
+			return fastDirectionChangeTimeLeft > 0;
+		}
+	}
+
+	int changingDirectionTimeLeft;
+
+	bool _isChangingDirection;
+	public bool isChangingDirection{
+		get {
+			return _isChangingDirection;
+		}
+	}
+
 	Vector2 moveVelocity;
 	public Direction moveDirection = Direction.NONE;
 	
@@ -117,7 +139,7 @@ public class MovementScript : _Mono {
 			}
 		}
 
-		if(_isMoving){
+		if(isMoving){
 			// Set character velocity
 			rigidbody2D.velocity = moveVelocity;
 			
@@ -127,6 +149,22 @@ public class MovementScript : _Mono {
 				StopMoving();
 			}
 		}
+
+		if(isChangingDirection){
+			
+			// Is changing direction done yet?
+			changingDirectionTimeLeft--;
+			if(changingDirectionTimeLeft <= 0){
+				StopChangingDirection();
+			}
+
+		}
+
+		//If we are still allowed to change directions fast, decrease time required by 1.
+		if(fastDirectionChangeTimeLeft > 0){
+			fastDirectionChangeTimeLeft -= 1;
+		}
+
 	}
 
 	public bool CanMoveInDirection(Direction direction){
@@ -149,11 +187,35 @@ public class MovementScript : _Mono {
 	}
 	
 	/// <summary>
+	/// Turns the character to face the specific direction.
+	/// </summary>
+	/// <param name="direction">Direction.</param>
+	public bool ChangeDirection(Direction direction){
+		if (_isChangingDirection || _isMoving || direction == Direction.NONE) {
+				return false;
+		}
+
+		Debug.Log ("Changing direction " + direction.ToString());
+		Debug.Log ("Current direction " + moveDirection.ToString());
+		_isChangingDirection = true;
+		moveDirection = direction;
+		changingDirectionTimeLeft = changingDirectionTime;
+		return false;
+	}
+
+	/// <summary>
+	/// Stop the character to face the specific direction.
+	/// </summary>
+	protected void StopChangingDirection(){
+		_isChangingDirection = false;
+	}
+
+	/// <summary>
 	/// Moves the character in the specified direction by 2 tiles
 	/// </summary>
 	/// <param name="direction">Direction.</param>
 	public bool MoveInDirection(Direction direction){
-		if(_isMoving || direction == Direction.NONE){
+		if(_isMoving || _isChangingDirection || direction == Direction.NONE){
 			return false;
 		}
 		
@@ -185,6 +247,7 @@ public class MovementScript : _Mono {
 		
 		_isMoving = false;
 		moveVelocity = new Vector2(0,0);
-		
+
+		fastDirectionChangeTimeLeft = fastDirectionChangeThreshold;
 	}
 }
