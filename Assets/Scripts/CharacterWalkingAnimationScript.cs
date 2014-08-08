@@ -30,6 +30,9 @@ public class CharacterWalkingAnimationScript : MonoBehaviour {
 		updateWalkingState ();
 	}
 
+	/// <summary>
+	/// Control command that updates walking state of the character.
+	/// </summary>
 	private void updateWalkingState(){
 		if (mov.isMoving && !playingAnimation) {
 			StartWalkingAnimation ();
@@ -41,16 +44,25 @@ public class CharacterWalkingAnimationScript : MonoBehaviour {
 			}
 		} else if (mov.isMoving && playingAnimation) {
 			AccountForDirectionChange();
+		} else if (mov.isChangingDirection){
+			AccountForDirectionChange();
+			StopWalkingAnimation ();
 		}
 	}
 
+	/// <summary>
+	/// If the player's direction changes while walking, play new animation
+	/// </summary>
 	private void AccountForDirectionChange(){
 		if( getDirectionToAnimationName() !=  sprAnimMan.currentAnimationName){
 			sprAnimMan.PlayAnimation(getDirectionToAnimationName(), 0);
 //			Debug.Log(getDirectionToAnimationName() + " " + sprAnimMan.currentAnimationName);
 		}
 	}
-
+	
+	/// <summary>
+	/// Sets the walking animation according to direction
+	/// </summary>
 	private void StartWalkingAnimation(){
 		waitedTime = 0f;
 
@@ -69,6 +81,9 @@ public class CharacterWalkingAnimationScript : MonoBehaviour {
 		playingAnimation = true;
 	}
 
+	/// <summary>
+	/// Stops the walking animation and set current animation to idle.
+	/// </summary>
 	private void StopWalkingAnimation(){
 		sprAnimMan.PauseAnimation();
 		sprAnimMan.SetCurrentFrame(0); //0 is the idle animation.
@@ -76,6 +91,9 @@ public class CharacterWalkingAnimationScript : MonoBehaviour {
 //		Debug.Log("Animation Stopped");
 	}
 
+	/// <summary>
+	/// Convert direction to name of animation
+	/// </summary>
 	private string getDirectionToAnimationName(){
 		string result = "";
 		switch(mov.moveDirection){
