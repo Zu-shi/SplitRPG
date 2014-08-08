@@ -195,8 +195,8 @@ public class MovementScript : _Mono {
 				return false;
 		}
 
-		Debug.Log ("Changing direction " + direction.ToString());
-		Debug.Log ("Current direction " + moveDirection.ToString());
+		//Debug.Log ("Changing direction " + direction.ToString());
+		//Debug.Log ("Current direction " + moveDirection.ToString());
 		_isChangingDirection = true;
 		moveDirection = direction;
 		changingDirectionTimeLeft = changingDirectionTime;

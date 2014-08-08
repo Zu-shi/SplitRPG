@@ -7,6 +7,8 @@ using System.Collections;
 /// <author>Mark Gardner</author>
 public class ButtonScript : _Mono {
 
+	private _Mono indicator;
+
 	Toggler _toggler;
 	public Toggler toggler{get{ return _toggler; }}
 
@@ -33,6 +35,16 @@ public class ButtonScript : _Mono {
 		foreach(GateScript gate in gates){
 			gate.togglerToWatch = _toggler;
 		}
+
+		foreach (Transform child in transform)
+		{
+			if( child.name.Equals("TimerIndicator") ){
+				indicator = child.GetComponentInChildren<_Mono> ();
+				indicator.ys = 0;
+				indicator.alpha = 0.45f;
+				indicator.gameObject.layer = gameObject.layer;
+			}
+		}
 	}
 
 	void Update () {
@@ -54,10 +66,7 @@ public class ButtonScript : _Mono {
 				timeLeft = timerLength; // reset timer
 
 			} else {
-				timeLeft -= Time.deltaTime; // count down
-				if(timeLeft <= 0){ // check if done
-					_toggler.TurnOff();
-				}
+				CountDownTimer();
 			}
 		}
 
@@ -69,6 +78,17 @@ public class ButtonScript : _Mono {
 		}
 	}
 
-
+	void CountDownTimer(){
+		if(timeLeft > 0){
+			timeLeft -= Time.deltaTime; // count down
+		}
+		if(timeLeft <= 0){ // check if done
+			_toggler.TurnOff();
+		}
+		
+		if (timerLength != 0) {
+			indicator.ys = (timeLeft / timerLength);
+		}
+	}
 	
 }
