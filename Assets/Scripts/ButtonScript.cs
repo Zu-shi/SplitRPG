@@ -16,14 +16,18 @@ public class ButtonScript : _Mono {
 	[Tooltip("Sprite for when the button is not pressed.")]
 	public Sprite offSprite;
 
-	[Tooltip("Springy buttons spring back to the off state when the player walks off.")]
-	public bool springy = false;
+	[Tooltip("Time for the switch to flip back to off state. " + 
+	         "When set to 0 the button will switch off when the player walks off, "+
+	         "when set to -1 the switch will stay on indefinitely")]
+	public float timerLength = -1;
+	float timeLeft;
 
 	[Tooltip("Gates that will watch the switch.")]
 	public GateScript[] gates;
 	
 	void Start () {
 		_toggler = new Toggler();
+		timeLeft = timerLength;
 
 		// Tell each gate to watch our switch
 		foreach(GateScript gate in gates){
@@ -36,11 +40,25 @@ public class ButtonScript : _Mono {
 		// Is the player on us?
 		bool playerIsOnButton = Globals.collisionManager.IsPlayerOnTile(tileVector, gameObject.layer);
 
-		// Switch the state of the switch if needed
-		if(_toggler.on && springy && !playerIsOnButton){
-			_toggler.TurnOff();
-		} else if (_toggler.off && playerIsOnButton){
+		// Toggle on if needed
+		if (_toggler.off && playerIsOnButton){
 			_toggler.TurnOn();
+		}
+
+		// Timer stuff
+		// We only need to count down when we're toggled on
+		// When timerLength is < 0 aka -1, the timer is disabled
+		if(_toggler.on && timerLength >= 0){
+
+			if(playerIsOnButton){
+				timeLeft = timerLength; // reset timer
+
+			} else {
+				timeLeft -= Time.deltaTime; // count down
+				if(timeLeft <= 0){ // check if done
+					_toggler.TurnOff();
+				}
+			}
 		}
 
 		// Update the sprite
