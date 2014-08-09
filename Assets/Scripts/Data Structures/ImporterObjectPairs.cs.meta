@@ -1,9 +1,0 @@
-fileFormatVersion: 2
-guid: f9a876facc0004a729948c042abf53b4
-MonoImporter:
-  serializedVersion: 2
-  defaultReferences:
-  - pushBlocksPrefab: {fileID: 100000, guid: 790ddb4818ad34a51aa85bb76cda356c, type: 2}
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 

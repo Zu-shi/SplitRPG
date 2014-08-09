@@ -3,6 +3,7 @@ using System.Collections;
 
 public static class Utils {
 
+	public const float TILED_TO_UNITY_SCALE = 0.015623f;
 	// Declaration of a simple delegate type
 	public delegate void VoidDelegate();
 

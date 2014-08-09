@@ -86,7 +86,7 @@ public class ButtonScript : _Mono {
 			_toggler.TurnOff();
 		}
 		
-		if (timerLength != 0) {
+		if (timerLength != 0 && indicator != null) {
 			indicator.ys = (timeLeft / timerLength);
 		}
 	}
