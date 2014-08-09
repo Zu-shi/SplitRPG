@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 7/31/2014 2:01:42 PM-->
+<!--Last exported: 8/8/2014 7:08:24 PM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="TempCyberpunkTileset" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="TempCyberpunkTileset" sortingLayerName="" sortingOrder="1" />
@@ -123,6 +123,11 @@
     </GameObject>
     <GameObject name="Starting">
       <GameObject name="Starting Point" x="1984" y="-7360">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+    </GameObject>
+    <GameObject name="Objects(Invisible)">
+      <GameObject name="pushblock" x="1984" y="-7040">
         <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>

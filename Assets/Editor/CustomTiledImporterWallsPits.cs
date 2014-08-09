@@ -6,7 +6,6 @@ using Tiled2Unity;
 public class CustomTiledImporterWallsPits : Tiled2Unity.ICustomTiledImporter {
 
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props){
-
 	}
 	
 	public void CustomizePrefab(GameObject prefab){
