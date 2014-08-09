@@ -222,7 +222,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1372393338}
-  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: -.707106888, y: 0, z: 0, w: .707106769}
   m_LocalPosition: {x: .203566313, y: 1.21850038, z: 0}
   m_LocalScale: {x: 10, y: 1, z: 5}
   m_Children: []
@@ -301,10 +301,10 @@ GameObject:
   - 92: {fileID: 2135246359}
   - 124: {fileID: 2135246358}
   - 81: {fileID: 2135246357}
-  - 114: {fileID: 2135246362}
   - 82: {fileID: 2135246364}
   - 114: {fileID: 2135246363}
   - 114: {fileID: 2135246365}
+  - 114: {fileID: 2135246362}
   m_Layer: 0
   m_Name: MainMenuCamera
   m_TagString: MainCamera

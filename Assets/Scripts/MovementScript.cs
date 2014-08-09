@@ -130,6 +130,11 @@ public class MovementScript : _Mono {
 	}
 
 	public bool CanMoveInDirection(Direction direction){
+		// Check if there is a fence blocking that direction
+		if(Globals.collisionManager.IsFenceBlocking(this.tileVector, direction, this.gameObject.layer)) {
+			//Debug.Log("Found fence, can't move.");
+			return false;
+		}
 		
 		// Look for blocking tile
 		ColliderScript blocker = Globals.collisionManager.GetBlockingObject(this, direction);
