@@ -7,23 +7,32 @@ public class InputManagerScript : MonoBehaviour {
 	 */
 
 	public bool ignoreInput;
+	public bool snapshotShortcut = true;
 
 	List<Button> _inputs;
 	List<Button> _lastInputs;
 
-
+	
 	void Start () {
 		ignoreInput = false;
 		_inputs = new List<Button>();
 		_lastInputs = new List<Button>();
 	}
-	
+
 	void LateUpdate () {
 		// Update variables
 		_lastInputs = _inputs;
 		_inputs = new List<Button>();
 
 		// Input
+		if (snapshotShortcut) {
+			if (Input.GetKeyDown ("space")) {
+				string fname = "Assets/Snapshots/tmp/Screenshot" + System.DateTime.Now.ToString ("MM:DD hh:mm:ss.fff") + ".png";
+				Debug.Log ("Snapshot saved: " + fname);
+				Application.CaptureScreenshot (fname);
+			}
+		}
+
 		float hIn = Input.GetAxis("Horizontal");
 		float vIn = Input.GetAxis("Vertical");
 		

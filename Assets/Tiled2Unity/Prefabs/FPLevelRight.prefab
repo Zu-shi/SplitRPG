@@ -621,7 +621,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 400074}
   - 61: {fileID: 6100066}
-  m_Layer: 13
+  - 114: {fileID: 11400000}
+  m_Layer: 9
   m_Name: RectangleObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -637,8 +638,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400076}
   - 61: {fileID: 6100064}
-  - 114: {fileID: 11400000}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: RectangleObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1027,7 +1027,7 @@ Transform:
   - {fileID: 400008}
   - {fileID: 400006}
   - {fileID: 400004}
-  - {fileID: 400076}
+  - {fileID: 400074}
   m_Father: {fileID: 400024}
   m_RootOrder: 4
 --- !u!4 &400046
@@ -1215,11 +1215,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1472, y: -6592, z: 0}
+  m_LocalPosition: {x: 960, y: -3264, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400086}
-  m_RootOrder: 0
+  m_Father: {fileID: 400044}
+  m_RootOrder: 15
 --- !u!4 &400076
 Transform:
   m_ObjectHideFlags: 1
@@ -1227,11 +1227,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: -3264, z: 0}
+  m_LocalPosition: {x: 1472, y: -6592, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400044}
-  m_RootOrder: 15
+  m_Father: {fileID: 400086}
+  m_RootOrder: 0
 --- !u!4 &400078
 Transform:
   m_ObjectHideFlags: 1
@@ -1292,7 +1292,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 400074}
+  - {fileID: 400076}
   - {fileID: 400072}
   - {fileID: 400070}
   - {fileID: 400068}
@@ -1743,8 +1743,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 512, y: 128}
-  m_Center: {x: 256, y: -64}
+  m_Size: {x: 1152, y: 1280}
+  m_Center: {x: 576, y: -640}
 --- !u!61 &6100066
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -1754,14 +1754,14 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 1152, y: 1280}
-  m_Center: {x: 576, y: -640}
+  m_Size: {x: 512, y: 128}
+  m_Center: {x: 256, y: -64}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100076}
+  m_GameObject: {fileID: 100074}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d681d2a103ec142ea9905ec01be55dbd, type: 3}

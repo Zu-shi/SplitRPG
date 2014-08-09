@@ -159,7 +159,11 @@ public class PlayerControllerScript : _Mono {
 			if(WillMoveOffScreen(direction))
 				walkingOutOfRoom = true;
 
-			characterMovement.MoveInDirection(direction);
+			if(characterMovement.moveDirection != direction && !characterMovement.justMoved){
+				characterMovement.ChangeDirection(direction);
+			}else{
+				characterMovement.MoveInDirection(direction);
+			}
 
 		}
 

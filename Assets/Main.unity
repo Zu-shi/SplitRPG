@@ -212,6 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ignoreInput: 0
+  snapshotShortcut: 1
 --- !u!114 &464160814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,7 +240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelPrefabs:
   - {fileID: 100120, guid: 0ea92dd77f66e4b46bfd983af1d59a41, type: 2}
-  - {fileID: 100090, guid: c38230223c36b43e98d2e0e6aa32d183, type: 2}
+  - {fileID: 100088, guid: c38230223c36b43e98d2e0e6aa32d183, type: 2}
   loadOnStart: 1
   preloadedLeftLevel: {fileID: 0}
   preloadedRightLevel: {fileID: 0}
@@ -255,7 +256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972203c7d8293994b98f5ae30a457a5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Music: []
+  Music:
+  - {fileID: 0}
 --- !u!82 &464160817
 AudioSource:
   m_ObjectHideFlags: 0
@@ -586,6 +588,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11400018, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
+      propertyPath: Music.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -625,11 +631,15 @@ Prefab:
     - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: levelPrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 100090, guid: c38230223c36b43e98d2e0e6aa32d183, type: 2}
+      objectReference: {fileID: 100088, guid: c38230223c36b43e98d2e0e6aa32d183, type: 2}
     - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: levelPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 100120, guid: 0ea92dd77f66e4b46bfd983af1d59a41, type: 2}
+    - target: {fileID: 11400012, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
+      propertyPath: snapshotShortcut
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
   m_RootGameObject: {fileID: 464160805}
