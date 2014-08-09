@@ -13,7 +13,7 @@ public class CollisionManagerScript : MonoBehaviour {
 	[Tooltip("Layers checked for left side")]
 	public LayerMask leftLayers;
 
-	[Tooltip("Layers checked for left side")]
+	[Tooltip("Layers checked for right side")]
 	public LayerMask rightLayers;
 
 	/*
@@ -135,6 +135,22 @@ public class CollisionManagerScript : MonoBehaviour {
 	public bool IsPlayerCollidingWith(Collider2D aCollider, int layerOfObject){
 		PlayerControllerScript player = Utils.PlayerOnLayer(layerOfObject);
 		return aCollider.OverlapPoint(player.xy);
+	}
+
+	public bool IsFenceBlocking(Vector2 tileCoords, Direction direction, int layerOfObject) {
+		LayerMask mask = defaultLayers;
+		if(layerOfObject == LayerMask.NameToLayer("Left")){
+			mask = leftLayers;
+		} else if(layerOfObject == LayerMask.NameToLayer("Right")){
+			mask = rightLayers;
+		}
+		RaycastHit2D[] hits = Physics2D.RaycastAll(tileCoords, Utils.DirectionToVector(direction), 2.0f, mask);
+		foreach(RaycastHit2D hit in hits) {
+			if(hit.collider.transform.parent != null && hit.collider.transform.parent.name == "Fences") {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/// <summary>
