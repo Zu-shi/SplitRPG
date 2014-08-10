@@ -28,6 +28,37 @@ public class CollisionManagerScript : MonoBehaviour {
 	 */
 
 	/// <summary>
+	/// Is the tile blocking movement?
+	/// </summary>
+	public bool IsTileActivatable(Vector2 tileCoords, int layerOfObject){
+		return GetActivatableObject(tileCoords, layerOfObject);
+	}
+	
+	/// <summary>
+	/// Is the tile in front of me activatable? Overload that takes coordinates, direction, and layer of object.
+	/// </summary>
+	public bool IsTileActivatable(Vector2 tileCoords, Direction direction, int layerOfObject){
+		return IsTileActivatable(tileCoords + 2 * Utils.DirectionToVector(direction), layerOfObject);
+	}
+	
+	/// <summary>
+	/// Is the tile in front of me activatable? Overload that takes a mono and a direction.
+	/// </summary>
+	public bool IsTileActivatable(_Mono mono, Direction direction){
+		return IsTileActivatable(mono.tileVector + 2 * Utils.DirectionToVector(direction), mono.gameObject.layer);
+	}
+
+	/// <summary>
+	/// Gets the ColliderScript of the object that's blocking a tile
+	/// </summary>
+	public ColliderScript GetActivatableObject(Vector2 tileCoords, int layerOfObject){
+		foreach(ColliderScript cs in GetColliderScriptsOnTile(tileCoords, layerOfObject)){
+			if(cs.activatable) return cs;
+		}
+		return null;
+	}
+
+	/// <summary>
 	/// Gets the ColliderScript of the object that's blocking a tile
 	/// </summary>
 	public ColliderScript GetBlockingObject(Vector2 tileCoords, int layerOfObject){
