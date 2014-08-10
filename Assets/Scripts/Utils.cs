@@ -43,6 +43,15 @@ public static class Utils {
 	/// <summary>
 	/// Clamp the specified value to between min and max.
 	/// </summary>
+	public static void assert(bool statement){
+		if (!statement) {
+			Debug.LogError("Statement failed.");
+		}
+	}
+
+	/// <summary>
+	/// Clamp the specified value to between min and max.
+	/// </summary>
 	public static float Clamp(float value, float min, float max){
 		if(value <= min)
 			return min;

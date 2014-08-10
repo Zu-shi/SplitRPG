@@ -110,6 +110,9 @@ namespace Tiled2Unity
 
         private void OnPostprocessModel(GameObject gameObject)
         {
+            if (!UseThisImporter())
+                return;
+
             // Each mesh renderer has the ability to set the a sort layer but it takes some work with Unity to expose it.
             foreach (MeshRenderer mr in gameObject.GetComponentsInChildren<MeshRenderer>())
             {
@@ -123,6 +126,9 @@ namespace Tiled2Unity
 
         private Material OnAssignMaterialModel(Material defaultMaterial, Renderer renderer)
         {
+            if (!UseThisImporter())
+                return null;
+
             // This is the only reliable place to assign materials in the import chain.
             // It kind of sucks because we have to go about making the mesh/material association in a roundabout way.
 
@@ -145,12 +151,21 @@ namespace Tiled2Unity
         {
             if (!UseThisImporter())
                 return;
+
             TextureImporter textureImporter = this.assetImporter as TextureImporter;
+            textureImporter.textureType = TextureImporterType.Advanced;
+            textureImporter.npotScale = TextureImporterNPOTScale.None;
             textureImporter.convertToNormalmap = false;
-            textureImporter.filterMode = FilterMode.Point;
-            textureImporter.textureFormat = TextureImporterFormat.AutomaticTruecolor;
+            textureImporter.lightmap = false;
+            textureImporter.alphaIsTransparency = true;
+            textureImporter.grayscaleToAlpha = false;
+            textureImporter.linearTexture = false;
+            textureImporter.spriteImportMode = SpriteImportMode.None;
             textureImporter.mipmapEnabled = false;
-            textureImporter.textureType = TextureImporterType.GUI;
+            textureImporter.generateCubemap = TextureImporterGenerateCubemap.None;
+            textureImporter.filterMode = FilterMode.Point;
+            textureImporter.wrapMode = TextureWrapMode.Clamp;
+            textureImporter.textureFormat = TextureImporterFormat.AutomaticTruecolor;
         }
 
     }

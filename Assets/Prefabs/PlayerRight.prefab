@@ -147,6 +147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingOrder: 3
   height: 1
+  slightlyAbove: 0
+  slightlyBelow: 0
   editModeRefresh: 0
 --- !u!114 &11400002
 MonoBehaviour:
@@ -261,7 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationName: WalkDownAnimation
-  rate: 1
+  rate: 10
   loop: 1
   sprites:
   - {fileID: 21300002, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}

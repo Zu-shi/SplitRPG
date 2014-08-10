@@ -7,7 +7,7 @@ using System.Collections;
 /// <author>Mark Gardner</author>
 public class Toggler {
 
-	private bool _on;
+	private bool _on = true;
 
 	/// <summary>
 	/// Gets a value indicating whether this <see cref="Switch"/> is on.

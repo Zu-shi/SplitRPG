@@ -7,8 +7,7 @@ using System.Collections;
 [Tiled2Unity.CustomTiledImporter]
 class CustomTiledImporterAddObjects : Tiled2Unity.ICustomTiledImporter{
 
-	private string pathPrefix = "Assets/Prefabs/";
-	private Dictionary<string, GameObject> objects;
+	private string pathPrefix = "Assets/Prefabs/MappedObjects/";
 
 
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props) {
@@ -16,22 +15,17 @@ class CustomTiledImporterAddObjects : Tiled2Unity.ICustomTiledImporter{
 	
 	public void CustomizePrefab(GameObject prefab) {
 		GameObject invisibleLayer;
-		if (invisibleLayer = prefab.transform.FindChild ("Objects(Invisible)").gameObject) {
-			
-			GameObject tmp1 = new GameObject();
-			tmp1.name = prefab.name;
-			
+
+		if (invisibleLayer = prefab.transform.Find ("Objects(Invisible)").gameObject) {
+	
 			foreach(Transform child in invisibleLayer.transform)
 			{
 				string name = child.gameObject.name.ToLower();
 
-				//GameObject item = (GameObject)GameObject.Instantiate(ImporterObjectPairs.mappings[name]);
-				Debug.LogWarning("Trying to match object " + name );
-				GameObject item = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/MappedObjects/" + name + ".prefab", typeof(GameObject)) as GameObject;
+				GameObject item = AssetDatabase.LoadAssetAtPath(pathPrefix + name + ".prefab", typeof(GameObject)) as GameObject;
 				if(item != null){
 					//Add Vector3.one to offset center differences.
 					item = (GameObject)GameObject.Instantiate(item, child.transform.position, child.transform.rotation);
-					Debug.LogWarning("Adding object " + name );
 
 					_Mono itemMono = item.GetComponent<_Mono>();
 					itemMono.xs /= Utils.TILED_TO_UNITY_SCALE;
@@ -40,12 +34,11 @@ class CustomTiledImporterAddObjects : Tiled2Unity.ICustomTiledImporter{
 					itemMono.y -= itemMono.ys/2;
 					item.name = name;
 					item.transform.parent = child;
+					item.layer = invisibleLayer.layer;
 				}
 				//GameObject.Destroy(child);
 			}
-			
-			PrefabUtility.CreatePrefab(pathPrefix + prefab.name + ".prefab", tmp1);
-			GameObject.DestroyImmediate(tmp1);
+
 		}
 	}
 

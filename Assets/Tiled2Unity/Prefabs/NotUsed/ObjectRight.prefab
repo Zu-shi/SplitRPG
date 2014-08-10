@@ -1838,6 +1838,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingOrder: 0
   height: 2
+  slightlyAbove: 0
+  slightlyBelow: 0
   editModeRefresh: 0
 --- !u!114 &11400004
 MonoBehaviour:

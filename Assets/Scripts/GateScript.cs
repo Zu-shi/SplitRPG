@@ -22,6 +22,7 @@ public class GateScript : _Mono {
 	}
 
 	void Update () {
+		//Debug.LogWarning ("toggler state " + togglerToWatch.on);
 		bool open = togglerToWatch.on;
 		if(reverse)
 			open = !open;

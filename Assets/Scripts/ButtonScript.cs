@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// An in-game button that can be stepped on to toggle a target, such as a gate.
@@ -9,7 +10,7 @@ public class ButtonScript : _Mono {
 
 	private _Mono indicator;
 
-	Toggler _toggler;
+	Toggler _toggler = new Toggler();
 	public Toggler toggler{get{ return _toggler; }}
 
 	[Tooltip("Sprite for when the button is pressed.")]
@@ -25,10 +26,11 @@ public class ButtonScript : _Mono {
 	float timeLeft;
 
 	[Tooltip("Gates that will watch the switch.")]
-	public GateScript[] gates;
+
+	//Do NOT make this private! Prefab setting must be saved to a public setting.
+	public List<GateScript> gates = new List<GateScript>();
 	
 	void Start () {
-		_toggler = new Toggler();
 		timeLeft = timerLength;
 
 		// Tell each gate to watch our switch
@@ -89,6 +91,13 @@ public class ButtonScript : _Mono {
 		if (timerLength != 0 && indicator != null) {
 			indicator.ys = (timeLeft / timerLength);
 		}
+	}
+
+	public void addGate(GateScript gs){
+		gates.Add (gs);
+		gs.togglerToWatch = _toggler;
+		//Debug.LogWarning ("toggler passed");
+		//Debug.LogWarning ("toggler value " + toggler.on);
 	}
 	
 }
