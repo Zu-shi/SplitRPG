@@ -4,7 +4,7 @@ using System.Collections;
 public class GateScript : _Mono {
 
 	// Gate determines whether it's open or closed based on the state of switchToWatch
-	public Toggler togglerToWatch {get; set;}
+	public Toggler togglerToWatch; //{get; set;}
 
 	[Tooltip("Sprite shown when gate is open.")]
 	public Sprite closedSprite;

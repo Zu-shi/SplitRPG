@@ -22,6 +22,8 @@ class CustomTiledImporterLeftRight : Tiled2Unity.ICustomTiledImporter{
 	}
 	
 	public void CustomizePrefab(GameObject prefab){
+		//Debug.LogWarning ("Customizing");
+
 		if(physicsLayer <= 0)
 			return;
 

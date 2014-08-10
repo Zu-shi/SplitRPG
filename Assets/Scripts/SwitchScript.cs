@@ -41,11 +41,13 @@ public class SwitchScript : ColliderScript {
 	
 	public void addGate(GateScript gs){
 		gates.Add (gs);
-		gs.togglerToWatch = _toggler;
+		//gs.togglerToWatch = _toggler;
 	}
 
 	public override void Activated(){
-		_toggler.Toggle ();
+//		Debug.Log("Activated called");
+		//_toggler.Toggle ();
+		_toggler.Toggle();
 	}
 	
 }

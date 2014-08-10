@@ -1,13 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 8/9/2014 10:23:55 PM-->
+<!--Last exported: 8/10/2014 11:01:38 AM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="Template4" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="Template4" sortingLayerName="" sortingOrder="1" />
   <Prefab name="Journey1LeftSide" scale="0.015625">
-    <Property name="defaultButton" value="button" />
-    <Property name="defaultButtonGate" value="buttonGate" />
+    <Property name="defaultButton" value="defaultButton" />
+    <Property name="defaultButtonGate" value="defaultButtonGate" />
+    <Property name="defaultSwitch" value="defaultSwitch" />
+    <Property name="defaultSwitchGate" value="defaultSwitchGate" />
     <Property name="side" value="left" />
     <GameObject name="Background_1_00">
       <GameObject copy="mesh_[00]_[00]" />
@@ -35,7 +37,7 @@
     </GameObject>
     <GameObject name="Switches and Gates">
       <GameObject name="S01" x="384" y="-12544">
-        <Property name="target" value="SG01, SG0" />
+        <Property name="target" value="SG01, SG02" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="SG01" x="384" y="-12288">

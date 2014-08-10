@@ -144,12 +144,15 @@ public class PlayerControllerScript : _Mono {
 	/// Tells the player to act on object in front
 	/// </summary>
 	public void GiveInputAction(){
+//		Debug.Log("disableCharacter");
 		if(disableCharacter)
 			return;
 		
+//		Debug.Log("characterMovement.falling || !allowCommands");
 		if(characterMovement.falling || !allowCommands)
 			return;
 
+//		Debug.Log("GiveInputAction called");
 		// Look for activating tile
 		ColliderScript toActivate = Globals.collisionManager.GetActivatableObject(this, 
 			GetComponent<CharacterMovementScript>().moveDirection);

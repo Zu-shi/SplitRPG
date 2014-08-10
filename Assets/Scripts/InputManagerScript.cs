@@ -55,6 +55,7 @@ public class InputManagerScript : MonoBehaviour {
 		foreach(KeyCode kc in ACTION_KEYS){
 			if(Input.GetKeyDown(kc)){
 				_inputs.Add(Button.ACTION);
+				//Debug.LogWarning("added input");
 			}
 		}
 
