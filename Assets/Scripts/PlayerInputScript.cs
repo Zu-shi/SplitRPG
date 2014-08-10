@@ -24,8 +24,13 @@ public class PlayerInputScript : MonoBehaviour {
 
 		// Check that both are ready and give the input at same time (prevents desyncs)
 		if(Globals.playerLeft.readyForInput && Globals.playerRight.readyForInput){
-			Globals.playerLeft.GiveInputDirection(_inputDirection);
-			Globals.playerRight.GiveInputDirection(_inputDirection);
+			if(_inputDirection != Direction.NONE){
+				Globals.playerLeft.GiveInputDirection(_inputDirection);
+				Globals.playerRight.GiveInputDirection(_inputDirection);
+			}else{
+				Globals.playerLeft.GiveInputAction();
+				Globals.playerRight.GiveInputAction();
+			}
 		}
 
 	}

@@ -2,7 +2,8 @@
 using System.Collections;
 
 /// <summary>
-/// Movement specific to a player character, attatched to player objects.
+/// Movement specific to a player character, attatched to player objects. 
+/// This isn't really specific to the player yet, the Movement script stuff should be refactored here.
 /// </summary>
 /// <author>Mark Gardner</author>
 public class CharacterMovementScript : MovementScript {

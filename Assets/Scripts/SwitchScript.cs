@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// An in-game button that can be stepped on to toggle a target, such as a gate.
 /// </summary>
 /// <author>Zuoming Shir</author>
-public class ButtonScript : ColliderScript {
+public class SwitchScript : ColliderScript {
 	
 	private _Mono indicator;
 	

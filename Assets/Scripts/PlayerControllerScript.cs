@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerControllerScript : _Mono {
 
-	bool allowMovement{get;set;}
+	bool allowCommands{get;set;}
 
 	[Tooltip("Shadow object of the player")]
 	public GameObject shadow;
@@ -29,12 +29,12 @@ public class PlayerControllerScript : _Mono {
 	/// <value><c>true</c> if ready for input; otherwise, <c>false</c>.</value>
 	public bool readyForInput {
 		get {
-			return !characterMovement.isMoving && !characterMovement.falling && allowMovement;
+			return !characterMovement.isMoving && !characterMovement.falling && allowCommands;
 		}
 	}
 
 	void Start () {
-		allowMovement = true;
+		allowCommands = true;
 
 		// Game Manager
 		roomManager = Globals.roomManager;
@@ -139,6 +139,25 @@ public class PlayerControllerScript : _Mono {
 		return characterMovement.CanMoveInDirection(direction) && !room.ContainsTile(dest);
 
 	}
+	
+	/// <summary>
+	/// Tells the player to act on object in front
+	/// </summary>
+	public void GiveInputAction(){
+		if(disableCharacter)
+			return;
+		
+		if(characterMovement.falling || !allowCommands)
+			return;
+
+		// Look for activating tile
+		ColliderScript toActivate = Globals.collisionManager.GetActivatableObject(this, 
+			GetComponent<CharacterMovementScript>().moveDirection);
+
+		if (toActivate != null) {
+			toActivate.Activated();
+		}
+	}
 
 	/// <summary>
 	/// Tells the player to move in a direction
@@ -148,7 +167,7 @@ public class PlayerControllerScript : _Mono {
 		if(disableCharacter)
 			return;
 
-		if(characterMovement.falling || !allowMovement)
+		if(characterMovement.falling || !allowCommands)
 			return;
 
 		// Check if we need to wait at the edge of the screen
@@ -173,14 +192,14 @@ public class PlayerControllerScript : _Mono {
 	/// Enables the ability to accept movement commands.
 	/// </summary>
 	public void EnableMovement(){
-		allowMovement = true;
+		allowCommands = true;
 	}
 
 	/// <summary>
 	/// Disables the ability to accept movement commands.
 	/// </summary>
 	public void DisableMovement(){
-		allowMovement = false;
+		allowCommands = false;
 
 	}
 
@@ -189,7 +208,7 @@ public class PlayerControllerScript : _Mono {
 	/// </summary>
 	/// <param name="t">Duration in seconds.</param>
 	public void DisableMovement(float t){
-		allowMovement = false;
+		allowCommands = false;
 		CancelInvoke("EnableMovement");
 		Invoke ("EnableMovement", t);
 	}

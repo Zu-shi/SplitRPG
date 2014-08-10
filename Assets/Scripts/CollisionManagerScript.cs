@@ -49,13 +49,27 @@ public class CollisionManagerScript : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Gets the ColliderScript of the object that's blocking a tile
+	/// Gets the ColliderScript of the object that's activatable
 	/// </summary>
 	public ColliderScript GetActivatableObject(Vector2 tileCoords, int layerOfObject){
 		foreach(ColliderScript cs in GetColliderScriptsOnTile(tileCoords, layerOfObject)){
 			if(cs.activatable) return cs;
 		}
 		return null;
+	}
+
+	/// <summary>
+	/// Gets the ColliderScript of the object that's activatable. Overload that takes coordinates, direction, and layer of object.
+	/// </summary>
+	public ColliderScript GetActivatableObject(Vector2 tileCoords, Direction direction, int layerOfObject){
+		return GetActivatableObject(tileCoords + 2 * Utils.DirectionToVector(direction), layerOfObject);
+	}
+
+	/// <summary>
+	/// Gets the ColliderScript of the object that's activatable. Overload that takes a mono and a direction.
+	/// </summary>
+	public ColliderScript GetActivatableObject(_Mono mono, Direction direction){
+		return GetActivatableObject(mono.tileVector + 2 * Utils.DirectionToVector(direction), mono.gameObject.layer);
 	}
 
 	/// <summary>

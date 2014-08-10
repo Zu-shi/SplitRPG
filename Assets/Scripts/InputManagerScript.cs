@@ -8,6 +8,8 @@ public class InputManagerScript : MonoBehaviour {
 
 	public bool ignoreInput;
 	public bool snapshotShortcut = true;
+	private const KeyCode SNAPSHOT_KEY = KeyCode.P;
+	private KeyCode[] ACTION_KEYS = {KeyCode.Space, KeyCode.LeftControl, KeyCode.Z};
 
 	List<Button> _inputs;
 	List<Button> _lastInputs;
@@ -26,7 +28,7 @@ public class InputManagerScript : MonoBehaviour {
 
 		// Input
 		if (snapshotShortcut) {
-			if (Input.GetKeyDown ("space")) {
+			if (Input.GetKeyDown (SNAPSHOT_KEY)) {
 				string fname = "Assets/Snapshots/tmp/Screenshot" + System.DateTime.Now.ToString ("MM:DD hh:mm:ss.fff") + ".png";
 				Debug.Log ("Snapshot saved: " + fname);
 				Application.CaptureScreenshot (fname);
@@ -50,6 +52,11 @@ public class InputManagerScript : MonoBehaviour {
 		else if (vIn < -threshhold)
 			_inputs.Add(Button.DOWN);
 
+		foreach(KeyCode kc in ACTION_KEYS){
+			if(Input.GetKeyDown(kc)){
+				_inputs.Add(Button.ACTION);
+			}
+		}
 
 		if(ignoreInput){
 			_inputs.Clear();
