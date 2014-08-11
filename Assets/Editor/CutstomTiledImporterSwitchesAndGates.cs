@@ -12,7 +12,7 @@ public class CustomTiledImporterSwitchesAndGates : Tiled2Unity.ICustomTiledImpor
 	
 	private string pathPrefix = "Assets/Prefabs/MappedObjects/";
 	private Dictionary<string, IDictionary<string, string>> switches = new Dictionary<string, IDictionary<string, string>>();
-	private Dictionary<string, string> gates = new Dictionary<string, string>();
+	private Dictionary<string, IDictionary<string, string>> gates = new Dictionary<string, IDictionary<string, string>>();
 	private string defaultSwitchPrefabName;
 	private string defaultGatePrefabName;
 	
@@ -33,18 +33,17 @@ public class CustomTiledImporterSwitchesAndGates : Tiled2Unity.ICustomTiledImpor
 				//A button
 				//Debug.LogWarning(gameObject.name);
 				switches.Add(gameObject.name, props);
-				string[] targets = props["target"].Split(new string[] { ", " }, System.StringSplitOptions.None);
-				
-				foreach(string target in targets){
-					gates.Add (target, "");
-					//Debug.LogWarning(target);
-				}
+				//string[] targets = props["target"].Split(new string[] { ", " }, System.StringSplitOptions.None);
 			}else{
-				//This is a gate that has specified a specific visual.
+				//This is a gate.
+				/*
 				if(gates.ContainsKey(gameObject.name)){
 					gates.Remove(gameObject.name);
 				}
-				gates.Add (gameObject.name, props["visual"]);
+
+				gates.Add (gameObject.name, props["visual"]);*/
+				Debug.LogWarning(gameObject.name);
+				gates.Add(gameObject.name, props);
 				//Debug.LogWarning(gameObject.name);
 			}
 		}
@@ -55,14 +54,22 @@ public class CustomTiledImporterSwitchesAndGates : Tiled2Unity.ICustomTiledImpor
 		
 		if (switchLayer = prefab.transform.FindChild ("Switches and Gates").gameObject) {
 			
-			foreach(KeyValuePair<string, string> gate in gates)
+			foreach(KeyValuePair<string, IDictionary<string, string>> gate in gates)
 			{
 				GameObject gateObjParent = switchLayer.transform.FindChild(gate.Key).gameObject;
+				GameObject gateObj;
 				//Check if the gate has a default visual
-				if(gate.Value != ""){
-					generatePrefabUnderObject(gate.Value, gateObjParent);
+				if( gate.Value.ContainsKey("visual") ){
+					gateObj = generatePrefabUnderObject(gate.Value["visual"], gateObjParent);
 				}else{
-					generatePrefabUnderObject(defaultGatePrefabName, gateObjParent);
+					gateObj = generatePrefabUnderObject(defaultGatePrefabName, gateObjParent);
+				}
+
+				if( gate.Value.ContainsKey("reverse") ){
+					Debug.LogWarning(gate.Value["reverse"]);
+					Debug.LogWarning(gateObj.GetComponent<GateScript>() != null);
+
+					gateObj.GetComponent<GateScript>().reverse = bool.Parse( gate.Value["reverse"] );
 				}
 			}
 			
@@ -111,7 +118,7 @@ public class CustomTiledImporterSwitchesAndGates : Tiled2Unity.ICustomTiledImpor
 			obj.name = obj.name + "Parent";
 			item.layer = obj.layer;
 		} else {
-			//Debug.LogWarning("Warning: prefab " + prefabName + " could not be found.");
+			Debug.LogWarning("Warning: prefab " + pathPrefix + prefabName + ".prefab" + " could not be found.");
 		}
 		return item;
 	}

@@ -277,7 +277,7 @@ namespace Tiled2Unity
             var props = from p in goXml.Elements("Property")
                         select new { Name = p.Attribute("name").Value, Value = p.Attribute("value").Value };
 
-            if (props.Count() > 0)
+            if (props.Count() >= 0)
             {
                 var dictionary = props.OrderBy(p => p.Name).ToDictionary(p => p.Name, p => p.Value);
                 foreach (ICustomTiledImporter importer in importers)

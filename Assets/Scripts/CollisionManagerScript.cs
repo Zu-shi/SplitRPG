@@ -191,7 +191,7 @@ public class CollisionManagerScript : MonoBehaviour {
 		}
 		RaycastHit2D[] hits = Physics2D.RaycastAll(tileCoords, Utils.DirectionToVector(direction), 2.0f, mask);
 		foreach(RaycastHit2D hit in hits) {
-			if(hit.collider.transform.parent != null && hit.collider.transform.parent.name == "Fences") {
+			if(hit.collider.transform.parent != null && hit.collider.transform.parent.name == "Collisions") {
 				return true;
 			}
 		}

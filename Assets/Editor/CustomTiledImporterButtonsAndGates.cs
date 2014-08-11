@@ -12,7 +12,7 @@ public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImport
 	
 	private string pathPrefix = "Assets/Prefabs/MappedObjects/";
 	private Dictionary<string, IDictionary<string, string>> buttons = new Dictionary<string, IDictionary<string, string>>();
-	private Dictionary<string, string> gates = new Dictionary<string, string>();
+	private Dictionary<string, IDictionary<string, string>> gates = new Dictionary<string, IDictionary<string, string>>();
 	private string defaultButtonPrefabName;
 	private string defaultGatePrefabName;
 
@@ -29,21 +29,18 @@ public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImport
 		}
 
 		if(parent.name.Contains("Buttons and Gates") ) {
-			if( props.ContainsKey("target") ){
-				//A button
-				//Debug.LogWarning(gameObject.name);
-				buttons.Add(gameObject.name, props);
-				string[] targets = props["target"].Split(new string[] { ", " }, System.StringSplitOptions.None);
-
-				foreach(string target in targets){
-					gates.Add (target, "");
+			if(gameObject.name != ""){
+				if( props.ContainsKey("target") ){
+					//A button
+					//Debug.LogWarning(gameObject.name);
+					buttons.Add(gameObject.name, props);
+				}else{
+					Debug.LogWarning(gameObject.name);
+					gates.Add(gameObject.name, props);
+					//This is a gate that has specified a specific visual.
 				}
 			}else{
-				//This is a gate that has specified a specific visual.
-				if(gates.ContainsKey(gameObject.name)){
-					gates.Remove(gameObject.name);
-				}
-				gates.Add (gameObject.name, props["visual"]);
+				Debug.LogWarning("Object with empty name found in \"Switches and Gates\", skipping object.");
 			}
 		}
 	}
@@ -53,14 +50,19 @@ public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImport
 		
 		if (buttonLayer = prefab.transform.FindChild ("Buttons and Gates").gameObject) {
 
-			foreach(KeyValuePair<string, string> gate in gates)
+			foreach(KeyValuePair<string, IDictionary<string, string>> gate in gates)
 			{
 				GameObject gateObjParent = buttonLayer.transform.FindChild(gate.Key).gameObject;
+				GameObject gateObj;
 				//Check if the gate has a default visual
-				if(gate.Value != ""){
-					generatePrefabUnderObject(gate.Value, gateObjParent);
+				if(gate.Value.ContainsKey("visual")){
+					gateObj = generatePrefabUnderObject(gate.Value["visual"], gateObjParent);
 				}else{
-					generatePrefabUnderObject(defaultGatePrefabName, gateObjParent);
+					gateObj = generatePrefabUnderObject(defaultGatePrefabName, gateObjParent);
+				}
+				
+				if(gate.Value.ContainsKey("reverse")){
+					gateObj.GetComponent<GateScript>().reverse = bool.Parse( gate.Value["reverse"] );
 				}
 			}
 
@@ -82,6 +84,7 @@ public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImport
 
 				string[] targets = button.Value["target"].Split(new string[] { ", " }, System.StringSplitOptions.None);
 				foreach(string target in targets){
+					//Debug.LogWarning(target + "Parent");
 					GateScript gs = buttonLayer.transform.Find(target + "Parent").Find (target).GetComponent<GateScript>();
 					//gs.togglerToWatch = bs;
 					bs.addGate( gs );
@@ -114,7 +117,7 @@ public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImport
 			obj.name = obj.name + "Parent";
 			item.layer = obj.layer;
 		} else {
-			//Debug.LogWarning("Warning: prefab " + prefabName + " could not be found.");
+			Debug.LogWarning("Warning: prefab " + prefabName + " could not be found.");
 		}
 		return item;
 	}
