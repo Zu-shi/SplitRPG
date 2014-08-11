@@ -29,7 +29,7 @@ public class PlayerControllerScript : _Mono {
 	/// <value><c>true</c> if ready for input; otherwise, <c>false</c>.</value>
 	public bool readyForInput {
 		get {
-			return !characterMovement.isMoving && !characterMovement.falling && allowCommands;
+			return !characterMovement.isMoving && !characterMovement.falling && allowCommands && !characterMovement.isChangingDirection;
 		}
 	}
 
@@ -182,12 +182,19 @@ public class PlayerControllerScript : _Mono {
 				walkingOutOfRoom = true;
 
 			//!characterMovement.justMoved
-			//if(characterMovement.moveDirection != direction && !characterMovement.justMoved){
-			//	characterMovement.ChangeDirection(direction);
-			//}else{
+			if(characterMovement.moveDirection != direction && !characterMovement.justMoved){
+				characterMovement.ChangeDirection(direction);
+			}else{
 				characterMovement.MoveInDirection(direction);
-			//}
-
+			}
+		}else{
+			if(WillMoveOffScreen(direction)){
+				if(characterMovement.moveDirection != direction && !characterMovement.justMoved){
+					characterMovement.ChangeDirection(direction);
+				}else{
+					characterMovement.PretendMoveInDirection(direction);
+				}
+			}
 		}
 
 	}

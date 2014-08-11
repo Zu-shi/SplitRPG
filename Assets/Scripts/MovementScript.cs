@@ -42,6 +42,7 @@ public class MovementScript : _Mono {
 	Vector3 startScale;
 	
 	int moveTimeLeft;
+	int waitTimeLeft;
 	float moveSpeed;
 	int fastDirectionChangeTimeLeft = 0;
 	
@@ -223,10 +224,10 @@ public class MovementScript : _Mono {
 		if(_isMoving || _isChangingDirection || direction == Direction.NONE){
 			return false;
 		}
-		
+
+		moveDirection = direction;
 		_isMoving = true;
 		moveTimeLeft = moveTime;
-		moveDirection = direction;
 
 		if(CanMoveInDirection(direction)){
 			StartMoving(Utils.DirectionToVector(direction) * moveSpeed);
@@ -234,6 +235,22 @@ public class MovementScript : _Mono {
 		} else {
 			return false;
 		}
+	}
+
+	/// <summary>
+	/// This method pretends that the player is moving in order to sync the characters when one is against a wall while the other is at the exit.
+	/// </summary>
+	/// <param name="direction">Direction.</param>
+	public bool PretendMoveInDirection(Direction direction){
+		if(_isMoving || _isChangingDirection || direction == Direction.NONE){
+			return false;
+		}
+
+		moveDirection = direction;
+		_isMoving = true;
+		moveTimeLeft = moveTime;
+		StartMoving(Utils.DirectionToVector(direction) * 0.0f);
+		return true;
 	}
 
 	protected virtual void StartMoving(Vector2 velocity){
