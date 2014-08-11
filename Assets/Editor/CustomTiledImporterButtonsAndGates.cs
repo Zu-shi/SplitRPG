@@ -35,7 +35,7 @@ public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImport
 					//Debug.LogWarning(gameObject.name);
 					buttons.Add(gameObject.name, props);
 				}else{
-					Debug.LogWarning(gameObject.name);
+					//Debug.LogWarning(gameObject.name);
 					gates.Add(gameObject.name, props);
 					//This is a gate that has specified a specific visual.
 				}

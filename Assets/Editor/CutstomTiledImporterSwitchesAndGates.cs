@@ -29,22 +29,26 @@ public class CustomTiledImporterSwitchesAndGates : Tiled2Unity.ICustomTiledImpor
 		}
 		
 		if(parent.name.Contains("Switches and Gates") ) {
-			if( props.ContainsKey("target") ){
-				//A button
-				//Debug.LogWarning(gameObject.name);
-				switches.Add(gameObject.name, props);
-				//string[] targets = props["target"].Split(new string[] { ", " }, System.StringSplitOptions.None);
-			}else{
-				//This is a gate.
-				/*
-				if(gates.ContainsKey(gameObject.name)){
-					gates.Remove(gameObject.name);
-				}
+			if(gameObject.name != ""){
+				if( props.ContainsKey("target") ){
+					//A button
+					//Debug.LogWarning(gameObject.name);
+					switches.Add(gameObject.name, props);
+					//string[] targets = props["target"].Split(new string[] { ", " }, System.StringSplitOptions.None);
+				}else{
+					//This is a gate.
+					/*
+					if(gates.ContainsKey(gameObject.name)){
+						gates.Remove(gameObject.name);
+					}
 
-				gates.Add (gameObject.name, props["visual"]);*/
-				Debug.LogWarning(gameObject.name);
-				gates.Add(gameObject.name, props);
-				//Debug.LogWarning(gameObject.name);
+					gates.Add (gameObject.name, props["visual"]);*/
+					Debug.LogWarning(gameObject.name);
+					gates.Add(gameObject.name, props);
+					//Debug.LogWarning(gameObject.name);
+				}
+			}else{
+				Debug.LogWarning("Object with empty name found in \"Switches and Gates\", skipping object.");
 			}
 		}
 	}
