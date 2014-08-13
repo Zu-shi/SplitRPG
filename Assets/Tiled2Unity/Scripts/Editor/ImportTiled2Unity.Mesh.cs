@@ -310,13 +310,14 @@ namespace Tiled2Unity
             }
 
             // Find all the types with the CustomTiledImporterAttribute, instantiate them, and give them a chance to customize our prefab
+			CustomTiledImporterAttribute attre;
             var types = from a in AppDomain.CurrentDomain.GetAssemblies()
                         from t in a.GetTypes()
                         where typeof(ICustomTiledImporter).IsAssignableFrom(t)
                         where !t.IsAbstract
                         from attr in Attribute.GetCustomAttributes(t, typeof(CustomTiledImporterAttribute))
                         let custom = attr as CustomTiledImporterAttribute
-                        orderby custom.Order
+						orderby custom.Order
                         select t;
 
             var instances = types.Select(t => (ICustomTiledImporter)Activator.CreateInstance(t));

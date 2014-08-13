@@ -7,6 +7,13 @@ public static class Utils {
 	// Declaration of a simple delegate type
 	public delegate void VoidDelegate();
 
+	public static HeightScript GetHeightScript(GameObject o){
+		HeightScript hs = o.GetComponent<HeightScript>();
+		if(hs == null){
+			hs = o.AddComponent<HeightScript>();
+		}
+		return hs;
+	}
 
 	public static GameObject Create(GameObject _go, float _x, float _y){
 		return (GameObject)(Object.Instantiate (_go, new Vector2 (_x, _y), Quaternion.identity));

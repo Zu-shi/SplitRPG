@@ -43,7 +43,7 @@ public class CustomTiledImporterSwitchesAndGates : Tiled2Unity.ICustomTiledImpor
 					}
 
 					gates.Add (gameObject.name, props["visual"]);*/
-					Debug.LogWarning(gameObject.name);
+//					Debug.LogWarning(gameObject.name);
 					gates.Add(gameObject.name, props);
 					//Debug.LogWarning(gameObject.name);
 				}
@@ -70,8 +70,8 @@ public class CustomTiledImporterSwitchesAndGates : Tiled2Unity.ICustomTiledImpor
 				}
 
 				if( gate.Value.ContainsKey("reverse") ){
-					Debug.LogWarning(gate.Value["reverse"]);
-					Debug.LogWarning(gateObj.GetComponent<GateScript>() != null);
+					//Debug.LogWarning(gate.Value["reverse"]);
+					//Debug.LogWarning(gateObj.GetComponent<GateScript>() != null);
 
 					gateObj.GetComponent<GateScript>().reverse = bool.Parse( gate.Value["reverse"] );
 				}

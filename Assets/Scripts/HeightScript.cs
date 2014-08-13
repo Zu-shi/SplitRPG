@@ -5,7 +5,7 @@ using System.Collections;
 public class HeightScript : _Mono {
 
 	public DrawingOrder drawingOrder;
-	public int height;
+	public int height = 1;
 	public bool slightlyAbove = false;
 	public bool slightlyBelow = false;
 
