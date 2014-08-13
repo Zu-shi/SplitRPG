@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using System.Collections.Generic;
 using Tiled2Unity;
 using UnityEditor;
@@ -42,7 +42,7 @@ public class CustomTiledImporterSwitchesAndGates : Tiled2Unity.ICustomTiledImpor
 						gates.Remove(gameObject.name);
 					}
 
-					gates.Add (gameObject.name, props["visual"]);*/
+					gates.Add (gameObject.name, props["visual"]);
 					Debug.LogWarning(gameObject.name);
 					gates.Add(gameObject.name, props);
 					//Debug.LogWarning(gameObject.name);
@@ -127,3 +127,4 @@ public class CustomTiledImporterSwitchesAndGates : Tiled2Unity.ICustomTiledImpor
 		return item;
 	}
 }
+*/

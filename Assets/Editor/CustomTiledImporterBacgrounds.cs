@@ -18,17 +18,18 @@ public class CustomTiledImporterBackgrounds : Tiled2Unity.ICustomTiledImporter {
 	}
 	
 	public void CustomizePrefab(GameObject prefab) {
+		GameObject map = new GameObject("Map");
+		int count = prefab.transform.childCount;
+
+		for(int i = 0; i < count; i++) {
+			prefab.transform.GetChild(0).parent = map.transform;
+		}
+		map.transform.localScale = new Vector3(0.015625f, 0.015625f, 0.015625f);
+		prefab.transform.localScale = new Vector3(1,1,1);
+		map.transform.parent = prefab.transform;
 		if(prefabToAdd) {
-			GameObject tmp1 = new GameObject();
-			tmp1.name = prefab.name;
 			GameObject bg = (GameObject)GameObject.Instantiate(prefabToAdd);
-			bg.name = "Background";
-			bg.transform.parent = tmp1.transform;
-			GameObject map = (GameObject)GameObject.Instantiate(prefab);
-			map.name = "Map";
-			map.transform.parent = tmp1.transform;
-			PrefabUtility.CreatePrefab(pathPrefix + prefab.name + ".prefab", tmp1);
-			GameObject.DestroyImmediate(tmp1);
+			bg.transform.parent = prefab.transform;
 		}
 		else {
 			Debug.Log("No loadPrefab property found on this map: " + prefab.name);

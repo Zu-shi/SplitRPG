@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using System.Collections.Generic;
 using Tiled2Unity;
 using UnityEditor;
@@ -122,3 +122,4 @@ public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImport
 		return item;
 	}
 }
+*/
