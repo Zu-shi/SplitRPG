@@ -116,4 +116,5 @@ public class CustomTiledImporterSwitchesAndGates : Tiled2Unity.ICustomTiledImpor
 		return item;
 	}
 }
+<<<<<<< HEAD:Assets/Editor/CustomTiledImporterSwitchesAndGates.cs
 */

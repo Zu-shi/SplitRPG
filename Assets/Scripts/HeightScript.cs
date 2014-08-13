@@ -15,7 +15,7 @@ public class HeightScript : _Mono {
 		editModeRefresh = false;
 	}
 
-	void Update(){
+	public void Update(){
 
 		// When a person checks the check box, update the z value
 		if(!Application.isPlaying){

@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+[ExecuteInEditMode]
 public class HeightSorterScript : MonoBehaviour {
+
+	public bool editModeRefresh = false;
 
 	const float MAX_Z = 0;
 	const float HEIGHT_FAC = 1f;
@@ -61,6 +64,23 @@ public class HeightSorterScript : MonoBehaviour {
 			Debug.Log("yOffset: " + yOffs);
 			Debug.Log("Z: " + obj.z);
 			*/
+	}
+
+	void Update(){
+		
+		// When a person checks the check box, update the z value
+		if(!Application.isPlaying){
+			if(!editModeRefresh){
+				return;
+			} else {
+				editModeRefresh = false;
+				HeightScript[] heights = GameObject.FindObjectsOfType<HeightScript>();
+				foreach(HeightScript hs in heights) {
+					hs.editModeRefresh = true;
+					hs.Update();
+				}
+			}
+		}
 	}
 
 

@@ -30,7 +30,7 @@ class CustomTiledImporterAddObjects : Tiled2Unity.ICustomTiledImporter{
 	public void CustomizePrefab(GameObject prefab) {
 		GameObject invisibleLayer;
 
-		if (invisibleLayer = prefab.transform.Find ("Objects(Invisible)").gameObject) {
+		if (invisibleLayer = Utils.FindChildRecursive(prefab,"Objects(Invisible)").gameObject) {
 	
 			foreach(Transform obj in invisibleLayer.transform)
 			{
