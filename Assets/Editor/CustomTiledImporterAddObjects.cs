@@ -7,10 +7,24 @@ using System.Collections;
 [Tiled2Unity.CustomTiledImporter]
 class CustomTiledImporterAddObjects : Tiled2Unity.ICustomTiledImporter{
 
-	private string pathPrefix = "Assets/Prefabs/MappedObjects/";
+	private string pathPrefix = PrefabMapper.PrefabLocation;
 	//Need to change name to "layerToHeightMap"
+	private Dictionary<string, string> prefabMap;
+	private string mapName;
 
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props) {
+		if(gameObject.transform.parent == null){
+			if(props.ContainsKey("map")){
+				prefabMap = PrefabMapper.maps[props["map"]];
+				//Added backslash here so that we can use load the default map without inserting a conditional.
+				mapName = props["map"] + "/";
+			}else{
+				Debug.LogWarning("Map does not contain requisite 'map' property, default used.");
+				prefabMap = PrefabMapper.maps["default"];
+				Utils.assert(prefabMap != null);
+				mapName = "";
+			}
+		}
 	}
 	
 	public void CustomizePrefab(GameObject prefab) {
@@ -22,7 +36,9 @@ class CustomTiledImporterAddObjects : Tiled2Unity.ICustomTiledImporter{
 			{
 				string name = obj.gameObject.name.ToLower();
 
-				GameObject item = AssetDatabase.LoadAssetAtPath(pathPrefix + name + ".prefab", typeof(GameObject)) as GameObject;
+				Utils.assert(prefabMap.ContainsKey(name));
+
+				GameObject item = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + prefabMap[name] + ".prefab", typeof(GameObject)) as GameObject;
 				if(item != null){
 					//Add Vector3.one to offset center differences.
 					item = (GameObject)GameObject.Instantiate(item, obj.transform.position, obj.transform.rotation);

@@ -48,7 +48,7 @@ public static class Utils {
 	}
 
 	/// <summary>
-	/// Clamp the specified value to between min and max.
+	/// Prints out an error message if a statement fails.
 	/// </summary>
 	public static void assert(bool statement){
 		if (!statement) {

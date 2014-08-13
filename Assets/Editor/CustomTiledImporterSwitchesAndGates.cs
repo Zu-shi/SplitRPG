@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿/*
+using UnityEngine;
 using System.Collections.Generic;
 using Tiled2Unity;
 using UnityEditor;
@@ -9,21 +10,21 @@ using System.Collections;
 //Author: Zuoming
 [Tiled2Unity.CustomTiledImporter]
 public class CustomTiledImporterSwitchesAndGates : Tiled2Unity.ICustomTiledImporter {
-	
-	private string pathPrefix = "Assets/Prefabs/MappedObjects/";
+
 	private Dictionary<string, IDictionary<string, string>> switches = new Dictionary<string, IDictionary<string, string>>();
 	private Dictionary<string, IDictionary<string, string>> gates = new Dictionary<string, IDictionary<string, string>>();
-	private string defaultSwitchPrefabName;
-	private string defaultGatePrefabName;
+	private Dictionary<string, string> prefabMap;
+	private string mapName;
 	
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props) {
 		Transform parent = gameObject.transform.parent;
 		if (parent == null) {
-			if( props.ContainsKey("defaultSwitch") ){
-				defaultSwitchPrefabName = props["defaultSwitch"];
-			}
-			if( props.ContainsKey("defaultSwitchGate") ){
-				defaultGatePrefabName = props["defaultSwitchGate"];
+			if(props.ContainsKey("map")){
+				prefabMap = PrefabMapper.maps[props["map"]];
+				mapName = props["map"] + "/";
+			}else{
+				prefabMap = PrefabMapper.maps["default"];
+				mapName = "";
 			}
 			return;
 		}
@@ -32,20 +33,10 @@ public class CustomTiledImporterSwitchesAndGates : Tiled2Unity.ICustomTiledImpor
 			if(gameObject.name != ""){
 				if( props.ContainsKey("target") ){
 					//A button
-					//Debug.LogWarning(gameObject.name);
 					switches.Add(gameObject.name, props);
-					//string[] targets = props["target"].Split(new string[] { ", " }, System.StringSplitOptions.None);
 				}else{
 					//This is a gate.
-					/*
-					if(gates.ContainsKey(gameObject.name)){
-						gates.Remove(gameObject.name);
-					}
-
-					gates.Add (gameObject.name, props["visual"]);*/
-//					Debug.LogWarning(gameObject.name);
 					gates.Add(gameObject.name, props);
-					//Debug.LogWarning(gameObject.name);
 				}
 			}else{
 				Debug.LogWarning("Object with empty name found in \"Switches and Gates\", skipping object.");
@@ -64,14 +55,12 @@ public class CustomTiledImporterSwitchesAndGates : Tiled2Unity.ICustomTiledImpor
 				GameObject gateObj;
 				//Check if the gate has a default visual
 				if( gate.Value.ContainsKey("visual") ){
-					gateObj = generatePrefabUnderObject(gate.Value["visual"], gateObjParent);
+					gateObj = generatePrefabUnderObject(mapName + prefabMap[gate.Value["visual"]], gateObjParent);
 				}else{
-					gateObj = generatePrefabUnderObject(defaultGatePrefabName, gateObjParent);
+					gateObj = generatePrefabUnderObject(mapName + prefabMap["switch1gate"], gateObjParent);
 				}
 
 				if( gate.Value.ContainsKey("reverse") ){
-					//Debug.LogWarning(gate.Value["reverse"]);
-					//Debug.LogWarning(gateObj.GetComponent<GateScript>() != null);
 
 					gateObj.GetComponent<GateScript>().reverse = bool.Parse( gate.Value["reverse"] );
 				}
@@ -84,9 +73,9 @@ public class CustomTiledImporterSwitchesAndGates : Tiled2Unity.ICustomTiledImpor
 				GameObject switchObj;
 				//Check if the button has a default visual
 				if(_switch.Value.ContainsKey("visual")){
-					switchObj = generatePrefabUnderObject(_switch.Value["visual"], switchObjParent);
+					switchObj = generatePrefabUnderObject(mapName + prefabMap[_switch.Value["visual"]], switchObjParent);
 				}else{
-					switchObj = generatePrefabUnderObject(defaultSwitchPrefabName, switchObjParent);
+					switchObj = generatePrefabUnderObject(mapName + prefabMap["switch1"], switchObjParent);
 				}
 				
 				SwitchScript ss = switchObj.GetComponent<SwitchScript>();
@@ -106,7 +95,7 @@ public class CustomTiledImporterSwitchesAndGates : Tiled2Unity.ICustomTiledImpor
 	}
 	
 	public GameObject generatePrefabUnderObject(string prefabName, GameObject obj){
-		GameObject item = AssetDatabase.LoadAssetAtPath(pathPrefix + prefabName + ".prefab", typeof(GameObject)) as GameObject;
+		GameObject item = AssetDatabase.LoadAssetAtPath(PrefabMapper.PrefabLocation + prefabName + ".prefab", typeof(GameObject)) as GameObject;
 		if (item != null) {
 			//Add Vector3.one to offset center differences.
 			item = (GameObject)GameObject.Instantiate (item, obj.transform.position, obj.transform.rotation);
@@ -122,8 +111,9 @@ public class CustomTiledImporterSwitchesAndGates : Tiled2Unity.ICustomTiledImpor
 			obj.name = obj.name + "Parent";
 			item.layer = obj.layer;
 		} else {
-			Debug.LogWarning("Warning: prefab " + pathPrefix + prefabName + ".prefab" + " could not be found.");
+			Debug.LogWarning("Warning: prefab " + PrefabMapper.PrefabLocation + prefabName + ".prefab" + " could not be found.");
 		}
 		return item;
 	}
 }
+*/

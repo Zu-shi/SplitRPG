@@ -9,21 +9,21 @@ using System.Collections;
 //Author: Zuoming
 [Tiled2Unity.CustomTiledImporter]
 public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImporter {
-	
-	private string pathPrefix = "Assets/Prefabs/MappedObjects/";
+
 	private Dictionary<string, IDictionary<string, string>> buttons = new Dictionary<string, IDictionary<string, string>>();
 	private Dictionary<string, IDictionary<string, string>> gates = new Dictionary<string, IDictionary<string, string>>();
-	private string defaultButtonPrefabName;
-	private string defaultGatePrefabName;
+	private Dictionary<string, string> prefabMap;
+	private string mapName;
 
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props) {
 		Transform parent = gameObject.transform.parent;
 		if (parent == null) {
-			if( props.ContainsKey("defaultButton") ){
-				defaultButtonPrefabName = props["defaultButton"];
-			}
-			if( props.ContainsKey("defaultButtonGate") ){
-				defaultGatePrefabName = props["defaultButtonGate"];
+			if(props.ContainsKey("map")){
+				prefabMap = PrefabMapper.maps[props["map"]];
+				mapName = props["map"] + "/";
+			}else{
+				prefabMap = PrefabMapper.maps["default"];
+				mapName = "";
 			}
 			return;
 		}
@@ -53,14 +53,23 @@ public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImport
 			foreach(KeyValuePair<string, IDictionary<string, string>> gate in gates)
 			{
 				GameObject gateObjParent = buttonLayer.transform.FindChild(gate.Key).gameObject;
+				EdgeCollider2D ec = gateObjParent.GetComponent<EdgeCollider2D>();
+
+				bool horizontal = true;
+				if (ec.points[0].y != ec.points[1].y){
+					horizontal = false;
+				}
+
 				GameObject gateObj;
 				//Check if the gate has a default visual
 				if(gate.Value.ContainsKey("visual")){
-					gateObj = generatePrefabUnderObject(gate.Value["visual"], gateObjParent);
+					gateObj = generatePrefabUnderObject(mapName + prefabMap[gate.Value["visual"]], gateObjParent);
 				}else{
-					gateObj = generatePrefabUnderObject(defaultGatePrefabName, gateObjParent);
+					gateObj = generatePrefabUnderObject(mapName + prefabMap["buttongate1"], gateObjParent);
 				}
-				
+
+				gateObj.GetComponent<GateScript>().horizontal = horizontal;
+
 				if(gate.Value.ContainsKey("reverse")){
 					gateObj.GetComponent<GateScript>().reverse = bool.Parse( gate.Value["reverse"] );
 				}
@@ -73,9 +82,9 @@ public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImport
 				GameObject buttonObj;
 				//Check if the button has a default visual
 				if(button.Value.ContainsKey("visual")){
-					buttonObj = generatePrefabUnderObject(button.Value["visual"], buttonObjParent);
+					buttonObj = generatePrefabUnderObject(mapName + prefabMap[button.Value["visual"]], buttonObjParent);
 				}else{
-					buttonObj = generatePrefabUnderObject(defaultButtonPrefabName, buttonObjParent);
+					buttonObj = generatePrefabUnderObject(mapName + prefabMap["button1"], buttonObjParent);
 				}
 
 				ButtonScript bs = buttonObj.GetComponent<ButtonScript>();
@@ -101,7 +110,7 @@ public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImport
 	}
 
 	public GameObject generatePrefabUnderObject(string prefabName, GameObject obj){
-		GameObject item = AssetDatabase.LoadAssetAtPath(pathPrefix + prefabName + ".prefab", typeof(GameObject)) as GameObject;
+		GameObject item = AssetDatabase.LoadAssetAtPath(PrefabMapper.PrefabLocation + prefabName + ".prefab", typeof(GameObject)) as GameObject;
 		if (item != null) {
 			//Add Vector3.one to offset center differences.
 			item = (GameObject)GameObject.Instantiate (item, obj.transform.position, obj.transform.rotation);
