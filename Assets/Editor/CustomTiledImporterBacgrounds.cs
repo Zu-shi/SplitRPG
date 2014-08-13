@@ -24,7 +24,7 @@ public class CustomTiledImporterBackgrounds : Tiled2Unity.ICustomTiledImporter {
 		for(int i = 0; i < count; i++) {
 			prefab.transform.GetChild(0).parent = map.transform;
 		}
-		map.transform.localScale = new Vector3(0.015625f, 0.015625f, 1);
+		map.transform.localScale = new Vector3(0.015625f, 0.015625f, 1f);
 		prefab.transform.localScale = new Vector3(1,1,1);
 		map.transform.parent = prefab.transform;
 		if(prefabToAdd) {

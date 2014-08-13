@@ -15,7 +15,7 @@ class CustomTiledImporterHeight : Tiled2Unity.ICustomTiledImporter{
 		{ "Switches and Gates", 1 },
 		{ "Switches and Gates 2", 2 },
 		{ "Buttons and Gates", 1 },
-		{ "Buttons and Gates 2", 2 }
+		{ "Buttons and Gates 2", 2 },
 	};
 	
 	private Dictionary<string, DrawingOrder> orderMap = new Dictionary<string, DrawingOrder>{
@@ -28,6 +28,11 @@ class CustomTiledImporterHeight : Tiled2Unity.ICustomTiledImporter{
 
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props){
 
+		if (props.ContainsKey ("height")) {
+			Debug.Log (gameObject.name);
+			HeightScript hs = Utils.GetHeightScript (gameObject);
+			hs.height = int.Parse(props["height"]);
+		}
 	}
 
 	public void CustomizePrefab(GameObject prefab){

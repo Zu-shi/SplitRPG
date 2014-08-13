@@ -32,7 +32,7 @@ public class HeightSorterScript : MonoBehaviour {
 
 		float heightOffs = HEIGHT_FAC * obj.height;
 		float doOffs = DRAWING_ORDER_FAC * (int)obj.drawingOrder;
-		float yOffs = YCAM_FAC * (cam.y + 20 - obj.y * obj.transform.root.localScale.y); // written so that the number will be a reasonable positive number
+		float yOffs = YCAM_FAC * ( cam.y + 20 - obj.y/obj.ys); // written so that the number will be a reasonable positive number
 
 		//Debug.Log(obj.transform.root.localScale.y);
 		// Objects off camera might try to make their yOffs too big or too small,
@@ -47,7 +47,16 @@ public class HeightSorterScript : MonoBehaviour {
 			slightOffs += SLIGHT_DIFFERENCE;
 		}
 
+		/*
+		Debug.Log (heightOffs);
+		Debug.Log (doOffs);
+		Debug.Log (yOffs);*/
+		//Debug.Log (MAX_Z + " - " + heightOffs + " - " + doOffs + "-" + yOffs);
 		obj.z = MAX_Z - heightOffs - doOffs - yOffs + slightOffs;
+		//obj.z *= 0.015625f;
+		//Debug.Log (obj.z);
+
+		/*
 		if(obj.z < cam.z){
 			Debug.LogError("Sorting error: Object placed behind camera");
 		}
@@ -55,7 +64,8 @@ public class HeightSorterScript : MonoBehaviour {
 			Debug.LogError("Sorting error: Object placed below z bounds");
 		} else if (obj.z > MaxZAtHeight(obj.height)){
 			Debug.LogError("Sorting error: Object placed above z bounds");
-		}
+		}*/
+
 		
 		/*
 			Debug.Log(obj.name);

@@ -10,7 +10,8 @@ public class CustomTiledImporterWallsPits : Tiled2Unity.ICustomTiledImporter {
 	
 	public void CustomizePrefab(GameObject prefab){
 		// Look for layers that contain "Collisions" or "Pits"
-		foreach(Transform child in prefab.transform){
+		// After some changes, now grabs from the first child of Map, which should be child object of the main prefab.
+		foreach(Transform child in prefab.transform.GetChild(0)){
 
 			if(child.name.Contains("Collisions")){
 
