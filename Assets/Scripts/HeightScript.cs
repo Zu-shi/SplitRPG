@@ -26,6 +26,10 @@ public class HeightScript : _Mono {
 			}
 		} 
 
+		/*
+		if (gameObject.name == "pushblock") {
+			Debug.LogWarning("pushblock updating.");
+		}*/
 		Globals.heightSorter.SetZForObject(this);
 	}
 }

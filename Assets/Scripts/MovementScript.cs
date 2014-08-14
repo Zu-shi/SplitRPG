@@ -31,22 +31,22 @@ public class MovementScript : _Mono {
 	public bool fell{get;set;}
 
 	// Time it takes to move two spaces in frames (at Unity's fixed time step aka 50 fps)
-	const int moveTime = 11;
+	protected const int moveTime = 11;
 	
 	// Time it takes to change direction in frames (at Unity's fixed time step aka 50 fps)
-	const int changingDirectionTime = 5;
+	protected const int changingDirectionTime = 5;
 
 	// Time since last movement in frames 
-	const int fastDirectionChangeThreshold = 12;
+	protected const int fastDirectionChangeThreshold = 12;
 
-	Vector3 startScale;
+	protected Vector3 startScale;
+	 
+	protected int moveTimeLeft;
+	protected int waitTimeLeft;
+	protected float moveSpeed;
+	protected int fastDirectionChangeTimeLeft = 0;
 	
-	int moveTimeLeft;
-	int waitTimeLeft;
-	float moveSpeed;
-	int fastDirectionChangeTimeLeft = 0;
-	
-	bool _isMoving;
+	protected bool _isMoving;
 	public bool isMoving{
 		get {
 			return _isMoving;
@@ -59,9 +59,9 @@ public class MovementScript : _Mono {
 		}
 	}
 
-	int changingDirectionTimeLeft;
+	protected int changingDirectionTimeLeft;
 
-	bool _isChangingDirection;
+	protected bool _isChangingDirection;
 	public bool isChangingDirection{
 		get {
 			return _isChangingDirection;
@@ -168,7 +168,15 @@ public class MovementScript : _Mono {
 
 	}
 
-	public bool CanMoveInDirection(Direction direction){
+	public bool CanMoveInDirectionWithPushSideEffect(Direction direction){
+		return CanMoveInDirection (direction, true);
+	}
+	
+	public bool CanMoveInDirectionWithoutPushSideEffect(Direction direction){
+		return CanMoveInDirection (direction, false);
+	}
+
+	private bool CanMoveInDirection(Direction direction, bool push){
 		// Check if there is a fence blocking that direction
 		if(Globals.collisionManager.IsFenceBlocking(this.tileVector, direction, this.gameObject.layer)) {
 			//Debug.Log("Found fence, can't move.");
@@ -183,9 +191,9 @@ public class MovementScript : _Mono {
 			if(!canPush){
 				return false;
 
-			} else if(!blocker.TryToPush(gameObject, direction)){
-				// If we can't push it, we can't move
-				return false;
+			} else {
+				if(push){return blocker.TryToPush(gameObject, direction);}
+				else{return blocker.CanPush(gameObject, direction);}
 			}
 		}
 		
@@ -229,35 +237,19 @@ public class MovementScript : _Mono {
 		_isMoving = true;
 		moveTimeLeft = moveTime;
 
-		if(CanMoveInDirection(direction)){
+		if(CanMoveInDirectionWithPushSideEffect(direction)){
 			StartMoving(Utils.DirectionToVector(direction) * moveSpeed);
 			return true;
 		} else {
 			return false;
 		}
 	}
-
-	/// <summary>
-	/// This method pretends that the player is moving in order to sync the characters when one is against a wall while the other is at the exit.
-	/// </summary>
-	/// <param name="direction">Direction.</param>
-	public bool PretendMoveInDirection(Direction direction){
-		if(_isMoving || _isChangingDirection || direction == Direction.NONE){
-			return false;
-		}
-
-		moveDirection = direction;
-		_isMoving = true;
-		moveTimeLeft = moveTime;
-		StartMoving(Utils.DirectionToVector(direction) * 0.0f);
-		return true;
-	}
-
+	
 	protected virtual void StartMoving(Vector2 velocity){
 		collider2D.enabled = false;
 		moveVelocity = velocity;
 	}
-	
+
 	protected void StopMoving(){
 		collider2D.enabled = true;
 		// Cancel move velocity

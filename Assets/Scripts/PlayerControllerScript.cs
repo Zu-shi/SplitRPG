@@ -136,7 +136,7 @@ public class PlayerControllerScript : _Mono {
 
 		Vector2 dest = new Vector2(tileX, tileY) + 2 * Utils.DirectionToVector(direction);
 		Room room = roomManager.GetRoom(gameObject.layer);
-		return characterMovement.CanMoveInDirection(direction) && !room.ContainsTile(dest);
+		return characterMovement.CanMoveInDirectionWithoutPushSideEffect(direction) && !room.ContainsTile(dest);
 
 	}
 	

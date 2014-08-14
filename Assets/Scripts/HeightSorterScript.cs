@@ -7,18 +7,20 @@ public class HeightSorterScript : MonoBehaviour {
 	public bool editModeRefresh = false;
 
 	const float MAX_Z = 0;
-	const float HEIGHT_FAC = 1f;
-	const float DRAWING_ORDER_FAC = .1f;
-	const float YCAM_FAC = .001f;
-	const float SLIGHT_DIFFERENCE = .000001f;
+	const float HEIGHT_FAC = 100f;
+	const float DRAWING_ORDER_FAC = 10f;
+	//const float YCAM_FAC = 0.1f;
+	const float YOFF = 0.01f;
+	const float SLIGHT_DIFFERENCE = .00001f;
 
+	/*
 	public float MaxZAtHeight(int height){
-		return MAX_Z - height * HEIGHT_FAC + SLIGHT_DIFFERENCE;
+		return MAX_Z - height * HEIGHT_FAC - HEIGHT_FAC/5 + SLIGHT_DIFFERENCE;
 	}
 
 	public float MinZAtHeight(int height){
-		return MaxZAtHeight (height + 1) + YCAM_FAC - SLIGHT_DIFFERENCE;
-	}
+		return MaxZAtHeight (height + 1) + YOFF - SLIGHT_DIFFERENCE;
+	}*/
 
 	public void SetZForObject(HeightScript obj){
 
@@ -32,13 +34,21 @@ public class HeightSorterScript : MonoBehaviour {
 
 		float heightOffs = HEIGHT_FAC * obj.height;
 		float doOffs = DRAWING_ORDER_FAC * (int)obj.drawingOrder;
-		float yOffs = YCAM_FAC * ( cam.y + 20 - obj.y/obj.ys); // written so that the number will be a reasonable positive number
 
-		//Debug.Log(obj.transform.root.localScale.y);
-		// Objects off camera might try to make their yOffs too big or too small,
-		// so we clamp it to reasonable values
-		yOffs = Utils.Clamp(yOffs, 0, DRAWING_ORDER_FAC - YCAM_FAC); 
-		float slightOffs = 0;
+		//Try using fixed Y.
+
+		float yOffs = (-obj.y ) * YOFF;
+		/*
+		if (obj.ys > 100) {
+			Debug.Log (obj.y);
+		}*/
+
+		/*
+		if ( Mathf.Abs(obj.y / obj.ys) > 5000) {
+			Debug.LogWarning("Y value exceeds drawing order.");
+		}*/
+
+		float slightOffs = 0f;
 		if (obj.slightlyAbove) {
 			slightOffs -= SLIGHT_DIFFERENCE;
 		}
@@ -52,28 +62,19 @@ public class HeightSorterScript : MonoBehaviour {
 		Debug.Log (doOffs);
 		Debug.Log (yOffs);*/
 		//Debug.Log (MAX_Z + " - " + heightOffs + " - " + doOffs + "-" + yOffs);
-		obj.z = MAX_Z - heightOffs - doOffs - yOffs + slightOffs;
-		//obj.z *= 0.015625f;
-		//Debug.Log (obj.z);
 
-		/*
+		obj.z = MAX_Z - heightOffs - doOffs - yOffs + slightOffs;
+
 		if(obj.z < cam.z){
 			Debug.LogError("Sorting error: Object placed behind camera");
 		}
+		/*
 		if(obj.z < MinZAtHeight(obj.height)){
 			Debug.LogError("Sorting error: Object placed below z bounds");
 		} else if (obj.z > MaxZAtHeight(obj.height)){
 			Debug.LogError("Sorting error: Object placed above z bounds");
 		}*/
 
-		
-		/*
-			Debug.Log(obj.name);
-			Debug.Log("Height: " + height);
-			Debug.Log("Order: " + drawingOrder);
-			Debug.Log("yOffset: " + yOffs);
-			Debug.Log("Z: " + obj.z);
-			*/
 	}
 
 	void Update(){

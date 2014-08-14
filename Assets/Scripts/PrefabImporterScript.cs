@@ -50,14 +50,16 @@ public class PrefabImporterScript : _Mono {
 		sr.sprite = retrieveSpriteByName (map, objname);
 		SaveAndDestory (map, objname, go);
 		
-		objname = "Switch";
-		go = getOriginalPrefabOfObject (map, objname.ToLower ());
-		SwitchScript ss = go.GetComponent<SwitchScript> ();
-		ss.onSprite = retrieveSpriteByName (map, objname + "On");
-		ss.offSprite = retrieveSpriteByName (map, objname + "Off");
-		sr = go.GetComponent<SpriteRenderer> ();
-		sr.sprite = ss.onSprite;
-		SaveAndDestory (map, objname, go);
+		for (int i = 1; i <= 4; i ++) {
+			objname = "Switch";
+			go = getOriginalPrefabOfObject (map, objname.ToLower ());
+			SwitchScript ss = go.GetComponent<SwitchScript> ();
+			ss.onSprite = retrieveSpriteByName (map, objname + "On");
+			ss.offSprite = retrieveSpriteByName (map, objname + "Off");
+			sr = go.GetComponent<SpriteRenderer> ();
+			sr.sprite = ss.onSprite;
+			SaveAndDestory (map, objname + i.ToString(), go);
+		}
 
 		for (int i = 1; i <= 3; i ++) {
 			objname = "Button" + i.ToString();
@@ -82,7 +84,19 @@ public class PrefabImporterScript : _Mono {
 			sr.sprite = gs.closedSpriteH;
 			SaveAndDestory (map, objname, go);
 		}
-
+		
+		for (int i = 1; i <= 4; i ++) {
+			objname = "SwitchGate" + i.ToString();
+			go = getOriginalPrefabOfObject (map, objname.ToLower());
+			GateScript gs = go.GetComponent<GateScript> ();
+			gs.closedSpriteH = retrieveSpriteByName (map, objname + "ClosedH");
+			gs.closedSpriteV = retrieveSpriteByName (map, objname + "ClosedV");
+			gs.openSprite = retrieveSpriteByName (map, objname + "Open");
+			
+			sr = go.GetComponent<SpriteRenderer> ();
+			sr.sprite = gs.closedSpriteH;
+			SaveAndDestory (map, objname, go);
+		}
 		/*
 		for (int i = 1; i < 5; i ++) {
 			objname = "Button";

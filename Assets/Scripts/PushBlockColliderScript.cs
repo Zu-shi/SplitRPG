@@ -10,8 +10,11 @@ public class PushBlockColliderScript : ColliderScript {
 	}
 
 	public override bool TryToPush(GameObject pusher, Direction dir){
+		return movementScript.MoveInDirection (dir);
+	}
 
-		return movementScript.MoveInDirection(dir);
+	public override bool CanPush(GameObject pusher, Direction dir){
+		return movementScript.CanMoveInDirectionWithoutPushSideEffect(dir);
 	}
 
 }

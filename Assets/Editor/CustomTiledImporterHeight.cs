@@ -29,7 +29,7 @@ class CustomTiledImporterHeight : Tiled2Unity.ICustomTiledImporter{
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props){
 
 		if (props.ContainsKey ("height")) {
-			Debug.Log (gameObject.name);
+			//Debug.Log (gameObject.name);
 			HeightScript hs = Utils.GetHeightScript (gameObject);
 			hs.height = int.Parse(props["height"]);
 		}

@@ -33,5 +33,12 @@ public class ColliderScript : _Mono {
 	public virtual bool TryToPush(GameObject pusher, Direction dir){
 		return false;
 	}
-
+	
+	/// <summary>
+	/// Checks to see if an object can be pushed a certrain direction.
+	/// </summary>
+	/// <returns><c>true</c>, if the object was successfully pushed, <c>false</c> otherwise.</returns>
+	public virtual bool CanPush(GameObject pusher, Direction dir){
+		return false;
+	}
 }

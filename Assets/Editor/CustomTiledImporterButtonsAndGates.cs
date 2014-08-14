@@ -8,9 +8,11 @@ using System.Collections;
 //Notes: the "visual" property of objects are optional, as long as a default prefab for buttons and gates are specified by the map.
 //Author: Zuoming
 [Tiled2Unity.CustomTiledImporter]
-public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImporter {
+public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTiledImporter {
 
 	private Dictionary<string, IDictionary<string, string>> buttons = new Dictionary<string, IDictionary<string, string>>();
+	private Dictionary<string, IDictionary<string, string>> buttonGates = new Dictionary<string, IDictionary<string, string>>();
+	private Dictionary<string, IDictionary<string, string>> switches = new Dictionary<string, IDictionary<string, string>>();
 	private Dictionary<string, IDictionary<string, string>> gates = new Dictionary<string, IDictionary<string, string>>();
 	private Dictionary<string, string> prefabMap;
 	private string mapName;
@@ -36,8 +38,22 @@ public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImport
 					buttons.Add(gameObject.name, props);
 				}else{
 					//Debug.LogWarning(gameObject.name);
-					gates.Add(gameObject.name, props);
+					buttonGates.Add(gameObject.name, props);
 					//This is a gate that has specified a specific visual.
+				}
+			}else{
+				Debug.LogWarning("Object with empty name found in \"Switches and Gates\", skipping object.");
+			}
+		}
+
+		if(parent.name.Contains("Switches and Gates") ) {
+			if(gameObject.name != ""){
+				if( props.ContainsKey("target") ){
+					//A button
+					switches.Add(gameObject.name, props);
+				}else{
+					//This is a gate.
+					gates.Add(gameObject.name, props);
 				}
 			}else{
 				Debug.LogWarning("Object with empty name found in \"Switches and Gates\", skipping object.");
@@ -46,38 +62,15 @@ public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImport
 	}
 	
 	public void CustomizePrefab(GameObject prefab) {
-		GameObject buttonLayer;
+		GameObject buttonLayer = prefab.transform.GetChild(0).FindChild("Buttons and Gates").gameObject;
+		GameObject switchLayer = prefab.transform.GetChild(0).FindChild ("Switches and Gates").gameObject;
 		
-		if (buttonLayer = prefab.transform.FindChild ("Buttons and Gates").gameObject) {
+		if (buttonLayer) {
 
-			foreach(KeyValuePair<string, IDictionary<string, string>> gate in gates)
-			{
-				GameObject gateObjParent = buttonLayer.transform.FindChild(gate.Key).gameObject;
-				EdgeCollider2D ec = gateObjParent.GetComponent<EdgeCollider2D>();
-
-				bool horizontal = true;
-				if (ec.points[0].y != ec.points[1].y){
-					horizontal = false;
-				}
-
-				GameObject gateObj;
-				//Check if the gate has a default visual
-				if(gate.Value.ContainsKey("visual")){
-					gateObj = generatePrefabUnderObject(mapName + prefabMap[gate.Value["visual"]], gateObjParent);
-				}else{
-					gateObj = generatePrefabUnderObject(mapName + prefabMap["buttongate1"], gateObjParent);
-				}
-
-				gateObj.GetComponent<GateScript>().horizontal = horizontal;
-
-				if(gate.Value.ContainsKey("reverse")){
-					gateObj.GetComponent<GateScript>().reverse = bool.Parse( gate.Value["reverse"] );
-				}
-			}
+			ImportGates(buttonGates, buttonLayer, "buttongate1");
 
 			//This must happen after the gates importer, so that the correct gate objects can be found.
-			foreach(KeyValuePair<string, IDictionary<string, string>> button in buttons)
-			{
+			foreach(KeyValuePair<string, IDictionary<string, string>> button in buttons){
 				GameObject buttonObjParent = buttonLayer.transform.FindChild(button.Key).gameObject;
 				GameObject buttonObj;
 				//Check if the button has a default visual
@@ -93,12 +86,10 @@ public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImport
 
 				string[] targets = button.Value["target"].Split(new string[] { ", " }, System.StringSplitOptions.None);
 				foreach(string target in targets){
-					//Debug.LogWarning(target + "Parent");
 					GateScript gs = buttonLayer.transform.Find(target + "Parent").Find (target).GetComponent<GateScript>();
-					//gs.togglerToWatch = bs;
 					bs.addGate( gs );
 				}
-
+			
 				if( button.Value.ContainsKey("time") ){
 					bs.timerLength = float.Parse(button.Value["time"]);
 				}else{
@@ -106,6 +97,37 @@ public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImport
 				}
 			}
 
+		}
+
+		if (switchLayer) {
+			
+			ImportGates(gates, switchLayer, "switchgate1");
+			
+			//This must happen after the gates importer, so that the correct gate objects can be found.
+			foreach(KeyValuePair<string, IDictionary<string, string>> _switch in switches)
+			{
+				GameObject switchObjParent = switchLayer.transform.FindChild(_switch.Key).gameObject;
+				GameObject switchObj;
+				//Check if the button has a default visual
+				if(_switch.Value.ContainsKey("visual")){
+					switchObj = generatePrefabUnderObject(mapName + prefabMap[_switch.Value["visual"]], switchObjParent);
+				}else{
+					switchObj = generatePrefabUnderObject(mapName + prefabMap["switch1"], switchObjParent);
+				}
+				
+				SwitchScript ss = switchObj.GetComponent<SwitchScript>();
+				Utils.assert(ss != null);
+				Utils.assert(_switch.Value.ContainsKey("target"));
+				
+				string[] targets = _switch.Value["target"].Split(new string[] { ", " }, System.StringSplitOptions.None);
+				foreach(string target in targets){
+					GateScript gs = switchLayer.transform.Find(target + "Parent").Find (target).GetComponent<GateScript>();
+					//gs.togglerToWatch = bs;
+					ss.addGate( gs );
+				}
+				
+			}
+			
 		}
 	}
 
@@ -116,8 +138,6 @@ public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImport
 			item = (GameObject)GameObject.Instantiate (item, obj.transform.position, obj.transform.rotation);
 
 			_Mono itemMono = item.GetComponent<_Mono> ();
-			itemMono.xs /= Utils.TILED_TO_UNITY_SCALE;
-			itemMono.ys /= Utils.TILED_TO_UNITY_SCALE;
 			itemMono.x += itemMono.xs / 2;
 			itemMono.y -= itemMono.ys / 2;
 			item.transform.parent = obj.transform;
@@ -130,5 +150,29 @@ public class CustomTiledImporterButtonsAndGates : Tiled2Unity.ICustomTiledImport
 		}
 		return item;
 	}
-}
 
+	private void ImportGates(Dictionary<string, IDictionary<string, string>> gates, GameObject layer, string gatename){
+		foreach(KeyValuePair<string, IDictionary<string, string>> gate in gates)
+		{
+			GameObject gateObjParent = layer.transform.FindChild(gate.Key).gameObject;
+			GameObject gateObj;
+			//Check if the gate has a default visual
+			if( gate.Value.ContainsKey("visual") ){
+				gateObj = generatePrefabUnderObject(mapName + prefabMap[gate.Value["visual"]], gateObjParent);
+			}else{
+				gateObj = generatePrefabUnderObject(mapName + prefabMap[gatename], gateObjParent);
+			}
+			
+			EdgeCollider2D ec = gateObjParent.GetComponent<EdgeCollider2D>();
+			if (ec.points[0].y != ec.points[1].y){
+				gateObj.GetComponent<GateScript>().horizontal = false;
+				gateObj.GetComponent<SpriteRenderer>().sprite = gateObj.GetComponent<GateScript>().closedSpriteV;
+			}
+			
+			if( gate.Value.ContainsKey("reverse") ){
+				gateObj.GetComponent<GateScript>().reverse = bool.Parse( gate.Value["reverse"] );
+			}
+		}
+	}
+
+}

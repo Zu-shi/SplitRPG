@@ -26,4 +26,21 @@ public class CharacterMovementScript : MovementScript {
 		base.StartFall ();
 		Invoke("PlayWrongBeep", 0.6f);
 	}
+
+	/// <summary>
+	/// This method pretends that the player is moving in order to sync the characters when one is against a wall while the other is at the exit.
+	/// </summary>
+	/// <param name="direction">Direction.</param>
+	public bool PretendMoveInDirection(Direction direction){
+		if(_isMoving || _isChangingDirection || direction == Direction.NONE){
+			return false;
+		}
+		
+		moveDirection = direction;
+		_isMoving = true;
+		moveTimeLeft = moveTime;
+		StartMoving(Utils.DirectionToVector(direction) * 0.0f);
+		return true;
+	}
+
 }
