@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11400004}
   - 50: {fileID: 5000000}
   m_Layer: 0
-  m_Name: pushblock
+  m_Name: defaultPushblock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

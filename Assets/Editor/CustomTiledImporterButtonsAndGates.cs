@@ -10,6 +10,7 @@ using System.Collections;
 [Tiled2Unity.CustomTiledImporter]
 public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTiledImporter {
 
+
 	private Dictionary<string, IDictionary<string, string>> buttons = new Dictionary<string, IDictionary<string, string>>();
 	private Dictionary<string, IDictionary<string, string>> buttonGates = new Dictionary<string, IDictionary<string, string>>();
 	private Dictionary<string, IDictionary<string, string>> switches = new Dictionary<string, IDictionary<string, string>>();
