@@ -7,6 +7,7 @@ public static class PrefabMapper {
 
 	public static string PrefabLocation = "Assets/Prefabs/MappedObjects/";
 	public static string SpriteLocation = "Assets/Sprites/";
+	public static string SoundLocation = "Assets/SoundEffects/";
 
 	public static Dictionary<string, string> originals = new Dictionary<string, string>()
 	{

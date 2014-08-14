@@ -17,6 +17,8 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 	private Dictionary<string, IDictionary<string, string>> gates = new Dictionary<string, IDictionary<string, string>>();
 	private Dictionary<string, string> prefabMap;
 	private string mapName;
+	//private <string, string>
+	private bool autoPair;
 
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props) {
 		Transform parent = gameObject.transform.parent;
@@ -27,6 +29,12 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 			}else{
 				prefabMap = PrefabMapper.maps["default"];
 				mapName = "";
+			}
+			
+			if(props.ContainsKey("map")){
+				autoPair = bool.Parse(props["map"]);
+			}else{
+				autoPair = false;
 			}
 			return;
 		}
@@ -76,8 +84,10 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 				GameObject buttonObj;
 				//Check if the button has a default visual
 				if(button.Value.ContainsKey("visual")){
+					Debug.Log ("Contains visual: " + mapName + prefabMap[button.Value["visual"]] );
 					buttonObj = generatePrefabUnderObject(mapName + prefabMap[button.Value["visual"]], buttonObjParent);
 				}else{
+					Debug.Log ("Does not contain visual: " + mapName + prefabMap["button1"] );
 					buttonObj = generatePrefabUnderObject(mapName + prefabMap["button1"], buttonObjParent);
 				}
 

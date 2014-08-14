@@ -31,20 +31,20 @@ public class MovementScript : _Mono {
 	public bool fell{get;set;}
 
 	// Time it takes to move two spaces in frames (at Unity's fixed time step aka 50 fps)
-	protected const int moveTime = 11;
+	protected const int moveTime = 17;
 	
 	// Time it takes to change direction in frames (at Unity's fixed time step aka 50 fps)
 	protected const int changingDirectionTime = 5;
 
 	// Time since last movement in frames 
 	protected const int fastDirectionChangeThreshold = 12;
+	protected int fastDirectionChangeTimeLeft = 0;
 
 	protected Vector3 startScale;
 	 
 	protected int moveTimeLeft;
 	protected int waitTimeLeft;
 	protected float moveSpeed;
-	protected int fastDirectionChangeTimeLeft = 0;
 	
 	protected bool _isMoving;
 	public bool isMoving{
