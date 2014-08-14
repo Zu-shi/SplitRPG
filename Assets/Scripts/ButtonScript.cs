@@ -43,6 +43,7 @@ public class ButtonScript : _Mono {
 			if( child.name.Equals("TimerIndicator") ){
 				indicator = child.GetComponentInChildren<_Mono> ();
 				indicator.ys = 0;
+				indicator.xs = 1;
 				indicator.alpha = 0.45f;
 				indicator.gameObject.layer = gameObject.layer;
 			}
