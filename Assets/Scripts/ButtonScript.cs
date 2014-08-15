@@ -30,6 +30,8 @@ public class ButtonScript : _Mono {
 	//Do NOT make this private! Prefab setting must be saved to a public setting.
 	public List<GateScript> gates = new List<GateScript>();
 	
+	//public bool itemIsOnButton = false;
+
 	void Start () {
 		timeLeft = timerLength;
 
@@ -53,10 +55,12 @@ public class ButtonScript : _Mono {
 	void Update () {
 
 		// Is the player on us?
-		bool playerIsOnButton = Globals.collisionManager.IsMovableObjectsOnTile(tileVector, gameObject.layer);
+		bool itemIsOnButton = Globals.collisionManager.IsMovableObjectsOnTile(tileVector, gameObject.layer);
+
+		//bool playerIsOnButton = true;
 
 		// Toggle on if needed
-		if (_toggler.off && playerIsOnButton){
+		if (_toggler.off && itemIsOnButton){
 			_toggler.TurnOn();
 		}
 
@@ -65,9 +69,8 @@ public class ButtonScript : _Mono {
 		// When timerLength is < 0 aka -1, the timer is disabled
 		if(_toggler.on && timerLength >= 0){
 
-			if(playerIsOnButton){
+			if(itemIsOnButton){
 				timeLeft = timerLength; // reset timer
-
 			} else {
 				CountDownTimer();
 			}
@@ -80,6 +83,17 @@ public class ButtonScript : _Mono {
 			spriteRenderer.sprite = offSprite;
 		}
 	}
+
+	/*
+	//To be called by movementScript
+	public void TurnOn(){
+		itemIsOnButton = true;
+	}
+
+	//To be called my movementscript
+	public void TurnOff(){
+		itemIsOnButton = false;
+	}*/
 
 	void CountDownTimer(){
 		if(timeLeft > 0){

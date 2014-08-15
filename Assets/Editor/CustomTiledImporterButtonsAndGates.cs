@@ -17,7 +17,7 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 	private Dictionary<string, IDictionary<string, string>> gates = new Dictionary<string, IDictionary<string, string>>();
 	private Dictionary<string, string> prefabMap;
 	private string mapName;
-	//private <string, string>
+
 	private bool autobond;
 
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props) {

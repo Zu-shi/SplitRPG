@@ -229,10 +229,31 @@ public class CollisionManagerScript : MonoBehaviour {
 		}
 	}
 
+	private List <_Mono> GetMovableObjectsOnTile(Vector2 tileCoords, int layerOfObject){
+
+		List <_Mono> movableObjectsOnMe = new List<_Mono>();
+
+		LayerMask mask = defaultLayers;
+		if(layerOfObject == LayerMask.NameToLayer("Left")){
+			mask = leftLayers;
+		} else if(layerOfObject == LayerMask.NameToLayer("Right")){
+			mask = rightLayers;
+		}
+		Collider2D[] cols = Physics2D.OverlapPointAll(tileCoords, mask);
+
+		foreach(Collider2D col in cols){
+			if(col.GetComponent<MovementScript>() != null){
+				movableObjectsOnMe.Add(col.GetComponent<_Mono>());
+			}
+		}
+		return movableObjectsOnMe;
+	}
+
 	/// <summary>
 	/// Gets a list of movableobjects on a tile.
 	/// Returns empty list if nothing found.
 	/// </summary>
+	/*
 	private List <_Mono> GetMovableObjectsOnTile(Vector2 tileCoords, int layerOfObject){
 		LayerMask mask = defaultLayers;
 		if(layerOfObject == LayerMask.NameToLayer("Left")){
@@ -240,10 +261,10 @@ public class CollisionManagerScript : MonoBehaviour {
 		} else if(layerOfObject == LayerMask.NameToLayer("Right")){
 			mask = rightLayers;
 		}
-
+		
 		Object[] movableObjects = Object.FindObjectsOfType ( typeof(MovementScript) );
 		List <_Mono> movableObjectsOnMe = new List <_Mono>();
-
+		
 		foreach(Object movableObject in movableObjects){
 			_Mono movableObjectMono = ((MovementScript)movableObject).GetComponent<_Mono>();
 			//Debug.Log (movableObject);
@@ -256,9 +277,9 @@ public class CollisionManagerScript : MonoBehaviour {
 				}
 			}
 		}
-
+		
 		return movableObjectsOnMe;
-	}
+	}*/
 
 	/// <summary>
 	/// Gets a list of ColliderScripts's on a tile.
