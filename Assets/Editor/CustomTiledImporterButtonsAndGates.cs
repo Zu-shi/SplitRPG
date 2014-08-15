@@ -178,13 +178,17 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 			if (ec.points[0].y != ec.points[1].y){
 				gateObj.GetComponent<GateScript>().horizontal = false;
 				gateObj.GetComponent<SpriteRenderer>().sprite = gateObj.GetComponent<GateScript>().closedSpriteV;
+				gateObj.transform.position += new Vector3(-1,0,0);
+			}
+			else {
+				
+				gateObj.transform.position += new Vector3(0,1.5f,0);
 			}
 			
 			if( gate.Value.ContainsKey("reverse") ){
 				gateObj.GetComponent<GateScript>().reverse = bool.Parse( gate.Value["reverse"] );
 			}
 
-			gateObj.transform.position += new Vector3(0,1,0);
 		}
 	}
 
