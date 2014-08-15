@@ -194,6 +194,10 @@ public class CollisionManagerScript : MonoBehaviour {
 			if(hit.collider.transform.parent != null && hit.collider.transform.parent.name == "Collisions") {
 				return true;
 			}
+			GateScript gs = hit.collider.gameObject.GetComponent<GateScript>();
+			if(gs != null) { // It's a gate
+				return !gs.IsOpen();
+			}
 		}
 		return false;
 	}

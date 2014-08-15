@@ -20,10 +20,9 @@ public class GateScript : _Mono {
 	public bool reverse = false;
 	
 	private Sprite closedSprite;
-	ColliderScript colliderScript;
 
-	void Start(){
-		colliderScript = GetComponent<ColliderScript>();
+	public bool IsOpen() {
+		return togglerToWatch.on != reverse;
 	}
 
 	void Update () {
@@ -40,12 +39,8 @@ public class GateScript : _Mono {
 
 		if(open){
 			spriteRenderer.sprite = openSprite;
-			// disable collision
-			colliderScript.blocking = false;
 		} else {
 			spriteRenderer.sprite = closedSprite;
-			// enable collision
-			colliderScript.blocking = true;
 
 		}
 	}

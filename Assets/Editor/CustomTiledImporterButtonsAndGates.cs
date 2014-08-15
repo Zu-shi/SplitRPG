@@ -173,6 +173,8 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 			if( gate.Value.ContainsKey("reverse") ){
 				gateObj.GetComponent<GateScript>().reverse = bool.Parse( gate.Value["reverse"] );
 			}
+
+			gateObj.transform.position += new Vector3(0,1,0);
 		}
 	}
 
