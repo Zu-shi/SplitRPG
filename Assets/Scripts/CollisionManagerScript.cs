@@ -217,6 +217,50 @@ public class CollisionManagerScript : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Returns whether a movable object is on the specified tile
+	/// </summary>
+	public bool IsMovableObjectsOnTile(Vector2 tileCoords, int layerOfObject){
+		List <_Mono> movableObjectsOnMe = GetMovableObjectsOnTile (tileCoords, layerOfObject);
+
+		if(movableObjectsOnMe.Count != 0){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/// <summary>
+	/// Gets a list of movableobjects on a tile.
+	/// Returns empty list if nothing found.
+	/// </summary>
+	private List <_Mono> GetMovableObjectsOnTile(Vector2 tileCoords, int layerOfObject){
+		LayerMask mask = defaultLayers;
+		if(layerOfObject == LayerMask.NameToLayer("Left")){
+			mask = leftLayers;
+		} else if(layerOfObject == LayerMask.NameToLayer("Right")){
+			mask = rightLayers;
+		}
+
+		Object[] movableObjects = Object.FindObjectsOfType ( typeof(MovementScript) );
+		List <_Mono> movableObjectsOnMe = new List <_Mono>();
+
+		foreach(Object movableObject in movableObjects){
+			_Mono movableObjectMono = ((MovementScript)movableObject).GetComponent<_Mono>();
+			//Debug.Log (movableObject);
+			//Debug.Log (movableObjectMono);
+			//Debug.Log (movableObjectMono.gameObject);
+			//Debug.Log (movableObjectMono.gameObject.layer);
+			if( ( mask.value & ( 1 << movableObjectMono.gameObject.layer ) ) != 0 ){
+				if(movableObjectMono.tileVector.Equals(tileCoords)){
+					movableObjectsOnMe.Add(movableObjectMono);
+				}
+			}
+		}
+
+		return movableObjectsOnMe;
+	}
+
+	/// <summary>
 	/// Gets a list of ColliderScripts's on a tile.
 	/// </summary>
 	private ColliderScript[] GetColliderScriptsOnTile(Vector2 tileCoords, int layerOfObject){
@@ -230,7 +274,6 @@ public class CollisionManagerScript : MonoBehaviour {
 		}
 		return scripts.ToArray();
 	}
-	
 
 
 }

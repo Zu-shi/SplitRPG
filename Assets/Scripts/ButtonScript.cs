@@ -53,7 +53,7 @@ public class ButtonScript : _Mono {
 	void Update () {
 
 		// Is the player on us?
-		bool playerIsOnButton = Globals.collisionManager.IsPlayerOnTile(tileVector, gameObject.layer);
+		bool playerIsOnButton = Globals.collisionManager.IsMovableObjectsOnTile(tileVector, gameObject.layer);
 
 		// Toggle on if needed
 		if (_toggler.off && playerIsOnButton){
