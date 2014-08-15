@@ -241,8 +241,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelPrefabs:
-  - {fileID: 100052, guid: f7b3f0989c737413d9f18197aba3f05a, type: 2}
-  - {fileID: 100322, guid: 72926749bd67d4627854229f3e87e589, type: 2}
+  - {fileID: 100016, guid: 62be08d5db6c94c3abb4062eb4751060, type: 2}
+  - {fileID: 100024, guid: 22b766b9fb2eb463988892a8bc145500, type: 2}
   loadOnStart: 1
   preloadedLeftLevel: {fileID: 0}
   preloadedRightLevel: {fileID: 0}
@@ -645,11 +645,11 @@ Prefab:
     - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: levelPrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 100322, guid: 72926749bd67d4627854229f3e87e589, type: 2}
+      objectReference: {fileID: 100024, guid: 22b766b9fb2eb463988892a8bc145500, type: 2}
     - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: levelPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 100052, guid: f7b3f0989c737413d9f18197aba3f05a, type: 2}
+      objectReference: {fileID: 100016, guid: 62be08d5db6c94c3abb4062eb4751060, type: 2}
     - target: {fileID: 11400012, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: snapshotShortcut
       value: 1

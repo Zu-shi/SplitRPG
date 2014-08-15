@@ -6,14 +6,29 @@ using System.Collections.Generic;
 [Tiled2Unity.CustomTiledImporter]
 class CustomTiledImporterFences : Tiled2Unity.ICustomTiledImporter{
 
-	private const string fencePostPath = "Assets/Prefabs/Tiles/FencePost.prefab";
-	private const string fenceHBarPath = "Assets/Prefabs/Tiles/FenceHBar.prefab";
-	private const string fenceVBarPath = "Assets/Prefabs/Tiles/FenceVBar.prefab";
-	private const string fenceVBarBottomPath = "Assets/Prefabs/Tiles/FenceVBarBottom.prefab";
-	private const string fenceVBarTopPath = "Assets/Prefabs/Tiles/FenceVBarTop.prefab";
+	private const string fencePostPath = "FencePost.prefab";
+	private const string fenceHBarPath = "FenceHBar.prefab";
+	private const string fenceVBarPath = "FenceVBar.prefab";
+	private const string fenceVBarBottomPath = "FenceVBarBottom.prefab";
+	private const string fenceVBarTopPath = "FenceVBarTop.prefab";
+	
+	private Dictionary<string, string> prefabMap;
+	private string mapName;
 
-
-	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props) {}
+	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props) {
+		if(gameObject.transform.parent == null){
+			if(props.ContainsKey("map")){
+				prefabMap = PrefabMapper.maps[props["map"]];
+				//Added backslash here so that we can use load the default map without inserting a conditional.
+				mapName = props["map"] + "/";
+			}else{
+				Debug.LogWarning("Map does not contain requisite 'map' property, default used.");
+				prefabMap = PrefabMapper.maps["default"];
+				Utils.assert(prefabMap != null);
+				mapName = "";
+			}
+		}
+	}
 
 	public void CustomizePrefab(GameObject prefab) {
 		Transform tmp = Utils.FindChildRecursive(prefab, "Collisions");
@@ -50,7 +65,7 @@ class CustomTiledImporterFences : Tiled2Unity.ICustomTiledImporter{
 	}
 
 	private void MakeFencePost(GameObject graphics, Vector2 where) {
-		GameObject tmp = (GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath(fencePostPath, typeof(GameObject)),
+		GameObject tmp = (GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath(PrefabMapper.PrefabLocation + mapName + fencePostPath, typeof(GameObject)),
 		                                                    where,
 		                                                    Quaternion.identity);
 		tmp.transform.parent = graphics.transform;
@@ -62,7 +77,7 @@ class CustomTiledImporterFences : Tiled2Unity.ICustomTiledImporter{
 			lower = Mathf.Min ((int)from.x, (int)to.x);
 			higher = Mathf.Max ((int)from.x, (int)to.x);
 			for(int i = lower; i < higher; i++) {
-			GameObject tmp = (GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath(fenceHBarPath, typeof(GameObject)),
+				GameObject tmp = (GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath(PrefabMapper.PrefabLocation + mapName + fenceHBarPath, typeof(GameObject)),
 			                                                    new Vector2(i + 1, from.y),
 			                                                    Quaternion.identity);
 				tmp.transform.parent = graphics.transform;
@@ -74,21 +89,21 @@ class CustomTiledImporterFences : Tiled2Unity.ICustomTiledImporter{
 			higher = Mathf.Max ((int)from.y, (int)to.y);
 
 			// Make the bottom bit of the bar.
-			GameObject bottom = (GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath(fenceVBarBottomPath, typeof(GameObject)),
+			GameObject bottom = (GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath(PrefabMapper.PrefabLocation + mapName + fenceVBarBottomPath, typeof(GameObject)),
 			                                                       new Vector2(from.x, lower),
 			                                                       Quaternion.identity);
 			bottom.transform.parent = graphics.transform;
 
 			// Make the middle bits of the bar.
 			for(int i = lower; i < higher - 1; i++) {
-				GameObject tmp = (GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath(fenceVBarPath, typeof(GameObject)),
+				GameObject tmp = (GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath(PrefabMapper.PrefabLocation + mapName + fenceVBarPath, typeof(GameObject)),
 				                                                    new Vector2(from.x, i + 1),
 				                                                    Quaternion.identity);
 				tmp.transform.parent = graphics.transform;
 			}
 
 			// Make the top bit of the bar.
-			GameObject top = (GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath(fenceVBarTopPath, typeof(GameObject)),
+			GameObject top = (GameObject)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath(PrefabMapper.PrefabLocation + mapName + fenceVBarTopPath, typeof(GameObject)),
 			                                                       new Vector2(from.x, higher),
 			                                                       Quaternion.identity);
 			top.transform.parent = graphics.transform;

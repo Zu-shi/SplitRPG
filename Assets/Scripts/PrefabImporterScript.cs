@@ -42,8 +42,9 @@ public class PrefabImporterScript : _Mono {
 		go  = getOriginalPrefabOfObject (map, objname.ToLower());
 		sr = go.GetComponent<SpriteRenderer> ();
 		sr.sprite = retrieveSpriteByName (map, objname);
+		go.GetComponent<PushBlockColliderScript> ().pushSound = AssetDatabase.LoadAssetAtPath(PrefabMapper.SoundLocation + map + "Push.wav", typeof(AudioClip)) as AudioClip;
 		SaveAndDestory (map, objname, go);
-		
+
 		objname = "Blocker";
 		go  = getOriginalPrefabOfObject (map, objname.ToLower());
 		sr = go.GetComponent<SpriteRenderer> ();

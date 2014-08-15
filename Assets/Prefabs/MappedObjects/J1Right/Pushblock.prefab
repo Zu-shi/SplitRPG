@@ -74,7 +74,7 @@ MonoBehaviour:
   canFall: 1
   fallObject: {fileID: 400000}
   destroyOnFall: 1
-  fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}
+  fallingSound: {fileID: 8300000, guid: 1dc3d591506b94c578ecd7f5be602636, type: 3}
   moveDirection: 0
 --- !u!114 &11400002
 MonoBehaviour:
@@ -106,6 +106,7 @@ MonoBehaviour:
   blocking: 1
   activatable: 0
   pit: 0
+  pushSound: {fileID: 8300000, guid: 1dc3d591506b94c578ecd7f5be602636, type: 3}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
