@@ -18,7 +18,7 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 	private Dictionary<string, string> prefabMap;
 	private string mapName;
 	//private <string, string>
-	private bool autoPair;
+	private bool autobond;
 
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props) {
 		Transform parent = gameObject.transform.parent;
@@ -31,10 +31,10 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 				mapName = "";
 			}
 			
-			if(props.ContainsKey("map")){
-				autoPair = bool.Parse(props["map"]);
+			if(props.ContainsKey("autobond")){
+				autobond = bool.Parse(props["autobond"]);
 			}else{
-				autoPair = false;
+				autobond = false;
 			}
 			return;
 		}
