@@ -8,6 +8,20 @@ public static class PrefabMapper {
 	public static string PrefabLocation = "Assets/Prefabs/MappedObjects/";
 	public static string SpriteLocation = "Assets/Sprites/";
 	public static string SoundLocation = "Assets/SoundEffects/";
+	
+	public static Dictionary<string, string> activatorToGateMap = new Dictionary<string, string>()
+	{
+		{"Switch", "switchgate"},
+		{"Switch1", "switchgate1"},
+		{"Switch2", "switchgate2"},
+		{"Switch3", "switchgate3"},
+		{"Switch4", "switchgate4"},
+		{"Button", "buttongate"},
+		{"Button1", "buttongate1"},
+		{"Button2", "buttongate2"},
+		{"Button3", "buttongate3"},
+		{"Button4", "buttongate4"}
+	};
 
 	public static Dictionary<string, string> originals = new Dictionary<string, string>()
 	{

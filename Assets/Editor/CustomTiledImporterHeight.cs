@@ -19,9 +19,9 @@ class CustomTiledImporterHeight : Tiled2Unity.ICustomTiledImporter{
 	};
 	
 	private Dictionary<string, DrawingOrder> orderMap = new Dictionary<string, DrawingOrder>{
-		{ "Objects(Invisible)", DrawingOrder.OBJECTS },
-		{ "Switches and Gates", DrawingOrder.OBJECTS },
-		{ "Buttons and Gates", DrawingOrder.OBJECTS }
+		{ "Objects(Invisible)", DrawingOrder.OBJECTS }//,
+		//{ "Switches and Gates", DrawingOrder.OBJECTS },
+		//{ "Buttons and Gates", DrawingOrder.OBJECTS }
 	};
 	private const int DEFAULT_HEIGHT = 1;
 
@@ -32,6 +32,19 @@ class CustomTiledImporterHeight : Tiled2Unity.ICustomTiledImporter{
 			//Debug.Log (gameObject.name);
 			HeightScript hs = Utils.GetHeightScript (gameObject);
 			hs.height = int.Parse(props["height"]);
+		}
+
+		
+		if (props.ContainsKey ("order")) {
+			//Debug.Log (gameObject.name);
+			HeightScript hs = Utils.GetHeightScript (gameObject);
+			if(props["order"].ToLower() == "above"){
+				hs.slightlyAbove = true;
+			}else if(props["order"].ToLower() == "below"){
+				hs.slightlyBelow = true;
+			}else{
+				Debug.LogWarning("Uknown order " + props["order"] + ", only \"above\" or \"below\" recognized");
+			}
 		}
 	}
 

@@ -68,7 +68,8 @@ namespace Tiled2Unity
             }
 
             // Set the sorting order
-            renderer.sortingOrder = ImportUtils.GetAttributeAsInt(match, "sortingOrder");
+			// Zuoming: We disable sorting order here, preferring using height instead.
+			renderer.sortingOrder = 0;//ImportUtils.GetAttributeAsInt(match, "sortingOrder");
 
             // Do we have an alpha color key?
             string htmlColor = ImportUtils.GetAttributeAsString(match, "alphaColorKey", "");

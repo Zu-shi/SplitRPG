@@ -7,11 +7,11 @@ public class HeightSorterScript : MonoBehaviour {
 	public bool editModeRefresh = false;
 
 	const float MAX_Z = 0;
-	const float HEIGHT_FAC = 100f;
-	const float DRAWING_ORDER_FAC = 10f;
+	const float HEIGHT_FAC = 1000f;
+	const float DRAWING_ORDER_FAC = 100f;
 	//const float YCAM_FAC = 0.1f;
-	const float YOFF = 0.01f;
-	const float SLIGHT_DIFFERENCE = .00001f;
+	const float YOFF = 0.1f;
+	const float SLIGHT_DIFFERENCE = .01f;
 
 	/*
 	public float MaxZAtHeight(int height){

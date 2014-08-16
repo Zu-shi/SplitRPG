@@ -10,8 +10,8 @@ public class SwitchScript : ColliderScript {
 	
 	private _Mono indicator;
 	
-	Toggler _toggler = new Toggler();
-	public Toggler toggler{get{ return _toggler; }}
+	public Toggler _toggler = new Toggler();
+	//public Toggler toggler{get{ return _toggler; }}
 	
 	[Tooltip("Sprite for when the switch is activated.")]
 	public Sprite onSprite;
@@ -33,9 +33,9 @@ public class SwitchScript : ColliderScript {
 	void Update () {
 		// Update the sprite
 		if(_toggler.on){
-			spriteRenderer.sprite = onSprite;
-		} else {
 			spriteRenderer.sprite = offSprite;
+		} else {
+			spriteRenderer.sprite = onSprite;
 		}
 	}
 	

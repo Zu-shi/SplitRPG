@@ -55,6 +55,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontal: 1
+  openSound: {fileID: 8300000, guid: 3c82e5c0808ef443992dbf1ffe0af4f6, type: 3}
+  closeSound: {fileID: 8300000, guid: 1b244487094a84fd1b494c853056842e, type: 3}
   openSprite: {fileID: 0}
   closedSpriteH: {fileID: 0}
   closedSpriteV: {fileID: 0}
