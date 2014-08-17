@@ -30,7 +30,7 @@ public class ColliderScript : _Mono {
 	/// Tries to push the object in a direction
 	/// </summary>
 	/// <returns><c>true</c>, if the object was successfully pushed, <c>false</c> otherwise.</returns>
-	public virtual bool TryToPush(GameObject pusher, Direction dir){
+	public virtual bool TryToPush(MovementScript pusher, Direction dir){
 		return false;
 	}
 	
@@ -38,7 +38,7 @@ public class ColliderScript : _Mono {
 	/// Checks to see if an object can be pushed a certrain direction.
 	/// </summary>
 	/// <returns><c>true</c>, if the object was successfully pushed, <c>false</c> otherwise.</returns>
-	public virtual bool CanPush(GameObject pusher, Direction dir){
+	public virtual bool CanPush(MovementScript pusher, Direction dir){
 		return false;
 	}
 }

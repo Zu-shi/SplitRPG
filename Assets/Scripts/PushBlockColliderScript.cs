@@ -5,21 +5,42 @@ public class PushBlockColliderScript : ColliderScript {
 	
 	MovementScript movementScript;
 	public AudioClip pushSound;
+	public bool isHeavy = false;
 
 	void Start(){
 		movementScript = GetComponent<MovementScript>();
 	}
 
-	public override bool TryToPush(GameObject pusher, Direction dir){
-		bool wasPushed = movementScript.MoveInDirection (dir);
-		if (wasPushed) {
-			Globals.soundManager.PlaySound(pushSound);
+	public virtual bool CanBePushedByPusher(MovementScript pusher){
+		if (isHeavy) {
+			if(!pusher.canPush & pusher.canPushHeavy){
+				Debug.LogWarning("Warning: MovementScript canPushHeavy set to true but canPush set to false.");
+			}
+			return pusher.canPush & pusher.canPushHeavy;
+		} else {
+			return pusher.canPush;
 		}
-		return wasPushed;
 	}
 
-	public override bool CanPush(GameObject pusher, Direction dir){
-		return movementScript.CanMoveInDirectionWithoutPushSideEffect(dir);
+	public override bool TryToPush(MovementScript pusher, Direction dir){
+		if (CanBePushedByPusher(pusher)) {
+			bool wasPushed = movementScript.MoveInDirection (dir);
+			if (wasPushed) {
+				Globals.soundManager.PlaySound (pushSound);
+			}
+
+			return wasPushed;
+		} else {
+			return false;
+		}
+	}
+
+	public override bool CanPush(MovementScript pusher, Direction dir){
+		if (CanBePushedByPusher(pusher)) {
+			return movementScript.CanMoveInDirectionWithoutPushSideEffect (dir);
+		}else{
+			return false;
+		}
 	}
 
 }

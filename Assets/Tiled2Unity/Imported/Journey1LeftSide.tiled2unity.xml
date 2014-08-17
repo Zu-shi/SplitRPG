@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 8/16/2014 2:51:33 PM-->
+<!--Last exported: 8/17/2014 11:20:44 AM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J1Left" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="J1Left" sortingLayerName="" sortingOrder="1" />
@@ -278,11 +278,6 @@
           <Points>0,0 256,0</Points>
         </EdgeCollider2D>
       </GameObject>
-      <GameObject name="PolylineObject" x="448" y="-4352">
-        <EdgeCollider2D>
-          <Points>0,0 0,-768</Points>
-        </EdgeCollider2D>
-      </GameObject>
       <GameObject name="PolylineObject" x="192" y="-4736">
         <EdgeCollider2D>
           <Points>0,0 -128,0</Points>
@@ -451,6 +446,11 @@
       <GameObject name="PolylineObject" x="1216" y="-5056">
         <EdgeCollider2D>
           <Points>0,0 0,128</Points>
+        </EdgeCollider2D>
+      </GameObject>
+      <GameObject name="PolylineObject" x="448" y="-4352">
+        <EdgeCollider2D>
+          <Points>0,0 0,-704</Points>
         </EdgeCollider2D>
       </GameObject>
     </GameObject>

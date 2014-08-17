@@ -4,6 +4,7 @@ using System.Collections;
 public class MovementScript : _Mono {
 
 	public bool canPush = false;
+	public bool canPushHeavy = false;
 	public bool canFall = true;
 
 	[Tooltip ("Object that will be scaled down when it falls.")]
@@ -188,13 +189,8 @@ public class MovementScript : _Mono {
 	
 		// If we found one, try to push it
 		if(blocker != null){
-			if(!canPush){
-				return false;
-
-			} else {
-				if(push){return blocker.TryToPush(gameObject, direction);}
-				else{return blocker.CanPush(gameObject, direction);}
-			}
+			if(push){return blocker.TryToPush(this, direction);}
+			else{return blocker.CanPush(this, direction);}
 		}
 		
 		return true;
