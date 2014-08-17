@@ -37,7 +37,7 @@ public class PushBlockColliderScript : ColliderScript {
 
 	public override bool CanPush(MovementScript pusher, Direction dir){
 		if (CanBePushedByPusher(pusher)) {
-			return movementScript.CanMoveInDirectionWithoutPushSideEffect (dir);
+			return movementScript.CanMoveInDirectionWithoutPushSideEffect (this.tileVector, dir);
 		}else{
 			return false;
 		}

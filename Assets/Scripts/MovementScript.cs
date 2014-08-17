@@ -4,8 +4,9 @@ using System.Collections;
 public class MovementScript : _Mono {
 
 	public bool canPush = false;
-	public bool canPushHeavy = false;
 	public bool canFall = true;
+	public bool canPushHeavy = false;
+	public bool canJump = false;
 
 	[Tooltip ("Object that will be scaled down when it falls.")]
 	public Transform fallObject;
@@ -33,6 +34,7 @@ public class MovementScript : _Mono {
 
 	// Time it takes to move two spaces in frames (at Unity's fixed time step aka 50 fps)
 	protected const int moveTime = 14;
+	protected const int jumpTime = moveTime;
 	
 	// Time it takes to change direction in frames (at Unity's fixed time step aka 50 fps)
 	protected const int changingDirectionTime = 5;
@@ -40,12 +42,14 @@ public class MovementScript : _Mono {
 	// Time since last movement in frames 
 	protected const int fastDirectionChangeThreshold = 12;
 	protected int fastDirectionChangeTimeLeft = 0;
+	protected const float maxJumpingHeight = 1f;
 
 	protected Vector3 startScale;
 	 
 	protected int moveTimeLeft;
 	protected int waitTimeLeft;
 	protected float moveSpeed;
+	protected float naturalCharacterOffset;
 	
 	protected bool _isMoving;
 	public bool isMoving{
@@ -73,7 +77,14 @@ public class MovementScript : _Mono {
 	public Direction moveDirection = Direction.NONE;
 	
 	void Start () {
-		
+
+		//Set character jump height offset
+		if (this.GetType () == typeof(CharacterMovementScript)) {
+			_Mono sprite = gameObject.transform.FindChild("Sprite").GetComponent<_Mono>();
+			_Mono parent = GetComponent<_Mono>();
+			naturalCharacterOffset = sprite.y - parent.y;
+		}
+
 		moveTimeLeft = 0;
 		
 		// Calculate moveSpeed based on moveTime
@@ -118,6 +129,14 @@ public class MovementScript : _Mono {
 		rigidbody2D.velocity = new Vector2 (0f, 0f);
 	}
 
+	//Check if player will fall, and activate falling sequence if so.
+	private void CheckAndStartFall(){
+		bool collidingWithPit = Globals.collisionManager.IsTilePit(xy, gameObject.layer);
+		if (!inAir && collidingWithPit) {
+			StartFall();
+		}
+	}
+
 	void FixedUpdate () {
 
 		if(canFall){
@@ -131,12 +150,9 @@ public class MovementScript : _Mono {
 					// Fall animation
 					fallAnimation();
 				} else {
-					
+					CheckAndStartFall();
 					// Figure out if still on ground
-					bool collidingWithPit = Globals.collisionManager.IsTilePit(xy, gameObject.layer);
-					if (!inAir && collidingWithPit) {
-						StartFall();
-					}
+					//Set character jump height offset
 				}
 			}
 		}
@@ -167,25 +183,39 @@ public class MovementScript : _Mono {
 			fastDirectionChangeTimeLeft -= 1;
 		}
 
+		//Set height offset for jumping character.
+		if (this.GetType () == typeof(CharacterMovementScript)) {
+			_Mono sprite = gameObject.transform.FindChild("Sprite").GetComponent<_Mono>();
+			_Mono parent = GetComponent<_Mono>();
+			if(inAir && isMoving){
+				float fraction = (float)(moveTimeLeft) / (float)(moveTime) * 2;
+				float offset = (- Mathf.Pow(fraction, 2) + 2 * fraction ) * maxJumpingHeight;
+				
+				//Debug.Log ("jumping");
+				sprite.y = parent.y + naturalCharacterOffset + offset;
+			}
+			else{sprite.y = parent.y + naturalCharacterOffset;}
+		}
+
 	}
 
-	public bool CanMoveInDirectionWithPushSideEffect(Direction direction){
-		return CanMoveInDirection (direction, true);
+	public bool CanMoveInDirectionWithPushSideEffect(Vector2 tileLocation, Direction direction){
+		return CanMoveInDirection (tileLocation, direction, true);
 	}
 	
-	public bool CanMoveInDirectionWithoutPushSideEffect(Direction direction){
-		return CanMoveInDirection (direction, false);
+	public bool CanMoveInDirectionWithoutPushSideEffect(Vector2 tileLocation, Direction direction){
+		return CanMoveInDirection (tileLocation, direction, false);
 	}
 
-	private bool CanMoveInDirection(Direction direction, bool push){
+	private bool CanMoveInDirection(Vector2 tileLocation, Direction direction, bool push){
 		// Check if there is a fence blocking that direction
-		if(Globals.collisionManager.IsFenceBlocking(this.tileVector, direction, this.gameObject.layer)) {
+		if(Globals.collisionManager.IsFenceBlocking(tileLocation, direction, this.gameObject.layer)) {
 			//Debug.Log("Found fence, can't move.");
 			return false;
 		}
 		
 		// Look for blocking tile
-		ColliderScript blocker = Globals.collisionManager.GetBlockingObject(this, direction);
+		ColliderScript blocker = Globals.collisionManager.GetBlockingObject(tileLocation, direction, this.gameObject.layer);
 	
 		// If we found one, try to push it
 		if(blocker != null){
@@ -233,8 +263,19 @@ public class MovementScript : _Mono {
 		_isMoving = true;
 		moveTimeLeft = moveTime;
 
-		if(CanMoveInDirectionWithPushSideEffect(direction)){
-			StartMoving(Utils.DirectionToVector(direction) * moveSpeed);
+		if(CanMoveInDirectionWithPushSideEffect(this.tileVector, direction)){
+			if(!canJump){
+				StartMoving(Utils.DirectionToVector(direction) * moveSpeed);
+			}else{
+				bool pitInFront = Globals.collisionManager.IsTilePit(xy + Utils.DirectionToVector(direction), gameObject.layer);
+				bool safeToLand = CanMoveInDirectionWithPushSideEffect(xy + Utils.DirectionToVector(direction), direction);
+				if (pitInFront && safeToLand) {
+					inAir = true;
+					StartMoving(Utils.DirectionToVector(direction) * moveSpeed * 2);
+				}else{
+					StartMoving(Utils.DirectionToVector(direction) * moveSpeed);
+				}
+			}
 			return true;
 		} else {
 			return false;
@@ -247,6 +288,9 @@ public class MovementScript : _Mono {
 	}
 
 	protected void StopMoving(){
+		inAir = false;
+		CheckAndStartFall();
+
 		collider2D.enabled = true;
 		// Cancel move velocity
 		rigidbody2D.velocity = new Vector2(0, 0);

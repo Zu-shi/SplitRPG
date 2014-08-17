@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class SpriteAnimationManagerScript : MonoBehaviour {
+public class SpriteAnimationManagerScript : _Mono {
 
 	[Tooltip("If set, this sprite will revert to it's idle animation after it is told to play a one-shot animation.")]
 	public bool idleAfterOneTimeAnimations = false;

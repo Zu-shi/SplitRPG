@@ -241,8 +241,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelPrefabs:
-  - {fileID: 100052, guid: f7b3f0989c737413d9f18197aba3f05a, type: 2}
-  - {fileID: 100322, guid: 72926749bd67d4627854229f3e87e589, type: 2}
+  - {fileID: 100226, guid: a76b317e85751422e9216b78f1df95cd, type: 2}
+  - {fileID: 100226, guid: 7852501df8fa1464ba2457b41b046b10, type: 2}
   loadOnStart: 1
   preloadedLeftLevel: {fileID: 0}
   preloadedRightLevel: {fileID: 0}
@@ -330,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5d5af2d782c4ea4ab7f5a02e4d4025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 0}
   convertSpritesToPrefabs: 0
   J1Left: 1
   J1Right: 1
@@ -645,11 +646,11 @@ Prefab:
     - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: levelPrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 100322, guid: 72926749bd67d4627854229f3e87e589, type: 2}
+      objectReference: {fileID: 100226, guid: 7852501df8fa1464ba2457b41b046b10, type: 2}
     - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: levelPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 100052, guid: f7b3f0989c737413d9f18197aba3f05a, type: 2}
+      objectReference: {fileID: 100226, guid: a76b317e85751422e9216b78f1df95cd, type: 2}
     - target: {fileID: 11400012, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: snapshotShortcut
       value: 1
@@ -767,6 +768,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canPush: 1
   canFall: 1
+  canPushHeavy: 0
+  canJump: 0
   fallObject: {fileID: 844761425}
   destroyOnFall: 0
   fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}
@@ -1197,6 +1200,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canPush: 1
   canFall: 1
+  canPushHeavy: 0
+  canJump: 0
   fallObject: {fileID: 1361838052}
   destroyOnFall: 0
   fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}

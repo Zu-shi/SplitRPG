@@ -71,9 +71,14 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 	}
 	
 	public void CustomizePrefab(GameObject prefab) {
-		GameObject buttonLayer = prefab.transform.GetChild(0).FindChild("Buttons and Gates").gameObject;
-		GameObject switchLayer = prefab.transform.GetChild(0).FindChild ("Switches and Gates").gameObject;
-		
+		GameObject buttonLayer = null;
+		GameObject switchLayer = null;;
+		if (prefab.transform.GetChild (0).FindChild ("Buttons and Gates") != null) {
+			buttonLayer = prefab.transform.GetChild (0).FindChild ("Buttons and Gates").gameObject;
+		}
+		if (prefab.transform.GetChild(0).FindChild ("Switches and Gates") != null ) {
+			switchLayer = prefab.transform.GetChild(0).FindChild ("Switches and Gates").gameObject;
+		}
 		if (buttonLayer) {
 
 			//This must happen after the gates importer, so that the correct gate objects can be found.
