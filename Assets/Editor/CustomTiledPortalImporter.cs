@@ -12,6 +12,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 	private GameObject senderPrefab;
 	private GameObject receiverPrefab;
 	private GameObject biPrefab;
+	private GameObject loaderPrefab;
 	
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props){
 		Transform parent = gameObject.transform.parent;
@@ -21,8 +22,16 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 			senderPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/SendPortal.prefab", typeof(GameObject)) as GameObject;
 			receiverPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/ReceivePortal.prefab", typeof(GameObject)) as GameObject;
 			biPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/BidirectionalPortal.prefab", typeof(GameObject)) as GameObject;
+			loaderPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/LevelLoader.prefab", typeof(GameObject)) as GameObject;
 		}
 
+		if(parent.name.Contains("Unidirectional Portals") && props.ContainsKey("levelsToLoad")) {
+			gameObject = MakePrefab(gameObject, loaderPrefab);
+			LevelLoaderScript tmp = gameObject.GetComponent<LevelLoaderScript>();
+			tmp.leftLevel = props["levelsToLoad"].Split(",".ToCharArray())[0];
+			tmp.rightLevel = props["levelsToLoad"].Split(",".ToCharArray())[1];
+			return;
+		}
 		if(parent.name.Contains("Unidirectional Portals") && props.ContainsKey("target")) {
 			gameObject = MakePrefab(gameObject, senderPrefab);
 			senders.Add(gameObject.name);
@@ -69,7 +78,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 		tmp.name = o.name;
 		tmp.transform.parent = o.transform.parent;
 		tmp.transform.localScale *= 64;
-		tmp.transform.position += 64 * new Vector3(1,1,0);
+		tmp.transform.position += 64 * new Vector3(1,-1,0);
 		GameObject.DestroyImmediate(o);
 		return tmp;
 	}

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 8/19/2014 10:38:39 PM-->
+<!--Last exported: 8/21/2014 8:01:51 PM-->
 <Tiled2Unity version="0.9.4.5">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J1Left" sortingLayerName="" sortingOrder="0" />
   <Prefab name="rightJumpTest">
@@ -85,10 +85,14 @@
     </GameObject>
     <GameObject name="Unidirectional Portals">
       <GameObject name="A" x="0" y="-1152">
-        <Property name="Target" value="B" />
+        <Property name="target" value="B" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="B" x="256" y="-1152">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="LevelLoader" x="512" y="-256">
+        <Property name="levelsToLoad" value="leftJumpTest,rightJumpTest" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>

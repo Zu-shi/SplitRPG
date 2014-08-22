@@ -9,7 +9,7 @@ public class PortalSenderScript : _Mono {
 	// This is set from an attached receiver script, if we have one. This allows us to avoid infinite
 	// teleport loops between two bidirectional portals.
 	public bool teleportDisabled = false;
-	
+
 	public void Update() {
 		if(Globals.collisionManager.IsPlayerOnTile(tileVector, gameObject.layer)) {			// A player is on us
 			if(teleportDisabled) return;													// We shouldn't be teleporting
@@ -31,5 +31,4 @@ public class PortalSenderScript : _Mono {
 			}
 		}
 	}
-
 }
