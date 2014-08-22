@@ -330,10 +330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5d5af2d782c4ea4ab7f5a02e4d4025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderer: {fileID: 0}
-  convertSpritesToPrefabs: 0
-  J1Left: 1
-  J1Right: 1
 --- !u!1 &516045933
 GameObject:
   m_ObjectHideFlags: 0
