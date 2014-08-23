@@ -6,24 +6,29 @@ public class PortalSenderScript : _Mono {
 	[Tooltip("Where to send to character that steps on this portal.")]
 	public PortalReceiverScript target;
 
-	public bool allowLeftCharacter = true;
-	public bool allowRightCharacter = true;
+	// This is set from an attached receiver script, if we have one. This allows us to avoid infinite
+	// teleport loops between two bidirectional portals.
+	public bool teleportDisabled = false;
 
+	public void Update() {
+		if(Globals.collisionManager.IsPlayerOnTile(tileVector, gameObject.layer)) {			// A player is on us
+			if(teleportDisabled) return;													// We shouldn't be teleporting
 
-	public void OnTriggerStay2D(Collider2D other) {
-		if(other.gameObject.tag == "PlayerLeft" && allowLeftCharacter) {
-			if( !other.GetComponent<CharacterMovementScript>().isMoving ) {
-				other.GetComponent<PlayerControllerScript>().tileX = target.tileX + (int)target.exitDirection.x;
-				other.GetComponent<PlayerControllerScript>().tileY = target.tileY + (int)target.exitDirection.y;
+			if(Globals.playerLeft.gameObject.layer == this.gameObject.layer) {				// Left player is on us
+				if(Globals.playerLeft.GetComponent<MovementScript>().isMoving) return;		// Don't teleport until they stop moving
+
+				target.MovePlayerHere(Globals.playerLeft);
+			}
+			else {																			// Right player is on us
+				if(Globals.playerRight.GetComponent<MovementScript>().isMoving) return;		// Don't teleport until they stop moving
+
+				target.MovePlayerHere(Globals.playerRight);
 			}
 		}
-
-		if(other.gameObject.tag == "PlayerRight" && allowRightCharacter) {
-			if( !other.GetComponent<CharacterMovementScript>().isMoving ) {
-				other.GetComponent<PlayerControllerScript>().tileX = target.tileX + (int)target.exitDirection.x;
-				other.GetComponent<PlayerControllerScript>().tileY = target.tileY + (int)target.exitDirection.y;
+		else {
+			if(teleportDisabled) {
+				teleportDisabled = false;
 			}
 		}
 	}
-
 }
