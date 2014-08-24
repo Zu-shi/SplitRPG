@@ -46,9 +46,13 @@ class CustomTiledImporterAddObjects : Tiled2Unity.ICustomTiledImporter{
 					_Mono itemMono = item.GetComponent<_Mono>();
 					itemMono.xs /= Utils.TILED_TO_UNITY_SCALE;
 					itemMono.ys /= Utils.TILED_TO_UNITY_SCALE;
-					itemMono.x += itemMono.xs/2;
-					itemMono.y -= itemMono.ys/2;
+					itemMono.x += itemMono.xs;
+					itemMono.y -= itemMono.ys;
+					//itemMono.x += itemMono.xs/2;
+					//itemMono.y -= itemMono.ys/2;
 					item.name = name;
+					//itemMono.x = itemMono.x + Globals.PIXELS_PER_TILE/2;
+					//itemMono.y = itemMono.y + Globals.PIXELS_PER_TILE/2;
 					item.transform.parent = obj;
 					obj.name = obj.name + "Parent";
 					item.layer = invisibleLayer.layer;

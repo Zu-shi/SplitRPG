@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [Tiled2Unity.CustomTiledImporter]
 class CustomTiledImporterFences : Tiled2Unity.ICustomTiledImporter{
 	
-	private const bool DISABLE_IMPORT = false;
+	private const bool DISABLE_IMPORT = true;
 	private const string fencePostPath = "FencePost.prefab";
 	private const string fenceHBarPath = "FenceHBar.prefab";
 	private const string fenceVBarPath = "FenceVBar.prefab";

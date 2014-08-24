@@ -157,8 +157,10 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 			item = (GameObject)GameObject.Instantiate (item, obj.transform.position, obj.transform.rotation);
 
 			_Mono itemMono = item.GetComponent<_Mono> ();
-			itemMono.x += itemMono.xs / 2;
-			itemMono.y -= itemMono.ys / 2;
+
+			itemMono.x += itemMono.xs;
+			itemMono.y -= itemMono.ys;
+
 			item.transform.parent = obj.transform;
 			//Debug.LogWarning("Object " + obj.name + " added.");
 			item.name = obj.name;
