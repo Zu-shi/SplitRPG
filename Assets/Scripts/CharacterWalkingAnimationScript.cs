@@ -8,7 +8,7 @@ using System.Collections;
 [RequireComponent(typeof(SpriteAnimationManagerScript))]
 public class CharacterWalkingAnimationScript : MonoBehaviour {
 
-	private MovementScript mov;
+	private CharacterMovementScript mov;
 	private SpriteAnimationManagerScript sprAnimMan;
 	private bool playingAnimation;
 	private const float timeForWalkingAnimationToEnd = 0.04f;
@@ -16,7 +16,7 @@ public class CharacterWalkingAnimationScript : MonoBehaviour {
 
 	void Start () {
 
-		mov = gameObject.GetComponentInParent<MovementScript> ();
+		mov = gameObject.GetComponentInParent<CharacterMovementScript> ();
 		if (mov == null) {
 			// This error message must be logged since RequireComponent cannot garuntee its presence.
 			Debug.LogError("Error: CharacterWalkingAnimationScript is not attatched to child of an object with movement script");		

@@ -4,9 +4,8 @@ using System.Collections;
 public class MovementScript : _Mono {
 
 	public bool canPush = false;
-	public bool canFall = true;
 	public bool canPushHeavy = false;
-	public bool canJump = false;
+	public bool canFall = true;
 
 	[Tooltip ("Object that will be scaled down when it falls.")]
 	public Transform fallObject;
@@ -17,19 +16,13 @@ public class MovementScript : _Mono {
 	[Tooltip ("Sound to play when the object falls.")]
 	public AudioClip fallingSound;
 
-	/// <summary>
 	/// Object is unable to fall while inAir, e.g. if jumping or flying over a gap
-	/// </summary>
 	public bool inAir{get;set;}
-	
-	/// <summary>
+
 	/// Object is currently falling
-	/// </summary>
 	public bool falling{get; set;}
-	
-	/// <summary>
+
 	/// Object has fallen all the way down to invisible size.
-	/// </summary>
 	public bool fell{get;set;}
 
 	// Time it takes to move two spaces in frames (at Unity's fixed time step aka 50 fps)
@@ -39,17 +32,18 @@ public class MovementScript : _Mono {
 	// Time it takes to change direction in frames (at Unity's fixed time step aka 50 fps)
 	protected const int changingDirectionTime = 5;
 
-	// Time since last movement in frames 
-	protected const int fastDirectionChangeThreshold = 12;
-	protected int fastDirectionChangeTimeLeft = 0;
-	protected const float maxJumpingHeight = 1f;
-
 	protected Vector3 startScale;
 	 
 	protected int moveTimeLeft;
 	protected int waitTimeLeft;
 	protected float moveSpeed;
 	protected float naturalCharacterOffset;
+
+	// Time since last movement in frames 
+	protected const int fastDirectionChangeThreshold = 12;
+	protected int fastDirectionChangeTimeLeft = 0;
+	protected const float maxJumpingHeight = 1f;
+	protected Vector2 moveVelocity;
 	
 	protected bool _isMoving;
 	public bool isMoving{
@@ -57,24 +51,6 @@ public class MovementScript : _Mono {
 			return _isMoving;
 		}
 	}
-	
-	public bool justMoved{
-		get {
-			return fastDirectionChangeTimeLeft > 0;
-		}
-	}
-
-	protected int changingDirectionTimeLeft;
-
-	protected bool _isChangingDirection;
-	public bool isChangingDirection{
-		get {
-			return _isChangingDirection;
-		}
-	}
-
-	Vector2 moveVelocity;
-	public Direction moveDirection = Direction.NONE;
 	
 	void Start () {
 
@@ -137,7 +113,7 @@ public class MovementScript : _Mono {
 		}
 	}
 
-	void FixedUpdate () {
+	protected virtual void FixedUpdate () {
 
 		if(canFall){
 			if(fell && destroyOnFall){
@@ -168,35 +144,6 @@ public class MovementScript : _Mono {
 			}
 		}
 
-		if(isChangingDirection){
-			
-			// Is changing direction done yet?
-			changingDirectionTimeLeft--;
-			if(changingDirectionTimeLeft <= 0){
-				StopChangingDirection();
-			}
-
-		}
-
-		//If we are still allowed to change directions fast, decrease time required by 1.
-		if(fastDirectionChangeTimeLeft > 0){
-			fastDirectionChangeTimeLeft -= 1;
-		}
-
-		//Set height offset for jumping character.
-		if (this.GetType () == typeof(CharacterMovementScript)) {
-			_Mono sprite = gameObject.transform.FindChild("Sprite").GetComponent<_Mono>();
-			_Mono parent = GetComponent<_Mono>();
-			if(inAir && isMoving){
-				float fraction = (float)(moveTimeLeft) / (float)(moveTime) * 2;
-				float offset = (- Mathf.Pow(fraction, 2) + 2 * fraction ) * maxJumpingHeight;
-				
-				//Debug.Log ("jumping");
-				sprite.y = parent.y + naturalCharacterOffset + offset;
-			}
-			else{sprite.y = parent.y + naturalCharacterOffset;}
-		}
-
 	}
 
 	public bool CanMoveInDirectionWithPushSideEffect(Vector2 tileLocation, Direction direction){
@@ -225,57 +172,21 @@ public class MovementScript : _Mono {
 		
 		return true;
 	}
-	
-	/// <summary>
-	/// Turns the character to face the specific direction.
-	/// </summary>
-	/// <param name="direction">Direction.</param>
-	public bool ChangeDirection(Direction direction){
-		if (_isChangingDirection || _isMoving || direction == Direction.NONE) {
-				return false;
-		}
-
-		//Debug.Log ("Changing direction " + direction.ToString());
-		//Debug.Log ("Current direction " + moveDirection.ToString());
-		_isChangingDirection = true;
-		moveDirection = direction;
-		changingDirectionTimeLeft = changingDirectionTime;
-		return false;
-	}
-
-	/// <summary>
-	/// Stop the character to face the specific direction.
-	/// </summary>
-	protected void StopChangingDirection(){
-		_isChangingDirection = false;
-	}
 
 	/// <summary>
 	/// Moves the character in the specified direction by 2 tiles
 	/// </summary>
 	/// <param name="direction">Direction.</param>
-	public bool MoveInDirection(Direction direction){
-		if(_isMoving || _isChangingDirection || direction == Direction.NONE){
+	public virtual bool MoveInDirection(Direction direction){
+		if(_isMoving || direction == Direction.NONE){
 			return false;
 		}
 
-		moveDirection = direction;
 		_isMoving = true;
 		moveTimeLeft = moveTime;
 
 		if(CanMoveInDirectionWithPushSideEffect(this.tileVector, direction)){
-			if(!canJump){
-				StartMoving(Utils.DirectionToVector(direction) * moveSpeed);
-			}else{
-				bool pitInFront = Globals.collisionManager.IsTilePit(xy + Utils.DirectionToVector(direction), gameObject.layer);
-				bool safeToLand = CanMoveInDirectionWithPushSideEffect(xy + Utils.DirectionToVector(direction), direction);
-				if (pitInFront && safeToLand) {
-					inAir = true;
-					StartMoving(Utils.DirectionToVector(direction) * moveSpeed * 2);
-				}else{
-					StartMoving(Utils.DirectionToVector(direction) * moveSpeed);
-				}
-			}
+			StartMoving(Utils.DirectionToVector(direction) * moveSpeed);
 			return true;
 		} else {
 			return false;
