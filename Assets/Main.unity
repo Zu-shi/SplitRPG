@@ -81,6 +81,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11400002, guid: 222379b234d4444a9b088d32f8e371ff, type: 2}
+      propertyPath: test.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 222379b234d4444a9b088d32f8e371ff, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -290,8 +294,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelPrefabs:
-  - {fileID: 100226, guid: a76b317e85751422e9216b78f1df95cd, type: 2}
-  - {fileID: 100226, guid: 7852501df8fa1464ba2457b41b046b10, type: 2}
+  - {fileID: 100052, guid: f7b3f0989c737413d9f18197aba3f05a, type: 2}
+  - {fileID: 100322, guid: 72926749bd67d4627854229f3e87e589, type: 2}
   loadOnStart: 1
   preloadedLeftLevel: {fileID: 0}
   preloadedRightLevel: {fileID: 0}
@@ -677,11 +681,11 @@ Prefab:
     - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: levelPrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 100226, guid: 7852501df8fa1464ba2457b41b046b10, type: 2}
+      objectReference: {fileID: 100322, guid: 72926749bd67d4627854229f3e87e589, type: 2}
     - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: levelPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 100226, guid: a76b317e85751422e9216b78f1df95cd, type: 2}
+      objectReference: {fileID: 100052, guid: f7b3f0989c737413d9f18197aba3f05a, type: 2}
     - target: {fileID: 11400012, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: snapshotShortcut
       value: 1
@@ -842,15 +846,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canPush: 1
-  canFall: 1
   canPushHeavy: 0
-  canJump: 0
+  canFall: 1
   fallObject: {fileID: 844761425}
   destroyOnFall: 0
   fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}
-  moveDirection: 0
+  body:
+  - {x: 0, y: 0}
   walkingSound: {fileID: 8300000, guid: fe55a75936473435f8eba8b5b8c6fa5a, type: 3}
   wrongBeep: {fileID: 8300000, guid: 3576cfb536e8f4c52a19ff695d19d99a, type: 3}
+  moveDirection: 0
+  canJump: 0
 --- !u!114 &844761428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1222,15 +1228,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canPush: 1
-  canFall: 1
   canPushHeavy: 0
-  canJump: 0
+  canFall: 1
   fallObject: {fileID: 1361838052}
   destroyOnFall: 0
   fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}
-  moveDirection: 0
+  body:
+  - {x: 0, y: 0}
   walkingSound: {fileID: 8300000, guid: 9a863da87eecb41678b341ce726376f8, type: 3}
   wrongBeep: {fileID: 8300000, guid: 3576cfb536e8f4c52a19ff695d19d99a, type: 3}
+  moveDirection: 0
+  canJump: 0
 --- !u!114 &1361838056
 MonoBehaviour:
   m_ObjectHideFlags: 0

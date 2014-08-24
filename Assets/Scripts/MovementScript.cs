@@ -25,6 +25,9 @@ public class MovementScript : _Mono {
 	/// Object has fallen all the way down to invisible size.
 	public bool fell{get;set;}
 
+	// Parts of this pushblock, in terms of tiles offset from the original
+	public Vector2[] body = {new Vector2(0f, 0f)};
+
 	// Time it takes to move two spaces in frames (at Unity's fixed time step aka 50 fps)
 	protected const int moveTime = 14;
 	protected const int jumpTime = moveTime;
@@ -107,8 +110,14 @@ public class MovementScript : _Mono {
 
 	//Check if player will fall, and activate falling sequence if so.
 	private void CheckAndStartFall(){
-		bool collidingWithPit = Globals.collisionManager.IsTilePit(xy, gameObject.layer);
-		if (!inAir && collidingWithPit) {
+		bool collidingWithPit = true;
+		foreach (Vector2 bodypart in body) {
+			if( !Globals.collisionManager.IsTilePit(this.xy + bodypart, this.gameObject.layer) ) {;
+				collidingWithPit = false;
+			}
+		}
+
+		if (!inAir && collidingWithPit && !falling) {
 			StartFall();
 		}
 	}
@@ -156,18 +165,33 @@ public class MovementScript : _Mono {
 
 	private bool CanMoveInDirection(Vector2 tileLocation, Direction direction, bool push){
 		// Check if there is a fence blocking that direction
-		if(Globals.collisionManager.IsFenceBlocking(tileLocation, direction, this.gameObject.layer)) {
-			//Debug.Log("Found fence, can't move.");
-			return false;
+		foreach (Vector2 bodyPart in body){
+			if( Globals.collisionManager.IsFenceBlocking(tileLocation + bodyPart, direction, this.gameObject.layer) ) {
+				//Debug.Log("Found fence, can't move.");
+				return false;
+			}
 		}
 		
 		// Look for blocking tile
-		ColliderScript blocker = Globals.collisionManager.GetBlockingObject(tileLocation, direction, this.gameObject.layer);
-	
-		// If we found one, try to push it
-		if(blocker != null){
-			if(push){return blocker.TryToPush(this, direction);}
-			else{return blocker.CanPush(this, direction);}
+		foreach (Vector2 bodyPart in body) {
+			ColliderScript blocker = null;
+
+			bool needToCheckForCollisions = true;
+			foreach(Vector2 bodyPartTemp in body){
+				if(bodyPartTemp == bodyPart + Utils.DirectionToVector(direction) * 2){
+					needToCheckForCollisions = false;
+				}
+			}
+
+			if(needToCheckForCollisions){
+				blocker = Globals.collisionManager.GetBlockingObject (tileLocation + bodyPart, direction, this.gameObject.layer);
+			}
+
+			// This code must be changed if larger blocks can push other larger blocks, otherwise the code will work for large pushblocks.
+			if(blocker != null){
+				if(push){return blocker.TryToPush(this, direction);}
+				else{return blocker.CanPush(this, direction);}
+			}
 		}
 		
 		return true;
