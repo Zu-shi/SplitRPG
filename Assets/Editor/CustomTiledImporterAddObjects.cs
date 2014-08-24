@@ -55,6 +55,8 @@ class CustomTiledImporterAddObjects : Tiled2Unity.ICustomTiledImporter{
 
 					HeightScript hs = Utils.GetHeightScript(item);
 					hs.height = 2;
+				}else{
+					Debug.LogWarning("Item name " + name + "not recognized");
 				}
 				//GameObject.Destroy(child);
 			}

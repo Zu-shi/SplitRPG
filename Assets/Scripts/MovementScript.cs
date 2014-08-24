@@ -105,7 +105,7 @@ public class MovementScript : _Mono {
 	protected virtual void StartFall(){	
 		falling = true;
 		Globals.soundManager.PlaySound(fallingSound);
-		rigidbody2D.velocity = new Vector2 (0f, 0f);
+		//rigidbody2D.velocity = new Vector2 (0f, 0f);
 	}
 
 	//Check if player will fall, and activate falling sequence if so.

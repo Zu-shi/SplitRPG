@@ -49,7 +49,7 @@ public class CollisionManagerScript : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Gets the ColliderScript of the object that's activatable
+	/// Gets the ColliderScript of the first object that's activatable
 	/// </summary>
 	public ColliderScript GetActivatableObject(Vector2 tileCoords, int layerOfObject){
 		foreach(ColliderScript cs in GetColliderScriptsOnTile(tileCoords, layerOfObject)){

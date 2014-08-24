@@ -68,11 +68,18 @@ class CustomTiledImporterFences : Tiled2Unity.ICustomTiledImporter{
 				// Correct for camera offset.
 				graphics.transform.position += new Vector3(-0.5f, 0.5f, 0);
 
+				/*
 				// Update the heights for edit mode.
 				for(int i = 0; i < graphics.transform.childCount; i++) {
 					for(int j = 0; j < graphics.transform.GetChild(i).childCount; j++) {
 						graphics.transform.GetChild(i).GetChild(j).GetComponent<HeightScript>().editModeRefresh = true;
 					}
+				}
+				*/
+				
+				// Update the heights for edit mode.
+				for(int i = 0; i < graphics.transform.childCount; i++) {
+					graphics.transform.GetChild(i).GetComponent<HeightScript>().editModeRefresh = true;
 				}
 
 			}

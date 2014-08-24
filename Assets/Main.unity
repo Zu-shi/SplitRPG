@@ -145,8 +145,8 @@ GameObject:
   - 114: {fileID: 464160815}
   - 82: {fileID: 464160817}
   - 114: {fileID: 464160816}
-  - 114: {fileID: 464160818}
   - 114: {fileID: 464160819}
+  - 114: {fileID: 464160818}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -383,6 +383,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5d5af2d782c4ea4ab7f5a02e4d4025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  convertSpritesToPrefabs: 0
+  J1Left: 1
+  J1Right: 1
+  J2Left: 0
+  J2Right: 0
 --- !u!114 &464160819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -757,6 +762,10 @@ Prefab:
     - target: {fileID: 400000, guid: dd2a93b30af52407d9324f58e8ef7196, type: 2}
       propertyPath: m_RootMapOrder
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: dd2a93b30af52407d9324f58e8ef7196, type: 2}
+      propertyPath: canJump
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd2a93b30af52407d9324f58e8ef7196, type: 2}
@@ -1238,7 +1247,7 @@ MonoBehaviour:
   walkingSound: {fileID: 8300000, guid: 9a863da87eecb41678b341ce726376f8, type: 3}
   wrongBeep: {fileID: 8300000, guid: 3576cfb536e8f4c52a19ff695d19d99a, type: 3}
   moveDirection: 0
-  canJump: 0
+  canJump: 1
 --- !u!114 &1361838056
 MonoBehaviour:
   m_ObjectHideFlags: 0
