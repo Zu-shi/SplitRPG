@@ -38,14 +38,30 @@ public class RoomManagerScript : MonoBehaviour {
 		roomRightLayer = LayerMask.NameToLayer("RoomsRight");
 	}
 
+	public int PlayerLayerToRoomLayer(int playerLayer) {
+		if(playerLayer == Globals.playerLeft.gameObject.layer) {
+			return roomLeftLayer;
+		}
+		if(playerLayer == Globals.playerRight.gameObject.layer) {
+			return roomRightLayer;
+		}
+
+		Debug.LogError("Not a player layer: " + playerLayer);
+		return -1;
+	}
+
+	public BoxCollider2D GetRoomAtPoint(Vector2 point, int layer) {
+		return (BoxCollider2D) Physics2D.OverlapPoint(point, 1 << layer);
+	}
+
 	void Update() {
 		if(needsTransition){
 			BeginCameraTransition();
 			needsTransition = false;
 		}
 	
-		roomColliderLeft = (BoxCollider2D) Physics2D.OverlapPoint(leftPlayer.xy, 1 << roomLeftLayer);
-		roomColliderRight = (BoxCollider2D) Physics2D.OverlapPoint(rightPlayer.xy, 1 << roomRightLayer);
+		roomColliderLeft = GetRoomAtPoint(leftPlayer.xy, roomLeftLayer);
+		roomColliderRight = GetRoomAtPoint(rightPlayer.xy, roomRightLayer);
 
 		if (roomColliderLeft != roomColliderLeftPrev || roomColliderRight != roomColliderRightPrev) {
 			if(roomColliderLeft != null && roomColliderRight != null){

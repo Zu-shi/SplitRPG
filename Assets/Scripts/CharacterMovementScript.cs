@@ -130,7 +130,7 @@ public class CharacterMovementScript : MovementScript {
 			}else{
 				bool pitInFront = Globals.collisionManager.IsTilePit(xy + Utils.DirectionToVector(direction), gameObject.layer);
 				bool safeToLand = CanMoveInDirectionWithPushSideEffect(xy + Utils.DirectionToVector(direction), direction);
-				if (pitInFront && safeToLand) {
+				if (pitInFront && safeToLand && !JumpWillEnterNewRoom(direction)) {
 					inAir = true;
 					StartMoving(Utils.DirectionToVector(direction) * moveSpeed * 2);
 				}else{
@@ -139,6 +139,25 @@ public class CharacterMovementScript : MovementScript {
 			}
 			return true;
 		} else {
+			return false;
+		}
+	}
+
+	private bool JumpWillEnterNewRoom(Direction dir) {
+		//Debug.Log("Checking for new room on jump.");
+		int roomLayer = Globals.roomManager.PlayerLayerToRoomLayer(gameObject.layer);
+		Vector2 jumpCoords = xy + Utils.DirectionToVector(dir)*4;
+		//Debug.Log("\tCurrent coords: " + x + ", " + y);
+		//Debug.Log("\tJump coords: " + jumpCoords.x + ", " + jumpCoords.y);
+		BoxCollider2D currentRoom = Globals.roomManager.GetRoomAtPoint(xy, roomLayer);
+		BoxCollider2D nextRoom = Globals.roomManager.GetRoomAtPoint(jumpCoords, roomLayer);
+
+		if(currentRoom != nextRoom) { // The room we are in is not the same as the room we will enter.
+			Debug.Log("Rooms are different.");
+			return true;
+		}
+		else {
+			Debug.Log("Rooms are the same.");
 			return false;
 		}
 	}
