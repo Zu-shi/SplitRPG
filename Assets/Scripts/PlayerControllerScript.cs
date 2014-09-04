@@ -162,11 +162,23 @@ public class PlayerControllerScript : _Mono {
 		}
 	}
 
+	private void Tap(Direction dir, bool keyDown) {
+		if(characterMovement.WillFallInPit(dir) || otherPlayer.characterMovement.WillFallInPit(dir)) {
+			if(keyDown) {
+				characterMovement.MoveInDirection(dir);
+			} else {
+				characterMovement.PretendMoveInDirection(dir);
+			}
+		} else {
+			characterMovement.MoveInDirection(dir);
+		}
+	}
+
 	/// <summary>
 	/// Tells the player to move in a direction
 	/// </summary>
 	/// <param name="direction">Direction.</param>
-	public void GiveInputDirection(Direction direction){
+	public void GiveInputDirection(Direction direction, bool keyDown = false){
 		if(disableCharacter)
 			return;
 
@@ -185,7 +197,7 @@ public class PlayerControllerScript : _Mono {
 			if(characterMovement.moveDirection != direction && !characterMovement.justMoved){
 				characterMovement.ChangeDirection(direction);
 			}else{
-				characterMovement.MoveInDirection(direction);
+				Tap(direction, keyDown);
 			}
 		}else{
 			if(WillMoveOffScreen(direction)){

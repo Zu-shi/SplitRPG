@@ -59,7 +59,7 @@ public class CharacterMovementScript : MovementScript {
 	protected override void StartMoving( Vector2 velocity){
 		base.StartMoving (velocity);
 		Globals.soundManager.PlaySound (walkingSound);
-		//return yield (WaitForSeconds (1.0f));
+		//return yield (WaitForSeconds (1.0f))
 	}
 
 	protected void PlayWrongBeep(){
@@ -109,6 +109,18 @@ public class CharacterMovementScript : MovementScript {
 		moveTimeLeft = moveTime;
 		StartMoving(Utils.DirectionToVector(direction) * 0.0f);
 		return true;
+	}
+
+	public bool WillFallInPit(Direction dir) {
+		if(Globals.collisionManager.IsTilePit(tileVector + Utils.DirectionToVector(dir), gameObject.layer)) { // There is a pit in front of us
+			if(canJump) {
+				return Globals.collisionManager.IsTilePit(tileVector + Utils.DirectionToVector(dir) * 2, gameObject.layer);
+			} else {
+				return true;
+			}
+		} else {
+			return false;
+		}
 	}
 
 	/// <summary>
