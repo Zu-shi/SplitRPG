@@ -29,7 +29,6 @@ public class PlayerInputScript : MonoBehaviour {
 			if(_inputDirection != Direction.NONE){
 				//Debug.Log("Direction? = " + _inputDirection.ToString());
 				if(directionChangedThisFram) {
-					Debug.Log("KeyDown");
 					Globals.playerLeft.GiveInputDirection(_inputDirection, true);
 					Globals.playerRight.GiveInputDirection(_inputDirection, true);
 					directionChangedThisFram = false;
