@@ -23,10 +23,13 @@ public class PushBlockColliderScript : ColliderScript {
 	}
 
 	public override bool TryToPush(MovementScript pusher, Direction dir){
+		//Debug.Log ("Trying to push");
 		if (CanBePushedByPusher(pusher)) {
 			bool wasPushed = movementScript.MoveInDirection (dir);
+			//Debug.Log ("Trying to psuh returned " + wasPushed);
 			if (wasPushed) {
 				Globals.soundManager.PlaySound (pushSound);
+				//Debug.Log ("Sound played");
 			}
 
 			return wasPushed;

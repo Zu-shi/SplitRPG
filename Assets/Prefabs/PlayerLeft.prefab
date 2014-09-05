@@ -150,15 +150,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canPush: 1
-  canFall: 1
   canPushHeavy: 0
-  canJump: 0
+  canFall: 1
   fallObject: {fileID: 400002}
   destroyOnFall: 0
   fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}
-  moveDirection: 0
+  body:
+  - {x: 0, y: 0}
   walkingSound: {fileID: 8300000, guid: 9a863da87eecb41678b341ce726376f8, type: 3}
   wrongBeep: {fileID: 8300000, guid: 3576cfb536e8f4c52a19ff695d19d99a, type: 3}
+  moveDirection: 0
+  canJump: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

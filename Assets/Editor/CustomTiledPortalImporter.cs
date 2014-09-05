@@ -40,6 +40,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 		if(parent.name.Contains("Unidirectional Portals") && !props.ContainsKey("target")) {
 			gameObject = MakePrefab(gameObject, receiverPrefab);
 		}
+
 		if(parent.name.Contains("Bidirectional Portals")) {
 			gameObject = MakePrefab(gameObject, biPrefab);
 			senders.Add(gameObject.name);
