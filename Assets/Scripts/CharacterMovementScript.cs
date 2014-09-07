@@ -135,18 +135,19 @@ public class CharacterMovementScript : MovementScript {
 		moveDirection = direction;
 		_isMoving = true;
 		moveTimeLeft = moveTime;
+		Vector2 directionVector = Utils.DirectionToVector(direction);
 		
 		if(CanMoveInDirectionWithPushSideEffect(this.tileVector, direction)){
 			if(!canJump){
 				StartMoving(Utils.DirectionToVector(direction) * moveSpeed);
 			}else{
-				bool pitInFront = Globals.collisionManager.IsTilePit(xy + Utils.DirectionToVector(direction), gameObject.layer);
-				bool safeToLand = CanMoveInDirectionWithPushSideEffect(xy + Utils.DirectionToVector(direction), direction);
+				bool pitInFront = Globals.collisionManager.IsTilePit(xy + directionVector, gameObject.layer);
+				bool safeToLand = CanMoveInDirectionWithPushSideEffect(xy + directionVector, direction);
 				if (pitInFront && safeToLand && !JumpWillEnterNewRoom(direction)) {
 					inAir = true;
-					StartMoving(Utils.DirectionToVector(direction) * moveSpeed * 2);
+					StartMoving(directionVector * moveSpeed * 2);
 				}else{
-					StartMoving(Utils.DirectionToVector(direction) * moveSpeed);
+					StartMoving(directionVector * moveSpeed);
 				}
 			}
 			return true;
