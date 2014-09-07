@@ -59,7 +59,7 @@ public class CharacterMovementScript : MovementScript {
 	protected override void StartMoving( Vector2 velocity){
 		base.StartMoving (velocity);
 		Globals.soundManager.PlaySound (walkingSound);
-		//return yield (WaitForSeconds (1.0f));
+		//return yield (WaitForSeconds (1.0f))
 	}
 
 	protected void PlayWrongBeep(){
@@ -111,6 +111,18 @@ public class CharacterMovementScript : MovementScript {
 		return true;
 	}
 
+	public bool WillFallInPit(Direction dir) {
+		if(Globals.collisionManager.IsTilePit(tileVector + Utils.DirectionToVector(dir), gameObject.layer)) { // There is a pit in front of us
+			if(canJump) {
+				return Globals.collisionManager.IsTilePit(tileVector + Utils.DirectionToVector(dir) * 2, gameObject.layer);
+			} else {
+				return true;
+			}
+		} else {
+			return false;
+		}
+	}
+
 	/// <summary>
 	/// Moves the character in the specified direction by 2 tiles, 4 if jumping.
 	/// </summary>
@@ -130,7 +142,7 @@ public class CharacterMovementScript : MovementScript {
 			}else{
 				bool pitInFront = Globals.collisionManager.IsTilePit(xy + Utils.DirectionToVector(direction), gameObject.layer);
 				bool safeToLand = CanMoveInDirectionWithPushSideEffect(xy + Utils.DirectionToVector(direction), direction);
-				if (pitInFront && safeToLand) {
+				if (pitInFront && safeToLand && !JumpWillEnterNewRoom(direction)) {
 					inAir = true;
 					StartMoving(Utils.DirectionToVector(direction) * moveSpeed * 2);
 				}else{
@@ -139,6 +151,25 @@ public class CharacterMovementScript : MovementScript {
 			}
 			return true;
 		} else {
+			return false;
+		}
+	}
+
+	private bool JumpWillEnterNewRoom(Direction dir) {
+		//Debug.Log("Checking for new room on jump.");
+		int roomLayer = Globals.roomManager.PlayerLayerToRoomLayer(gameObject.layer);
+		Vector2 jumpCoords = xy + Utils.DirectionToVector(dir)*4;
+		//Debug.Log("\tCurrent coords: " + x + ", " + y);
+		//Debug.Log("\tJump coords: " + jumpCoords.x + ", " + jumpCoords.y);
+		BoxCollider2D currentRoom = Globals.roomManager.GetRoomAtPoint(xy, roomLayer);
+		BoxCollider2D nextRoom = Globals.roomManager.GetRoomAtPoint(jumpCoords, roomLayer);
+
+		if(currentRoom != nextRoom) { // The room we are in is not the same as the room we will enter.
+			Debug.Log("Rooms are different.");
+			return true;
+		}
+		else {
+			Debug.Log("Rooms are the same.");
 			return false;
 		}
 	}

@@ -5,6 +5,7 @@ public class PlayerInputScript : MonoBehaviour {
 	
 	Direction _inputDirection;
 	bool inputAction;
+	bool directionChangedThisFram = false;
 
 	/// <summary>
 	/// The direction that is currently indicated by the player
@@ -27,8 +28,14 @@ public class PlayerInputScript : MonoBehaviour {
 		if(Globals.playerLeft.readyForInput && Globals.playerRight.readyForInput){
 			if(_inputDirection != Direction.NONE){
 				//Debug.Log("Direction? = " + _inputDirection.ToString());
-				Globals.playerLeft.GiveInputDirection(_inputDirection);
-				Globals.playerRight.GiveInputDirection(_inputDirection);
+				if(directionChangedThisFram) {
+					Globals.playerLeft.GiveInputDirection(_inputDirection, true);
+					Globals.playerRight.GiveInputDirection(_inputDirection, true);
+					directionChangedThisFram = false;
+				} else {
+					Globals.playerLeft.GiveInputDirection(_inputDirection);
+					Globals.playerRight.GiveInputDirection(_inputDirection);
+				}
 			}
 			else{
 				//Debug.Log("Direction = NONE");
@@ -47,6 +54,8 @@ public class PlayerInputScript : MonoBehaviour {
 		// Direction stayed, in case another button is pressed, keep moving in same direction
 		if(InputManager.GetDirectionStay(_inputDirection)){
 			return;
+		} else {
+			directionChangedThisFram = true;
 		}
 
 		_inputDirection = Direction.NONE;
