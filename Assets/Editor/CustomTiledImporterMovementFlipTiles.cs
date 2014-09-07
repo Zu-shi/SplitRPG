@@ -6,6 +6,11 @@ using Tiled2Unity;
 [Tiled2Unity.CustomTiledImporter]
 public class CustomTiledImporterMovementFlipTiles : Tiled2Unity.ICustomTiledImporter {
 
+	/*
+	 * To use movement flip tiles, the tiles must be specified in Tiled with either a 'flipXMovement' attribute
+	 * or a 'flipYMovement' attribute. Additionally, the values of these attributes need to be set to either
+	 * 'left' or 'right' depending on which side it is supposed to flip.
+	 */
 	private GameObject horizontalFlipper, verticalFlipper;
 
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props){
@@ -17,20 +22,26 @@ public class CustomTiledImporterMovementFlipTiles : Tiled2Unity.ICustomTiledImpo
 			gameObject = MakePrefab(gameObject, horizontalFlipper);
 			if(props["flipXMovement"].Contains("left")) {
 				gameObject.GetComponent<PlayerMovementFlipScript>().affectLeft = true;
-				gameObject.GetComponent<PlayerMovementFlipScript>().affectLeft = false;
 			} else {
 				gameObject.GetComponent<PlayerMovementFlipScript>().affectLeft = false;
-				gameObject.GetComponent<PlayerMovementFlipScript>().affectLeft = true;
+			}
+			if(props["flipXMovement"].Contains("right")) {
+				gameObject.GetComponent<PlayerMovementFlipScript>().affectRight = true;
+			} else {
+				gameObject.GetComponent<PlayerMovementFlipScript>().affectRight = false;
 			}
 		}
 		if(props.ContainsKey("flipYMovement")) {
 			gameObject = MakePrefab(gameObject, verticalFlipper);
-			if(props["flipXMovement"].Contains("left")) {
+			if(props["flipYMovement"].Contains("left")) {
 				gameObject.GetComponent<PlayerMovementFlipScript>().affectLeft = true;
-				gameObject.GetComponent<PlayerMovementFlipScript>().affectLeft = false;
 			} else {
 				gameObject.GetComponent<PlayerMovementFlipScript>().affectLeft = false;
-				gameObject.GetComponent<PlayerMovementFlipScript>().affectLeft = true;
+			}
+			if(props["flipYMovement"].Contains("right")) {
+				gameObject.GetComponent<PlayerMovementFlipScript>().affectRight = true;
+			} else {
+				gameObject.GetComponent<PlayerMovementFlipScript>().affectRight = false;
 			}
 		}
 	}
