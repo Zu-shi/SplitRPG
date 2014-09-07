@@ -4,7 +4,7 @@ using Tiled2Unity;
 
 //[Tiled2Unity.CustomTiledImporter]
 
-[Tiled2Unity.CustomTiledImporter(Order = short.MaxValue)]
+[Tiled2Unity.CustomTiledImporter(Order = short.MaxValue + 1)]
 class CustomTiledImporterHeight : Tiled2Unity.ICustomTiledImporter{
 
 	private List<GameObject>childsOfGameobject = new List<GameObject>();
@@ -19,7 +19,8 @@ class CustomTiledImporterHeight : Tiled2Unity.ICustomTiledImporter{
 	};
 	
 	private Dictionary<string, DrawingOrder> orderMap = new Dictionary<string, DrawingOrder>{
-		{ "Objects(Invisible)", DrawingOrder.OBJECTS }//,
+		{ "Objects(Invisible)", DrawingOrder.OBJECTS },//,
+		{ "Pushblocks(Default)", DrawingOrder.OBJECTS }//,
 		//{ "Switches and Gates", DrawingOrder.OBJECTS },
 		//{ "Buttons and Gates", DrawingOrder.OBJECTS }
 	};

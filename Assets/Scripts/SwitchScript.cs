@@ -23,7 +23,14 @@ public class SwitchScript : ColliderScript {
 	//Do NOT make this private! Prefab setting must be saved to a public setting.
 	public List<GateScript> gates = new List<GateScript>();
 	
+	[Tooltip("DO NOT MODIFY. List of gates that are not connected to the other map.")]
+	public string remainingGates;
+
 	void Start () {
+		if (remainingGates != "") {
+			Debug.LogWarning("Gates unconnected to other map detected: " + remainingGates + ". Check DefaultSwitchesConnectorScript.");
+		}
+
 		// Tell each gate to watch our switch
 		foreach(GateScript gate in gates){
 			gate.togglerToWatch = _toggler;

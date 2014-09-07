@@ -100,8 +100,16 @@ public class CollisionManagerScript : MonoBehaviour {
 	/// Gets the ColliderScript of the object that's a pit
 	/// </summary>
 	public ColliderScript GetPitObject(Vector2 tileCoords, int layerOfObject){
-		foreach(ColliderScript cs in GetColliderScriptsOnTile(tileCoords, layerOfObject)){
-			if(cs.pit) return cs;
+		if (layerOfObject != LayerMask.NameToLayer ("Default")) { 
+				foreach (ColliderScript cs in GetColliderScriptsOnTile(tileCoords, layerOfObject)) {
+						if (cs.pit)
+								return cs;
+				}
+		} else {
+			//For pushblocks on default layer.
+			if( GetPitObject(tileCoords, LayerMask.NameToLayer ("Left")) && 
+			   GetPitObject(tileCoords, LayerMask.NameToLayer ("Right")) ){return GetPitObject(tileCoords, LayerMask.NameToLayer ("Left"));}
+			else{return null;}
 		}
 		return null;
 	}

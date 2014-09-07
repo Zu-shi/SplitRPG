@@ -28,24 +28,29 @@ class CustomTiledImporterAddObjects : Tiled2Unity.ICustomTiledImporter{
 	}
 	
 	public void CustomizePrefab(GameObject prefab) {
+		CreateObjectsInLayer (prefab, "Objects(Invisible)");
+		CreateObjectsInLayer (prefab, "Pushblocks(Default)");
+
+	}
+
+	private void CreateObjectsInLayer(GameObject prefab, string s){
 		Transform invisibleLayerTransform;
 		GameObject invisibleLayer;
-
-		if (invisibleLayerTransform = Utils.FindChildRecursive(prefab,"Objects(Invisible)")) {
+		if (invisibleLayerTransform = Utils.FindChildRecursive(prefab,s)) {
 			invisibleLayer = invisibleLayerTransform.gameObject;
-
+			
 			foreach(Transform obj in invisibleLayer.transform)
 			{
 				string name = obj.gameObject.name.ToLower();
-
+				
 				Debug.Log(name);
-				Utils.assert(prefabMap.ContainsKey(name));
-
+				if (!Utils.assert(prefabMap.ContainsKey(name))){Debug.LogError ("Prefab with name " + name + " cannot be found.");}
+				
 				GameObject item = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + prefabMap[name] + ".prefab", typeof(GameObject)) as GameObject;
 				if(item != null){
 					//Add Vector3.one to offset center differences.
 					item = (GameObject)GameObject.Instantiate(item, obj.transform.position, obj.transform.rotation);
-
+					
 					_Mono itemMono = item.GetComponent<_Mono>();
 					itemMono.xs /= Utils.TILED_TO_UNITY_SCALE;
 					itemMono.ys /= Utils.TILED_TO_UNITY_SCALE;
@@ -59,7 +64,7 @@ class CustomTiledImporterAddObjects : Tiled2Unity.ICustomTiledImporter{
 					item.transform.parent = obj;
 					obj.name = obj.name + "Parent";
 					item.layer = invisibleLayer.layer;
-
+					
 					HeightScript hs = Utils.GetHeightScript(item);
 					hs.height = 2;
 				}else{
@@ -67,7 +72,7 @@ class CustomTiledImporterAddObjects : Tiled2Unity.ICustomTiledImporter{
 				}
 				//GameObject.Destroy(child);
 			}
-
+			
 		}
 	}
 

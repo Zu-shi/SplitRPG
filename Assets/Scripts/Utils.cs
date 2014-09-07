@@ -50,10 +50,11 @@ public static class Utils {
 	/// <summary>
 	/// Prints out an error message if a statement fails.
 	/// </summary>
-	public static void assert(bool statement){
+	public static bool assert(bool statement){
 		if (!statement) {
 			Debug.LogError("Statement failed.");
 		}
+		return statement;
 	}
 
 	/// <summary>
