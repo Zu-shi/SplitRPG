@@ -15,10 +15,11 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 	private Dictionary<string, IDictionary<string, string>> buttonGates = new Dictionary<string, IDictionary<string, string>>();
 	private Dictionary<string, IDictionary<string, string>> switches = new Dictionary<string, IDictionary<string, string>>();
 	private Dictionary<string, IDictionary<string, string>> gates = new Dictionary<string, IDictionary<string, string>>();
+	private Dictionary<string, IDictionary<string, string>> switchesDefault = new Dictionary<string, IDictionary<string, string>>();
+	private Dictionary<string, IDictionary<string, string>> gatesDefault = new Dictionary<string, IDictionary<string, string>>();
 	private Dictionary<string, string> prefabMap;
 	private string mapName;
-
-	private bool autobond;
+	//private bool autobond; //Temporarily commented out to be looked into later.
 
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props) {
 		Transform parent = gameObject.transform.parent;
@@ -32,9 +33,9 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 			}
 			
 			if(props.ContainsKey("autobond")){
-				autobond = bool.Parse(props["autobond"]);
+				//autobond = bool.Parse(props["autobond"]);
 			}else{
-				autobond = false;
+				//autobond = false;
 			}
 			return;
 		}
@@ -58,7 +59,7 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 		if(parent.name.Contains("Switches and Gates") ) {
 			if(gameObject.name != ""){
 				if( props.ContainsKey("target") ){
-					//A button
+					//A switch
 					switches.Add(gameObject.name, props);
 				}else{
 					//This is a gate.
@@ -68,17 +69,36 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 				Debug.LogWarning("Object with empty name found in \"Switches and Gates\", skipping object.");
 			}
 		}
+
+		if(parent.name.Contains("Switches and Gates(Default)") ) {
+			if(gameObject.name != ""){
+				if( props.ContainsKey("target") ){
+					//A switch
+					switchesDefault.Add(gameObject.name, props);
+				}else{
+					//This is a gate.
+					gatesDefault.Add(gameObject.name, props);
+				}
+			}else{
+				Debug.LogWarning("Object with empty name found in \"Switches and Gates(Default)\", skipping object.");
+			}
+		}
 	}
 	
 	public void CustomizePrefab(GameObject prefab) {
 		GameObject buttonLayer = null;
-		GameObject switchLayer = null;;
+		GameObject switchLayer = null;
+		GameObject switchDefaultLayer = null;
 		if (prefab.transform.GetChild (0).FindChild ("Buttons and Gates") != null) {
 			buttonLayer = prefab.transform.GetChild (0).FindChild ("Buttons and Gates").gameObject;
 		}
 		if (prefab.transform.GetChild(0).FindChild ("Switches and Gates") != null ) {
 			switchLayer = prefab.transform.GetChild(0).FindChild ("Switches and Gates").gameObject;
 		}
+		if (prefab.transform.GetChild(0).FindChild ("Switches and Gates(Default)") != null ) {
+			switchDefaultLayer = prefab.transform.GetChild(0).FindChild ("Switches and Gates(Default)").gameObject;
+		}
+
 		if (buttonLayer) {
 
 			//This must happen after the gates importer, so that the correct gate objects can be found.
@@ -114,11 +134,9 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 					bs.timerLength = 0;
 				}
 			}
-
 		}
 
 		if (switchLayer) {
-			
 			//This must happen after the gates importer, so that the correct gate objects can be found.
 			foreach(KeyValuePair<string, IDictionary<string, string>> _switch in switches)
 			{
@@ -146,7 +164,36 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 				}
 				
 			}
-			
+		}
+
+		//This loop needs to run differently, since each gates needs to be added regardless whether it is a target or not
+		//The autobond mechanic will probably be broken for these switches, so manual assembly would be required.
+		if (switchDefaultLayer) {
+			//This must happen after the gates importer, so that the correct gate objects can be found.
+			foreach(KeyValuePair<string, IDictionary<string, string>> _switch in switchesDefault)
+			{
+				GameObject switchObjParent = switchDefaultLayer.transform.FindChild(_switch.Key).gameObject;
+				GameObject switchObj;
+				//Check if the button has a default visual
+				string visualName;
+				if(_switch.Value.ContainsKey("visual")){
+					visualName = prefabMap[_switch.Value["visual"].ToLower()];
+				}else{
+					visualName = prefabMap["switch1"];
+				}
+				switchObj = generatePrefabUnderObject(mapName + visualName, switchObjParent);
+				
+				SwitchScript ss = switchObj.GetComponent<SwitchScript>();
+				Utils.assert(ss != null);
+				Utils.assert(_switch.Value.ContainsKey("target"));
+				
+				string[] targets = _switch.Value["target"].Split(new string[] { ", " }, System.StringSplitOptions.None);
+				foreach(string target in targets){
+					Debug.Log (visualName);
+					GateScript gs = ImportGate(target, gatesDefault[target], switchDefaultLayer, PrefabMapper.activatorToGateMap[visualName]);
+					ss.addGate( gs );
+				}
+			}
 		}
 	}
 
@@ -189,9 +236,7 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 			gateObj.GetComponent<SpriteRenderer>().sprite = gateObj.GetComponent<GateScript>().closedSpriteV;
 			gateObj.transform.position += new Vector3(-1,0,0);
 			RotateEdgeCollider(gateObj.GetComponent<EdgeCollider2D>());
-		}
-		else {
-			
+		}else {
 			gateObj.transform.position += new Vector3(0,1.5f,0);
 		}
 		

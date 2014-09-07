@@ -135,6 +135,16 @@ public class LevelManagerScript : _Mono{
 
 		GameObject left = (GameObject)GameObject.Instantiate(leftLevel, Vector3.zero, Quaternion.identity);
 		GameObject right = (GameObject)GameObject.Instantiate(rightLevel, Vector3.zero, Quaternion.identity);
+
+		if ( Utils.FindChildRecursive(left, "Pushblocks(Default)") &&
+		    Utils.FindChildRecursive(right, "Pushblocks(Default)") ) {
+			LinkPushblocks(left, right);
+		} 
+		if ( Utils.FindChildRecursive(left, "Switches and Gates(Default)") &&
+		    Utils.FindChildRecursive(right, "Switches and Gates(Default)") ){
+			LinkSwitches(left, right);
+		}
+
 		left.SetActive(false);
 		right.SetActive(false);
 		Globals.playerLeft.gameObject.SetActive(false);
@@ -227,5 +237,70 @@ public class LevelManagerScript : _Mono{
 		}
 		else
 			Debug.LogError("Not enough level prefabs assigned!");
+	}
+
+	void LinkPushblocks(GameObject prefab1,GameObject prefab2){
+		//Connect pushblocks by deleting the second copy.
+		List<Vector2> toDeleteAtPosition = new List<Vector2> ();
+		Transform pushblocksLayerTransform = Utils.FindChildRecursive(prefab1, "Pushblocks(Default)");
+		Transform pushblocksLayerTransform2 = Utils.FindChildRecursive(prefab2, "Pushblocks(Default)");
+		foreach (Transform pb in pushblocksLayerTransform) {
+			PushBlockColliderScript pbs = pb.gameObject.GetComponent<PushBlockColliderScript>();
+			Utils.assert(pbs != null, "Check for BlockColliderScript in the Pushblocks(Default) layer for object " + pb.gameObject.name);
+			Debug.Log ("Found switch " + pb.name);
+			bool foundLink = false;
+			
+			foreach (Transform pb2 in pushblocksLayerTransform2) {
+				PushBlockColliderScript pbs2 = pb2.gameObject.GetComponent<PushBlockColliderScript>();
+				Utils.assert(pbs2 != null, "Check for BlockColliderScript in the Pushblocks(Default) layer for object " + pb2.gameObject.name);
+				if(pb2.position.Equals(pb.position)){
+					Debug.Log ("Found counterpart " + pb.name);
+					foundLink = true;
+					toDeleteAtPosition.Add(new Vector2(pbs2.x, pbs2.y));
+				}
+			}
+			if(!foundLink){Debug.Log ("Cannot find counterpart for " + prefab1.name + " pushblock at " + pbs.x + ", " + pbs.y + ".");}
+		}
+		
+		foreach (Vector2 pos in toDeleteAtPosition) {
+			GameObject toDestroy = null;
+			foreach (Transform pb2 in pushblocksLayerTransform2) {
+				PushBlockColliderScript pbs2 = pb2.gameObject.GetComponent<PushBlockColliderScript>();
+				if(pbs2.x == pos.x && pbs2.y == pos.y){
+					toDestroy = pbs2.gameObject;
+					break;
+				}
+			}
+			GameObject.DestroyImmediate (toDestroy, true);
+		}
+	}
+	
+	//This function looks ugly, clean it later.
+	void LinkSwitches(GameObject prefab1,GameObject prefab2){
+		//Connect switches by sharing the toggler to watch.
+		Transform switchesLayerTransform = Utils.FindChildRecursive(prefab1, "Switches and Gates(Default)");
+		Transform switchesLayerTransform2 = Utils.FindChildRecursive(prefab2, "Switches and Gates(Default)");
+		foreach (Transform s in switchesLayerTransform) {
+			SwitchScript ss;
+			if((ss = s.gameObject.GetComponent<SwitchScript>()) != null){
+				Debug.Log ("Found switch " + s.name);
+				foreach (Transform s2 in switchesLayerTransform2) {
+					Debug.Log(s.name + " " + s2.name);
+					SwitchScript ss2;
+					if(s2.name == s.name){
+						if((ss2 = s2.gameObject.GetComponent<SwitchScript>()) != null){
+							//Debug.Log ("Found counterpart " + s.name);
+							//Debug.Log ("Check not actuall the SAME " + (ss2 == ss));
+							ss2.twin = ss;
+							ss.twin = ss2;
+							ss2._toggler = ss._toggler;
+							//Debug.Log (ss2._toggler == ss._toggler);
+						}else{
+							Debug.LogWarning ("Switch that shares a name does not have a switch script.");
+						}
+					}
+				}
+			}
+		}
 	}
 }

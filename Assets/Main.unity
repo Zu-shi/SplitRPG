@@ -341,8 +341,8 @@ MonoBehaviour:
   - {fileID: 100360, guid: 34497236e9ca84f7a874a8f49a4d3a83, type: 2}
   - {fileID: 105706, guid: 3520fdcd1821d4fb8bf366663283dd70, type: 2}
   loadOnStart: 1
-  preloadedLeftLevel: {fileID: 0}
-  preloadedRightLevel: {fileID: 0}
+  preloadedLeftLevel: {fileID: 100360, guid: 34497236e9ca84f7a874a8f49a4d3a83, type: 2}
+  preloadedRightLevel: {fileID: 105706, guid: 3520fdcd1821d4fb8bf366663283dd70, type: 2}
 --- !u!114 &464160816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,14 +424,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 464160805}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee5d5af2d782c4ea4ab7f5a02e4d4025, type: 3}
+  m_Script: {fileID: 11500000, guid: f52e676f7b061499f9cc068a8a92fd51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  convertSpritesToPrefabs: 0
-  J1Left: 0
-  J1Right: 0
-  J2Left: 0
-  J2Right: 0
 --- !u!114 &464160819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -763,6 +758,14 @@ Prefab:
       propertyPath: far clip plane
       value: 100000
       objectReference: {fileID: 0}
+    - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
+      propertyPath: preloadedLeftLevel
+      value: 
+      objectReference: {fileID: 100360, guid: 34497236e9ca84f7a874a8f49a4d3a83, type: 2}
+    - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
+      propertyPath: preloadedRightLevel
+      value: 
+      objectReference: {fileID: 105706, guid: 3520fdcd1821d4fb8bf366663283dd70, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
   m_RootGameObject: {fileID: 464160805}

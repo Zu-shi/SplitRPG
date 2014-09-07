@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 9/7/2014 9:10:40 AM-->
+<!--Last exported: 9/7/2014 1:56:10 PM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J2LeftTemp" sortingLayerName="" sortingOrder="0" />
   <Prefab name="pushblockTestRight" scale="1">
+    <Property name="autobond" value="true" />
     <Property name="map" value="J1Left" />
     <Property name="side" value="Right" />
     <GameObject name="Background_1_00">
@@ -44,6 +45,30 @@
     <GameObject name="Pushblocks(Default)">
       <GameObject name="pushblock" x="512" y="-512">
         <BoxCollider2D width="128" height="128" />
+      </GameObject>
+    </GameObject>
+    <GameObject name="Switches and Gates(Default)">
+      <GameObject name="DG1" x="896" y="-384">
+        <Property name="target" value="DSG1, DSG2, DSG3" />
+        <Property name="visual" value="switch2" />
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="DSG1" x="768" y="-256">
+        <Property name="reverse" value="true" />
+        <EdgeCollider2D>
+          <Points>0,0 128,0</Points>
+        </EdgeCollider2D>
+      </GameObject>
+      <GameObject name="DSG2" x="896" y="-256">
+        <EdgeCollider2D>
+          <Points>0,0 128,0</Points>
+        </EdgeCollider2D>
+      </GameObject>
+      <GameObject name="DSG3" x="1024" y="-256">
+        <Property name="reverse" value="true" />
+        <EdgeCollider2D>
+          <Points>0,0 128,0</Points>
+        </EdgeCollider2D>
       </GameObject>
     </GameObject>
   </Prefab>

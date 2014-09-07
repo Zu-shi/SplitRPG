@@ -27,12 +27,13 @@ public class Toggler {
 	public Toggler(){
 		_on = false;
 	}
-
+	
 	/// <summary>
 	/// Turns the switch on.
 	/// </summary>
 	public void TurnOn(){
 		_on = true;
+		Debug.LogWarning ("on");
 	}
 
 	/// <summary>
@@ -40,6 +41,7 @@ public class Toggler {
 	/// </summary>
 	public void TurnOff(){
 		_on = false;
+		Debug.LogWarning ("off");
 	}
 
 	/// <summary>
@@ -47,6 +49,7 @@ public class Toggler {
 	/// </summary>
 	public void Toggle(){
 		_on = !_on;
+		Debug.LogWarning ("toggled");
 	}
 
 }

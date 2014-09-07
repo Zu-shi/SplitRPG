@@ -11,6 +11,7 @@ public class SwitchScript : ColliderScript {
 	private _Mono indicator;
 	
 	public Toggler _toggler = new Toggler();
+	public SwitchScript twin = null;
 	//public Toggler toggler{get{ return _toggler; }}
 	
 	[Tooltip("Sprite for when the switch is activated.")]
@@ -23,13 +24,17 @@ public class SwitchScript : ColliderScript {
 	//Do NOT make this private! Prefab setting must be saved to a public setting.
 	public List<GateScript> gates = new List<GateScript>();
 	
-	[Tooltip("DO NOT MODIFY. List of gates that are not connected to the other map.")]
-	public string remainingGates;
+	//[Tooltip("DO NOT MODIFY. List of gates that are not connected to the other map.")]
+	//public string remainingGates = "";
 
 	void Start () {
-		if (remainingGates != "") {
-			Debug.LogWarning("Gates unconnected to other map detected: " + remainingGates + ". Check DefaultSwitchesConnectorScript.");
+		if (twin != null) {
+			_toggler = twin._toggler;
+			Debug.Log ("Linked twins");
 		}
+		//if (remainingGates != "") {
+		//	Debug.LogWarning("Gates unconnected to other map detected: " + remainingGates + ". Check DefaultSwitchesConnectorScript.");
+		//}
 
 		// Tell each gate to watch our switch
 		foreach(GateScript gate in gates){
@@ -38,6 +43,13 @@ public class SwitchScript : ColliderScript {
 	}
 	
 	void Update () {
+		
+		if (twin != null) {
+			//_toggler = twin._toggler;
+			Debug.Log ("test equality: " + (_toggler == twin._toggler));
+			Debug.Log ("test side: " + _toggler.on + " vs. " + twin._toggler.on );
+		}
+
 		// Update the sprite
 		if(_toggler.on){
 			spriteRenderer.sprite = offSprite;

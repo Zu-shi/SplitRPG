@@ -4,7 +4,7 @@ using Tiled2Unity;
 
 //[Tiled2Unity.CustomTiledImporter]
 
-[Tiled2Unity.CustomTiledImporter(Order = short.MaxValue + 1)]
+[Tiled2Unity.CustomTiledImporter(Order = short.MaxValue - 1)]
 class CustomTiledImporterHeight : Tiled2Unity.ICustomTiledImporter{
 
 	private List<GameObject>childsOfGameobject = new List<GameObject>();

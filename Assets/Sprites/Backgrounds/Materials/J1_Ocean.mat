@@ -19,6 +19,6 @@ Material:
         second:
           m_Texture: {fileID: 2800000, guid: 1ff3da42ab38447669d12c8588f1ed16, type: 3}
           m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 77.3107681, y: 63.8962746}
+          m_Offset: {x: 77.5579987, y: 64.9831696}
     m_Floats: {}
     m_Colors: {}
