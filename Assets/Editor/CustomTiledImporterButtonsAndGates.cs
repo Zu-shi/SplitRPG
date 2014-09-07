@@ -89,10 +89,10 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 				//Check if the button has a default visual
 				string visualName;
 				if(button.Value.ContainsKey("visual")){
-					//Debug.Log ("Contains visual: " + mapName + prefabMap[button.Value["visual"]] );
+					Debug.Log ("Contains visual: " + mapName + prefabMap[button.Value["visual"]] );
 					visualName = prefabMap[button.Value["visual"].ToLower()];
 				}else{
-					//Debug.Log ("Does not contain visual: " + mapName + prefabMap["button1"] );
+					Debug.Log ("Does not contain visual: " + mapName + prefabMap["button1"] );
 					visualName = prefabMap["button1"];
 				}
 				buttonObj = generatePrefabUnderObject(mapName + visualName, buttonObjParent);
@@ -104,7 +104,7 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 				string[] targets = button.Value["target"].Split(new string[] { ", " }, System.StringSplitOptions.None);
 				foreach(string target in targets){
 					Debug.Log (visualName);
-					GateScript gs = ImportGate(target, buttonGates[target], buttonLayer, PrefabMapper.activatorToGateMap[visualName]);
+					GateScript gs = ImportGate(target, buttonGates[target], buttonLayer, PrefabMapper.activatorToGateMap["Button2"]);
 					bs.addGate( gs );
 				}
 			

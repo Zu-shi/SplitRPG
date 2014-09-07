@@ -179,7 +179,7 @@ public class MovementScript : _Mono {
 			bool needToCheckForCollisions = true;
 			foreach(Vector2 bodyPartTemp in body){
 				if(bodyPartTemp == bodyPart + Utils.DirectionToVector(direction) * 2){
-					needToCheckForCollisions = false;
+					needToCheckForCollisions = false; //This object does not need to check for collision.
 				}
 			}
 

@@ -28,14 +28,17 @@ class CustomTiledImporterAddObjects : Tiled2Unity.ICustomTiledImporter{
 	}
 	
 	public void CustomizePrefab(GameObject prefab) {
+		Transform invisibleLayerTransform;
 		GameObject invisibleLayer;
 
-		if (invisibleLayer = Utils.FindChildRecursive(prefab,"Objects(Invisible)").gameObject) {
-	
+		if (invisibleLayerTransform = Utils.FindChildRecursive(prefab,"Objects(Invisible)")) {
+			invisibleLayer = invisibleLayerTransform.gameObject;
+
 			foreach(Transform obj in invisibleLayer.transform)
 			{
 				string name = obj.gameObject.name.ToLower();
 
+				Debug.Log(name);
 				Utils.assert(prefabMap.ContainsKey(name));
 
 				GameObject item = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + prefabMap[name] + ".prefab", typeof(GameObject)) as GameObject;

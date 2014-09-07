@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using System.Collections;
 using UnityEditor;
 
@@ -46,10 +47,10 @@ public class PrefabImporterScript : MonoBehaviour {
 
 	private void ImportHeavyBlocks(){
 		string map = "J2Right";
-		SetUpHeavyBlock( map, "1x2", new Vector2[]{new Vector2(0, 0), new Vector2(2, 0)} );
-		SetUpHeavyBlock( map, "1x3", new Vector2[]{new Vector2(0, 0), new Vector2(2, 0), new Vector2(4, 0)} );
-		SetUpHeavyBlock( map, "2x1", new Vector2[]{new Vector2(0, 0), new Vector2(0, 2)} );
-		SetUpHeavyBlock( map, "3x1", new Vector2[]{new Vector2(0, 0), new Vector2(0, 2), new Vector2(0, 4)} );
+		SetUpHeavyBlock( map, "2x1", new Vector2[]{new Vector2(0, 0), new Vector2(2, 0)} );
+		SetUpHeavyBlock( map, "3x1", new Vector2[]{new Vector2(0, 0), new Vector2(2, 0), new Vector2(4, 0)} );
+		SetUpHeavyBlock( map, "1x2", new Vector2[]{new Vector2(0, 0), new Vector2(0, -2)} );
+		SetUpHeavyBlock( map, "1x3", new Vector2[]{new Vector2(0, 0), new Vector2(0, -2), new Vector2(0, -4)} );
 
 	}
 
@@ -119,6 +120,17 @@ public class PrefabImporterScript : MonoBehaviour {
 			bs.offSprite = retrieveSpriteByName (map, objname + "Off");
 			sr = go.GetComponent<SpriteRenderer> ();
 			sr.sprite = bs.onSprite;
+			SaveAndDestory (map, objname, go);
+		}
+
+		for (int i = 1; i <= 4; i ++) {
+			objname = "Portal" + i.ToString();
+			go = getOriginalPrefabOfObject (objname.ToLower ());
+			PortalSenderScript bs = go.GetComponent<PortalSenderScript> ();
+			//bs.onSprite = retrieveSpriteByName (map, objname + "On");
+			//bs.offSprite = retrieveSpriteByName (map, objname + "Off");
+			sr = go.GetComponent<SpriteRenderer> ();
+			//sr.sprite = bs.onSprite;
 			SaveAndDestory (map, objname, go);
 		}
 
@@ -197,15 +209,6 @@ public class PrefabImporterScript : MonoBehaviour {
 			temp.GetComponent<SpriteRenderer> ().sprite = retrieveSpriteByName (map, objname + childName);
 		}
 		SaveAndDestory (map, objname, go);
-		/*
-		for (int i = 1; i < 5; i ++) {
-			objname = "Button";
-			go = getOriginalPrefabOfObject (map, objname.ToLower ());
-			ButtonScript bs = go.GetComponent<ButtonScript> ();
-			bs.onSprite = retrieveSpriteByName (map, objname + "On" + i.ToString);
-			bs.offSprite = retrieveSpriteByName (map, objname + "Off" + i.ToString);
-			SaveAndDestory (map, objname + i.ToString, go);
-		}*/
 	}
 
 	private GameObject getOriginalPrefabOfObject(string name){
@@ -228,4 +231,6 @@ public class PrefabImporterScript : MonoBehaviour {
 		PrefabUtility.CreatePrefab(PrefabMapper.PrefabLocation + map + "/" + name + ".prefab", go);
 		DestroyImmediate (go);
 	}
+
+
 }

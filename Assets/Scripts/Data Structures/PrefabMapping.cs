@@ -32,6 +32,11 @@ public static class PrefabMapper {
 		{"button2", "defaultButton"},
 		{"button3", "defaultButton"},
 		{"button4", "defaultButton"},
+		{"portal", "defaultBidirectionalPortal"},
+		{"portal1", "defaultBidirectionalPortal"},
+		{"portal2", "defaultBidirectionalPortal"},
+		{"portal3", "defaultBidirectionalPortal"},
+		{"portal4", "defaultBidirectionalPortal"},
 		{"switchgate", "defaultSwitchGate"},
 		{"switchgate1", "defaultSwitchGate"},
 		{"switchgate2", "defaultSwitchGate"},
@@ -138,7 +143,7 @@ public static class PrefabMapper {
 		{"J1Left", JOURNEY1_LEFT_PREFABS},
 		{"J2Left", JOURNEY2_LEFT_PREFABS},
 		{"J1Right", JOURNEY1_RIGHT_PREFABS},
-		{"J2Right", JOURNEY1_RIGHT_PREFABS},
+		{"J2Right", JOURNEY2_RIGHT_PREFABS},
 		{"default", originals}
 	};
 }
