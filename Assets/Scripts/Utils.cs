@@ -7,6 +7,10 @@ public static class Utils {
 	// Declaration of a simple delegate type
 	public delegate void VoidDelegate();
 
+	public static Vector2 ComponentMultiply(Vector2 a, Vector2 b) {
+		return new Vector2(a.x * b.x, a.y * b.y);
+	}
+
 	public static HeightScript GetHeightScript(GameObject o){
 		HeightScript hs = o.GetComponent<HeightScript>();
 		if(hs == null){

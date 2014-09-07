@@ -23,6 +23,8 @@ public class PlayerControllerScript : _Mono {
 	// Disable
 	bool disableCharacter;
 
+	private bool flipXMovement, flipYMovement;
+
 	/// <summary>
 	/// Whether Player is ready to recieve input
 	/// </summary>
@@ -33,7 +35,11 @@ public class PlayerControllerScript : _Mono {
 		}
 	}
 
+	public void FlipXMovement() { flipXMovement = !flipXMovement; }
+	public void FlipYMovement() { flipYMovement = !flipYMovement; }
+
 	void Start () {
+		flipXMovement = flipYMovement = false;
 		allowCommands = true;
 
 		// Game Manager
@@ -61,6 +67,7 @@ public class PlayerControllerScript : _Mono {
 	/// </summary>
 	public void ResetPlayer(){
 		characterMovement.ResetFalling();
+		flipXMovement = flipYMovement = false;
 	}
 	
 	void ResetBothPlayers(){
@@ -174,6 +181,18 @@ public class PlayerControllerScript : _Mono {
 		}
 	}
 
+	private Direction FlipDirection(Direction dir) {
+		if(dir == Direction.DOWN)
+			return Direction.UP;
+		if(dir == Direction.LEFT)
+			return Direction.RIGHT;
+		if(dir == Direction.RIGHT)
+			return Direction.LEFT;
+		if(dir == Direction.UP)
+			return Direction.DOWN;
+		return Direction.NONE;
+	}
+
 	/// <summary>
 	/// Tells the player to move in a direction
 	/// </summary>
@@ -188,23 +207,29 @@ public class PlayerControllerScript : _Mono {
 		// Check if we need to wait at the edge of the screen
 		bool needToWait = WillMoveOffScreen(direction) && !otherPlayer.WillMoveOffScreen(direction);
 
+		Direction realDir = direction;
+		if(flipXMovement && (direction == Direction.LEFT || direction == Direction.RIGHT))
+			realDir = FlipDirection(realDir);
+		if(flipYMovement && (direction == Direction.UP || direction == Direction.DOWN))
+			realDir = FlipDirection(realDir);
+
 
 		if(!needToWait){
 			if(WillMoveOffScreen(direction))
 				walkingOutOfRoom = true;
 
 			//!characterMovement.justMoved
-			if(characterMovement.moveDirection != direction && !characterMovement.justMoved){
-				characterMovement.ChangeDirection(direction);
+			if(characterMovement.moveDirection != realDir && !characterMovement.justMoved){
+				characterMovement.ChangeDirection(realDir);
 			}else{
-				Tap(direction, keyDown);
+				Tap(realDir, keyDown);
 			}
 		}else{
 			if(WillMoveOffScreen(direction)){
-				if(characterMovement.moveDirection != direction && !characterMovement.justMoved){
-					characterMovement.ChangeDirection(direction);
+				if(characterMovement.moveDirection != realDir && !characterMovement.justMoved){
+					characterMovement.ChangeDirection(realDir);
 				}else{
-					characterMovement.PretendMoveInDirection(direction);
+					characterMovement.PretendMoveInDirection(realDir);
 				}
 			}
 		}
