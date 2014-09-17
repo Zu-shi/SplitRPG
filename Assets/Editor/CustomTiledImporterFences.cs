@@ -16,6 +16,7 @@ class CustomTiledImporterFences : Tiled2Unity.ICustomTiledImporter{
 	private Object fenceVBar;
 	private Object fenceVBarBottom;
 	private Object fenceVBarTop;
+	private const float yoffset = -0.22f;
 	
 	private Dictionary<string, string> prefabMap;
 	private string mapName;
@@ -88,7 +89,7 @@ class CustomTiledImporterFences : Tiled2Unity.ICustomTiledImporter{
 
 	private void MakeFencePost(GameObject graphics, Vector2 where) {
 		GameObject tmp = (GameObject)GameObject.Instantiate(fencePost,
-		                                                    where,
+		                                                    where + new Vector2(0.5f, 0f + yoffset),
 		                                                    Quaternion.identity);
 		tmp.transform.parent = graphics.transform;
 	}
@@ -100,7 +101,7 @@ class CustomTiledImporterFences : Tiled2Unity.ICustomTiledImporter{
 			higher = Mathf.Max ((int)from.x, (int)to.x);
 			for(int i = lower; i < higher; i++) {
 				GameObject tmp = (GameObject)GameObject.Instantiate(fenceHBar,
-			                                                    new Vector2(i + 1, from.y),
+				                                                    new Vector2(i + 1, from.y + yoffset),
 			                                                    Quaternion.identity);
 				tmp.transform.parent = graphics.transform;
 			}
@@ -112,21 +113,21 @@ class CustomTiledImporterFences : Tiled2Unity.ICustomTiledImporter{
 
 			// Make the bottom bit of the bar.
 			GameObject bottom = (GameObject)GameObject.Instantiate(fenceVBarBottom,
-			                                                       new Vector2(from.x, lower),
+			                                                       new Vector2(from.x + 0.5f, lower + yoffset),
 			                                                       Quaternion.identity);
 			bottom.transform.parent = graphics.transform;
 
 			// Make the middle bits of the bar.
 			for(int i = lower; i < higher - 1; i++) {
 				GameObject tmp = (GameObject)GameObject.Instantiate(fenceVBar,
-				                                                    new Vector2(from.x, i + 1),
+				                                                    new Vector2(from.x + 0.5f, i + 2 + yoffset),
 				                                                    Quaternion.identity);
 				tmp.transform.parent = graphics.transform;
 			}
 
 			// Make the top bit of the bar.
 			GameObject top = (GameObject)GameObject.Instantiate(fenceVBarTop,
-			                                                       new Vector2(from.x, higher),
+			                                                    new Vector2(from.x + 0.5f, higher + yoffset),
 			                                                       Quaternion.identity);
 			top.transform.parent = graphics.transform;
 

@@ -11,7 +11,13 @@ public class PushBlockColliderScript : ColliderScript {
 		movementScript = GetComponent<MovementScript>();
 	}
 
-	public virtual bool CanBePushedByPusher(MovementScript pusher){
+	public virtual bool CanBePushedByPusher(MovementScript pusher, Direction dir){
+		Room room = Globals.roomManager.GetRoom(gameObject.layer);
+		//Disallow a block from being pushed outside of a room
+		if (!room.ContainsTile (this.tileVector + Utils.DirectionToVector (dir) * 2)) {
+			return false;
+		}
+
 		if (isHeavy) {
 			if(!pusher.canPush & pusher.canPushHeavy){
 				Debug.LogWarning("Warning: MovementScript canPushHeavy set to true but canPush set to false.");
@@ -24,7 +30,7 @@ public class PushBlockColliderScript : ColliderScript {
 
 	public override bool TryToPush(MovementScript pusher, Direction dir){
 		//Debug.Log ("Trying to push");
-		if (CanBePushedByPusher(pusher)) {
+		if (CanBePushedByPusher(pusher, dir)) {
 			bool wasPushed = movementScript.MoveInDirection (dir);
 			//Debug.Log ("Trying to psuh returned " + wasPushed);
 			if (wasPushed) {
@@ -39,8 +45,9 @@ public class PushBlockColliderScript : ColliderScript {
 	}
 
 	public override bool CanPush(MovementScript pusher, Direction dir){
-		if (CanBePushedByPusher(pusher)) {
-			return movementScript.CanMoveInDirectionWithoutPushSideEffect (this.tileVector, dir);
+		if (CanBePushedByPusher(pusher, dir)) {
+			Room room = Globals.roomManager.GetRoom(gameObject.layer);
+			return movementScript.CanMoveInDirectionWithoutPushSideEffect (this.tileVector, dir) && room.ContainsTile(this.tileVector + Utils.DirectionToVector(dir) * 2);
 		}else{
 			return false;
 		}

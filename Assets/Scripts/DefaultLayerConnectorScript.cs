@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+//using UnityEditor;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class DefaultLayerConnectorScript : MonoBehaviour {
 
 	//This script assumes that Switches and Gates that are shared across two screens are in the Switches and Gates(Default) layer,
