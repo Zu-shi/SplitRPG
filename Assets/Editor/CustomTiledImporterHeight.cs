@@ -20,7 +20,8 @@ class CustomTiledImporterHeight : Tiled2Unity.ICustomTiledImporter{
 	
 	private Dictionary<string, DrawingOrder> orderMap = new Dictionary<string, DrawingOrder>{
 		{ "Objects(Invisible)", DrawingOrder.OBJECTS },//,
-		{ "Pushblocks(Default)", DrawingOrder.OBJECTS }//,
+		{ "Pushblocks(Default)", DrawingOrder.OBJECTS },//,
+		{ "Bidirectional Portals", DrawingOrder.OBJECTS }//,
 		//{ "Switches and Gates", DrawingOrder.OBJECTS },
 		//{ "Buttons and Gates", DrawingOrder.OBJECTS }
 	};

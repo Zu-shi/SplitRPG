@@ -8,20 +8,40 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 
 	private List<string> senders = new List<string>();
 	private List<string> receivers = new List<string>();
+	private string pathPrefix = PrefabMapper.PrefabLocation;
 
 	private GameObject senderPrefab;
 	private GameObject receiverPrefab;
 	private GameObject biPrefab;
 	private GameObject loaderPrefab;
 	
+	private Dictionary<string, string> prefabMap;
+	private string mapName;
+
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props){
+		if(gameObject.transform.parent == null){
+			if(props.ContainsKey("map")){
+				prefabMap = PrefabMapper.maps[props["map"]];
+				//Added backslash here so that we can use load the default map without inserting a conditional.
+				mapName = props["map"] + "/";
+			}else{
+				Debug.LogWarning("Map does not contain requisite 'map' property, default used.");
+				prefabMap = PrefabMapper.maps["default"];
+				Utils.assert(prefabMap != null);
+				mapName = "";
+			}
+		}
+
 		Transform parent = gameObject.transform.parent;
 		if(parent == null)
 			return;
 		if(senderPrefab == null || receiverPrefab == null || biPrefab == null) {
+			Debug.LogWarning("Temporary warning: right now only BidireactionalPortal has the updated assets.");
+			biPrefab = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + "Portal1" + ".prefab", typeof(GameObject)) as GameObject;
+
 			senderPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/SendPortal.prefab", typeof(GameObject)) as GameObject;
 			receiverPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/ReceivePortal.prefab", typeof(GameObject)) as GameObject;
-			biPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/BidirectionalPortal.prefab", typeof(GameObject)) as GameObject;
+			//biPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/BidirectionalPortal.prefab", typeof(GameObject)) as GameObject;
 			loaderPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/LevelLoader.prefab", typeof(GameObject)) as GameObject;
 		}
 
@@ -42,6 +62,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 		}
 
 		if(parent.name.Contains("Bidirectional Portals")) {
+			Debug.Log("Made bidirectional portal");
 			gameObject = MakePrefab(gameObject, biPrefab);
 			senders.Add(gameObject.name);
 			receivers.Add(props["target"]);
@@ -78,7 +99,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 		GameObject tmp = GameObject.Instantiate(prefab, o.transform.position, Quaternion.identity) as GameObject;
 		tmp.name = o.name;
 		tmp.transform.parent = o.transform.parent;
-		tmp.transform.localScale *= 64;
+		tmp.transform.localScale *= 32;
 		tmp.transform.position += 64 * new Vector3(1,-1,0);
 		GameObject.DestroyImmediate(o);
 		return tmp;

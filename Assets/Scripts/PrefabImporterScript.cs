@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-//using UnityEditor;
+using UnityEditor;
 
 [ExecuteInEditMode]
 public class PrefabImporterScript : MonoBehaviour {
-
-	/*
+	
 	public bool convertSpritesToPrefabs = false;
 	public bool J1Left;
 	public bool J1Right;
@@ -124,14 +123,17 @@ public class PrefabImporterScript : MonoBehaviour {
 		}
 
 		for (int i = 1; i <= 4; i ++) {
-			objname = "Portal" + i.ToString();
-			go = getOriginalPrefabOfObject (objname.ToLower ());
-			PortalSenderScript bs = go.GetComponent<PortalSenderScript> ();
-			//bs.onSprite = retrieveSpriteByName (map, objname + "On");
-			//bs.offSprite = retrieveSpriteByName (map, objname + "Off");
-			sr = go.GetComponent<SpriteRenderer> ();
-			//sr.sprite = bs.onSprite;
-			SaveAndDestory (map, objname, go);
+			if(map!="J1Left"  && map != "J1Right"){
+				objname = "Portal" + i.ToString();
+				go = getOriginalPrefabOfObject (objname.ToLower ());
+				PortalSenderScript bs = go.GetComponent<PortalSenderScript> ();
+				//bs.onSprite = retrieveSpriteByName (map, objname + "On");
+				//bs.offSprite = retrieveSpriteByName (map, objname + "Off");
+				//sr = go.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer> ();
+				sr = go.GetComponent<SpriteRenderer> ();
+				sr.sprite = retrieveSpriteByName (map, objname);
+				SaveAndDestory (map, objname, go);
+			}
 		}
 
 		for (int i = 1; i <= 3; i ++) {
@@ -206,7 +208,6 @@ public class PrefabImporterScript : MonoBehaviour {
 	private void SaveAndDestory(string map, string name, GameObject go){
 		PrefabUtility.CreatePrefab(PrefabMapper.PrefabLocation + map + "/" + name + ".prefab", go);
 		DestroyImmediate (go);
-	]
-	*/
+	}
 
 }
