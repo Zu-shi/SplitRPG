@@ -112,7 +112,8 @@ public class CharacterMovementScript : MovementScript {
 	}
 
 	public bool WillFallInPit(Direction dir) {
-		if(Globals.collisionManager.IsTilePit(tileVector + Utils.DirectionToVector(dir), gameObject.layer)) { // There is a pit in front of us
+		if(Globals.collisionManager.IsTilePit(tileVector + Utils.DirectionToVector(dir), gameObject.layer)
+		   && !Globals.collisionManager.IsFenceBlocking(tileVector, dir, this.gameObject.layer)) { // There is a pit in front of us
 			if(canJump) {
 				return Globals.collisionManager.IsTilePit(tileVector + Utils.DirectionToVector(dir) * 2, gameObject.layer);
 			} else {

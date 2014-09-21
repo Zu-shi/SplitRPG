@@ -56,6 +56,7 @@ MonoBehaviour:
   blocking: 1
   activatable: 1
   pit: 0
+  twin: {fileID: 0}
   onSprite: {fileID: 21300000, guid: 2c2bce163b6054ae1a6ab75b24ff960e, type: 3}
   offSprite: {fileID: 21300000, guid: 0d9d6344d4b6b42d6ad69c65b34a0d20, type: 3}
   gates: []

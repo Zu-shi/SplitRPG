@@ -424,7 +424,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 464160805}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f52e676f7b061499f9cc068a8a92fd51, type: 3}
+  m_Script: {fileID: 11500000, guid: ee5d5af2d782c4ea4ab7f5a02e4d4025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &464160819
@@ -766,6 +766,14 @@ Prefab:
       propertyPath: preloadedRightLevel
       value: 
       objectReference: {fileID: 105706, guid: 3520fdcd1821d4fb8bf366663283dd70, type: 2}
+    - target: {fileID: 2000000, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
+      propertyPath: orthographic size
+      value: 10.3000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000002, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
+      propertyPath: orthographic size
+      value: 10.3000002
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
   m_RootGameObject: {fileID: 464160805}
@@ -994,7 +1002,7 @@ Camera:
   far clip plane: 100000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 10.3000002
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1109,7 +1117,7 @@ Camera:
   far clip plane: 100000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 10.3000002
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
