@@ -9,6 +9,8 @@ public class BackgroundScrollingTextureScript : _Mono {
 
 	public float parralaxDepth = 1;
 	public Vector2 passiveMove;
+	public bool lockToCamera = true;
+	public bool lockVerticalOffset = false;
 	public bool runInEditor = false;
 
 	bool started = false;
@@ -25,7 +27,8 @@ public class BackgroundScrollingTextureScript : _Mono {
 		}
 		
 		if(!started){
-			xy = cameraScript.xy;
+			if(lockToCamera)
+				xy = cameraScript.xy;
 			lastCameraPosition = cameraScript.transform.position;
 			started = true;
 		}
@@ -41,11 +44,16 @@ public class BackgroundScrollingTextureScript : _Mono {
 			// offset the texture
 			renderer.sharedMaterial.mainTextureOffset += fac * new Vector2(diff.x, diff.y);
 
-			xy = cameraScript.xy; // keep in front of the camera
+			if(lockToCamera)
+				xy = cameraScript.xy; // keep in front of the camera
 		}
 
 		renderer.sharedMaterial.mainTextureOffset += Time.deltaTime * passiveMove;
 
+		if(lockVerticalOffset){
+			Vector2 offset = renderer.sharedMaterial.mainTextureOffset;
+			renderer.sharedMaterial.mainTextureOffset = new Vector2(offset.x, 0);
+		}
 		
 		lastCameraPosition = cameraScript.transform.position;
 	}
