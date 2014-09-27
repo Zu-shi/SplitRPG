@@ -38,9 +38,11 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 		if(senderPrefab == null || receiverPrefab == null || biPrefab == null) {
 			Debug.LogWarning("Temporary warning: right now only BidireactionalPortal has the updated assets.");
 			biPrefab = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + "Portal1" + ".prefab", typeof(GameObject)) as GameObject;
+			senderPrefab = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + "SendPortal2" + ".prefab", typeof(GameObject)) as GameObject;
+			receiverPrefab = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + "ReceivePortal3" + ".prefab", typeof(GameObject)) as GameObject;
 
-			senderPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/SendPortal.prefab", typeof(GameObject)) as GameObject;
-			receiverPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/ReceivePortal.prefab", typeof(GameObject)) as GameObject;
+			//senderPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/SendPortal.prefab", typeof(GameObject)) as GameObject;
+			//receiverPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/ReceivePortal.prefab", typeof(GameObject)) as GameObject;
 			//biPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/BidirectionalPortal.prefab", typeof(GameObject)) as GameObject;
 			loaderPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/LevelLoader.prefab", typeof(GameObject)) as GameObject;
 		}

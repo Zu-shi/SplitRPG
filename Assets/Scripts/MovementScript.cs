@@ -79,7 +79,7 @@ public class MovementScript : _Mono {
 	/// <summary>
 	/// Reset to not falling and regular size.
 	/// </summary>
-	public void ResetFalling (){
+	public virtual void ResetFalling (){
 		falling = fell = false;
 		inAir = false;
 		fallObject.localScale = startScale;
@@ -87,7 +87,7 @@ public class MovementScript : _Mono {
 		
 	}
 
-	protected void fallAnimation(){	
+	protected virtual void fallAnimation(){	
 		Vector3 s = fallObject.localScale;
 		s *= .9f;
 		fallObject.position -= new Vector3(0, 0.05f, 0);
@@ -96,7 +96,7 @@ public class MovementScript : _Mono {
 		checkAndSetFell ();
 	}
 
-	protected void checkAndSetFell(){
+	protected virtual void checkAndSetFell(){
 		Vector3 s = fallObject.localScale;
 		if (s.magnitude < .03f) {
 			fell = true;

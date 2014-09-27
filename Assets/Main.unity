@@ -117,6 +117,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
+      propertyPath: levelPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 100592, guid: 672b7b4fa26ea4f3284caeb78829254f, type: 2}
+    - target: {fileID: 11400024, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
+      propertyPath: J2Left
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400024, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
+      propertyPath: J2Right
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400024, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
+      propertyPath: convertSpritesToPrefabs
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
+      propertyPath: levelPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 100522, guid: 4b44ef9e19545461aa9e00e82160fc03, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
   m_RootGameObject: {fileID: 464160805}
@@ -390,8 +410,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelPrefabs:
-  - {fileID: 100496, guid: 04fb8f5bcac1445b6a519babfa13f514, type: 2}
-  - {fileID: 100542, guid: 3514d453b2e474ff4a7056145af14bb5, type: 2}
+  - {fileID: 100522, guid: 4b44ef9e19545461aa9e00e82160fc03, type: 2}
+  - {fileID: 100592, guid: 672b7b4fa26ea4f3284caeb78829254f, type: 2}
   loadOnStart: 1
   preloadedLeftLevel: {fileID: 100456, guid: b21a954db400d4b3cb201e035eeee932, type: 2}
   preloadedRightLevel: {fileID: 100574, guid: 17e76007421ba4526a1e76cfa37682d8, type: 2}
