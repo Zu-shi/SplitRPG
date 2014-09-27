@@ -83,14 +83,12 @@ public class MovementScript : _Mono {
 		falling = fell = false;
 		inAir = false;
 		fallObject.localScale = startScale;
-		fallObject.position = Vector3.zero;
-		
 	}
 
 	protected virtual void fallAnimation(){	
 		Vector3 s = fallObject.localScale;
 		s *= .9f;
-		fallObject.position -= new Vector3(0, 0.05f, 0);
+		y -= 0.05f;
 		fallObject.localScale = s;
 		
 		checkAndSetFell ();
