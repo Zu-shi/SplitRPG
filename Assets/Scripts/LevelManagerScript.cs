@@ -17,7 +17,6 @@ public class LevelManagerScript : _Mono{
 	public GameObject preloadedLeftLevel, preloadedRightLevel;
 	
 	private GameObject currentLeftLevelPrefab, currentRightLevelPrefab;
-	private GameObject savedLeftLevel, savedRightLevel;
 
 	private string _currentLeftLevel;
 	public string currentLeftLevel {
@@ -45,48 +44,27 @@ public class LevelManagerScript : _Mono{
 		}
 	}
 
-	public bool SaveCheckpoint(GameObject leftLevel, GameObject rightLevel) {
-		if(leftLevel == null || rightLevel == null) {
-			Debug.LogError("Attempted to save null level.");
-			return false;
-		}
-		Destroy(savedLeftLevel);
-		Destroy(savedRightLevel);
-
-		savedLeftLevel = (GameObject)Instantiate(leftLevel);
-		savedLeftLevel.name = leftLevel.name;
-		Transform lsp = Utils.FindChildRecursive(savedLeftLevel, "Starting").GetChild(0);
-		lsp.position = Globals.playerLeft.transform.position;
-		lsp.GetComponent<BoxCollider2D>().center = Vector3.zero;
-		PlayerPrefs.SetFloat("LeftX", lsp.position.x);
-		PlayerPrefs.SetFloat("LeftY", lsp.position.y);
-		savedLeftLevel.SetActive(false);
-
-		savedRightLevel = (GameObject)Instantiate(rightLevel);
-		savedRightLevel.name = rightLevel.name;
-		Transform rsp = Utils.FindChildRecursive(savedRightLevel, "Starting").GetChild(0);
-		rsp.position = Globals.playerRight.transform.position;
-		rsp.GetComponent<BoxCollider2D>().center = Vector3.zero;
-		PlayerPrefs.SetFloat("RightX", rsp.position.x);
-		PlayerPrefs.SetFloat("RightY", rsp.position.y);
-		savedRightLevel.SetActive(false);
+	public bool SaveCheckpoint() {
+		Debug.Log("Saving checkpoint...");
+		PlayerPrefs.SetFloat("LeftX", Globals.playerLeft.tileX);
+		PlayerPrefs.SetFloat("LeftY", Globals.playerLeft.tileY);
+		PlayerPrefs.SetFloat("RightX", Globals.playerRight.tileX);
+		PlayerPrefs.SetFloat("RightY", Globals.playerRight.tileY);
 
 		PlayerPrefs.SetString("LeftLevel", currentLeftLevel);
 		PlayerPrefs.SetString("RightLevel", currentRightLevel);
+		
+		/*Debug.Log ("LeftLevel = " + PlayerPrefs.GetString("LeftLevel"));
+		Debug.Log ("RightLevel = " + PlayerPrefs.GetString("RightLevel"));
+		Debug.Log ("LeftX, LeftY = " + PlayerPrefs.GetFloat("LeftX") + ", " + PlayerPrefs.GetFloat("LeftY"));
+		Debug.Log ("RightX, RightY = " + PlayerPrefs.GetFloat("RightX") + ", " + PlayerPrefs.GetFloat("RightY"));*/
 
 		return true;
 	}
 
-	public void SaveCheckpoint() {
-		SaveCheckpoint(currentLeftLevelPrefab, currentRightLevelPrefab);
-	}
-
 	public void LoadLastCheckpoint() {
-		if(savedLeftLevel == null || savedRightLevel == null) {
-			LoadLevels(currentLeftLevel, currentRightLevel);
-		} else {
-			LoadLevels(savedLeftLevel, savedRightLevel);
-		}
+		Debug.Log("Loading checkpoint...");
+		LoadSerializedGame();
 	}
 
 	public void ReloadCurrentLevels() {
@@ -98,13 +76,17 @@ public class LevelManagerScript : _Mono{
 	}
 	
 	public void LoadSerializedGame() {
+		/*Debug.Log("Loading serialized game...");
+		Debug.Log ("LeftLevel = " + PlayerPrefs.GetString("LeftLevel"));
+		Debug.Log ("RightLevel = " + PlayerPrefs.GetString("RightLevel"));
+		Debug.Log ("LeftX, LeftY = " + PlayerPrefs.GetFloat("LeftX") + ", " + PlayerPrefs.GetFloat("LeftY"));
+		Debug.Log ("RightX, RightY = " + PlayerPrefs.GetFloat("RightX") + ", " + PlayerPrefs.GetFloat("RightY"));*/
 		LoadLevels(PlayerPrefs.GetString("LeftLevel"), PlayerPrefs.GetString("RightLevel"));
 
-		// Current levels are set in the above call to LoadLevels
-		leftSpawn.position = new Vector3(PlayerPrefs.GetFloat("LeftX"), PlayerPrefs.GetFloat("LeftY"), leftSpawn.position.z);
-		rightSpawn.position = new Vector3(PlayerPrefs.GetFloat("RightX"), PlayerPrefs.GetFloat("RightY"), rightSpawn.position.z);
-		leftSpawn.GetComponent<BoxCollider2D>().center = Vector3.zero;
-		rightSpawn.GetComponent<BoxCollider2D>().center = Vector3.zero;
+		leftSpawn.position = new Vector3(PlayerPrefs.GetFloat("LeftX"), PlayerPrefs.GetFloat("LeftY"), 0);
+		rightSpawn.position = new Vector3(PlayerPrefs.GetFloat("RightX"), PlayerPrefs.GetFloat("RightY"), 0);
+		leftSpawn.GetComponent<BoxCollider2D>().center = Vector2.zero;
+		rightSpawn.GetComponent<BoxCollider2D>().center = Vector2.zero;
 	}
 
 	public bool LoadLevels(string leftLevelName, string rightLevelName) {
@@ -128,6 +110,7 @@ public class LevelManagerScript : _Mono{
 	}
 
 	public bool LoadLevels(GameObject leftLevel, GameObject rightLevel) {
+		Debug.Log("Loading levels...");
 		if(leftLevel == null || rightLevel == null) {
 			Debug.LogError("Cannont load null level.");
 			return false;
@@ -149,6 +132,7 @@ public class LevelManagerScript : _Mono{
 		right.SetActive(false);
 		Globals.playerLeft.gameObject.SetActive(false);
 		Globals.playerRight.gameObject.SetActive(false);
+		Globals.roomManager.enabled = false;
 
 		// Left level
 		left.name = leftLevel.name;
@@ -170,13 +154,17 @@ public class LevelManagerScript : _Mono{
 		_currentRightLevel = right.name;
 	
 		if(rightSpawn != null) {
-			Globals.cameraRight.FadeTransition( (Utils.VoidDelegate)MoveRightCharacterToSpawnPoint + (Utils.VoidDelegate)FinishMoving, null);
+			Globals.cameraRight.FadeTransition( (Utils.VoidDelegate)MoveRightCharacterToSpawnPoint + (Utils.VoidDelegate)FinishMoving, FinishLoad);
 		}
 		else {
 			Debug.LogError("No spawn point set for level: " + right.name);
 		}
 
 		return true;
+	}
+
+	private void FinishLoad() {
+		Globals.roomManager.enabled = true;
 	}
 
 	// Used as a callback
@@ -195,6 +183,7 @@ public class LevelManagerScript : _Mono{
 
 	// Helper function for callback
 	private void FinishMoving() {
+		Debug.Log("Finishing movement...");
 		Globals.roomManager.MoveCamerasToPoint( new Vector2(rightSpawn.position.x, rightSpawn.position.y));
 		if(PlayerPrefs.GetString("LoadGame") == "true") {
 			PlayerPrefs.SetString("LoadGame", "false");
