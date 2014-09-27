@@ -137,6 +137,35 @@ public class PrefabImporterScript : MonoBehaviour {
 			}
 		}
 
+		
+		for (int i = 1; i <= 4; i ++) {
+			if(map!="J1Left"  && map != "J1Right"){
+				objname = "SendPortal" + i.ToString();
+				go = getOriginalPrefabOfObject (objname.ToLower ());
+				PortalSenderScript bs = go.GetComponent<PortalSenderScript> ();
+				//bs.onSprite = retrieveSpriteByName (map, objname + "On");
+				//bs.offSprite = retrieveSpriteByName (map, objname + "Off");
+				//sr = go.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer> ();
+				sr = go.GetComponent<SpriteRenderer> ();
+				sr.sprite = retrieveSpriteByName (map, objname);
+				SaveAndDestory (map, objname, go);
+			}
+		}
+		
+		for (int i = 1; i <= 4; i ++) {
+			if(map!="J1Left"  && map != "J1Right"){
+				objname = "ReceivePortal" + i.ToString();
+				go = getOriginalPrefabOfObject (objname.ToLower ());
+				PortalSenderScript bs = go.GetComponent<PortalSenderScript> ();
+				//bs.onSprite = retrieveSpriteByName (map, objname + "On");
+				//bs.offSprite = retrieveSpriteByName (map, objname + "Off");
+				//sr = go.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer> ();
+
+				//sr = go.GetComponent<SpriteRenderer> ();
+				//sr.sprite = retrieveSpriteByName (map, objname);
+				SaveAndDestory (map, objname, go);
+			}
+		}
 		for (int i = 1; i <= 3; i ++) {
 			objname = "ButtonGate" + i.ToString();
 			go = getOriginalPrefabOfObject (objname.ToLower ());
@@ -210,6 +239,6 @@ public class PrefabImporterScript : MonoBehaviour {
 		PrefabUtility.CreatePrefab(PrefabMapper.PrefabLocation + map + "/" + name + ".prefab", go);
 		DestroyImmediate (go);
 	}
-	*/
 
+*/
 }

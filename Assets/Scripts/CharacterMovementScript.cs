@@ -95,6 +95,15 @@ public class CharacterMovementScript : MovementScript {
 		_isChangingDirection = false;
 	}
 
+	protected virtual void fallAnimation(){	
+		Vector3 s = fallObject.localScale;
+		s *= .9f;
+		gameObject.transform.FindChild("Sprite").GetComponent<_Mono>().y -= 0.05f;
+		fallObject.localScale = s;
+		
+		checkAndSetFell ();
+	}
+
 	/// <summary>
 	/// This method pretends that the player is moving in order to sync the characters when one is against a wall while the other is at the exit.
 	/// </summary>
