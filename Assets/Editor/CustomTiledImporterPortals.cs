@@ -99,7 +99,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 		GameObject tmp = GameObject.Instantiate(prefab, o.transform.position, Quaternion.identity) as GameObject;
 		tmp.name = o.name;
 		tmp.transform.parent = o.transform.parent;
-		tmp.transform.localScale *= 32;
+		tmp.transform.localScale *= 64;
 		tmp.transform.position += 64 * new Vector3(1,-1,0);
 		GameObject.DestroyImmediate(o);
 		return tmp;

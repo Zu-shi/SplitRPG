@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditor;
+//using UnityEditor;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class PrefabImporterScript : MonoBehaviour {
-	
+
+	/*
 	public bool convertSpritesToPrefabs = false;
 	public bool J1Left;
 	public bool J1Right;
@@ -161,7 +162,7 @@ public class PrefabImporterScript : MonoBehaviour {
 			sr.sprite = gs.closedSpriteH;
 			SaveAndDestory (map, objname, go);
 		}
-		
+
 		objname = "FenceHBar";
 		go  = getOriginalPrefabOfObject (objname);
 		go.GetComponent<SpriteRenderer> ().sprite = retrieveSpriteByName (map, objname);
@@ -209,5 +210,6 @@ public class PrefabImporterScript : MonoBehaviour {
 		PrefabUtility.CreatePrefab(PrefabMapper.PrefabLocation + map + "/" + name + ".prefab", go);
 		DestroyImmediate (go);
 	}
+	*/
 
 }

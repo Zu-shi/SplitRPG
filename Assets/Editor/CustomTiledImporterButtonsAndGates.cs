@@ -15,6 +15,8 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 	private Dictionary<string, IDictionary<string, string>> buttonGates = new Dictionary<string, IDictionary<string, string>>();
 	private Dictionary<string, IDictionary<string, string>> switches = new Dictionary<string, IDictionary<string, string>>();
 	private Dictionary<string, IDictionary<string, string>> gates = new Dictionary<string, IDictionary<string, string>>();
+
+	//For switches and gates that act on both sides
 	private Dictionary<string, IDictionary<string, string>> switchesDefault = new Dictionary<string, IDictionary<string, string>>();
 	private Dictionary<string, IDictionary<string, string>> gatesDefault = new Dictionary<string, IDictionary<string, string>>();
 	private Dictionary<string, string> prefabMap;
@@ -124,7 +126,7 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 				string[] targets = button.Value["target"].Split(new string[] { ", " }, System.StringSplitOptions.None);
 				foreach(string target in targets){
 					Debug.Log (visualName);
-					GateScript gs = ImportGate(target, buttonGates[target], buttonLayer, PrefabMapper.activatorToGateMap["Button2"]);
+					GateScript gs = ImportGate(target, buttonGates[target], buttonLayer, PrefabMapper.activatorToGateMap[visualName]);
 					bs.addGate( gs );
 				}
 			

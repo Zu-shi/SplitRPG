@@ -19,6 +19,8 @@ GameObject:
   - 114: {fileID: 11400016}
   - 82: {fileID: 8200000}
   - 114: {fileID: 11400018}
+  - 114: {fileID: 11400026}
+  - 114: {fileID: 11400024}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -107,7 +109,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -119,7 +121,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -131,7 +133,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -153,7 +155,7 @@ Camera:
     width: .5
     height: 1
   near clip plane: .300000012
-  far clip plane: 1000
+  far clip plane: 100000
   field of view: 60
   orthographic: 1
   orthographic size: 10
@@ -185,7 +187,7 @@ Camera:
     width: .5
     height: 1
   near clip plane: .300000012
-  far clip plane: 1000
+  far clip plane: 100000
   field of view: 60
   orthographic: 1
   orthographic size: 10
@@ -399,6 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d7795600a2740e69a46932f8db6ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  editModeRefresh: 0
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -422,6 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ignoreInput: 0
+  snapshotShortcut: 1
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -446,11 +450,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelPrefabs:
-  - {fileID: 100016, guid: 62be08d5db6c94c3abb4062eb4751060, type: 2}
-  - {fileID: 100024, guid: 22b766b9fb2eb463988892a8bc145500, type: 2}
+  - {fileID: 100496, guid: 04fb8f5bcac1445b6a519babfa13f514, type: 2}
+  - {fileID: 100542, guid: 3514d453b2e474ff4a7056145af14bb5, type: 2}
   loadOnStart: 1
-  preloadedLeftLevel: {fileID: 0}
-  preloadedRightLevel: {fileID: 0}
+  preloadedLeftLevel: {fileID: 100456, guid: b21a954db400d4b3cb201e035eeee932, type: 2}
+  preloadedRightLevel: {fileID: 100574, guid: 17e76007421ba4526a1e76cfa37682d8, type: 2}
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -462,7 +466,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972203c7d8293994b98f5ae30a457a5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Music: []
+  Music:
+  - {fileID: 0}
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -487,6 +492,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   faderPrefab: {fileID: 100000, guid: da0bf8efd7fcf4d45ad119d0e9f555a4, type: 2}
+--- !u!114 &11400024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee5d5af2d782c4ea4ab7f5a02e4d4025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11400026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f956d764864508549a475c2bcf7e0cef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetAspectRatio: 1.79999995
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

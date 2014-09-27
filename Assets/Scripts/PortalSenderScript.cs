@@ -16,12 +16,10 @@ public class PortalSenderScript : _Mono {
 
 			if(Globals.playerLeft.gameObject.layer == this.gameObject.layer) {				// Left player is on us
 				if(Globals.playerLeft.GetComponent<MovementScript>().isMoving) return;		// Don't teleport until they stop moving
-
 				target.MovePlayerHere(Globals.playerLeft);
 			}
 			else {																			// Right player is on us
 				if(Globals.playerRight.GetComponent<MovementScript>().isMoving) return;		// Don't teleport until they stop moving
-
 				target.MovePlayerHere(Globals.playerRight);
 			}
 		}
