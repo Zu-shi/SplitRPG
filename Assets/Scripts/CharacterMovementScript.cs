@@ -85,7 +85,7 @@ public class CharacterMovementScript : MovementScript {
 		_isChangingDirection = true;
 		moveDirection = direction;
 		changingDirectionTimeLeft = changingDirectionTime;
-		return false;
+		return true;
 	}
 	
 	/// <summary>

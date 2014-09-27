@@ -25,7 +25,7 @@ public class FaderScript : _Mono {
 		x = y = .5f;
 	}
 	
-	void Update () {
+	void FixedUpdate () {
 		// Resize the gui element to fit the screen
 		int w = Screen.width + 5;
 		int h = Screen.height + 5;
@@ -83,5 +83,17 @@ public class FaderScript : _Mono {
 		float bonus = Utils.Clamp(1 / (1 - value), 1, 40);
 		value = Utils.MoveValueTowards(value, dest, rate * bonus);
 		return value;
+	}
+
+	public float EstimateTime() {
+		float gAlpha = guiAlpha;
+		float tAlpha = targetAlpha;
+		int frames = 0;
+		while (gAlpha != targetAlpha) {
+			frames++;
+			gAlpha = fadeFunc(gAlpha, tAlpha, fadeRate);
+		}
+
+		return frames * (1.0f/50.0f); // number of frames * time per frame
 	}
 }
