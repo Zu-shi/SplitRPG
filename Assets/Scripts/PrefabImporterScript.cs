@@ -2,7 +2,7 @@
 using System.Collections;
 //using UnityEditor;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class PrefabImporterScript : MonoBehaviour {
 
 	/*
@@ -124,14 +124,17 @@ public class PrefabImporterScript : MonoBehaviour {
 		}
 
 		for (int i = 1; i <= 4; i ++) {
-			objname = "Portal" + i.ToString();
-			go = getOriginalPrefabOfObject (objname.ToLower ());
-			PortalSenderScript bs = go.GetComponent<PortalSenderScript> ();
-			//bs.onSprite = retrieveSpriteByName (map, objname + "On");
-			//bs.offSprite = retrieveSpriteByName (map, objname + "Off");
-			sr = go.GetComponent<SpriteRenderer> ();
-			//sr.sprite = bs.onSprite;
-			SaveAndDestory (map, objname, go);
+			if(map!="J1Left"  && map != "J1Right"){
+				objname = "Portal" + i.ToString();
+				go = getOriginalPrefabOfObject (objname.ToLower ());
+				PortalSenderScript bs = go.GetComponent<PortalSenderScript> ();
+				//bs.onSprite = retrieveSpriteByName (map, objname + "On");
+				//bs.offSprite = retrieveSpriteByName (map, objname + "Off");
+				//sr = go.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer> ();
+				sr = go.GetComponent<SpriteRenderer> ();
+				sr.sprite = retrieveSpriteByName (map, objname);
+				SaveAndDestory (map, objname, go);
+			}
 		}
 
 		for (int i = 1; i <= 3; i ++) {
@@ -159,7 +162,7 @@ public class PrefabImporterScript : MonoBehaviour {
 			sr.sprite = gs.closedSpriteH;
 			SaveAndDestory (map, objname, go);
 		}
-		
+
 		objname = "FenceHBar";
 		go  = getOriginalPrefabOfObject (objname);
 		go.GetComponent<SpriteRenderer> ().sprite = retrieveSpriteByName (map, objname);
@@ -206,7 +209,7 @@ public class PrefabImporterScript : MonoBehaviour {
 	private void SaveAndDestory(string map, string name, GameObject go){
 		PrefabUtility.CreatePrefab(PrefabMapper.PrefabLocation + map + "/" + name + ".prefab", go);
 		DestroyImmediate (go);
-	]
+	}
 	*/
 
 }

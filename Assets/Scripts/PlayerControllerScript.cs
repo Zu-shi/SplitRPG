@@ -24,6 +24,7 @@ public class PlayerControllerScript : _Mono {
 	bool disableCharacter;
 
 	private bool flipXMovement, flipYMovement;
+	private bool doubleTapToFallInPit = false;
 
 	/// <summary>
 	/// Whether Player is ready to recieve input
@@ -170,13 +171,17 @@ public class PlayerControllerScript : _Mono {
 	}
 
 	private void Tap(Direction dir, bool keyDown) {
-		if(characterMovement.WillFallInPit(dir) || otherPlayer.characterMovement.WillFallInPit(dir)) {
-			if(keyDown) {
-				characterMovement.MoveInDirection(dir);
+		if(doubleTapToFallInPit){
+			if(characterMovement.WillFallInPit(dir) || otherPlayer.characterMovement.WillFallInPit(dir)) {
+				if(keyDown) {
+					characterMovement.MoveInDirection(dir);
+				} else {
+					characterMovement.PretendMoveInDirection(dir);
+				}
 			} else {
-				characterMovement.PretendMoveInDirection(dir);
+				characterMovement.MoveInDirection(dir);
 			}
-		} else {
+		}else{
 			characterMovement.MoveInDirection(dir);
 		}
 	}
