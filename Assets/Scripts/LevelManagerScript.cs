@@ -10,6 +10,7 @@ public class LevelManagerScript : _Mono{
 	// Only used in editor, copied to _levelPrefabs at start
 	public GameObject[] levelPrefabs;
 	private List<GameObject> _levelPrefabs;
+	private GameObject[] _cachedPersistentObjects;
 
 	public bool loadOnStart;
 
@@ -75,21 +76,22 @@ public class LevelManagerScript : _Mono{
 		Application.LoadLevel(0);
 	}
 	
-	public void LoadSerializedGame() {
+	public void LoadSerializedGame(bool reloadPersistent = false) {
 		/*Debug.Log("Loading serialized game...");
 		Debug.Log ("LeftLevel = " + PlayerPrefs.GetString("LeftLevel"));
 		Debug.Log ("RightLevel = " + PlayerPrefs.GetString("RightLevel"));
 		Debug.Log ("LeftX, LeftY = " + PlayerPrefs.GetFloat("LeftX") + ", " + PlayerPrefs.GetFloat("LeftY"));
 		Debug.Log ("RightX, RightY = " + PlayerPrefs.GetFloat("RightX") + ", " + PlayerPrefs.GetFloat("RightY"));*/
-		LoadLevels(PlayerPrefs.GetString("LeftLevel"), PlayerPrefs.GetString("RightLevel"));
+		LoadLevels(PlayerPrefs.GetString("LeftLevel"), PlayerPrefs.GetString("RightLevel"), reloadPersistent);
 
+		// LoadLevel callbacks will move the players to these points
 		leftSpawn.position = new Vector3(PlayerPrefs.GetFloat("LeftX"), PlayerPrefs.GetFloat("LeftY"), 0);
 		rightSpawn.position = new Vector3(PlayerPrefs.GetFloat("RightX"), PlayerPrefs.GetFloat("RightY"), 0);
 		leftSpawn.GetComponent<BoxCollider2D>().center = Vector2.zero;
 		rightSpawn.GetComponent<BoxCollider2D>().center = Vector2.zero;
 	}
 
-	public bool LoadLevels(string leftLevelName, string rightLevelName) {
+	public bool LoadLevels(string leftLevelName, string rightLevelName, bool reloadPersistent = false) {
 		GameObject left = null;
 		GameObject right = null;
 		for(int i = 0; i < _levelPrefabs.Count; i++) {
@@ -101,7 +103,7 @@ public class LevelManagerScript : _Mono{
 			}
 		}
 		if(left != null && right != null) {
-			return LoadLevels(left, right);
+			return LoadLevels(left, right, reloadPersistent);
 		}
 		else{
 			Debug.Log("Failed to load levels: " + leftLevelName + ", " + rightLevelName);
@@ -109,7 +111,7 @@ public class LevelManagerScript : _Mono{
 		}
 	}
 
-	public bool LoadLevels(GameObject leftLevel, GameObject rightLevel) {
+	public bool LoadLevels(GameObject leftLevel, GameObject rightLevel, bool reloadPersistent = false) {
 		Debug.Log("Loading levels...");
 		if(leftLevel == null || rightLevel == null) {
 			Debug.LogError("Cannont load null level.");
@@ -126,6 +128,14 @@ public class LevelManagerScript : _Mono{
 		if ( Utils.FindChildRecursive(left, "Switches and Gates(Default)") &&
 		    Utils.FindChildRecursive(right, "Switches and Gates(Default)") ){
 			LinkSwitches(left, right);
+		}
+
+		if(reloadPersistent) {
+			_cachedPersistentObjects = GameObject.FindGameObjectsWithTag("Persistent");
+			foreach(GameObject go in _cachedPersistentObjects) {
+				go.transform.parent = null;
+				go.tag = null;
+			}
 		}
 
 		left.SetActive(false);
@@ -152,9 +162,14 @@ public class LevelManagerScript : _Mono{
 		GameObject.DestroyImmediate(currentRightLevelPrefab);
 		currentRightLevelPrefab = right;
 		_currentRightLevel = right.name;
+
+		Utils.VoidDelegate mainCallback = (Utils.VoidDelegate)FinishMoving;
+		if(reloadPersistent) {
+			mainCallback += (Utils.VoidDelegate)FixCachedObjects;
+		}
 	
 		if(rightSpawn != null) {
-			Globals.cameraRight.FadeTransition( (Utils.VoidDelegate)MoveRightCharacterToSpawnPoint + (Utils.VoidDelegate)FinishMoving, FinishLoad);
+			Globals.cameraRight.FadeTransition( (Utils.VoidDelegate)MoveRightCharacterToSpawnPoint + mainCallback, FinishLoad);
 		}
 		else {
 			Debug.LogError("No spawn point set for level: " + right.name);
@@ -163,8 +178,20 @@ public class LevelManagerScript : _Mono{
 		return true;
 	}
 
+
 	private void FinishLoad() {
 		Globals.roomManager.enabled = true;
+	}
+
+	private void FixCachedObjects() {
+		GameObject[] uncachedObjects = GameObject.FindGameObjectsWithTag("Persistent");
+		foreach(GameObject uncached in uncachedObjects) {
+			string name = uncached.name;
+			uncached.name = "___uncached___" + name;
+			GameObject.Find(name).transform.parent = uncached.transform.parent;
+			Destroy(uncached);
+		}
+		_cachedPersistentObjects = null;
 	}
 
 	// Used as a callback
@@ -185,10 +212,7 @@ public class LevelManagerScript : _Mono{
 	private void FinishMoving() {
 		Debug.Log("Finishing movement...");
 		Globals.roomManager.MoveCamerasToPoint( new Vector2(rightSpawn.position.x, rightSpawn.position.y));
-		if(PlayerPrefs.GetString("LoadGame") == "true") {
-			PlayerPrefs.SetString("LoadGame", "false");
-			SaveCheckpoint();
-		}
+		SaveCheckpoint();
 	}
 
 	private void _Load() {

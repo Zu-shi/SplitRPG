@@ -72,7 +72,7 @@ public class PlayerControllerScript : _Mono {
 	}
 	
 	void ResetBothPlayers(){
-		Globals.levelManager.LoadSerializedGame();
+		Globals.levelManager.LoadSerializedGame(true);
 
 
 		ResetPlayer();
