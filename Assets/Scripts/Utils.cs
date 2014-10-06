@@ -88,7 +88,8 @@ public static class Utils {
 	/// Returns the player on the layer passed in (left or right)
 	/// </summary>
 	public static PlayerControllerScript PlayerOnLayer(int layer){
-		PlayerControllerScript player = (layer == LayerMask.NameToLayer("Left") ? Globals.playerLeft : Globals.playerRight);
+		PlayerControllerScript player = (layer == LayerMask.NameToLayer("Right") ? Globals.playerRight : Globals.playerLeft);
+		//Debug.Log ("PlayerOnLayer Called");
 		return player;
 	}
 

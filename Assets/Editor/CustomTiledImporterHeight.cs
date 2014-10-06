@@ -19,7 +19,8 @@ class CustomTiledImporterHeight : Tiled2Unity.ICustomTiledImporter{
 		{ "Bidirectional Portals", 1 },
 		{ "Bidirectional Portals 2", 2 },
 		{ "Unidirectional Portals", 1 },
-		{ "Unidirectional Portals 2", 2 }
+		{ "Unidirectional Portals 2", 2 },
+		{ "Pushblocks(Default)", 1 }
 	};
 	
 	private Dictionary<string, DrawingOrder> orderMap = new Dictionary<string, DrawingOrder>{

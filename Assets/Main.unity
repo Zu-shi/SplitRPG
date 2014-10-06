@@ -120,14 +120,14 @@ Prefab:
     - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: levelPrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 100592, guid: 672b7b4fa26ea4f3284caeb78829254f, type: 2}
+      objectReference: {fileID: 104406, guid: fae586b1b532a4e26b66fd9d859e9647, type: 2}
     - target: {fileID: 11400024, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: J2Left
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400024, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: J2Right
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400024, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: convertSpritesToPrefabs
@@ -136,7 +136,15 @@ Prefab:
     - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: levelPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 100522, guid: 4b44ef9e19545461aa9e00e82160fc03, type: 2}
+      objectReference: {fileID: 100732, guid: c3db91af971144e7987b7ec542266ef8, type: 2}
+    - target: {fileID: 11400024, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
+      propertyPath: S
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400024, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
+      propertyPath: J1Right
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
   m_RootGameObject: {fileID: 464160805}
@@ -235,6 +243,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: dd2a93b30af52407d9324f58e8ef7196, type: 2}
       propertyPath: canJump
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: dd2a93b30af52407d9324f58e8ef7196, type: 2}
+      propertyPath: canPushHeavy
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -410,8 +422,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelPrefabs:
-  - {fileID: 100522, guid: 4b44ef9e19545461aa9e00e82160fc03, type: 2}
-  - {fileID: 100592, guid: 672b7b4fa26ea4f3284caeb78829254f, type: 2}
+  - {fileID: 100732, guid: c3db91af971144e7987b7ec542266ef8, type: 2}
+  - {fileID: 104406, guid: fae586b1b532a4e26b66fd9d859e9647, type: 2}
   loadOnStart: 1
   preloadedLeftLevel: {fileID: 100456, guid: b21a954db400d4b3cb201e035eeee932, type: 2}
   preloadedRightLevel: {fileID: 100574, guid: 17e76007421ba4526a1e76cfa37682d8, type: 2}
@@ -500,6 +512,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5d5af2d782c4ea4ab7f5a02e4d4025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  convertSpritesToPrefabs: 0
+  J1Left: 0
+  J1Right: 0
+  J2Left: 0
+  J2Right: 0
+  S: 1
 --- !u!114 &464160819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1214,7 +1232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canPush: 1
-  canPushHeavy: 0
+  canPushHeavy: 1
   canFall: 1
   fallObject: {fileID: 1361838052}
   destroyOnFall: 0

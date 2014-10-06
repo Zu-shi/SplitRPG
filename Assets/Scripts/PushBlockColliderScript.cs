@@ -12,7 +12,7 @@ public class PushBlockColliderScript : ColliderScript {
 	}
 
 	public virtual bool CanBePushedByPusher(MovementScript pusher, Direction dir){
-		Room room = Globals.roomManager.GetRoom(gameObject.layer);
+		Room room = Globals.roomManager.GetRoom(pusher.gameObject.layer);
 		//Disallow a block from being pushed outside of a room
 		if (!room.ContainsTile (this.tileVector + Utils.DirectionToVector (dir) * 2)) {
 			return false;
@@ -45,8 +45,11 @@ public class PushBlockColliderScript : ColliderScript {
 	}
 
 	public override bool CanPush(MovementScript pusher, Direction dir){
+		//Debug.Log("Canpush");
 		if (CanBePushedByPusher(pusher, dir)) {
+			//Debug.Log ("Can be pushed by pusher");
 			Room room = Globals.roomManager.GetRoom(gameObject.layer);
+			//Debug.Log ("Verdict: " + movementScript.CanMoveInDirectionWithoutPushSideEffect (this.tileVector, dir) && room.ContainsTile(this.tileVector + Utils.DirectionToVector(dir) * 2));
 			return movementScript.CanMoveInDirectionWithoutPushSideEffect (this.tileVector, dir) && room.ContainsTile(this.tileVector + Utils.DirectionToVector(dir) * 2);
 		}else{
 			return false;

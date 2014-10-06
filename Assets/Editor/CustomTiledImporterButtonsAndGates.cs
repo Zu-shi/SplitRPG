@@ -42,7 +42,7 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 			return;
 		}
 
-		if(parent.name.Contains("Buttons and Gates") ) {
+		if(parent.name.Equals("Buttons and Gates") ) {
 			if(gameObject.name != ""){
 				if( props.ContainsKey("target") ){
 					//A button
@@ -58,8 +58,22 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 			}
 		}
 
-		if(parent.name.Contains("Switches and Gates") ) {
-			if(gameObject.name != ""){
+		if(parent.name.Equals("Switches and Gates") ) {
+			if(gameObject.name.Trim() != ""){
+				/*
+				Debug.Log("Adding object name:" + gameObject.name);
+
+				string str = "Gates: ";
+				foreach(string s in gates.Keys){
+					str += " " + s + " ";
+				}
+				str +=" Switches: ";
+
+				foreach(string s in switches.Keys){
+					str += " " + s + " ";
+				}
+				Debug.Log(str);
+				*/
 				if( props.ContainsKey("target") ){
 					//A switch
 					switches.Add(gameObject.name, props);
@@ -72,8 +86,21 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 			}
 		}
 
-		if(parent.name.Contains("Switches and Gates(Default)") ) {
-			if(gameObject.name != ""){
+		if(parent.name.Equals("Switches and Gates(Default)") ) {
+			if(gameObject.name.Trim() != ""){
+				Debug.Log("Adding object name:" + gameObject.name);
+				
+				string str = "Gates: ";
+				foreach(string s in gatesDefault.Keys){
+					str += " " + s + " ";
+				}
+				str +=" Switches: ";
+				
+				foreach(string s in switchesDefault.Keys){
+					str += " " + s + " ";
+				}
+				Debug.Log(str);
+
 				if( props.ContainsKey("target") ){
 					//A switch
 					switchesDefault.Add(gameObject.name, props);
@@ -125,7 +152,9 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 
 				string[] targets = button.Value["target"].Split(new string[] { ", " }, System.StringSplitOptions.None);
 				foreach(string target in targets){
-					Debug.Log (visualName);
+					if(!PrefabMapper.activatorToGateMap.ContainsKey(visualName)){Debug.Log("Visual name not found: " + visualName);}
+					if(!buttonGates.ContainsKey(target)){Debug.Log("Target name not found: " + target);}
+
 					GateScript gs = ImportGate(target, buttonGates[target], buttonLayer, PrefabMapper.activatorToGateMap[visualName]);
 					bs.addGate( gs );
 				}
@@ -159,7 +188,9 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 				
 				string[] targets = _switch.Value["target"].Split(new string[] { ", " }, System.StringSplitOptions.None);
 				foreach(string target in targets){
-					Debug.Log (visualName);
+					if(!PrefabMapper.activatorToGateMap.ContainsKey(visualName)){Debug.Log("Visual name not found: " + visualName);}
+					if(!gates.ContainsKey(target)){Debug.Log("Target name not found: " + target);}
+
 					GateScript gs = ImportGate(target, gates[target], switchLayer, PrefabMapper.activatorToGateMap[visualName]);
 					//gs.togglerToWatch = bs;
 					ss.addGate( gs );
@@ -181,7 +212,7 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 				if(_switch.Value.ContainsKey("visual")){
 					visualName = prefabMap[_switch.Value["visual"].ToLower()];
 				}else{
-					visualName = prefabMap["switch1"];
+					visualName = prefabMap["switchdefault1"];
 				}
 				switchObj = generatePrefabUnderObject(mapName + visualName, switchObjParent);
 				
@@ -191,7 +222,9 @@ public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTil
 				
 				string[] targets = _switch.Value["target"].Split(new string[] { ", " }, System.StringSplitOptions.None);
 				foreach(string target in targets){
-					Debug.Log (visualName);
+					if(!PrefabMapper.activatorToGateMap.ContainsKey(visualName)){Debug.Log("Visual name not found: " + visualName);}
+					if(!gatesDefault.ContainsKey(target)){Debug.Log("Target name not found: " + target);}
+
 					GateScript gs = ImportGate(target, gatesDefault[target], switchDefaultLayer, PrefabMapper.activatorToGateMap[visualName]);
 					ss.addGate( gs );
 				}

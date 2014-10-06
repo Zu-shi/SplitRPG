@@ -7,11 +7,12 @@ using System.Collections.Generic;
 /// </summary>
 /// <author>Zuoming Shir</author>
 public class SwitchScript : ColliderScript {
-	
+
 	private _Mono indicator;
 	
 	public Toggler _toggler = new Toggler();
 	public SwitchScript twin = null;
+	public bool toggledThisFrame {get; set;}
 	//public Toggler toggler{get{ return _toggler; }}
 	
 	[Tooltip("Sprite for when the switch is activated.")]
@@ -43,11 +44,13 @@ public class SwitchScript : ColliderScript {
 	}
 	
 	void Update () {
-		
+		toggledThisFrame = false;
+
 		if (twin != null) {
 			//_toggler = twin._toggler;
-			Debug.Log ("test equality: " + (_toggler == twin._toggler));
-			Debug.Log ("test side: " + _toggler.on + " vs. " + twin._toggler.on );
+
+			//Debug.Log ("test equality: " + (_toggler == twin._toggler));
+			//Debug.Log ("test side: " + _toggler.on + " vs. " + twin._toggler.on );
 		}
 
 		// Update the sprite
@@ -66,7 +69,14 @@ public class SwitchScript : ColliderScript {
 	public override void Activated(){
 //		Debug.Log("Activated called");
 		//_toggler.Toggle ();
-		_toggler.Toggle();
+		if(!toggledThisFrame){
+			_toggler.Toggle();
+		}
+
+		toggledThisFrame = true;
+		if(twin != null){
+			twin.toggledThisFrame = true;
+		}
 	}
 	
 }

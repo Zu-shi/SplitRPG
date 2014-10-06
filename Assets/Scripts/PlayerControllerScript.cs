@@ -36,8 +36,15 @@ public class PlayerControllerScript : _Mono {
 		}
 	}
 
-	public void FlipXMovement() { flipXMovement = !flipXMovement; }
-	public void FlipYMovement() { flipYMovement = !flipYMovement; }
+	public void FlipXMovement() { flipXMovement = !flipXMovement; 
+		if(horizontalDirection(characterMovement.moveDirection)) 
+			characterMovement.moveDirection = FlipDirection(characterMovement.moveDirection);
+	}
+	public void FlipYMovement() { flipYMovement = !flipYMovement; characterMovement.moveDirection = FlipDirection(characterMovement.moveDirection);}
+
+	public bool horizontalDirection(Direction d){
+		return (d==Direction.LEFT || d==Direction.RIGHT);
+	}
 
 	void Start () {
 		flipXMovement = flipYMovement = false;
@@ -137,14 +144,15 @@ public class PlayerControllerScript : _Mono {
 	/// <summary>
 	/// Will moving in the indicated direction move the player out of the room?
 	/// </summary>
-	public bool WillMoveOffScreen(Direction direction){
+	public bool WillMoveOffScreen(Direction readlDir){
+		//Real direction used.
 
 		if(disableCharacter)
 			return true;
 
-		Vector2 dest = new Vector2(tileX, tileY) + 2 * Utils.DirectionToVector(direction);
+		Vector2 dest = new Vector2(tileX, tileY) + 2 * Utils.DirectionToVector(readlDir);
 		Room room = roomManager.GetRoom(gameObject.layer);
-		return characterMovement.CanMoveInDirectionWithoutPushSideEffect(characterMovement.tileVector, direction) && !room.ContainsTile(dest);
+		return characterMovement.CanMoveInDirectionWithoutPushSideEffect(characterMovement.tileVector, readlDir) && !room.ContainsTile(dest);
 
 	}
 	
@@ -208,19 +216,25 @@ public class PlayerControllerScript : _Mono {
 
 		if(characterMovement.falling || !allowCommands)
 			return;
-
-		// Check if we need to wait at the edge of the screen
-		bool needToWait = WillMoveOffScreen(direction) && !otherPlayer.WillMoveOffScreen(direction);
-
+		
 		Direction realDir = direction;
 		if(flipXMovement && (direction == Direction.LEFT || direction == Direction.RIGHT))
-			realDir = FlipDirection(realDir);
+		{realDir = FlipDirection(realDir);}
 		if(flipYMovement && (direction == Direction.UP || direction == Direction.DOWN))
-			realDir = FlipDirection(realDir);
+		{realDir = FlipDirection(realDir);}
 
+		Direction otherPlayerRealDir = direction;
+		if(otherPlayer.flipXMovement && (direction == Direction.LEFT || direction == Direction.RIGHT))
+		{otherPlayerRealDir = FlipDirection(otherPlayerRealDir);}
+		if(otherPlayer.flipYMovement && (direction == Direction.UP || direction == Direction.DOWN))
+		{otherPlayerRealDir = FlipDirection(otherPlayerRealDir);}
+
+
+		// Check if we need to wait at the edge of the screen
+		bool needToWait = WillMoveOffScreen(realDir) && !otherPlayer.WillMoveOffScreen(otherPlayerRealDir);
 
 		if(!needToWait){
-			if(WillMoveOffScreen(direction))
+			if(WillMoveOffScreen(realDir))
 				walkingOutOfRoom = true;
 
 			//!characterMovement.justMoved
@@ -230,7 +244,7 @@ public class PlayerControllerScript : _Mono {
 				Tap(realDir, keyDown);
 			}
 		}else{
-			if(WillMoveOffScreen(direction)){
+			if(WillMoveOffScreen(realDir)){
 				if(characterMovement.moveDirection != realDir && !characterMovement.justMoved){
 					characterMovement.ChangeDirection(realDir);
 				}else{

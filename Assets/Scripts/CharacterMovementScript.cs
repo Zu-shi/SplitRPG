@@ -25,6 +25,7 @@ public class CharacterMovementScript : MovementScript {
 	public bool isChangingDirection{
 		get {
 			return _isChangingDirection;
+			//return false;
 		}
 	}
 
@@ -82,10 +83,17 @@ public class CharacterMovementScript : MovementScript {
 		
 		//Debug.Log ("Changing direction " + direction.ToString());
 		//Debug.Log ("Current direction " + moveDirection.ToString());
+
 		_isChangingDirection = true;
 		moveDirection = direction;
 		changingDirectionTimeLeft = changingDirectionTime;
 		return true;
+	}
+
+	public bool CanChangeDirection(Direction direction){
+		if (_isChangingDirection || _isMoving || direction == Direction.NONE) {
+			return false;
+		}else return true;
 	}
 	
 	/// <summary>

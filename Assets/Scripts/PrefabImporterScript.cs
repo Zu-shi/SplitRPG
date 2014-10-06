@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
-//using UnityEditor;
+using UnityEditor;
 
-//[ExecuteInEditMode]
+[ExecuteInEditMode]
 public class PrefabImporterScript : MonoBehaviour {
 
-	/*
 	public bool convertSpritesToPrefabs = false;
 	public bool J1Left;
 	public bool J1Right;
 	public bool J2Left;
 	public bool J2Right;
+	public bool S;
 
 	void Start(){
 		convertSpritesToPrefabs = false;
@@ -41,8 +41,39 @@ public class PrefabImporterScript : MonoBehaviour {
 				ImportPrefabsFromIamges("J2Right");	
 				ImportHeavyBlocks();
 			}
+			
+			if (S) {
+				ImportPrefabsFromIamges("S");
+				ImportDefaultElements2();
+			}
+
 		} 
 
+	}
+
+	private void ImportDefaultElements2(){
+		string map = "S";
+		GameObject go;
+		SpriteRenderer sr;
+		string objname;
+
+		objname = "PushblockDefault";
+		go  = getOriginalPrefabOfObject (objname.ToLower());
+		sr = go.GetComponent<SpriteRenderer> ();
+		sr.sprite = retrieveSpriteByName (map, objname);
+		go.GetComponent<PushBlockColliderScript> ().pushSound = AssetDatabase.LoadAssetAtPath(PrefabMapper.SoundLocation + map + "Push.wav", typeof(AudioClip)) as AudioClip;
+		SaveAndDestory (map, objname, go);
+
+		for (int i = 1; i <= 4; i ++) {
+			objname = "Switch" + "Default" + i.ToString();
+			go = getOriginalPrefabOfObject (objname.ToLower ());
+			SwitchScript ss = go.GetComponent<SwitchScript> ();
+			ss.onSprite = retrieveSpriteByName (map, objname + "On");
+			ss.offSprite = retrieveSpriteByName (map, objname + "Off");
+			sr = go.GetComponent<SpriteRenderer> ();
+			sr.sprite = ss.onSprite;
+			SaveAndDestory (map, objname, go);
+		}
 	}
 
 	private void ImportHeavyBlocks(){
@@ -100,16 +131,29 @@ public class PrefabImporterScript : MonoBehaviour {
 		sr = go.GetComponent<SpriteRenderer> ();
 		sr.sprite = retrieveSpriteByName (map, objname);
 		SaveAndDestory (map, objname, go);
-		
-		for (int i = 1; i <= 4; i ++) {
-			objname = "Switch";
-			go = getOriginalPrefabOfObject (objname.ToLower ());
-			SwitchScript ss = go.GetComponent<SwitchScript> ();
-			ss.onSprite = retrieveSpriteByName (map, objname + "On");
-			ss.offSprite = retrieveSpriteByName (map, objname + "Off");
-			sr = go.GetComponent<SpriteRenderer> ();
-			sr.sprite = ss.onSprite;
-			SaveAndDestory (map, objname + i.ToString(), go);
+
+		if(map!="S"){
+			for (int i = 1; i <= 4; i ++) {
+				objname = "Switch";
+				go = getOriginalPrefabOfObject (objname.ToLower ());
+				SwitchScript ss = go.GetComponent<SwitchScript> ();
+				ss.onSprite = retrieveSpriteByName (map, objname + "On");
+				ss.offSprite = retrieveSpriteByName (map, objname + "Off");
+				sr = go.GetComponent<SpriteRenderer> ();
+				sr.sprite = ss.onSprite;
+				SaveAndDestory (map, objname + i.ToString(), go);
+			}
+		}else{
+			for (int i = 1; i <= 4; i ++) {
+				objname = "Switch" + i.ToString();
+				go = getOriginalPrefabOfObject (objname.ToLower ());
+				SwitchScript ss = go.GetComponent<SwitchScript> ();
+				ss.onSprite = retrieveSpriteByName (map, objname + "On");
+				ss.offSprite = retrieveSpriteByName (map, objname + "Off");
+				sr = go.GetComponent<SpriteRenderer> ();
+				sr.sprite = ss.onSprite;
+				SaveAndDestory (map, objname, go);
+			}
 		}
 
 		for (int i = 1; i <= 3; i ++) {
@@ -137,7 +181,6 @@ public class PrefabImporterScript : MonoBehaviour {
 			}
 		}
 
-		
 		for (int i = 1; i <= 4; i ++) {
 			if(map!="J1Left"  && map != "J1Right"){
 				objname = "SendPortal" + i.ToString();
@@ -166,6 +209,7 @@ public class PrefabImporterScript : MonoBehaviour {
 				SaveAndDestory (map, objname, go);
 			}
 		}
+
 		for (int i = 1; i <= 3; i ++) {
 			objname = "ButtonGate" + i.ToString();
 			go = getOriginalPrefabOfObject (objname.ToLower ());
@@ -222,7 +266,7 @@ public class PrefabImporterScript : MonoBehaviour {
 	private GameObject getOriginalPrefabOfObject(string name){
 		Debug.Log (name);
 		string goLocation = PrefabMapper.originals [name];
-		GameObject goPrefab = AssetDatabase.LoadAssetAtPath(PrefabMapper.PrefabLocation + goLocation + ".prefab", typeof(GameObject)) as GameObject;
+		GameObject goPrefab = AssetDatabase.LoadAssetAtPath( PrefabMapper.PrefabLocation + goLocation + ".prefab", typeof(GameObject) ) as GameObject;
 		Utils.assert (goPrefab != null);
 		GameObject go = GameObject.Instantiate(goPrefab) as GameObject;
 		return go;
@@ -240,5 +284,4 @@ public class PrefabImporterScript : MonoBehaviour {
 		DestroyImmediate (go);
 	}
 
-*/
 }
