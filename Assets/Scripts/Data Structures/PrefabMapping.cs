@@ -16,6 +16,11 @@ public static class PrefabMapper {
 		{"Switch2", "switchgate2"},
 		{"Switch3", "switchgate3"},
 		{"Switch4", "switchgate4"},
+		{"SwitchDefault", "switchgate"},
+		{"SwitchDefault1", "switchgate1"},
+		{"SwitchDefault2", "switchgate2"},
+		{"SwitchDefault3", "switchgate3"},
+		{"SwitchDefault4", "switchgate4"},
 		{"Button", "buttongate"},
 		{"Button1", "buttongate1"},
 		{"Button2", "buttongate2"},
@@ -27,6 +32,14 @@ public static class PrefabMapper {
 	{
 		{"pushblock", "defaultPushblock"},
 		{"switch", "defaultSwitch"},
+		{"switch1", "defaultSwitch"},
+		{"switch2", "defaultSwitch"},
+		{"switch3", "defaultSwitch"},
+		{"switch4", "defaultSwitch"},
+		{"switchdefault1", "defaultSwitch"},
+		{"switchdefault2", "defaultSwitch"},
+		{"switchdefault3", "defaultSwitch"},
+		{"switchdefault4", "defaultSwitch"},
 		{"button", "defaultButton"},
 		{"button1", "defaultButton"},
 		{"button2", "defaultButton"},
@@ -61,7 +74,8 @@ public static class PrefabMapper {
 		{"FencePost", "FencePost"},
 		{"FenceVBar", "FenceVBar"},
 		{"FenceVBarTop", "FenceVBarTop"},
-		{"FenceVBarBottom", "FenceVBarBottom"}
+		{"FenceVBarBottom", "FenceVBarBottom"},
+		{"pushblockdefault", "defaultPushblock"}
 	};
 	
 	public static Dictionary<string, string> JOURNEY1_LEFT_PREFABS = new Dictionary<string, string>()
@@ -147,6 +161,29 @@ public static class PrefabMapper {
 		{ "buttongate2", "ButtonGate2" },
 		{ "buttongate3", "ButtonGate3" }
 	};
+	
+	public static Dictionary<string, string> S_PREFABS = new Dictionary<string, string>()
+	{
+		{ "pushblockdefault", "PushblockDefault" },
+		{ "pushblock", "Pushblock" },
+		{ "blocker", "Blocker" },
+		{ "switch1", "Switch1" },
+		{ "switch2", "Switch2" },
+		{ "switch3", "Switch3" },
+		{ "switchdefault1", "SwitchDefault1" },
+		{ "switchdefault2", "SwitchDefault2" },
+		{ "switchdefault3", "SwitchDefault3" },
+		{ "switchgate1", "SwitchGate1" },
+		{ "switchgate2", "SwitchGate2" },
+		{ "switchgate3", "SwitchGate3" },
+		{ "button1", "Button1" },
+		{ "button2", "Button2" },
+		{ "button3", "Button3" },
+		{ "buttongate1", "ButtonGate1" },
+		{ "buttongate2", "ButtonGate2" },
+		{ "buttongate3", "ButtonGate3" }
+	};
+
 
 	public static Dictionary< string, Dictionary<string, string> > maps = new Dictionary<string, Dictionary<string, string> >()
 	{
@@ -154,6 +191,7 @@ public static class PrefabMapper {
 		{"J2Left", JOURNEY2_LEFT_PREFABS},
 		{"J1Right", JOURNEY1_RIGHT_PREFABS},
 		{"J2Right", JOURNEY2_RIGHT_PREFABS},
+		{"S", S_PREFABS},
 		{"default", originals}
 	};
 }

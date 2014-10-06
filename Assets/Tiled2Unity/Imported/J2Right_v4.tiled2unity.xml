@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 9/27/2014 11:57:31 AM-->
+<!--Last exported: 10/1/2014 7:38:35 PM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J2Right" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="J2Right" sortingLayerName="" sortingOrder="1" />
   <AssignMaterial mesh="mesh_[02]_[00]" material="J2Right" sortingLayerName="" sortingOrder="2" />
   <Prefab name="J2Right_v4" scale="1">
     <Property name="autobond" value="true" />
+    <Property name="loadPrefab" value="J1_CyberpunkBG" />
     <Property name="map" value="J2Right" />
     <Property name="side" value="Right" />
     <GameObject name="Background_1_00">

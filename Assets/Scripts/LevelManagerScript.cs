@@ -252,7 +252,7 @@ public class LevelManagerScript : _Mono{
 			Debug.LogError("Not enough level prefabs assigned!");
 	}
 
-	void LinkPushblocks(GameObject prefab1,GameObject prefab2){
+	void LinkPushblocks(GameObject prefab1, GameObject prefab2){
 		//Connect pushblocks by deleting the second copy.
 		List<Vector2> toDeleteAtPosition = new List<Vector2> ();
 		Transform pushblocksLayerTransform = Utils.FindChildRecursive(prefab1, "Pushblocks(Default)");
@@ -260,7 +260,7 @@ public class LevelManagerScript : _Mono{
 		foreach (Transform pb in pushblocksLayerTransform) {
 			PushBlockColliderScript pbs = pb.gameObject.GetComponent<PushBlockColliderScript>();
 			Utils.assert(pbs != null, "Check for BlockColliderScript in the Pushblocks(Default) layer for object " + pb.gameObject.name);
-			Debug.Log ("Found switch " + pb.name);
+			Debug.Log ("Found pushblock " + pb.name);
 			bool foundLink = false;
 			
 			foreach (Transform pb2 in pushblocksLayerTransform2) {
@@ -296,9 +296,9 @@ public class LevelManagerScript : _Mono{
 		foreach (Transform s in switchesLayerTransform) {
 			SwitchScript ss;
 			if((ss = s.gameObject.GetComponent<SwitchScript>()) != null){
-				Debug.Log ("Found switch " + s.name);
+				//Debug.Log ("Found switch " + s.name);
 				foreach (Transform s2 in switchesLayerTransform2) {
-					Debug.Log(s.name + " " + s2.name);
+					//Debug.Log(s.name + " " + s2.name);
 					SwitchScript ss2;
 					if(s2.name == s.name){
 						if((ss2 = s2.gameObject.GetComponent<SwitchScript>()) != null){

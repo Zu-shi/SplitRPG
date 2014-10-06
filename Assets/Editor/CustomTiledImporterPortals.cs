@@ -3,7 +3,8 @@ using UnityEditor;
 using System.Collections.Generic;
 using Tiled2Unity;
 
-[Tiled2Unity.CustomTiledImporter]
+//[Tiled2Unity.CustomTiledImporter]
+[Tiled2Unity.CustomTiledImporter(Order = short.MaxValue - 4)]
 public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 
 	private List<string> senders = new List<string>();
@@ -19,27 +20,34 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 	private string mapName;
 
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props){
-		if(gameObject.transform.parent == null){
-			if(props.ContainsKey("map")){
-				prefabMap = PrefabMapper.maps[props["map"]];
-				//Added backslash here so that we can use load the default map without inserting a conditional.
-				mapName = props["map"] + "/";
-			}else{
-				Debug.LogWarning("Map does not contain requisite 'map' property, default used.");
-				prefabMap = PrefabMapper.maps["default"];
-				Utils.assert(prefabMap != null);
-				mapName = "";
+		Transform parent = null;
+		if(gameObject != null){
+			if(gameObject.transform != null){
+				parent = gameObject.transform.parent;
+
+				if(parent == null){
+					if(props.ContainsKey("map")){
+						prefabMap = PrefabMapper.maps[props["map"]];
+						//Added backslash here so that we can use load the default map without inserting a conditional.
+						mapName = props["map"] + "/";
+					}else{
+						Debug.LogWarning("Map does not contain requisite 'map' property, default used.");
+						prefabMap = PrefabMapper.maps["default"];
+						Utils.assert(prefabMap != null);
+						mapName = "";
+					}
+				}
+
 			}
 		}
 
-		Transform parent = gameObject.transform.parent;
 		if(parent == null)
 			return;
 		if(senderPrefab == null || receiverPrefab == null || biPrefab == null) {
 			Debug.LogWarning("Temporary warning: right now only BidireactionalPortal has the updated assets.");
 			biPrefab = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + "Portal1" + ".prefab", typeof(GameObject)) as GameObject;
 			senderPrefab = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + "SendPortal2" + ".prefab", typeof(GameObject)) as GameObject;
-			receiverPrefab = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + "ReceivePortal3" + ".prefab", typeof(GameObject)) as GameObject;
+			receiverPrefab = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + "ReceivePortal2" + ".prefab", typeof(GameObject)) as GameObject;
 
 			//senderPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/SendPortal.prefab", typeof(GameObject)) as GameObject;
 			//receiverPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/ReceivePortal.prefab", typeof(GameObject)) as GameObject;
