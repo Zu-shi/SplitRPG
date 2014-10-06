@@ -103,7 +103,7 @@ public class CharacterMovementScript : MovementScript {
 		_isChangingDirection = false;
 	}
 
-	protected virtual void fallAnimation(){	
+	protected override void fallAnimation(){	
 		Vector3 s = fallObject.localScale;
 		s *= .9f;
 		gameObject.transform.FindChild("Sprite").GetComponent<_Mono>().y -= 0.05f;

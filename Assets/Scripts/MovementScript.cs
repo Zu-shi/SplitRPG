@@ -83,7 +83,6 @@ public class MovementScript : _Mono {
 		falling = fell = false;
 		inAir = false;
 		fallObject.localScale = startScale;
-		
 	}
 
 	protected virtual void fallAnimation(){	
