@@ -28,7 +28,7 @@ public abstract class CutsceneScript : _Mono {
 		leftCamera = Globals.cameraLeft;
 		rightCamera = Globals.cameraRight;
 	}
-
+	
 	public virtual void Update() {
 		if(triggered)
 			return;
@@ -91,6 +91,15 @@ public abstract class CutsceneScript : _Mono {
 		StartCoroutine(MoveCoroutine(ms, dir, numTiles));
 		return numTiles * 14 * (1.0f/50);
 		// ^^ numTiles * numFramesPerMove * lengthOfFrameInSeconds ^^
+	}
+
+	protected void PlayAnimation(GameObject player, string animation, int startIndex = 0) {
+		SpriteAnimationManagerScript sams = player.GetComponent<SpriteAnimationManagerScript>();
+		if(sams == null) {
+			Debug.LogError("Object " + player.name + " has no SpriteAnimationManagerScript.");
+			return;
+		}
+		sams.PlayAnimation(animation, 0);
 	}
 
 	private IEnumerator MoveCoroutine(MovementScript ms, Direction dir, int numTiles) {

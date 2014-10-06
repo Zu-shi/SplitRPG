@@ -12,6 +12,7 @@ GameObject:
   - 61: {fileID: 6100000}
   - 212: {fileID: 21200000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400004}
   m_Layer: 8
   m_Name: CutsceneTestObject
   m_TagString: Untagged
@@ -48,7 +49,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f29e0a8cfd9d92340a2fa3b0c20d52e5, type: 3}
   m_Name: 
@@ -72,6 +73,42 @@ MonoBehaviour:
   slightlyAbove: 0
   slightlyBelow: 0
   editModeRefresh: 0
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebb794b581f7dcf4892c86046195355e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggered: 0
+  sittingAnimationName: Sitting
+  standardBubbleDisplayTime: 1.29999995
+  askForSeatSpeechBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+    type: 2}
+  smileyFaceBubbleLeftTail: {fileID: 0}
+  smileyFaceBubbleRightTail: {fileID: 0}
+  isTheSceneryGoodBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+    type: 2}
+  theSceneryIsGoodBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+    type: 2}
+  isTheMountainGoodBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+    type: 2}
+  theMountainIsGoodBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+    type: 2}
+  doYouLikeVideoGamesBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+    type: 2}
+  iLikeFantasyVideoGamesBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+    type: 2}
+  iLikeSciFiBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf, type: 2}
+  iLikeSciFiTooBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf, type: 2}
+  spaceSuitBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf, type: 2}
+  elipsiesBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf, type: 2}
+  coffeeShopBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf, type: 2}
+  fivePmBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

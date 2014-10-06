@@ -1,0 +1,276 @@
+fileFormatVersion: 2
+guid: 9486193051c9879498da5ac41bdc0ecf
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 64
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: LeftTailThoughtBubble
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 735
+        width: 470
+        height: 334
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RightTailThoughtBubble
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 1093
+        width: 470
+        height: 333
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LeftTailSpeechBubble
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 1443
+        width: 472
+        height: 280
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RightTailSpeechBubble
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 1757
+        width: 468
+        height: 283
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RightPC
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 1823
+        width: 168
+        height: 206
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LeftPC
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 1822
+        width: 181
+        height: 203
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PulsSign
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 1621
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: QuestionMark
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 1592
+        width: 96
+        height: 156
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ExclaimationMark
+      rect:
+        serializedVersion: 2
+        x: 1135
+        y: 1583
+        width: 49
+        height: 162
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SmilelyFace
+      rect:
+        serializedVersion: 2
+        x: 1341
+        y: 1623
+        width: 115
+        height: 96
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SadFace
+      rect:
+        serializedVersion: 2
+        x: 1621
+        y: 1613
+        width: 92
+        height: 108
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: AngryFace
+      rect:
+        serializedVersion: 2
+        x: 1871
+        y: 1632
+        width: 105
+        height: 93
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: TrainBench
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 1301
+        width: 92
+        height: 226
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpaceShip
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 1069
+        width: 234
+        height: 171
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Scenery
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 1333
+        width: 234
+        height: 148
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Mountain
+      rect:
+        serializedVersion: 2
+        x: 1043
+        y: 1327
+        width: 243
+        height: 177
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GameController
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 1303
+        width: 208
+        height: 176
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Dragon
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 1288
+        width: 218
+        height: 235
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wizard
+      rect:
+        serializedVersion: 2
+        x: 1805
+        y: 1277
+        width: 243
+        height: 260
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Ring
+      rect:
+        serializedVersion: 2
+        x: 1848
+        y: 1071
+        width: 136
+        height: 169
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Necklace
+      rect:
+        serializedVersion: 2
+        x: 1552
+        y: 1087
+        width: 240
+        height: 178
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PlateWithFood
+      rect:
+        serializedVersion: 2
+        x: 1293
+        y: 1077
+        width: 227
+        height: 123
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coffee
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 1070
+        width: 200
+        height: 188
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
