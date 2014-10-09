@@ -12,6 +12,8 @@ public class CharacterMovementScript : MovementScript {
 	public AudioClip wrongBeep;
 	public Direction moveDirection = Direction.NONE;
 	public bool canJump = false;
+	public bool fallingInWater;
+	public GameObject splashAnimation;
 	protected int changingDirectionTimeLeft;
 	protected bool _isChangingDirection;
 	private const float wrongBeatWaitTime = 1.0f;
@@ -49,12 +51,13 @@ public class CharacterMovementScript : MovementScript {
 		_Mono sprite = gameObject.transform.FindChild("Sprite").GetComponent<_Mono>();
 		_Mono parent = GetComponent<_Mono>();
 
-		if(inAir && isMoving){
-			float fraction = (float)(moveTimeLeft) / (float)(moveTime) * 2;
-			float offset = (- Mathf.Pow(fraction, 2) + 2 * fraction ) * maxJumpingHeight;
-			sprite.y = parent.y + naturalCharacterOffset + offset;
+		if(!falling){
+			if(inAir && isMoving){
+				float fraction = (float)(moveTimeLeft) / (float)(moveTime) * 2;
+				float offset = (- Mathf.Pow(fraction, 2) + 2 * fraction ) * maxJumpingHeight;
+				sprite.y = parent.y + naturalCharacterOffset + offset;
+			}else{sprite.y = parent.y + naturalCharacterOffset;}
 		}
-		else{sprite.y = parent.y + naturalCharacterOffset;}
 	}
 
 	protected override void StartMoving( Vector2 velocity){
@@ -68,8 +71,41 @@ public class CharacterMovementScript : MovementScript {
 	}
 
 	protected override void StartFall(){
-		base.StartFall ();
+		falling = true;
+		totalFallTimer = 33;
+		if(fallingInWater){
+			gameObject.transform.FindChild("Sprite").GetComponent<HeightScript>().slightlyBelow = true;
+			gameObject.transform.FindChild("Sprite").GetComponent<HeightScript>().drawingOrder = DrawingOrder.UNDER_GROUND;
+			//base.StartFall ();
+			Invoke ("CreateSplash", 0.1f);
+			Invoke ("TurnInvisible", 0.2f);
+		}else{
+			Globals.soundManager.PlaySound(fallingSound);
+		}
 		Invoke("PlayWrongBeep", 0.6f);
+	}
+
+	protected void TurnInvisible(){
+		gameObject.transform.FindChild("Sprite").GetComponent<_Mono>().alpha = 0f;
+	}
+
+	/// <summary>
+	/// Reset to not falling and regular size.
+	/// </summary>
+	public override void ResetFalling (){
+		falling = fell = false;
+		inAir = false;
+		fallObject.localScale = startScale;
+
+		gameObject.transform.FindChild("Sprite").GetComponent<_Mono>().alpha = 1f;
+		gameObject.transform.FindChild("Sprite").GetComponent<HeightScript>().slightlyBelow = false;
+		gameObject.transform.FindChild("Sprite").GetComponent<HeightScript>().drawingOrder = DrawingOrder.OBJECTS;
+	}
+
+	protected void CreateSplash(){
+		GameObject sp = Instantiate(splashAnimation, gameObject.transform.position, Quaternion.identity) as GameObject;
+		_Mono m = sp.AddComponent<_Mono>();
+		//m.x += Utils.DirectionToVector(moveDirection).x;
 	}
 
 	/// <summary>
@@ -103,12 +139,23 @@ public class CharacterMovementScript : MovementScript {
 		_isChangingDirection = false;
 	}
 
-	protected override void fallAnimation(){	
-		Vector3 s = fallObject.localScale;
-		s *= .9f;
-		gameObject.transform.FindChild("Sprite").GetComponent<_Mono>().y -= 0.05f;
-		fallObject.localScale = s;
-		
+	protected override void fallAnimation(){
+
+		if(!fallingInWater){
+			Vector3 s = fallObject.localScale;
+			s *= .9f;
+			fallObject.gameObject.GetComponent<_Mono>().y -= 0.06f;
+			fallObject.localScale = s;
+			totalFallTimer -= 1;
+		}else{
+			Vector3 s = fallObject.localScale;
+			//s -= 0.03f * Vector3.one;
+			s *= 0.88f;
+			fallObject.gameObject.GetComponent<_Mono>().y -= 0.2f;
+			fallObject.localScale = s;
+			totalFallTimer -= 1;
+		}
+
 		checkAndSetFell ();
 	}
 
