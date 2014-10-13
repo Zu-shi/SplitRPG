@@ -150,15 +150,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canPush: 1
-  canFall: 1
   canPushHeavy: 0
-  canJump: 0
+  canFall: 1
   fallObject: {fileID: 400002}
   destroyOnFall: 0
   fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}
-  moveDirection: 0
+  body:
+  - {x: 0, y: 0}
   walkingSound: {fileID: 8300000, guid: fe55a75936473435f8eba8b5b8c6fa5a, type: 3}
   wrongBeep: {fileID: 8300000, guid: 3576cfb536e8f4c52a19ff695d19d99a, type: 3}
+  moveDirection: 0
+  canJump: 0
+  fallingInWater: 0
+  splashAnimation: {fileID: 100000, guid: f20c0d8e6eb7c4f15a7876d742e6ae14, type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,6 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idleAfterOneTimeAnimations: 0
+  destroyAfterOneTimeAnimations: 0
   playOnAwake: 0
 --- !u!114 &11400008
 MonoBehaviour:

@@ -6,6 +6,8 @@ public class SpriteAnimationManagerScript : _Mono {
 
 	[Tooltip("If set, this sprite will revert to it's idle animation after it is told to play a one-shot animation.")]
 	public bool idleAfterOneTimeAnimations = false;
+	[Tooltip("If set, the gameObject containing this animation will be destroyed after it is told to play a one-shot animation..")]
+	public bool destroyAfterOneTimeAnimations = false;
 	public bool playOnAwake = true;
 	public string currentAnimationName{
 		get{
@@ -85,7 +87,10 @@ public class SpriteAnimationManagerScript : _Mono {
 			frameTimer = 0;
 			currentFrame = (currentFrame + 1) % currentAnim.sprites.Length;
 			if(currentFrame == 0 && !currentAnim.loop) {
-				if(idleAfterOneTimeAnimations){
+				Debug.LogWarning("check destory animations");
+				if(destroyAfterOneTimeAnimations){
+					Destroy(gameObject);
+				}else if(idleAfterOneTimeAnimations){
 					PlayAnimation(animations[0].animationName);
 					return;
 				}else {

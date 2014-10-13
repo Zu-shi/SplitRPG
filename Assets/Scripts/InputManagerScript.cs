@@ -10,6 +10,7 @@ public class InputManagerScript : MonoBehaviour {
 	public bool snapshotShortcut = true;
 	private const KeyCode SNAPSHOT_KEY = KeyCode.P;
 	private KeyCode[] ACTION_KEYS = {KeyCode.Space, KeyCode.LeftControl, KeyCode.Z};
+	private KeyCode[] DIRECTION_SWITCH_KEYS = {KeyCode.Q};
 
 	List<Button> _inputs;
 	List<Button> _lastInputs;
@@ -55,6 +56,14 @@ public class InputManagerScript : MonoBehaviour {
 		foreach(KeyCode kc in ACTION_KEYS){
 			if(Input.GetKeyDown(kc)){
 				_inputs.Add(Button.ACTION);
+				//Debug.LogWarning("added input");
+			}
+		}
+		
+		//TO REMOVE DIRECTION_SWITCH_KEYS
+		foreach(KeyCode kc in DIRECTION_SWITCH_KEYS){
+			if(Input.GetKeyDown(kc)){
+				_inputs.Add(Button.DIRECTION_SWITCH);
 				//Debug.LogWarning("added input");
 			}
 		}

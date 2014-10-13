@@ -33,7 +33,7 @@ public class MovementScript : _Mono {
 	protected const int jumpTime = moveTime;
 	
 	// Time it takes to change direction in frames (at Unity's fixed time step aka 50 fps)
-	protected const int changingDirectionTime = 5;
+	protected const int changingDirectionTime = 7;
 
 	protected Vector3 startScale;
 	 
@@ -41,6 +41,8 @@ public class MovementScript : _Mono {
 	protected int waitTimeLeft;
 	protected float moveSpeed;
 	protected float naturalCharacterOffset;
+
+	protected int totalFallTimer = 33;
 
 	// Time since last movement in frames 
 	protected const int fastDirectionChangeThreshold = 12;
@@ -90,13 +92,14 @@ public class MovementScript : _Mono {
 		s *= .9f;
 		y -= 0.05f;
 		fallObject.localScale = s;
-		
+
+		totalFallTimer -= 1;
 		checkAndSetFell ();
 	}
 
 	protected virtual void checkAndSetFell(){
 		Vector3 s = fallObject.localScale;
-		if (s.magnitude < .03f) {
+		if (totalFallTimer <= 0) {
 			fell = true;
 		}
 	}

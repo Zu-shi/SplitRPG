@@ -71,5 +71,10 @@ public class PlayerInputScript : MonoBehaviour {
 		} else {
 			inputAction = false;
 		}
+
+		//TO REMOVE
+		if (InputManager.GetButtonDown (Button.DIRECTION_SWITCH)) {
+			Globals.playerRight.GetComponent<PlayerControllerScript>().FlipXMovement();
+		}
 	}
 }
