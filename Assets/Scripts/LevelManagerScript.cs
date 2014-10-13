@@ -188,7 +188,9 @@ public class LevelManagerScript : _Mono{
 		foreach(GameObject uncached in uncachedObjects) {
 			string name = uncached.name;
 			uncached.name = "___uncached___" + name;
-			GameObject.Find(name).transform.parent = uncached.transform.parent;
+			GameObject tmp = GameObject.Find(name);
+			tmp.transform.parent = uncached.transform.parent;
+			tmp.tag = "Persistent";
 			Destroy(uncached);
 		}
 		_cachedPersistentObjects = null;

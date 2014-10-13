@@ -94,7 +94,7 @@ public abstract class CutsceneScript : _Mono {
 	}
 
 	protected void PlayAnimation(GameObject player, string animation, int startIndex = 0) {
-		SpriteAnimationManagerScript sams = player.GetComponent<SpriteAnimationManagerScript>();
+		SpriteAnimationManagerScript sams = player.GetComponentInChildren<SpriteAnimationManagerScript>();
 		if(sams == null) {
 			Debug.LogError("Object " + player.name + " has no SpriteAnimationManagerScript.");
 			return;
@@ -155,17 +155,25 @@ public abstract class CutsceneScript : _Mono {
 			Debug.LogError("Cannot show bubble without a speaker.");
 			return null;
 		}
-		return ShowSpeechBubble(speaker.transform.position, bubblePrefab);
+		return ShowSpeechBubble(speaker.transform.position, bubblePrefab, speaker.layer);
 	}
 
-	protected GameObject ShowSpeechBubble(Vector3 pos, GameObject bubblePrefab) {
+	protected GameObject ShowSpeechBubble(Vector3 pos, GameObject bubblePrefab, int layer) {
 		if(bubblePrefab == null) {
 			Debug.LogError("Cannot show null bubble prefab.");
 			return null;
 		}
 		GameObject bubbleInstance = Instantiate(bubblePrefab, pos, Quaternion.identity) as GameObject;
 		bubbleInstance.name = bubblePrefab.name;
+		ChangeLayerRecursive(bubbleInstance, layer);
 		return bubbleInstance;
+	}
+
+	private void ChangeLayerRecursive(GameObject go, int layer) {
+		go.layer = layer;
+		for(int i = 0; i < go.transform.childCount; i++) {
+			ChangeLayerRecursive(go.transform.GetChild(i).gameObject, layer);
+		}
 	}
 
 	protected void HideSpeechBubble(GameObject bubbleInstance) {

@@ -1,6 +1,30 @@
 fileFormatVersion: 2
 guid: 9486193051c9879498da5ac41bdc0ecf
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: LeftTailThoughtBubble
+    21300002: RightTailThoughtBubble
+    21300004: LeftTailSpeechBubble
+    21300006: RightTailSpeechBubble
+    21300008: RightPC
+    21300010: LeftPC
+    21300012: PlusSign
+    21300014: QuestionMark
+    21300016: ExclaimationMark
+    21300018: SmilelyFace
+    21300020: SadFace
+    21300022: AngryFace
+    21300024: TrainBench
+    21300026: SpaceShip
+    21300028: Scenery
+    21300030: Mountain
+    21300032: GameController
+    21300034: Dragon
+    21300036: Wizard
+    21300038: Ring
+    21300040: Necklace
+    21300042: PlateWithFood
+    21300044: Coffee
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -102,7 +126,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: PulsSign
+    - name: PlusSign
       rect:
         serializedVersion: 2
         x: 597

@@ -120,7 +120,7 @@ Prefab:
     - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: levelPrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 104406, guid: fae586b1b532a4e26b66fd9d859e9647, type: 2}
+      objectReference: {fileID: 105706, guid: 3520fdcd1821d4fb8bf366663283dd70, type: 2}
     - target: {fileID: 11400024, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: J2Left
       value: 0
@@ -136,7 +136,7 @@ Prefab:
     - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: levelPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 100732, guid: c3db91af971144e7987b7ec542266ef8, type: 2}
+      objectReference: {fileID: 100360, guid: 34497236e9ca84f7a874a8f49a4d3a83, type: 2}
     - target: {fileID: 11400024, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: S
       value: 1
@@ -422,8 +422,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelPrefabs:
-  - {fileID: 100732, guid: c3db91af971144e7987b7ec542266ef8, type: 2}
-  - {fileID: 104406, guid: fae586b1b532a4e26b66fd9d859e9647, type: 2}
+  - {fileID: 100360, guid: 34497236e9ca84f7a874a8f49a4d3a83, type: 2}
+  - {fileID: 105706, guid: 3520fdcd1821d4fb8bf366663283dd70, type: 2}
   loadOnStart: 1
   preloadedLeftLevel: {fileID: 100456, guid: b21a954db400d4b3cb201e035eeee932, type: 2}
   preloadedRightLevel: {fileID: 100574, guid: 17e76007421ba4526a1e76cfa37682d8, type: 2}
