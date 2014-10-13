@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalPosition: {x: 65.2653046, y: -125.424431, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -86,29 +86,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggered: 0
   sittingAnimationName: Sitting
-  standardBubbleDisplayTime: 1.29999995
-  askForSeatSpeechBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+  standardBubbleDisplayTime: 1.60000002
+  askForSeatBubble: {fileID: 100006, guid: 9e908ebc5b7e9484cbed5157f6352c3c, type: 2}
+  smileyFaceBubbleLeftTail: {fileID: 100004, guid: e3ca98d0e045b8c4c926209ffcdb05e0,
     type: 2}
-  smileyFaceBubbleLeftTail: {fileID: 0}
-  smileyFaceBubbleRightTail: {fileID: 0}
-  isTheSceneryGoodBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+  smileyFaceBubbleRightTail: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
     type: 2}
-  theSceneryIsGoodBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+  isTheSceneryGoodBubble: {fileID: 100006, guid: a41dba8d220c89942bd08f8ec850ef8c,
     type: 2}
-  isTheMountainGoodBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+  theSceneryIsGoodBubble: {fileID: 100006, guid: 22d23728121734a4fbe81d90f21e4c2c,
     type: 2}
-  theMountainIsGoodBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+  isTheMountainGoodBubble: {fileID: 100006, guid: 3527fe76f244ec6458808f8cd9615274,
     type: 2}
-  doYouLikeVideoGamesBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+  theMountainIsGoodBubble: {fileID: 100006, guid: 5b93159232c1d1e4f9252a514ed138e7,
     type: 2}
-  iLikeFantasyVideoGamesBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+  doYouLikeVideoGamesBubble: {fileID: 100006, guid: e17f3fc9ddbaced4ea16cfc9b381de63,
     type: 2}
-  iLikeSciFiBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf, type: 2}
-  iLikeSciFiTooBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf, type: 2}
-  spaceSuitBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf, type: 2}
+  iLikeVideoGamesBubble: {fileID: 100006, guid: df8bea848c418074da61f1893ac5d9f8,
+    type: 2}
+  wizardBubble: {fileID: 100006, guid: 5208813e90df8744b939ef75d5f7bb34, type: 2}
+  dragonBubbleLeftTail: {fileID: 100006, guid: c5d58b348463c064aa812e9cc145012d, type: 2}
+  dragonBubbleRightTail: {fileID: 100006, guid: e2450726660946245ba5d8557abb4e7b,
+    type: 2}
+  iLikeSciFiBubbleRightTail: {fileID: 100006, guid: 9464d370acd06d74eb5efa809e17cb8a,
+    type: 2}
+  iLikeSciFiBubbleLeftTail: {fileID: 100006, guid: 5152e83e91461fc44a52c80b6f1a74a3,
+    type: 2}
+  spaceSuitBubble: {fileID: 100006, guid: 9464d370acd06d74eb5efa809e17cb8a, type: 2}
   elipsiesBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf, type: 2}
-  coffeeShopBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf, type: 2}
-  fivePmBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf, type: 2}
+  coffeeShopBubble: {fileID: 100006, guid: dc95033ba87bb884a97dd2fe7acf7f0f, type: 2}
+  fivePmBubble: {fileID: 100006, guid: fdbb9f8d6894dd9499b51ca51d24ba87, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

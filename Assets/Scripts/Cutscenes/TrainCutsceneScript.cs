@@ -8,7 +8,7 @@ public class TrainCutsceneScript : CutsceneScript {
 	[Tooltip("All wait times are some multiple of this.")]
 	public float standardBubbleDisplayTime = 2.0f;
 
-	public GameObject askForSeatSpeechBubble;
+	public GameObject askForSeatBubble;
 	public GameObject smileyFaceBubbleLeftTail;
 	public GameObject smileyFaceBubbleRightTail;
 	public GameObject isTheSceneryGoodBubble;
@@ -16,9 +16,12 @@ public class TrainCutsceneScript : CutsceneScript {
 	public GameObject isTheMountainGoodBubble;
 	public GameObject theMountainIsGoodBubble;
 	public GameObject doYouLikeVideoGamesBubble;
-	public GameObject iLikeFantasyVideoGamesBubble;
-	public GameObject iLikeSciFiBubble;
-	public GameObject iLikeSciFiTooBubble;
+	public GameObject iLikeVideoGamesBubble;
+	public GameObject wizardBubble;
+	public GameObject dragonBubbleLeftTail;
+	public GameObject dragonBubbleRightTail;
+	public GameObject iLikeSciFiBubbleRightTail;
+	public GameObject iLikeSciFiBubbleLeftTail;
 	public GameObject spaceSuitBubble;
 	public GameObject elipsiesBubble;
 	public GameObject coffeeShopBubble;
@@ -33,68 +36,106 @@ public class TrainCutsceneScript : CutsceneScript {
 
 		CheckPrefabLinks();
 
-		GameObject bubble1 = ShowSpeechBubble(rightPlayer, askForSeatSpeechBubble);
+		yield return new WaitForSeconds(standardBubbleDisplayTime * 2.0f);
+
+		// Can I sit here?
+		GameObject bubble1 = ShowSpeechBubble(rightPlayer, askForSeatBubble);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
 		HideSpeechBubble(bubble1);
-		yield return new WaitForSeconds(standardBubbleDisplayTime / 4.0f);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
+		// Yes, you can sit there.
 		bubble1 = ShowSpeechBubble(leftPlayer, smileyFaceBubbleLeftTail);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
+		// Pause.
 		HideSpeechBubble(bubble1);
 		yield return new WaitForSeconds(2.0f * standardBubbleDisplayTime);
 
+		// Do you like the scenery?
 		bubble1 = ShowSpeechBubble(leftPlayer, isTheSceneryGoodBubble);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
 		HideSpeechBubble(bubble1);
-		yield return new WaitForSeconds(standardBubbleDisplayTime / 4.0f);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
+		// Yes, I like the scenery.
 		bubble1 = ShowSpeechBubble(rightPlayer, theSceneryIsGoodBubble);
-		yield return new WaitForSeconds(standardBubbleDisplayTime);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 1.5f);
+		
+		HideSpeechBubble(bubble1);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 8.0f);
+
+		bubble1 = ShowSpeechBubble(rightPlayer, smileyFaceBubbleRightTail);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 1.5f);
 
 		HideSpeechBubble(bubble1);
-		yield return new WaitForSeconds(standardBubbleDisplayTime / 4.0f);
+		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
+		// Do you like the mountain?
 		bubble1 = ShowSpeechBubble(rightPlayer, isTheMountainGoodBubble);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
 		HideSpeechBubble(bubble1);
-		yield return new WaitForSeconds(standardBubbleDisplayTime / 4.0f);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
+		// Yes, I like the mountain.
 		bubble1 = ShowSpeechBubble(leftPlayer, theMountainIsGoodBubble);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
+		// Pause
 		HideSpeechBubble(bubble1);
 		yield return new WaitForSeconds(standardBubbleDisplayTime * 2.0f);
 
+		// Do you like video games?
 		bubble1 = ShowSpeechBubble(rightPlayer, doYouLikeVideoGamesBubble);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
 		HideSpeechBubble(bubble1);
-		yield return new WaitForSeconds(standardBubbleDisplayTime / 4.0f);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
-		bubble1 = ShowSpeechBubble(leftPlayer, iLikeFantasyVideoGamesBubble);
-		yield return new WaitForSeconds(standardBubbleDisplayTime);
+		// Yes, I like video games, mostly fantasy games.
+		bubble1 = ShowSpeechBubble(leftPlayer, iLikeVideoGamesBubble);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 1.5f);
+
+		HideSpeechBubble(bubble1);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 8.0f);
+
+		bubble1 = ShowSpeechBubble(leftPlayer, wizardBubble);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 1.5f);
+
+		HideSpeechBubble(bubble1);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 8.0f);
+		
+		bubble1 = ShowSpeechBubble(leftPlayer, dragonBubbleLeftTail);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 1.5f);
 		
 		HideSpeechBubble(bubble1);
-		yield return new WaitForSeconds(standardBubbleDisplayTime / 4.0f);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
-		bubble1 = ShowSpeechBubble(rightPlayer, iLikeSciFiBubble);
+		// I like fantasy too, but I like scifi more!
+		bubble1 = ShowSpeechBubble(rightPlayer, dragonBubbleRightTail);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 1.5f);
+		
+		HideSpeechBubble(bubble1);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 8.0f);
+		
+		bubble1 = ShowSpeechBubble(rightPlayer, iLikeSciFiBubbleRightTail);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 1.5f);
+		
+		HideSpeechBubble(bubble1);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
+
+		// I like scifi too!
+		bubble1 = ShowSpeechBubble(leftPlayer, iLikeSciFiBubbleLeftTail);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
 		HideSpeechBubble(bubble1);
-		yield return new WaitForSeconds(standardBubbleDisplayTime / 4.0f);
-
-		bubble1 = ShowSpeechBubble(leftPlayer, iLikeSciFiTooBubble);
-		yield return new WaitForSeconds(standardBubbleDisplayTime);
-
-		HideSpeechBubble(bubble1);
-		yield return new WaitForSeconds(standardBubbleDisplayTime / 4.0f);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
 		bubble1 = ShowSpeechBubble(rightPlayer, spaceSuitBubble);
-		yield return new WaitForSeconds(standardBubbleDisplayTime / 10.0f);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
 		waitTime = FadeCameraOut(rightCamera);
 		waitTime = FadeCameraOut(leftCamera);
@@ -134,7 +175,7 @@ public class TrainCutsceneScript : CutsceneScript {
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
 		HideSpeechBubble(bubble1);
-		yield return new WaitForSeconds(standardBubbleDisplayTime / 4.0f);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
 		bubble1 = ShowSpeechBubble(rightPlayer, smileyFaceBubbleRightTail);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
@@ -144,7 +185,7 @@ public class TrainCutsceneScript : CutsceneScript {
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
 		HideSpeechBubble(bubble1);
-		yield return new WaitForSeconds(standardBubbleDisplayTime / 4.0f);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
 		bubble1 = ShowSpeechBubble(leftPlayer, smileyFaceBubbleLeftTail);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
@@ -170,7 +211,7 @@ public class TrainCutsceneScript : CutsceneScript {
 	}
 
 	private bool CheckPrefabLinks() {
-		if(askForSeatSpeechBubble == null
+		if(askForSeatBubble == null
 		   || smileyFaceBubbleLeftTail == null
 		   || smileyFaceBubbleRightTail == null
 		   || isTheSceneryGoodBubble == null
@@ -178,9 +219,12 @@ public class TrainCutsceneScript : CutsceneScript {
 		   || isTheMountainGoodBubble == null
 		   || theMountainIsGoodBubble == null
 		   || doYouLikeVideoGamesBubble == null
-		   || iLikeFantasyVideoGamesBubble == null
-		   || iLikeSciFiBubble == null
-		   || iLikeSciFiTooBubble == null
+		   || iLikeVideoGamesBubble == null
+		   || wizardBubble == null
+		   || dragonBubbleLeftTail == null
+		   || dragonBubbleRightTail == null
+		   || iLikeSciFiBubbleRightTail == null
+		   || iLikeSciFiBubbleLeftTail == null
 		   || spaceSuitBubble == null
 		   || elipsiesBubble == null
 		   || coffeeShopBubble == null
