@@ -44,7 +44,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 		if(parent == null)
 			return;
 		if(senderPrefab == null || receiverPrefab == null || biPrefab == null) {
-			Debug.LogWarning("Temporary warning: right now only BidireactionalPortal has the updated assets.");
+			//Debug.LogWarning("Temporary warning: right now only BidireactionalPortal has the updated assets.");
 			biPrefab = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + "Portal1" + ".prefab", typeof(GameObject)) as GameObject;
 			senderPrefab = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + "SendPortal2" + ".prefab", typeof(GameObject)) as GameObject;
 			receiverPrefab = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + "ReceivePortal2" + ".prefab", typeof(GameObject)) as GameObject;
