@@ -6,6 +6,7 @@ public class SoundManagerScript : _Mono {
 
 	[Tooltip("This is a list of all the AudioClips that have music in them and should be played. Music is selected at random from this list.")]
 	public AudioClip[] Music;
+	public AudioClip musicClip;
 
 	private List<AudioClip> musicClips;
 	private bool paused = false;  // Indicates if the music has been manually paused
@@ -52,6 +53,9 @@ public class SoundManagerScript : _Mono {
 	}
 
 	public void PlayMusic() {
+		Debug.Log ("SoundManager PlayMusic()");
+		audio.clip = musicClip;
+		audio.Play();
 		if(paused) {
 			audio.Play();
 		}

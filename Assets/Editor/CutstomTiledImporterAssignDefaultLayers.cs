@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using Tiled2Unity;
 
-
-[Tiled2Unity.CustomTiledImporter(Order = short.MaxValue)]
-
 //Sets a block on a default layer to show up on both sides.
 //Note: switches are actually two seperate objects and thus does not need to be on the defaults layer.
+[Tiled2Unity.CustomTiledImporter]
 public class CutstomTiledImporterAssignDefaultLayers : Tiled2Unity.ICustomTiledImporter {
 	
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props){}

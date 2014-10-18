@@ -263,7 +263,7 @@ AudioSource:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 60dd90af1b12a427ca7edef456d8a6f8, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -449,12 +449,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1743bb8ac4c3ff844bf200c6c160043a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level1LeftPrefab: {fileID: 0}
-  level1RightPrefab: {fileID: 0}
+  level1LeftPrefab: {fileID: 100360, guid: 34497236e9ca84f7a874a8f49a4d3a83, type: 2}
+  level1RightPrefab: {fileID: 105706, guid: 3520fdcd1821d4fb8bf366663283dd70, type: 2}
   level2LeftPrefab: {fileID: 0}
   level2RightPrefab: {fileID: 0}
-  level1Theme: {fileID: 0}
+  level1Theme: {fileID: 8300000, guid: 60dd90af1b12a427ca7edef456d8a6f8, type: 3}
   level2Theme: {fileID: 0}
+  debugLocation: 
   levelPrefabs:
   - {fileID: 100360, guid: 34497236e9ca84f7a874a8f49a4d3a83, type: 2}
   - {fileID: 105706, guid: 3520fdcd1821d4fb8bf366663283dd70, type: 2}
