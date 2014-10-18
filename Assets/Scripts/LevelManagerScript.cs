@@ -222,6 +222,7 @@ public class LevelManagerScript : _Mono{
 	}
 
 	private void FixCachedObjects() {
+		Debug.Log("Loading from cache.");
 		GameObject[] uncachedObjects = GameObject.FindGameObjectsWithTag("Persistent");
 		foreach(GameObject uncached in uncachedObjects) {
 			string name = uncached.name;
