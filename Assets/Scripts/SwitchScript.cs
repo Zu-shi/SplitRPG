@@ -42,7 +42,14 @@ public class SwitchScript : ColliderScript {
 			gate.togglerToWatch = _toggler;
 		}
 	}
-	
+
+	//In order to maintain persistence, we need to pass references from old gates to new gates.
+	public void InheritGatesFromSwitch(SwitchScript s){
+		foreach(GateScript gate in s.gates){
+			gate.togglerToWatch = _toggler;
+		}
+	}
+
 	void Update () {
 		toggledThisFrame = false;
 

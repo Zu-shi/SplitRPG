@@ -19,8 +19,12 @@ class CustomTiledImporterSafelyRemoveParents : Tiled2Unity.ICustomTiledImporter{
 		
 		foreach(GameObject gameObject in childsOfGameobject){
 			if(gameObject.name.Contains("Parent")){
+
+				if(gameObject.tag == "Persistent"){
+					Debug.LogWarning("Deleting persistent parent! Setting up again.");
+					gameObject.transform.GetChild(0).gameObject.tag = "Persistent";
+				}
 				gameObject.transform.GetChild(0).parent = gameObject.transform.parent;
-				//Debug.LogWarning("Removed " + gameObject.name);
 				Object.DestroyImmediate(gameObject);
 			}
 		}

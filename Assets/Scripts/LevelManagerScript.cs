@@ -123,7 +123,9 @@ public class LevelManagerScript : _Mono{
 	
 	private void PlayLevelTheme(GameObject leftLevel, GameObject rightLevel)
 	{
+		Debug.Log("LevelManager PlayLevelTheme()");
 		if(leftLevel == level1LeftPrefab && rightLevel == level1RightPrefab){
+			Globals.soundManager.musicClip = level1Theme;
 			Globals.soundManager.PlayMusic();//(level1Theme);
 		}
 	} 
@@ -149,22 +151,13 @@ public class LevelManagerScript : _Mono{
 	}
 
 	public bool LoadLevels(GameObject leftLevel, GameObject rightLevel, bool reloadPersistent = false) {
+
+		PlayLevelTheme(leftLevel, rightLevel);
+
 		Debug.Log("Loading levels...");
-		if(leftLevel == null || rightLevel == null) {
+		if (leftLevel == null || rightLevel == null) {
 			Debug.LogError("Cannont load null level.");
 			return false;
-		}
-
-		GameObject left = (GameObject)GameObject.Instantiate(leftLevel, Vector3.zero, Quaternion.identity);
-		GameObject right = (GameObject)GameObject.Instantiate(rightLevel, Vector3.zero, Quaternion.identity);
-
-		if ( Utils.FindChildRecursive(left, "Pushblocks(Default)") &&
-		    Utils.FindChildRecursive(right, "Pushblocks(Default)") ) {
-			LinkPushblocks(left, right);
-		} 
-		if ( Utils.FindChildRecursive(left, "Switches and Gates(Default)") &&
-		    Utils.FindChildRecursive(right, "Switches and Gates(Default)") ){
-			LinkSwitches(left, right);
 		}
 
 		if(reloadPersistent) {
@@ -173,6 +166,18 @@ public class LevelManagerScript : _Mono{
 				go.transform.parent = null;
 				go.tag = null;
 			}
+		}
+
+		GameObject left = (GameObject)GameObject.Instantiate(leftLevel, Vector3.zero, Quaternion.identity);
+		GameObject right = (GameObject)GameObject.Instantiate(rightLevel, Vector3.zero, Quaternion.identity);
+		
+		if ( Utils.FindChildRecursive(left, "Pushblocks(Default)") &&
+		    Utils.FindChildRecursive(right, "Pushblocks(Default)") ) {
+			LinkPushblocks(left, right);
+		} 
+		if ( Utils.FindChildRecursive(left, "Switches and Gates(Default)") &&
+		    Utils.FindChildRecursive(right, "Switches and Gates(Default)") ){
+			LinkSwitches(left, right);
 		}
 
 		left.SetActive(false);
@@ -222,12 +227,19 @@ public class LevelManagerScript : _Mono{
 
 	private void FixCachedObjects() {
 		GameObject[] uncachedObjects = GameObject.FindGameObjectsWithTag("Persistent");
+		//Debug.LogError(uncachedObjects.Length + "YAYAYAY");
 		foreach(GameObject uncached in uncachedObjects) {
 			string name = uncached.name;
 			uncached.name = "___uncached___" + name;
 			GameObject tmp = GameObject.Find(name);
 			tmp.transform.parent = uncached.transform.parent;
 			tmp.tag = "Persistent";
+
+			//Update references from gates to old switches to references to new switches
+			if(tmp.GetComponent<SwitchScript>() != null){
+				tmp.GetComponent<SwitchScript>().InheritGatesFromSwitch(uncached.GetComponent<SwitchScript>());
+			}
+
 			Destroy(uncached);
 		}
 		_cachedPersistentObjects = null;

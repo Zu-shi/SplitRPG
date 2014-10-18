@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 10/12/2014 5:13:04 PM-->
+<!--Last exported: 10/12/2014 6:19:08 PM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J1Left" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="J1Left" sortingLayerName="" sortingOrder="1" />
@@ -144,17 +144,18 @@
         </EdgeCollider2D>
       </GameObject>
       <GameObject name="Final3Left" x="320" y="-384">
-        <Property name="Persistent" value="" />
+        <Property name="Persistent" value="true" />
         <Property name="target" value="SGFinal3Left, SG3FinalSelf" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="Final1Left" x="2624" y="-512">
+        <Property name="Persistent" value="true" />
         <Property name="target" value="SGFinal1Left" />
         <Property name="visual" value="switch2" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="Final2Left" x="1728" y="-896">
-        <Property name="Persistent" value="" />
+        <Property name="Persistent" value="true" />
         <Property name="target" value="SGFinal2Left" />
         <Property name="visual" value="switch3" />
         <BoxCollider2D width="128" height="128" />
