@@ -158,7 +158,7 @@ Camera:
   far clip plane: 100000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 10.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -190,7 +190,7 @@ Camera:
   far clip plane: 100000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 10.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -449,9 +449,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1743bb8ac4c3ff844bf200c6c160043a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level1LeftPrefab: {fileID: 0}
+  level1RightPrefab: {fileID: 0}
+  level2LeftPrefab: {fileID: 0}
+  level2RightPrefab: {fileID: 0}
+  level1Theme: {fileID: 0}
+  level2Theme: {fileID: 0}
   levelPrefabs:
-  - {fileID: 100732, guid: c3db91af971144e7987b7ec542266ef8, type: 2}
-  - {fileID: 104406, guid: fae586b1b532a4e26b66fd9d859e9647, type: 2}
+  - {fileID: 100360, guid: 34497236e9ca84f7a874a8f49a4d3a83, type: 2}
+  - {fileID: 105706, guid: 3520fdcd1821d4fb8bf366663283dd70, type: 2}
   loadOnStart: 1
   preloadedLeftLevel: {fileID: 100732, guid: c3db91af971144e7987b7ec542266ef8, type: 2}
   preloadedRightLevel: {fileID: 104406, guid: fae586b1b532a4e26b66fd9d859e9647, type: 2}

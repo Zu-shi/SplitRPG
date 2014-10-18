@@ -143,7 +143,8 @@ public static class Utils {
 			return o;
 		} else {
 			foreach(Transform t in obj.transform){
-				Transform o2 = t.transform.FindChild(child);
+				//Transform o2 = t.transform.FindChild(child);
+				Transform o2 = Utils.FindChildRecursive(t.gameObject, child);// t.transform.FindChild(child);
 				if(o2 != null)
 					return o2;
 			}

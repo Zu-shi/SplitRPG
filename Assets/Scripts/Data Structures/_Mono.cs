@@ -8,6 +8,7 @@ using System.Collections;
 public class _Mono : MonoBehaviour {
 
 	private SpriteRenderer _spriteRenderer;
+	private float oscillateSeed = 0f;
 
 	public float x {
 		set {
@@ -145,5 +146,8 @@ public class _Mono : MonoBehaviour {
 		Destroy (this.gameObject);
 	}
 
-
+	public float sinOscillate(float min, float max, float period){
+		oscillateSeed += Mathf.PI * 2 / (period * 30f);
+		return (max - min)/2 * Mathf.Sin(oscillateSeed) + (max + min)/2;
+	}
 }

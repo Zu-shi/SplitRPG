@@ -8,6 +8,14 @@ using System.Collections.Generic;
 public class LevelManagerScript : _Mono{
 
 	// Only used in editor, copied to _levelPrefabs at start
+	public GameObject level1LeftPrefab;
+	public GameObject level1RightPrefab;
+	public GameObject level2LeftPrefab;
+	public GameObject level2RightPrefab;
+	public AudioClip level1Theme;
+	public AudioClip level2Theme;
+	public string debugLocation;
+
 	public GameObject[] levelPrefabs;
 	private List<GameObject> _levelPrefabs;
 	private GameObject[] _cachedPersistentObjects;
@@ -35,13 +43,35 @@ public class LevelManagerScript : _Mono{
 
 	private Transform leftSpawn {
 		get {
-			return Utils.FindChildRecursive(currentLeftLevelPrefab, "Starting").GetChild(0);
+			if(debugLocation.Trim() == ""){
+				return Utils.FindChildRecursive(currentLeftLevelPrefab, "Starting").GetChild(0);
+			}else{
+				Transform t;
+				//Debug.Log(Utils.FindChildRecursive(currentLeftLevelPrefab, debugLocation));
+				if( (t = Utils.FindChildRecursive(currentLeftLevelPrefab, debugLocation) ) != null ){
+					return t;
+				}else{
+					Debug.LogWarning("Cannot find debug location " + debugLocation + ". Loading default location.");
+					return Utils.FindChildRecursive(currentLeftLevelPrefab, "Starting").GetChild(0);
+				}
+			}
 		}
 	}
 	
 	private Transform rightSpawn {
 		get {
-			return Utils.FindChildRecursive(currentRightLevelPrefab, "Starting").GetChild(0);
+			if(debugLocation.Trim() == ""){
+				return Utils.FindChildRecursive(currentRightLevelPrefab, "Starting").GetChild(0);
+			}else{
+				Transform t;
+				//Debug.Log(Utils.FindChildRecursive(currentRightLevelPrefab, debugLocation));
+				if( (t = Utils.FindChildRecursive(currentLeftLevelPrefab, debugLocation) ) != null ){
+					return t;
+				}else{
+					Debug.LogWarning("Cannot find debug location " + debugLocation + ". Loading default location.");
+					return Utils.FindChildRecursive(currentRightLevelPrefab, "Starting").GetChild(0);
+				}
+			}
 		}
 	}
 
@@ -90,6 +120,13 @@ public class LevelManagerScript : _Mono{
 		leftSpawn.GetComponent<BoxCollider2D>().center = Vector2.zero;
 		rightSpawn.GetComponent<BoxCollider2D>().center = Vector2.zero;
 	}
+	
+	private void PlayLevelTheme(GameObject leftLevel, GameObject rightLevel)
+	{
+		if(leftLevel == level1LeftPrefab && rightLevel == level1RightPrefab){
+			Globals.soundManager.PlayMusic();//(level1Theme);
+		}
+	} 
 
 	public bool LoadLevels(string leftLevelName, string rightLevelName, bool reloadPersistent = false) {
 		GameObject left = null;

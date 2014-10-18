@@ -67,8 +67,8 @@ public class SoundManagerScript : _Mono {
 		fadeRate = maxVolume / seconds;
 	}
 
-	public void PlaySound(AudioClip sound) {
-		AudioSource.PlayClipAtPoint(sound, transform.position, PlayerPrefs.GetInt("SoundEffectsVolume", 100) / 100.0f);
+	public void PlaySound (AudioClip sound) {
+		audio.PlayOneShot(sound, PlayerPrefs.GetInt("SoundEffectsVolume", 100) / 100.0f);
 	}
 
 	public void Update() {

@@ -8,7 +8,11 @@ using System.Collections;
 public class BackgroundScrollingTextureScript : _Mono {
 
 	public float parralaxDepth = 1;
+	//Transparency of image
+	public float alpha = 1;
 	public Vector2 passiveMove;
+	public Vector2 defaultOffset;
+	public Vector2 lockToCameraOffset;
 	public bool lockToCamera = true;
 	public bool lockVerticalOffset = false;
 	public bool runInEditor = false;
@@ -16,11 +20,17 @@ public class BackgroundScrollingTextureScript : _Mono {
 	bool started = false;
 	Vector3 lastCameraPosition;
 	
-	void Update () {
+	protected virtual void Update () {
+
 		if(!Application.isPlaying && !runInEditor){
 			return;
 		}
-		
+
+		if(renderer.sharedMaterial.HasProperty("_Color")){
+			Color c = renderer.sharedMaterial.GetColor("_Color");
+			renderer.sharedMaterial.color = new Color(c.r, c.g, c.b, alpha);
+		}
+
 		CameraScript cameraScript = Globals.cameraLeft;
 		if(Utils.LayerIs(gameObject.layer, "Right")){
 			cameraScript = Globals.cameraRight;
@@ -28,11 +38,11 @@ public class BackgroundScrollingTextureScript : _Mono {
 		
 		if(!started){
 			if(lockToCamera)
-				xy = cameraScript.xy;
+				xy = cameraScript.xy + lockToCameraOffset;
 			lastCameraPosition = cameraScript.transform.position;
 			started = true;
 		}
-		
+
 		if(cameraScript.transform.position != lastCameraPosition){
 			Vector3 diff = cameraScript.transform.position - lastCameraPosition;
 
@@ -45,7 +55,7 @@ public class BackgroundScrollingTextureScript : _Mono {
 			renderer.sharedMaterial.mainTextureOffset += fac * new Vector2(diff.x, diff.y);
 
 			if(lockToCamera)
-				xy = cameraScript.xy; // keep in front of the camera
+				xy = cameraScript.xy + lockToCameraOffset; // keep in front of the camera
 		}
 
 		renderer.sharedMaterial.mainTextureOffset += Time.deltaTime * passiveMove;
@@ -56,5 +66,9 @@ public class BackgroundScrollingTextureScript : _Mono {
 		}
 		
 		lastCameraPosition = cameraScript.transform.position;
+	}
+
+	protected void OnApplicationQuit(){
+		renderer.sharedMaterial.mainTextureOffset = defaultOffset;
 	}
 }
