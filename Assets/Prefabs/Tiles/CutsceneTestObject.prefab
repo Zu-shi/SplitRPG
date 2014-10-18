@@ -8,11 +8,13 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 114: {fileID: 11400000}
   - 61: {fileID: 6100000}
   - 212: {fileID: 21200000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
+  - 114: {fileID: 11400008}
+  - 114: {fileID: 11400006}
+  - 114: {fileID: 11400000}
   m_Layer: 8
   m_Name: CutsceneTestObject
   m_TagString: Untagged
@@ -27,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 65.2653046, y: -125.424431, z: 0}
+  m_LocalPosition: {x: 56.4428329, y: -228.188049, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,12 +53,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f29e0a8cfd9d92340a2fa3b0c20d52e5, type: 3}
+  m_Script: {fileID: 11500000, guid: ba23f6bb25e158a40b7c5e011d4c1b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   triggered: 0
-  testBubble1: {fileID: 100000, guid: 22618516a0c867e4d9fe66351a468d48, type: 2}
-  testBubble2: {fileID: 100000, guid: c4cfecd9345e3f546abaa12d301eca6b, type: 2}
+  standardBubbleDisplayTime: 2
+  cameraFadeRate: .100000001
+  girlFaceBubble: {fileID: 0}
+  boyFaceBubble: {fileID: 0}
+  eatingDinerBubble: {fileID: 0}
+  playingVideoGamesBubble: {fileID: 0}
+  sittingOnParkBenchBubble: {fileID: 0}
+  sittingOnTrainBubble: {fileID: 0}
+  sadFaceBubbleLeftTail: {fileID: 0}
+  sadFaceBubbleRightTail: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -79,7 +89,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebb794b581f7dcf4892c86046195355e, type: 3}
   m_Name: 
@@ -116,6 +126,69 @@ MonoBehaviour:
   elipsiesBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf, type: 2}
   coffeeShopBubble: {fileID: 100006, guid: dc95033ba87bb884a97dd2fe7acf7f0f, type: 2}
   fivePmBubble: {fileID: 100006, guid: fdbb9f8d6894dd9499b51ca51d24ba87, type: 2}
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a61d22437d2614f9f6dee0c0f4210e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggered: 0
+  standardBubbleDisplayTime: 2
+  confusionBubble: {fileID: 0}
+  vrHeadSetBubble: {fileID: 0}
+  expensiveBubbleLeftTail: {fileID: 0}
+  expensiveBubbleRightTail: {fileID: 0}
+  smileyFaceBubbleRightTail: {fileID: 0}
+  cyberpunkGameBubble: {fileID: 0}
+  wizardGameBubble: {fileID: 0}
+  playingWithVrBubble: {fileID: 0}
+  angryBubbleLeftTail: {fileID: 0}
+  angryBubbleRightTail: {fileID: 0}
+  breadBubble: {fileID: 0}
+  catFoodBubble: {fileID: 0}
+  newCarBubble: {fileID: 0}
+  exclaimationMarkBubble: {fileID: 0}
+  noNewCarBubble: {fileID: 0}
+  oldCarBubble: {fileID: 0}
+  noOldCarBubble: {fileID: 0}
+  elipsesBubbleLeftTail: {fileID: 0}
+  elipsesBubbleRightTail: {fileID: 0}
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae56c5b6254889419630654f335eab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggered: 0
+  standardBubbleDisplayTime: 2
+  plateWithChickenBubble: {fileID: 100004, guid: f2e64d0872582654387c3ed3340572a0,
+    type: 2}
+  thumbsUpBubble: {fileID: 100004, guid: e149f298a7d70084a82ae58f6beb8795, type: 2}
+  smileyFaceBubbleRightTail: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+    type: 2}
+  smileyFaceBubbleLeftTail: {fileID: 100004, guid: e3ca98d0e045b8c4c926209ffcdb05e0,
+    type: 2}
+  exclaimationMarkBubbleRightTail: {fileID: 100004, guid: fa8bebcb77fb53042b5821158a9d621e,
+    type: 2}
+  exclaimationMarkBubbleLeftTail: {fileID: 100004, guid: 85d5399c229f1194c8c8c981ab21ded7,
+    type: 2}
+  necklaceBubble: {fileID: 100004, guid: 73d8454b722ec624f86785aaec12ae54, type: 2}
+  jumpingBubble: {fileID: 100004, guid: e017880de487f8443b7444ee0fb3bf92, type: 2}
+  elipsesBubbleLeftTail: {fileID: 100004, guid: 02db6c949db560e45a7b169d07552323,
+    type: 2}
+  braceletBubble: {fileID: 100004, guid: 4d2957376c29a59428e4512cbc24c4b6, type: 2}
+  pushingBlocksBubble: {fileID: 100004, guid: a7bf459908c8a294ebee4fcd7a717bec, type: 2}
+  videoGamesBubble: {fileID: 100006, guid: 37bee24e02cab724789104bc8fcc727e, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

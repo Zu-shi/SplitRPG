@@ -180,6 +180,15 @@ public class LevelManagerScript : _Mono{
 			LinkSwitches(left, right);
 		}
 
+		if(reloadPersistent) {
+			_cachedPersistentObjects = GameObject.FindGameObjectsWithTag("Persistent");
+			foreach(GameObject go in _cachedPersistentObjects) {
+				Debug.Log("Caching: " + go.name);
+				go.transform.parent = null;
+				go.tag = null;
+			}
+		}
+
 		left.SetActive(false);
 		right.SetActive(false);
 		Globals.playerLeft.gameObject.SetActive(false);
@@ -231,7 +240,7 @@ public class LevelManagerScript : _Mono{
 		foreach(GameObject uncached in uncachedObjects) {
 			string name = uncached.name;
 			uncached.name = "___uncached___" + name;
-			GameObject tmp = GameObject.Find(name);
+			GameObject tmp = FindCachedGameObject(name);
 			tmp.transform.parent = uncached.transform.parent;
 			tmp.tag = "Persistent";
 
@@ -243,6 +252,15 @@ public class LevelManagerScript : _Mono{
 			Destroy(uncached);
 		}
 		_cachedPersistentObjects = null;
+	}
+
+	private GameObject FindCachedGameObject(string name) {
+		for(int i = 0; i < _cachedPersistentObjects.Length; i++) {
+			if(_cachedPersistentObjects[i].name == name)
+				return _cachedPersistentObjects[i];
+		}
+		Debug.LogError("No cached object named: " + name);
+		return null;
 	}
 
 	// Used as a callback
