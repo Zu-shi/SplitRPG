@@ -6,6 +6,6 @@ public class DefaultImporterSettings : AssetPostprocessor {
 	
 	void OnPreprocessTexture() {
 		TextureImporter importer = assetImporter as TextureImporter;
-		importer.spritePixelsToUnits = 64f;
+		//importer.spritePixelsToUnits = 64f;
 	}
 }

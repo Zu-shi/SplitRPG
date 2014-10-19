@@ -76,7 +76,7 @@ public class LevelManagerScript : _Mono{
 	}
 
 	public bool SaveCheckpoint() {
-		Debug.Log("Saving checkpoint...");
+		//Debug.Log("Saving checkpoint...");
 		PlayerPrefs.SetFloat("LeftX", Globals.playerLeft.tileX);
 		PlayerPrefs.SetFloat("LeftY", Globals.playerLeft.tileY);
 		PlayerPrefs.SetFloat("RightX", Globals.playerRight.tileX);
@@ -154,7 +154,7 @@ public class LevelManagerScript : _Mono{
 
 		PlayLevelTheme(leftLevel, rightLevel);
 
-		Debug.Log("Loading levels...");
+		//Debug.Log("Loading levels...");
 		if (leftLevel == null || rightLevel == null) {
 			Debug.LogError("Cannont load null level.");
 			return false;
@@ -163,7 +163,7 @@ public class LevelManagerScript : _Mono{
 		if(reloadPersistent) {
 			_cachedPersistentObjects = GameObject.FindGameObjectsWithTag("Persistent");
 			foreach(GameObject go in _cachedPersistentObjects) {
-				Debug.Log("Caching: " + go.name);
+				//Debug.Log("Caching: " + go.name);
 				go.transform.parent = null;
 				go.tag = null;
 			}
@@ -273,7 +273,7 @@ public class LevelManagerScript : _Mono{
 
 	// Helper function for callback
 	private void FinishMoving() {
-		Debug.Log("Finishing movement...");
+		//Debug.Log("Finishing movement...");
 		Globals.roomManager.MoveCamerasToPoint( new Vector2(rightSpawn.position.x, rightSpawn.position.y));
 		SaveCheckpoint();
 	}

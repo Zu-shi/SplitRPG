@@ -29,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 225.185928, y: -217.624359, z: 0}
+  m_LocalPosition: {x: 30.2129555, y: -18.0310955, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,14 +59,18 @@ MonoBehaviour:
   triggered: 0
   standardBubbleDisplayTime: 2
   cameraFadeRate: .100000001
-  girlFaceBubble: {fileID: 0}
-  boyFaceBubble: {fileID: 0}
-  eatingDinerBubble: {fileID: 0}
-  playingVideoGamesBubble: {fileID: 0}
-  sittingOnParkBenchBubble: {fileID: 0}
-  sittingOnTrainBubble: {fileID: 0}
-  sadFaceBubbleLeftTail: {fileID: 0}
-  sadFaceBubbleRightTail: {fileID: 0}
+  girlFaceBubble: {fileID: 100004, guid: 78ad934242688a947a3a9bb0f2ea80cd, type: 2}
+  boyFaceBubble: {fileID: 100004, guid: 6bf20c497e2600c4b8081c5b463c2863, type: 2}
+  eatingDinerBubble: {fileID: 100004, guid: d170781d29e7a7f409f03411f8b59178, type: 2}
+  playingVideoGamesBubble: {fileID: 100004, guid: 1578cdadf8318804f8fbec3431ba308c,
+    type: 2}
+  sittingOnParkBenchBubble: {fileID: 100004, guid: 8dc5eb3cd6689a24295a4e5179117197,
+    type: 2}
+  sittingOnTrainBubble: {fileID: 100004, guid: d92471057e80e634587043f0be764992, type: 2}
+  sadFaceBubbleLeftTail: {fileID: 100004, guid: 39315e497aaa24145979572dc58097a2,
+    type: 2}
+  sadFaceBubbleRightTail: {fileID: 100004, guid: b715e82e06cf5df4dbfa875bb2663c49,
+    type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,7 +147,7 @@ MonoBehaviour:
   vrHeadSetBubble: {fileID: 100006, guid: df354bf89db618d41ba6713974ee3eb5, type: 2}
   expensiveBubbleLeftTail: {fileID: 100006, guid: b0865331a4f51a14cb6d7b54f043bf27,
     type: 2}
-  expensiveBubbleRightTail: {fileID: 100004, guid: fa8bebcb77fb53042b5821158a9d621e,
+  expensiveBubbleRightTail: {fileID: 100006, guid: 70f995818c1c3eb41a73c3560d4bdbd5,
     type: 2}
   smileyFaceBubbleRightTail: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
     type: 2}
