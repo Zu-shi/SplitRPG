@@ -57,6 +57,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggered: 0
+  BackgroundPrefab: {fileID: 0}
   standardBubbleDisplayTime: 2
   cameraFadeRate: .100000001
   girlFaceBubble: {fileID: 100004, guid: 78ad934242688a947a3a9bb0f2ea80cd, type: 2}
@@ -99,10 +100,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggered: 0
+  BackgroundPrefab: {fileID: 100000, guid: c1259fd0a5bc8724a8b9a19f7ebf1ff2, type: 2}
   sittingAnimationName: Sitting
   standardBubbleDisplayTime: 1.60000002
-  fadeRate: .5
-  BackgroundPrefab: {fileID: 100000, guid: c1259fd0a5bc8724a8b9a19f7ebf1ff2, type: 2}
+  fadeRate: .00999999978
   askForSeatBubble: {fileID: 100006, guid: 9e908ebc5b7e9484cbed5157f6352c3c, type: 2}
   smileyFaceBubbleLeftTail: {fileID: 100004, guid: e3ca98d0e045b8c4c926209ffcdb05e0,
     type: 2}
@@ -147,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggered: 0
+  BackgroundPrefab: {fileID: 0}
   standardBubbleDisplayTime: 2
   confusionBubble: {fileID: 100006, guid: fff69e694a1fee448848e02317c592f8, type: 2}
   vrHeadSetBubble: {fileID: 100006, guid: df354bf89db618d41ba6713974ee3eb5, type: 2}
@@ -185,6 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggered: 0
+  BackgroundPrefab: {fileID: 0}
   standardBubbleDisplayTime: 2
   plateWithChickenBubble: {fileID: 100004, guid: f2e64d0872582654387c3ed3340572a0,
     type: 2}

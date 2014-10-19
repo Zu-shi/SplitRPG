@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 10/19/2014 1:25:43 PM-->
+<!--Last exported: 10/19/2014 2:47:20 PM-->
 <Tiled2Unity version="0.9.4.5">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J1Right" sortingLayerName="" sortingOrder="0" />
   <Prefab name="Journey1_v2RightSide" scale="1">
@@ -65,6 +65,7 @@
     </GameObject>
     <GameObject name="Starting">
       <GameObject name="starting point" x="2880" y="-14592">
+        <Property name="Cutscene" value="Train" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>
@@ -684,14 +685,6 @@
         <Property name="canJump" value="" />
         <Property name="canPush" value="" />
         <Property name="levelsToLoad" value="J2Left_v4,J2Right_v4" />
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="Send" x="2880" y="-13952">
-        <Property name="fade" value="" />
-        <Property name="target" value="Receive" />
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="Receive" x="2880" y="-14336">
         <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>

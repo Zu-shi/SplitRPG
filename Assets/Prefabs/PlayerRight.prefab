@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationName: WalkUpAnimation
-  rate: 10
+  rate: 6
   loop: 1
   sprites:
   - {fileID: 21300024, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationName: WalkRightAnimation
-  rate: 10
+  rate: 6
   loop: 1
   sprites:
   - {fileID: 21300030, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationName: WalkLeftAnimation
-  rate: 10
+  rate: 6
   loop: 1
   sprites:
   - {fileID: 21300014, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationName: WalkDownAnimation
-  rate: 10
+  rate: 6
   loop: 1
   sprites:
   - {fileID: 21300002, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationName: SitLeft
-  rate: 10
+  rate: 6
   loop: 1
   sprites:
   - {fileID: 21300008, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}

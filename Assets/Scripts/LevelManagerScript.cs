@@ -75,7 +75,7 @@ public class LevelManagerScript : _Mono{
 		}
 	}
 
-	public bool EnableLevels(bool enabled = false) {
+	public bool EnableLevels(bool enabled = true) {
 		currentLeftLevelPrefab.SetActive(enabled);
 		currentRightLevelPrefab.SetActive(enabled);
 		return enabled;

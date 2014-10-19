@@ -21,6 +21,40 @@ public abstract class CutsceneScript : _Mono {
 	/// Has this cutscene been triggered yet?
 	/// </summary>
 	public bool triggered = false;
+	
+	public GameObject BackgroundPrefab;
+	
+	private GameObject background;
+	private Transform parent;
+	
+	protected void SetupScene() {
+		background = Instantiate(BackgroundPrefab, new Vector3(-1000, -1000, 0), Quaternion.identity) as GameObject;
+		leftPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("TransparentFX");
+		rightPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("TransparentFX");
+		leftPlayer.transform.position = background.transform.Find("LeftPlayer").position;
+		rightPlayer.transform.position = background.transform.Find("RightPlayer").position;
+		Globals.gameManager.transform.Find("CameraSpecial").position = background.transform.position + new Vector3(0,0,-10000);
+		rightCamera.transform.position = background.transform.position + new Vector3(0,0,-10000);
+		leftCamera.transform.position = background.transform.position + new Vector3(0,0,-10000);
+		this.parent = transform.parent;
+		transform.parent = null;
+		Globals.levelManager.EnableLevels(false);
+		Globals.gameManager.transform.Find("CameraSpecial").GetComponent<Camera>().cullingMask
+			= LayerMask.GetMask("Left", "Right", "TransparentFX");
+	}
+	
+	protected void TearDownScene() {
+		Destroy(background);
+		leftPlayer.transform.position = Globals.levelManager.leftSpawn.position + new Vector3(1f, -1f, 0);
+		rightPlayer.transform.position = Globals.levelManager.rightSpawn.position + new Vector3(1f, -1f, 0);
+		leftPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("Left");
+		rightPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("Right");
+		Globals.levelManager.EnableLevels();
+		transform.parent = this.parent;
+		Globals.roomManager.MoveCamerasToPoint(new Vector2(leftPlayer.transform.position.x, leftPlayer.transform.position.y));
+		Globals.gameManager.transform.Find("CameraSpecial").GetComponent<Camera>().cullingMask
+			= LayerMask.GetMask("TransparentFX");
+	}
 
 	public void Start() {
 		leftPlayer = Globals.playerLeft.gameObject;

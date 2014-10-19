@@ -1,0 +1,142 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 61: {fileID: 6100000}
+  - 212: {fileID: 21200000}
+  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
+  m_Layer: 8
+  m_Name: Train
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!61 &6100000
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Size: {x: 2, y: 2}
+  m_Center: {x: 0, y: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebb794b581f7dcf4892c86046195355e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggered: 0
+  BackgroundPrefab: {fileID: 100000, guid: c1259fd0a5bc8724a8b9a19f7ebf1ff2, type: 2}
+  sittingAnimationName: Sitting
+  standardBubbleDisplayTime: 1.60000002
+  fadeRate: .00999999978
+  askForSeatBubble: {fileID: 100006, guid: 9e908ebc5b7e9484cbed5157f6352c3c, type: 2}
+  smileyFaceBubbleLeftTail: {fileID: 100004, guid: e3ca98d0e045b8c4c926209ffcdb05e0,
+    type: 2}
+  smileyFaceBubbleRightTail: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+    type: 2}
+  isTheSceneryGoodBubble: {fileID: 100006, guid: a41dba8d220c89942bd08f8ec850ef8c,
+    type: 2}
+  theSceneryIsGoodBubble: {fileID: 100006, guid: 22d23728121734a4fbe81d90f21e4c2c,
+    type: 2}
+  isTheMountainGoodBubble: {fileID: 100006, guid: 3527fe76f244ec6458808f8cd9615274,
+    type: 2}
+  theMountainIsGoodBubble: {fileID: 100006, guid: 5b93159232c1d1e4f9252a514ed138e7,
+    type: 2}
+  doYouLikeVideoGamesBubble: {fileID: 100006, guid: e17f3fc9ddbaced4ea16cfc9b381de63,
+    type: 2}
+  iLikeVideoGamesBubble: {fileID: 100006, guid: df8bea848c418074da61f1893ac5d9f8,
+    type: 2}
+  wizardBubble: {fileID: 100006, guid: 5208813e90df8744b939ef75d5f7bb34, type: 2}
+  dragonBubbleLeftTail: {fileID: 100006, guid: c5d58b348463c064aa812e9cc145012d, type: 2}
+  dragonBubbleRightTail: {fileID: 100006, guid: e2450726660946245ba5d8557abb4e7b,
+    type: 2}
+  iLikeSciFiBubbleRightTail: {fileID: 100006, guid: 9464d370acd06d74eb5efa809e17cb8a,
+    type: 2}
+  iLikeSciFiBubbleLeftTail: {fileID: 100006, guid: 5152e83e91461fc44a52c80b6f1a74a3,
+    type: 2}
+  spaceSuitBubble: {fileID: 100006, guid: 9464d370acd06d74eb5efa809e17cb8a, type: 2}
+  ellipsiesBubbleLeftTail: {fileID: 100004, guid: 02db6c949db560e45a7b169d07552323,
+    type: 2}
+  ellipsiesBubbleRightTail: {fileID: 100004, guid: 91516b638c70b0b4aa98ac59cc56602c,
+    type: 2}
+  coffeeShopBubble: {fileID: 100006, guid: dc95033ba87bb884a97dd2fe7acf7f0f, type: 2}
+  fivePmBubble: {fileID: 100006, guid: fdbb9f8d6894dd9499b51ca51d24ba87, type: 2}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1ed6fcccaffe45a88b33b3f933d44ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawingOrder: 2
+  height: 1
+  slightlyAbove: 0
+  slightlyBelow: 0
+  editModeRefresh: 0
+--- !u!212 &21200000
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 0
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 8279be38acde04ffeb5027e53ce916f0, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1
