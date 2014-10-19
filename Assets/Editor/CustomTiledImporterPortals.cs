@@ -60,6 +60,11 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 			LevelLoaderScript tmp = gameObject.GetComponent<LevelLoaderScript>();
 			tmp.leftLevel = props["levelsToLoad"].Split(",".ToCharArray())[0];
 			tmp.rightLevel = props["levelsToLoad"].Split(",".ToCharArray())[1];
+			if(props.ContainsKey("canPush"))
+				tmp.canPush = true;
+			if(props.ContainsKey("canJump"))
+				tmp.canJump = true;
+
 			return;
 		}
 		if(parent.name.Contains("Unidirectional Portals") && props.ContainsKey("target")) {
