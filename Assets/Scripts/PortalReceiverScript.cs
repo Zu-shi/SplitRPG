@@ -13,12 +13,18 @@ public class PortalReceiverScript : _Mono {
 		mySender = GetComponent<PortalSenderScript>();
  	}
 
+	private void SwitchToNormalTransition() {
+		Globals.roomManager.transitionDelegate = null;
+		Globals.roomManager.fadeTransition = false;
+	}
+
 	public void MovePlayerHere(PlayerControllerScript player, bool fadeTransition = false) {
 		if(mySender) {
 			mySender.teleportDisabled = true;
 		}
 		if(fadeTransition) {
 			Globals.roomManager.fadeTransition = true;
+			Globals.roomManager.transitionDelegate = SwitchToNormalTransition as Utils.VoidDelegate;
 			this.fadeTransition = fadeTransition;
 		}
 		player.tileVector = tileVector + exitDirection;

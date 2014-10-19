@@ -41,7 +41,7 @@ public class LevelManagerScript : _Mono{
 		}
 	}
 
-	private Transform leftSpawn {
+	public Transform leftSpawn {
 		get {
 			if(debugLocation.Trim() == ""){
 				return Utils.FindChildRecursive(currentLeftLevelPrefab, "Starting").GetChild(0);
@@ -58,7 +58,7 @@ public class LevelManagerScript : _Mono{
 		}
 	}
 	
-	private Transform rightSpawn {
+	public Transform rightSpawn {
 		get {
 			if(debugLocation.Trim() == ""){
 				return Utils.FindChildRecursive(currentRightLevelPrefab, "Starting").GetChild(0);
@@ -73,6 +73,12 @@ public class LevelManagerScript : _Mono{
 				}
 			}
 		}
+	}
+
+	public bool EnableLevels(bool enabled = false) {
+		currentLeftLevelPrefab.SetActive(enabled);
+		currentRightLevelPrefab.SetActive(enabled);
+		return enabled;
 	}
 
 	public bool SaveCheckpoint() {

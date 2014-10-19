@@ -10,6 +10,8 @@ public class TrainCutsceneScript : CutsceneScript {
 
 	public float fadeRate = 0.5f;
 
+	public GameObject BackgroundPrefab;
+
 	public GameObject askForSeatBubble;
 	public GameObject smileyFaceBubbleLeftTail;
 	public GameObject smileyFaceBubbleRightTail;
@@ -30,16 +32,32 @@ public class TrainCutsceneScript : CutsceneScript {
 	public GameObject coffeeShopBubble;
 	public GameObject fivePmBubble;
 
-	public override void Update() {
-		if(triggered)
-			return;
-		
-		if(Globals.collisionManager.IsPlayerOnTile(tileVector, gameObject.layer)) {
-			triggered = true;
-			Globals.roomManager.enabled = false;
+	private GameObject background;
 
-			Begin();
-		}
+	private void SetupScene() {
+		background = Instantiate(BackgroundPrefab, new Vector3(-1000, -1000, 0), Quaternion.identity) as GameObject;
+		leftPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("TransparentFX");
+		rightPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("TransparentFX");
+		leftPlayer.transform.position = background.transform.Find("LeftPlayer").position;
+		rightPlayer.transform.position = background.transform.Find("RightPlayer").position;
+		Globals.gameManager.transform.Find("CameraSpecial").position = background.transform.position + new Vector3(0,0,-10000);
+		rightCamera.transform.position = background.transform.position + new Vector3(0,0,-10000);
+		leftCamera.transform.position = background.transform.position + new Vector3(0,0,-10000);
+		Globals.levelManager.EnableLevels(false);
+		Globals.gameManager.transform.Find("CameraSpecial").GetComponent<Camera>().cullingMask
+			= LayerMask.GetMask("Left", "Right", "TransparentFX");
+	}
+
+	private void TearDownScene() {
+		Destroy(background);
+		leftPlayer.transform.position = Globals.levelManager.leftSpawn.position;
+		rightPlayer.transform.position = Globals.levelManager.rightSpawn.position;
+		leftPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("Left");
+		rightPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("Right");
+		Globals.roomManager.MoveCamerasToPoint(new Vector2(leftPlayer.transform.position.x, leftPlayer.transform.position.y));
+		Globals.levelManager.EnableLevels();
+		Globals.gameManager.transform.Find("CameraSpecial").GetComponent<Camera>().cullingMask
+			= LayerMask.GetMask("TransparentFX");
 	}
 
 	protected override IEnumerator ActionSequence() {
@@ -51,7 +69,19 @@ public class TrainCutsceneScript : CutsceneScript {
 
 		CheckPrefabLinks();
 
+		SetupScene();
+
+		Move(leftPlayer, Direction.RIGHT, 0);
+		PlayAnimation(leftPlayer, "SitRight");
+
 		yield return new WaitForSeconds(standardBubbleDisplayTime * 2.0f);
+
+		// Boy walks to occupied room
+		waitTime = Move(rightPlayer, Direction.LEFT, 3);
+		yield return new WaitForSeconds(waitTime);
+
+		waitTime = Move(rightPlayer, Direction.UP, 0);
+		yield return new WaitForSeconds(waitTime + standardBubbleDisplayTime);
 
 		// Can I sit here?
 		GameObject bubble1 = ShowSpeechBubble(rightPlayer, askForSeatBubble);
@@ -63,6 +93,19 @@ public class TrainCutsceneScript : CutsceneScript {
 		// Yes, you can sit there.
 		bubble1 = ShowSpeechBubble(leftPlayer, smileyFaceBubbleLeftTail);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
+
+		// Boy moves to seat and sits.
+		waitTime = Move(rightPlayer, Direction.UP, 2);
+		yield return new WaitForSeconds(waitTime);
+
+		waitTime = Move(rightPlayer, Direction.RIGHT, 1);
+		yield return new WaitForSeconds(waitTime + standardBubbleDisplayTime / 4.0f);
+
+		// Boy turn around and sit down
+		waitTime = Move(rightPlayer, Direction.LEFT, 0);
+		yield return new WaitForSeconds(waitTime + standardBubbleDisplayTime / 4.0f);
+
+		PlayAnimation(rightPlayer, "SitLeft");
 
 		// Pause.
 		HideSpeechBubble(bubble1);
@@ -167,6 +210,9 @@ public class TrainCutsceneScript : CutsceneScript {
 
 		// Somehow signal the train is stopping.
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
+
+		PlayAnimation(leftPlayer, "WalkDownAnimation");
+		PlayAnimation(rightPlayer, "WalkDownAnimation");
 
 		waitTime = Move(leftPlayer, Direction.DOWN, 3);
 		waitTime = Move(rightPlayer, Direction.DOWN, 3);

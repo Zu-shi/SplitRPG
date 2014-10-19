@@ -35,6 +35,7 @@ GameObject:
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400016}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400018}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
@@ -276,6 +277,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c1e0e7b83484cd8b218ed51212510a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationName: SitRight
+  rate: 10
+  loop: 1
+  sprites:
+  - {fileID: 21300006, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

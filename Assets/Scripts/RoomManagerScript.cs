@@ -4,6 +4,7 @@ using System.Collections;
 public class RoomManagerScript : MonoBehaviour {
 
 	public bool fadeTransition = false;
+	public Utils.VoidDelegate transitionDelegate;
 
 	CameraScript leftCamera, rightCamera;
 	PlayerControllerScript leftPlayer, rightPlayer;
@@ -145,6 +146,8 @@ public class RoomManagerScript : MonoBehaviour {
 	void EndCameraTransition(){
 		leftPlayer.EnableMovement();
 		rightPlayer.EnableMovement();
+		if(transitionDelegate != null)
+			transitionDelegate();
 	}
 
 	// Wait for two cameras to finish, then enable player input

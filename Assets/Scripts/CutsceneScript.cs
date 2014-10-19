@@ -46,6 +46,7 @@ public abstract class CutsceneScript : _Mono {
 	public virtual void Begin(Utils.VoidDelegate callback = null) {
 		this.callback = callback;
 		Globals.gameManager.GetComponent<PlayerInputScript>().enabled = false;
+		Globals.roomManager.enabled = false;
 
 		StartCoroutine("ActionSequence");
 	}
@@ -125,6 +126,7 @@ public abstract class CutsceneScript : _Mono {
 	/// </summary>
 	protected void End() {
 		Globals.gameManager.GetComponent<PlayerInputScript>().enabled = true;
+		Globals.roomManager.enabled = true;
 		if(callback != null) {
 			callback();
 		}

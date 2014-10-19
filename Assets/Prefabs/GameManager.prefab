@@ -146,8 +146,8 @@ Camera:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: .139705896, b: .0472109765, a: .0196078438}
+  m_ClearFlags: 3
+  m_BackGroundColor: {r: 0, g: .139705896, b: .0472109765, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -162,7 +162,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294964735
+    m_Bits: 4294964733
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -178,7 +178,7 @@ Camera:
   m_GameObject: {fileID: 100004}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 3
   m_BackGroundColor: {r: 0, g: .0600490235, b: .154411793, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -194,7 +194,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294966015
+    m_Bits: 4294966013
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -210,8 +210,8 @@ Camera:
   m_GameObject: {fileID: 100006}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 3
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -219,11 +219,11 @@ Camera:
     width: 1
     height: 1
   near clip plane: .300000012
-  far clip plane: 1000
+  far clip plane: 20000
   field of view: 60
   orthographic: 1
   orthographic size: 10
-  m_Depth: -1
+  m_Depth: -2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 2
@@ -455,16 +455,12 @@ MonoBehaviour:
   level2RightPrefab: {fileID: 0}
   level1Theme: {fileID: 8300000, guid: 60dd90af1b12a427ca7edef456d8a6f8, type: 3}
   level2Theme: {fileID: 0}
-  debugLocation: debug1
+  debugLocation: 
   levelPrefabs:
   - {fileID: 100360, guid: 34497236e9ca84f7a874a8f49a4d3a83, type: 2}
   - {fileID: 105706, guid: 3520fdcd1821d4fb8bf366663283dd70, type: 2}
   - {fileID: 100522, guid: 4b44ef9e19545461aa9e00e82160fc03, type: 2}
   - {fileID: 100592, guid: 672b7b4fa26ea4f3284caeb78829254f, type: 2}
-  - {fileID: 100592, guid: 672b7b4fa26ea4f3284caeb78829254f, type: 2}
-  - {fileID: 100592, guid: 672b7b4fa26ea4f3284caeb78829254f, type: 2}
-  - {fileID: 100732, guid: c3db91af971144e7987b7ec542266ef8, type: 2}
-  - {fileID: 104406, guid: fae586b1b532a4e26b66fd9d859e9647, type: 2}
   loadOnStart: 1
   preloadedLeftLevel: {fileID: 100732, guid: c3db91af971144e7987b7ec542266ef8, type: 2}
   preloadedRightLevel: {fileID: 104406, guid: fae586b1b532a4e26b66fd9d859e9647, type: 2}

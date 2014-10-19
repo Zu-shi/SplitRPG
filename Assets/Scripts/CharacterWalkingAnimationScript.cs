@@ -27,7 +27,9 @@ public class CharacterWalkingAnimationScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		updateWalkingState ();
+		if(sprAnimMan.currentAnimationName.Contains("Walk")) {
+			updateWalkingState ();
+		}
 	}
 
 	/// <summary>

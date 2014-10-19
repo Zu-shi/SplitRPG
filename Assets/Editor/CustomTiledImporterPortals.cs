@@ -9,6 +9,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 
 	private List<string> senders = new List<string>();
 	private List<string> receivers = new List<string>();
+	private List<int> faders = new List<int>();
 	private string pathPrefix = PrefabMapper.PrefabLocation;
 
 	private GameObject senderPrefab;
@@ -72,6 +73,9 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 			gameObject = MakePrefab(gameObject, senderPrefab);
 			senders.Add(gameObject.name);
 			receivers.Add(props["target"]);
+			if(props.ContainsKey("fade")) {
+				faders.Add(receivers.Count - 1);
+			}
 		}
 		if(parent.name.Contains("Unidirectional Portals") && !props.ContainsKey("target")) {
 			gameObject = MakePrefab(gameObject, receiverPrefab);
@@ -108,6 +112,10 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 			}
 
 			sender.GetComponent<PortalSenderScript>().target = receiver.GetComponent<PortalReceiverScript>();
+
+			if(faders.Contains(i)) {
+				sender.GetComponent<PortalSenderScript>().fadeTransition = true;
+			}
 			Debug.LogWarning("Portal connection: " + sender.name + ", " + receiver.name);
 		}
 	}
