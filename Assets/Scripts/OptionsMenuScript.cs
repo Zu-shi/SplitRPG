@@ -183,7 +183,6 @@ public class OptionsMenuScript : MonoBehaviour {
 			PlayerPrefs.SetFloat("SoundEffectsVolume", soundFX);
 			PlayerPrefs.SetFloat("MusicVolume", musicFX);
 			Globals.soundManager.volume = musicFX;
-			Debug.Log("Music Levels: " + musicFX + ", " + Mathf.Log10(musicFX + 1));
 			s = State.MENU;
 		}
 		if(GUILayout.Button("Back", GUILayout.MaxWidth(150))) {

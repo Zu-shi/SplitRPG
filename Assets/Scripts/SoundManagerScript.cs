@@ -75,14 +75,8 @@ public class SoundManagerScript : _Mono {
 		audio.PlayOneShot(sound, PlayerPrefs.GetFloat("SoundEffectsVolume", 1));
 	}
 
-	private float __time = 0;
-	public void Update() {
-		__time += Time.deltaTime;
-		if(__time > 1.0f) {
-			__time = 0;
-			Debug.Log(volume);
-		}
 
+	public void Update() {
 		if(fading) {
 			fadeTime -= Time.deltaTime;
 			audio.volume -= fadeRate * Time.deltaTime;
