@@ -8,6 +8,8 @@ public class TrainCutsceneScript : CutsceneScript {
 	[Tooltip("All wait times are some multiple of this.")]
 	public float standardBubbleDisplayTime = 2.0f;
 
+	public float fadeRate = 0.5f;
+
 	public GameObject askForSeatBubble;
 	public GameObject smileyFaceBubbleLeftTail;
 	public GameObject smileyFaceBubbleRightTail;
@@ -23,9 +25,22 @@ public class TrainCutsceneScript : CutsceneScript {
 	public GameObject iLikeSciFiBubbleRightTail;
 	public GameObject iLikeSciFiBubbleLeftTail;
 	public GameObject spaceSuitBubble;
-	public GameObject elipsiesBubble;
+	public GameObject ellipsiesBubbleLeftTail;
+	public GameObject ellipsiesBubbleRightTail;
 	public GameObject coffeeShopBubble;
 	public GameObject fivePmBubble;
+
+	public override void Update() {
+		if(triggered)
+			return;
+		
+		if(Globals.collisionManager.IsPlayerOnTile(tileVector, gameObject.layer)) {
+			triggered = true;
+			Globals.roomManager.enabled = false;
+
+			Begin();
+		}
+	}
 
 	protected override IEnumerator ActionSequence() {
 		float waitTime = 0;
@@ -137,6 +152,9 @@ public class TrainCutsceneScript : CutsceneScript {
 		bubble1 = ShowSpeechBubble(rightPlayer, spaceSuitBubble);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
+		float tmp = rightCamera.fader.fadeRate;
+		rightCamera.fader.fadeRate = fadeRate;
+		leftCamera.fader.fadeRate = fadeRate;
 		waitTime = FadeCameraOut(rightCamera);
 		waitTime = FadeCameraOut(leftCamera);
 		yield return new WaitForSeconds(waitTime);
@@ -163,11 +181,11 @@ public class TrainCutsceneScript : CutsceneScript {
 		Move(leftPlayer, Direction.RIGHT, 0);
 		Move(rightPlayer, Direction.LEFT, 0);
 
-		bubble1 = ShowSpeechBubble(leftPlayer, elipsiesBubble);
+		bubble1 = ShowSpeechBubble(leftPlayer, ellipsiesBubbleLeftTail);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
 		HideSpeechBubble(bubble1);
-		bubble1 = ShowSpeechBubble(rightPlayer, elipsiesBubble);
+		bubble1 = ShowSpeechBubble(rightPlayer, ellipsiesBubbleRightTail);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
 		HideSpeechBubble(bubble1);
@@ -207,6 +225,9 @@ public class TrainCutsceneScript : CutsceneScript {
 		FadeCameraIn(rightCamera);
 		yield return new WaitForSeconds(waitTime);
 
+		rightCamera.fader.fadeRate = fadeRate;
+		leftCamera.fader.fadeRate = fadeRate;
+
 		End();
 	}
 
@@ -226,7 +247,8 @@ public class TrainCutsceneScript : CutsceneScript {
 		   || iLikeSciFiBubbleRightTail == null
 		   || iLikeSciFiBubbleLeftTail == null
 		   || spaceSuitBubble == null
-		   || elipsiesBubble == null
+		   || ellipsiesBubbleLeftTail == null
+		   || ellipsiesBubbleRightTail == null
 		   || coffeeShopBubble == null
 		   || fivePmBubble == null
 		   ) {

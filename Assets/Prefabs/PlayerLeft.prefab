@@ -65,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -130}
+  m_LocalPosition: {x: -2.11279488, y: -.631401122, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -79,7 +79,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .569999993, z: -1169.88599}
+  m_LocalPosition: {x: 0, y: .569999993, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -160,7 +160,7 @@ MonoBehaviour:
   walkingSound: {fileID: 8300000, guid: 9a863da87eecb41678b341ce726376f8, type: 3}
   wrongBeep: {fileID: 8300000, guid: 3576cfb536e8f4c52a19ff695d19d99a, type: 3}
   moveDirection: 0
-  canJump: 1
+  canJump: 0
   fallingInWater: 0
   splashAnimation: {fileID: 100000, guid: 7671f5a16bc9c4aa3b242b7898da9020, type: 2}
 --- !u!114 &11400004
@@ -190,10 +190,10 @@ MonoBehaviour:
   rate: 10
   loop: 1
   sprites:
-  - {fileID: 21300002, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300004, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300002, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300000, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300002, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
+  - {fileID: 21300000, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
+  - {fileID: 21300002, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
+  - {fileID: 21300004, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -223,10 +223,10 @@ MonoBehaviour:
   rate: 10
   loop: 1
   sprites:
-  - {fileID: 21300014, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300016, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300014, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300012, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300022, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
+  - {fileID: 21300020, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
+  - {fileID: 21300022, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
+  - {fileID: 21300024, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -242,10 +242,10 @@ MonoBehaviour:
   rate: 10
   loop: 1
   sprites:
-  - {fileID: 21300020, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300022, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300020, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300018, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300028, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
+  - {fileID: 21300026, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
+  - {fileID: 21300028, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
+  - {fileID: 21300030, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -261,10 +261,10 @@ MonoBehaviour:
   rate: 10
   loop: 1
   sprites:
-  - {fileID: 21300008, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300010, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300008, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
-  - {fileID: 21300006, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  - {fileID: 21300012, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
+  - {fileID: 21300010, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
+  - {fileID: 21300012, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
+  - {fileID: 21300014, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -296,7 +296,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 87078dacdc45544388f96c65888a09c8, type: 3}
+  m_Sprite: {fileID: 21300002, guid: 257d5c206842c504a9429b9d82d08271, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21200002
 SpriteRenderer:

@@ -93,7 +93,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebb794b581f7dcf4892c86046195355e, type: 3}
   m_Name: 
@@ -101,6 +101,7 @@ MonoBehaviour:
   triggered: 0
   sittingAnimationName: Sitting
   standardBubbleDisplayTime: 1.60000002
+  fadeRate: .5
   askForSeatBubble: {fileID: 100006, guid: 9e908ebc5b7e9484cbed5157f6352c3c, type: 2}
   smileyFaceBubbleLeftTail: {fileID: 100004, guid: e3ca98d0e045b8c4c926209ffcdb05e0,
     type: 2}
@@ -127,7 +128,10 @@ MonoBehaviour:
   iLikeSciFiBubbleLeftTail: {fileID: 100006, guid: 5152e83e91461fc44a52c80b6f1a74a3,
     type: 2}
   spaceSuitBubble: {fileID: 100006, guid: 9464d370acd06d74eb5efa809e17cb8a, type: 2}
-  elipsiesBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf, type: 2}
+  ellipsiesBubbleLeftTail: {fileID: 100004, guid: 02db6c949db560e45a7b169d07552323,
+    type: 2}
+  ellipsiesBubbleRightTail: {fileID: 100004, guid: 91516b638c70b0b4aa98ac59cc56602c,
+    type: 2}
   coffeeShopBubble: {fileID: 100006, guid: dc95033ba87bb884a97dd2fe7acf7f0f, type: 2}
   fivePmBubble: {fileID: 100006, guid: fdbb9f8d6894dd9499b51ca51d24ba87, type: 2}
 --- !u!114 &11400006
@@ -136,7 +140,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90a61d22437d2614f9f6dee0c0f4210e, type: 3}
   m_Name: 

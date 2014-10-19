@@ -36,6 +36,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 						Utils.assert(prefabMap != null);
 						mapName = "";
 					}
+					//Debug.Log("MapName: " + mapName);
 				}
 
 			}
@@ -107,6 +108,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 			}
 
 			sender.GetComponent<PortalSenderScript>().target = receiver.GetComponent<PortalReceiverScript>();
+			Debug.LogWarning("Portal connection: " + sender.name + ", " + receiver.name);
 		}
 	}
 
