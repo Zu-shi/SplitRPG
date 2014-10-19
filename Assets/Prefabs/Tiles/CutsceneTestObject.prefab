@@ -29,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 56.4428329, y: -228.188049, z: 0}
+  m_LocalPosition: {x: 225.185928, y: -217.624359, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -139,25 +139,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggered: 0
   standardBubbleDisplayTime: 2
-  confusionBubble: {fileID: 0}
-  vrHeadSetBubble: {fileID: 0}
-  expensiveBubbleLeftTail: {fileID: 0}
-  expensiveBubbleRightTail: {fileID: 0}
-  smileyFaceBubbleRightTail: {fileID: 0}
-  cyberpunkGameBubble: {fileID: 0}
-  wizardGameBubble: {fileID: 0}
-  playingWithVrBubble: {fileID: 0}
-  angryBubbleLeftTail: {fileID: 0}
-  angryBubbleRightTail: {fileID: 0}
-  breadBubble: {fileID: 0}
-  catFoodBubble: {fileID: 0}
-  newCarBubble: {fileID: 0}
-  exclaimationMarkBubble: {fileID: 0}
-  noNewCarBubble: {fileID: 0}
-  oldCarBubble: {fileID: 0}
-  noOldCarBubble: {fileID: 0}
-  elipsesBubbleLeftTail: {fileID: 0}
-  elipsesBubbleRightTail: {fileID: 0}
+  confusionBubble: {fileID: 100006, guid: fff69e694a1fee448848e02317c592f8, type: 2}
+  vrHeadSetBubble: {fileID: 100006, guid: df354bf89db618d41ba6713974ee3eb5, type: 2}
+  expensiveBubbleLeftTail: {fileID: 100006, guid: b0865331a4f51a14cb6d7b54f043bf27,
+    type: 2}
+  expensiveBubbleRightTail: {fileID: 100004, guid: fa8bebcb77fb53042b5821158a9d621e,
+    type: 2}
+  smileyFaceBubbleRightTail: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+    type: 2}
+  cyberpunkGameBubble: {fileID: 100006, guid: a15fc47c884d54b4299c78eb75f3435d, type: 2}
+  wizardGameBubble: {fileID: 100006, guid: 11c08fae1ac816a42b8de943387914d1, type: 2}
+  playingWithVrBubble: {fileID: 100006, guid: cb1e242ff48d0f54ebb5dbe09c80acdc, type: 2}
+  angryBubbleLeftTail: {fileID: 100004, guid: 70db5f863aff15d41afda527cdf2c649, type: 2}
+  angryBubbleRightTail: {fileID: 100004, guid: 627b1577921c22b45aee22fade024850, type: 2}
+  breadBubble: {fileID: 100006, guid: 0560aa7735c547b41876c736dadb2f8a, type: 2}
+  catFoodBubble: {fileID: 100006, guid: 2ba54bdaa508ade418b7d57a482bbdd7, type: 2}
+  newCarBubble: {fileID: 100006, guid: 060b9b361d359364eb050307f57ffaab, type: 2}
+  exclaimationMarkBubble: {fileID: 100004, guid: fa8bebcb77fb53042b5821158a9d621e,
+    type: 2}
+  noNewCarBubble: {fileID: 100006, guid: ceccd9ff714e397409517d3c1aefd510, type: 2}
+  oldCarBubble: {fileID: 100006, guid: 11d6af77d133e794499b0348ded07334, type: 2}
+  noOldCarBubble: {fileID: 100006, guid: 665e5e19c91cdb449a046d8ea64aae22, type: 2}
+  elipsesBubbleLeftTail: {fileID: 100004, guid: 02db6c949db560e45a7b169d07552323,
+    type: 2}
+  elipsesBubbleRightTail: {fileID: 100004, guid: 91516b638c70b0b4aa98ac59cc56602c,
+    type: 2}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -52,7 +52,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 			//senderPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/SendPortal.prefab", typeof(GameObject)) as GameObject;
 			//receiverPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/ReceivePortal.prefab", typeof(GameObject)) as GameObject;
 			//biPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/BidirectionalPortal.prefab", typeof(GameObject)) as GameObject;
-			loaderPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/LevelLoader.prefab", typeof(GameObject)) as GameObject;
+			loaderPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/TestObjects/Portals/LevelLoader.prefab", typeof(GameObject)) as GameObject;
 		}
 
 		if(parent.name.Contains("Unidirectional Portals") && props.ContainsKey("levelsToLoad")) {

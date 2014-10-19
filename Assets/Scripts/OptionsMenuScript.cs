@@ -100,8 +100,8 @@ public class OptionsMenuScript : MonoBehaviour {
 		GUILayout.FlexibleSpace(); GUILayout.EndHorizontal();
 		GUILayout.BeginHorizontal(); GUILayout.FlexibleSpace();
 		if(GUILayout.Button("Options", GUILayout.MaxWidth(150))) {
-			soundFX = PlayerPrefs.GetInt("SoundEffectsVolume", 100);
-			musicFX = PlayerPrefs.GetInt("MusicVolume", 100);
+			soundFX = PlayerPrefs.GetFloat("SoundEffectsVolume", 1);
+			musicFX = PlayerPrefs.GetFloat("MusicVolume", 1);
 			s = State.OPTIONS;
 		}
 		GUILayout.FlexibleSpace(); GUILayout.EndHorizontal();
@@ -165,8 +165,9 @@ public class OptionsMenuScript : MonoBehaviour {
 		GUILayout.EndVertical();
 
 		GUILayout.BeginVertical();
-		soundFX = GUILayout.HorizontalSlider(soundFX, 0, 100, GUILayout.Width(120), GUILayout.Height(_optionsHeight));
-		musicFX = GUILayout.HorizontalSlider(musicFX, 0, 100, GUILayout.Width(120), GUILayout.Height(_optionsHeight));
+		soundFX = GUILayout.HorizontalSlider(soundFX, 0, 1, GUILayout.Width(120), GUILayout.Height(_optionsHeight));
+		musicFX = GUILayout.HorizontalSlider(musicFX, 0, 1, GUILayout.Width(120), GUILayout.Height(_optionsHeight));
+		Globals.soundManager.volume = musicFX;
 		GUILayout.EndVertical();
 
 		GUILayout.BeginVertical();
@@ -179,8 +180,10 @@ public class OptionsMenuScript : MonoBehaviour {
 
 		GUILayout.BeginHorizontal(); GUILayout.FlexibleSpace();
 		if(GUILayout.Button("Apply", GUILayout.MaxWidth(150))) {
-			PlayerPrefs.SetInt("SoundEffectsVolume", (int)soundFX);
-			PlayerPrefs.SetInt("MusicVolume", (int)musicFX);
+			PlayerPrefs.SetFloat("SoundEffectsVolume", soundFX);
+			PlayerPrefs.SetFloat("MusicVolume", musicFX);
+			Globals.soundManager.volume = musicFX;
+			Debug.Log("Music Levels: " + musicFX + ", " + Mathf.Log10(musicFX + 1));
 			s = State.MENU;
 		}
 		if(GUILayout.Button("Back", GUILayout.MaxWidth(150))) {

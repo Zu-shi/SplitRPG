@@ -28,7 +28,7 @@ public class SoundManagerScript : _Mono {
 	}
 
 	public void Start () {
-		maxVolume = PlayerPrefs.GetInt("MusicVolume", 100) /100.0f;
+		maxVolume = PlayerPrefs.GetFloat("MusicVolume", 1);
 		musicClips = new List<AudioClip>();
 		foreach(AudioClip ac in Music)
 			musicClips.Add(ac);
@@ -72,10 +72,17 @@ public class SoundManagerScript : _Mono {
 	}
 
 	public void PlaySound (AudioClip sound) {
-		audio.PlayOneShot(sound, PlayerPrefs.GetInt("SoundEffectsVolume", 100) / 100.0f);
+		audio.PlayOneShot(sound, PlayerPrefs.GetFloat("SoundEffectsVolume", 1));
 	}
 
+	private float __time = 0;
 	public void Update() {
+		__time += Time.deltaTime;
+		if(__time > 1.0f) {
+			__time = 0;
+			Debug.Log(volume);
+		}
+
 		if(fading) {
 			fadeTime -= Time.deltaTime;
 			audio.volume -= fadeRate * Time.deltaTime;

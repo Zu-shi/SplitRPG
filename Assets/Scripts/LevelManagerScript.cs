@@ -163,14 +163,15 @@ public class LevelManagerScript : _Mono{
 		if(reloadPersistent) {
 			_cachedPersistentObjects = GameObject.FindGameObjectsWithTag("Persistent");
 			foreach(GameObject go in _cachedPersistentObjects) {
+				Debug.Log("Caching: " + go.name);
 				go.transform.parent = null;
 				go.tag = null;
 			}
 		}
-
+		
 		GameObject left = (GameObject)GameObject.Instantiate(leftLevel, Vector3.zero, Quaternion.identity);
 		GameObject right = (GameObject)GameObject.Instantiate(rightLevel, Vector3.zero, Quaternion.identity);
-		
+
 		if ( Utils.FindChildRecursive(left, "Pushblocks(Default)") &&
 		    Utils.FindChildRecursive(right, "Pushblocks(Default)") ) {
 			LinkPushblocks(left, right);
@@ -180,17 +181,9 @@ public class LevelManagerScript : _Mono{
 			LinkSwitches(left, right);
 		}
 
-		if(reloadPersistent) {
-			_cachedPersistentObjects = GameObject.FindGameObjectsWithTag("Persistent");
-			foreach(GameObject go in _cachedPersistentObjects) {
-				Debug.Log("Caching: " + go.name);
-				go.transform.parent = null;
-				go.tag = null;
-			}
-		}
-
 		left.SetActive(false);
 		right.SetActive(false);
+
 		Globals.playerLeft.gameObject.SetActive(false);
 		Globals.playerRight.gameObject.SetActive(false);
 		Globals.roomManager.enabled = false;
@@ -235,8 +228,8 @@ public class LevelManagerScript : _Mono{
 	}
 
 	private void FixCachedObjects() {
-		Debug.Log("Loading from cache.");
 		GameObject[] uncachedObjects = GameObject.FindGameObjectsWithTag("Persistent");
+
 		//Debug.LogError(uncachedObjects.Length + "YAYAYAY");
 		foreach(GameObject uncached in uncachedObjects) {
 			string name = uncached.name;

@@ -1,30 +1,6 @@
 fileFormatVersion: 2
-guid: 9486193051c9879498da5ac41bdc0ecf
+guid: 15da390908d54ae4594eaa97c5437b41
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: LeftTailThoughtBubble
-    21300002: RightTailThoughtBubble
-    21300004: LeftTailSpeechBubble
-    21300006: RightTailSpeechBubble
-    21300008: RightPC
-    21300010: LeftPC
-    21300012: PlusSign
-    21300014: QuestionMark
-    21300016: ExclaimationMark
-    21300018: SmilelyFace
-    21300020: SadFace
-    21300022: AngryFace
-    21300024: TrainBench
-    21300026: SpaceShip
-    21300028: Scenery
-    21300030: Mountain
-    21300032: GameController
-    21300034: Dragon
-    21300036: Wizard
-    21300038: Ring
-    21300040: Necklace
-    21300042: PlateWithFood
-    21300044: Coffee
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -66,37 +42,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: LeftTailThoughtBubble
-      rect:
-        serializedVersion: 2
-        x: 21
-        y: 735
-        width: 470
-        height: 334
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: RightTailThoughtBubble
-      rect:
-        serializedVersion: 2
-        x: 21
-        y: 1093
-        width: 470
-        height: 333
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: LeftTailSpeechBubble
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 1443
-        width: 472
-        height: 280
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: RightTailSpeechBubble
+    - name: SpeechBubbleRightTail
       rect:
         serializedVersion: 2
         x: 35
@@ -106,7 +52,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: RightPC
+    - name: GuyFace
       rect:
         serializedVersion: 2
         x: 549
@@ -116,13 +62,33 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: LeftPC
+    - name: GirlFace
       rect:
         serializedVersion: 2
-        x: 804
-        y: 1822
-        width: 181
+        x: 813
+        y: 1824
+        width: 172
         height: 203
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PlayingWithVR
+      rect:
+        serializedVersion: 2
+        x: 1061
+        y: 1821
+        width: 171
+        height: 206
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpeechBubbleLeftTail
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 1440
+        width: 472
+        height: 283
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,6 +99,156 @@ TextureImporter:
         y: 1621
         width: 90
         height: 90
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: TrainBench
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 1301
+        width: 92
+        height: 226
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Scenery
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 1333
+        width: 234
+        height: 148
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Mountain
+      rect:
+        serializedVersion: 2
+        x: 1039
+        y: 1328
+        width: 243
+        height: 177
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GameController
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 1303
+        width: 208
+        height: 176
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wizard
+      rect:
+        serializedVersion: 2
+        x: 1805
+        y: 1277
+        width: 243
+        height: 260
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpaceShip
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 1069
+        width: 234
+        height: 171
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PlateWithFood
+      rect:
+        serializedVersion: 2
+        x: 1293
+        y: 1077
+        width: 227
+        height: 123
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Bracelet
+      rect:
+        serializedVersion: 2
+        x: 1848
+        y: 1071
+        width: 136
+        height: 169
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: VRHeadSet
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 817
+        width: 156
+        height: 142
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Bread
+      rect:
+        serializedVersion: 2
+        x: 1055
+        y: 815
+        width: 196
+        height: 170
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CatFood
+      rect:
+        serializedVersion: 2
+        x: 1317
+        y: 768
+        width: 202
+        height: 193
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: NewCar
+      rect:
+        serializedVersion: 2
+        x: 1549
+        y: 823
+        width: 212
+        height: 140
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: OldCar
+      rect:
+        serializedVersion: 2
+        x: 1839
+        y: 817
+        width: 194
+        height: 136
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Necklace
+      rect:
+        serializedVersion: 2
+        x: 1552
+        y: 1087
+        width: 238
+        height: 178
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Dragon
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 1288
+        width: 218
+        height: 235
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,7 +272,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SmilelyFace
+    - name: SmileyFace
       rect:
         serializedVersion: 2
         x: 1341
@@ -186,103 +302,23 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: TrainBench
+    - name: Ellipses
       rect:
         serializedVersion: 2
-        x: 597
-        y: 1301
-        width: 92
-        height: 226
+        x: 1856
+        y: 1847
+        width: 119
+        height: 22
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpaceShip
+    - name: Expensive
       rect:
         serializedVersion: 2
-        x: 527
-        y: 1069
-        width: 234
-        height: 171
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scenery
-      rect:
-        serializedVersion: 2
-        x: 783
-        y: 1333
-        width: 234
-        height: 148
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Mountain
-      rect:
-        serializedVersion: 2
-        x: 1043
-        y: 1327
-        width: 243
-        height: 177
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: GameController
-      rect:
-        serializedVersion: 2
-        x: 1301
-        y: 1303
-        width: 208
-        height: 176
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Dragon
-      rect:
-        serializedVersion: 2
-        x: 1551
-        y: 1288
-        width: 218
-        height: 235
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wizard
-      rect:
-        serializedVersion: 2
-        x: 1805
-        y: 1277
-        width: 243
-        height: 260
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Ring
-      rect:
-        serializedVersion: 2
-        x: 1848
-        y: 1071
-        width: 136
-        height: 169
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Necklace
-      rect:
-        serializedVersion: 2
-        x: 1552
-        y: 1087
-        width: 240
-        height: 178
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: PlateWithFood
-      rect:
-        serializedVersion: 2
-        x: 1293
-        y: 1077
-        width: 227
-        height: 123
+        x: 775
+        y: 854
+        width: 244
+        height: 82
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -290,9 +326,29 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1064
-        y: 1070
+        y: 1069
         width: 200
         height: 188
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ThoughtBubbleRightTail
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 1093
+        width: 464
+        height: 333
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ThoughtBubbleLeftTail
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 735
+        width: 470
+        height: 334
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

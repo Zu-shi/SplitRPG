@@ -15,6 +15,7 @@ public class LevelLoaderScript : _Mono {
 		if(debugTileVectors) {
 			Debug.Log("Our tile vector: " + tileX + " , " + tileY);
 			Debug.Log("Player's tile vector: " + Globals.playerRight.tileX + " , " + Globals.playerRight.tileY);
+			debugTileVectors = false;
 		}
 	
 	}
