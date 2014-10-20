@@ -48,6 +48,13 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 			biPrefab = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + "Portal1" + ".prefab", typeof(GameObject)) as GameObject;
 			senderPrefab = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + "SendPortal2" + ".prefab", typeof(GameObject)) as GameObject;
 			receiverPrefab = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + "ReceivePortal2" + ".prefab", typeof(GameObject)) as GameObject;
+			//Debug.Log("TEST biPrefab: " + pathPrefix + mapName + "Portal1" + ".prefab");
+			//Debug.Log("TEST senderPrefab: " + pathPrefix + mapName + "SendPortal2" + ".prefab");
+			//Debug.Log("TEST receiverPrefab: " + pathPrefix + mapName + "ReceivePortal2" + ".prefab");
+
+			//Debug.Log ("receiverPrefab " + receiverPrefab.name);
+			//Debug.Log ("senderPrefab " + senderPrefab.name);
+			//Debug.Log ("biPrefab " + biPrefab.name);
 
 			//senderPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/SendPortal.prefab", typeof(GameObject)) as GameObject;
 			//receiverPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/ReceivePortal.prefab", typeof(GameObject)) as GameObject;

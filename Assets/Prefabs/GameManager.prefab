@@ -264,10 +264,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 60dd90af1b12a427ca7edef456d8a6f8, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Priority: 128
   DopplerLevel: 1
@@ -457,8 +457,8 @@ MonoBehaviour:
   level2Theme: {fileID: 0}
   debugLocation: 
   levelPrefabs:
-  - {fileID: 100360, guid: 34497236e9ca84f7a874a8f49a4d3a83, type: 2}
-  - {fileID: 105706, guid: 3520fdcd1821d4fb8bf366663283dd70, type: 2}
+  - {fileID: 100522, guid: 4b44ef9e19545461aa9e00e82160fc03, type: 2}
+  - {fileID: 100592, guid: 672b7b4fa26ea4f3284caeb78829254f, type: 2}
   loadOnStart: 1
   preloadedLeftLevel: {fileID: 100732, guid: c3db91af971144e7987b7ec542266ef8, type: 2}
   preloadedRightLevel: {fileID: 104406, guid: fae586b1b532a4e26b66fd9d859e9647, type: 2}
@@ -475,6 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Music:
   - {fileID: 0}
+  musicClip: {fileID: 0}
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -510,6 +511,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5d5af2d782c4ea4ab7f5a02e4d4025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  convertSpritesToPrefabs: 0
+  J1Left: 0
+  J1Right: 0
+  J2Left: 0
+  J2Right: 1
+  S: 0
 --- !u!114 &11400026
 MonoBehaviour:
   m_ObjectHideFlags: 1
