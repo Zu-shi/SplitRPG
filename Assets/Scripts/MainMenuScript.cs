@@ -16,16 +16,21 @@ public class MainMenuScript : _Mono {
 	GameObject cloud;
 	FaderScript fader;
 
+	SoundManagerScript soundManager;
+
 	public void Start () {
 		this.state = State.Menu;
 		cloud = GameObject.Find ("BGCloud");
 		fader = GameObject.Find("Fader").GetComponent<FaderScript>();
 		fader.guiAlpha = 1;
+		fader.fadeRate = .01f;
 		fader.FadeUp(null);
+
+		soundManager = gameObject.GetComponent<SoundManagerScript>();
 	}
 
 	public void Update(){
-		cloud.renderer.material.mainTextureOffset += new Vector2(0, .0004f);
+		cloud.renderer.material.mainTextureOffset += new Vector2(0, .00015f);
 	}
 
 	public void OnGUI () {

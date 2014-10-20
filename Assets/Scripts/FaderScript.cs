@@ -19,7 +19,7 @@ public class FaderScript : _Mono {
 		guiAlpha = 1;
 		lockFade = false;
 		targetAlpha = guiAlpha;
-		fadeRate = .05f;
+		fadeRate = .02f;
 
 		// Center on screen
 		x = y = .5f;
