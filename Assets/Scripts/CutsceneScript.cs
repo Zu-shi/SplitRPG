@@ -24,6 +24,8 @@ public abstract class CutsceneScript : _Mono {
 	
 	public GameObject BackgroundPrefab;
 	
+	public float fadeRate = 0.01f;
+	
 	private GameObject background;
 	private Transform parent;
 	

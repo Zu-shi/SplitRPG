@@ -8,8 +8,6 @@ public class TrainCutsceneScript : CutsceneScript {
 	[Tooltip("All wait times are some multiple of this.")]
 	public float standardBubbleDisplayTime = 2.0f;
 
-	public float fadeRate = 0.5f;
-
 	public GameObject askForSeatBubble;
 	public GameObject smileyFaceBubbleLeftTail;
 	public GameObject smileyFaceBubbleRightTail;
