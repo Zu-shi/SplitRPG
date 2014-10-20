@@ -219,7 +219,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: .300000012
-  far clip plane: 1000
+  far clip plane: 20000
   field of view: 60
   orthographic: 1
   orthographic size: 10
@@ -457,8 +457,8 @@ MonoBehaviour:
   level2Theme: {fileID: 0}
   debugLocation: 
   levelPrefabs:
-  - {fileID: 100522, guid: 4b44ef9e19545461aa9e00e82160fc03, type: 2}
-  - {fileID: 100592, guid: 672b7b4fa26ea4f3284caeb78829254f, type: 2}
+  - {fileID: 100516, guid: 473de786648a6eb4699c8cd766e0164a, type: 2}
+  - {fileID: 100496, guid: a7b40782d5b144b4fbaca3e039fda8ba, type: 2}
   loadOnStart: 1
   preloadedLeftLevel: {fileID: 100732, guid: c3db91af971144e7987b7ec542266ef8, type: 2}
   preloadedRightLevel: {fileID: 104406, guid: fae586b1b532a4e26b66fd9d859e9647, type: 2}

@@ -11,7 +11,12 @@ public class CustomTiledImporterCutscenes : Tiled2Unity.ICustomTiledImporter{
 		if (props.ContainsKey("Cutscene")) {
 			GameObject pref = AssetDatabase.LoadAssetAtPath(pathToPrefabs + props["Cutscene"] + ".prefab", typeof(GameObject) ) as GameObject;
 
-			MakePrefab(gameObject, pref, props["Cutscene"]);
+			if(pref == null) {
+				Debug.LogError("Could not load cutscene prefab: " + props["Cutscene"]);
+			}
+			else {
+				MakePrefab(gameObject, pref, props["Cutscene"]);
+			}
 		}
 	}
 	
