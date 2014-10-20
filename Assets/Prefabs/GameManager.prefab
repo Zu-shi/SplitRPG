@@ -223,7 +223,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 10
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 2
@@ -457,8 +457,12 @@ MonoBehaviour:
   level2Theme: {fileID: 0}
   debugLocation: 
   levelPrefabs:
+  - {fileID: 100360, guid: 34497236e9ca84f7a874a8f49a4d3a83, type: 2}
+  - {fileID: 105706, guid: 3520fdcd1821d4fb8bf366663283dd70, type: 2}
   - {fileID: 100516, guid: 473de786648a6eb4699c8cd766e0164a, type: 2}
   - {fileID: 100496, guid: a7b40782d5b144b4fbaca3e039fda8ba, type: 2}
+  - {fileID: 100376, guid: 57fc9091eb0bb48cab4d91f690e64628, type: 2}
+  - {fileID: 100366, guid: 3ff0a3569d19341c584a49a105406c6e, type: 2}
   loadOnStart: 1
   preloadedLeftLevel: {fileID: 100732, guid: c3db91af971144e7987b7ec542266ef8, type: 2}
   preloadedRightLevel: {fileID: 104406, guid: fae586b1b532a4e26b66fd9d859e9647, type: 2}

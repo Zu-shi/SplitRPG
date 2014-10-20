@@ -169,7 +169,7 @@ public class RestaurantCutsceneScript : CutsceneScript {
 
 		TearDownScene();
 		leftPlayer.GetComponent<CharacterMovementScript>().canJump = true;
-		rightPlayer.GetComponent<CharacterMovementScript>().canPush = true;
+		rightPlayer.GetComponent<CharacterMovementScript>().canPushHeavy = true;
 
 		Move(leftPlayer, Direction.UP, 0);
 		Move(rightPlayer, Direction.UP, 0);
