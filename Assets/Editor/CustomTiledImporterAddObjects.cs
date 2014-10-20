@@ -43,7 +43,8 @@ class CustomTiledImporterAddObjects : Tiled2Unity.ICustomTiledImporter{
 			{
 				string name = obj.gameObject.name.ToLower();
 				
-				Debug.Log(name);
+				//Debug.Log(name);
+				//Debug.Log(mapName);
 				if (!Utils.assert(prefabMap.ContainsKey(name))){Debug.LogError ("Prefab with name " + name + " cannot be found.");}
 				
 				GameObject item = AssetDatabase.LoadAssetAtPath(pathPrefix + mapName + prefabMap[name] + ".prefab", typeof(GameObject)) as GameObject;
