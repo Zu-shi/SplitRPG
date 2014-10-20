@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 10/19/2014 2:47:20 PM-->
+<!--Last exported: 10/19/2014 7:02:24 PM-->
 <Tiled2Unity version="0.9.4.5">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J1Right" sortingLayerName="" sortingOrder="0" />
   <Prefab name="Journey1_v2RightSide" scale="1">
@@ -684,7 +684,7 @@
       <GameObject name="LevelLoader" x="1728" y="-128">
         <Property name="canJump" value="" />
         <Property name="canPush" value="" />
-        <Property name="levelsToLoad" value="J2Left_v4,J2Right_v4" />
+        <Property name="levelsToLoad" value="J2Left_v5,J2Right_v5" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>

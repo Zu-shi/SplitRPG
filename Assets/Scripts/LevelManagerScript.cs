@@ -151,7 +151,7 @@ public class LevelManagerScript : _Mono{
 			return LoadLevels(left, right, reloadPersistent);
 		}
 		else{
-			Debug.Log("Failed to load levels: " + leftLevelName + ", " + rightLevelName);
+			Debug.LogError("Failed to load levels: " + leftLevelName + ", " + rightLevelName);
 			return false;
 		}
 	}
