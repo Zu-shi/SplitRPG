@@ -41,7 +41,7 @@ public class LevelManagerScript : _Mono{
 		}
 	}
 
-	private Transform leftSpawn {
+	public Transform leftSpawn {
 		get {
 			if(debugLocation.Trim() == ""){
 				return Utils.FindChildRecursive(currentLeftLevelPrefab, "Starting").GetChild(0);
@@ -58,7 +58,7 @@ public class LevelManagerScript : _Mono{
 		}
 	}
 	
-	private Transform rightSpawn {
+	public Transform rightSpawn {
 		get {
 			if(debugLocation.Trim() == ""){
 				return Utils.FindChildRecursive(currentRightLevelPrefab, "Starting").GetChild(0);
@@ -75,8 +75,14 @@ public class LevelManagerScript : _Mono{
 		}
 	}
 
+	public bool EnableLevels(bool enabled = true) {
+		currentLeftLevelPrefab.SetActive(enabled);
+		currentRightLevelPrefab.SetActive(enabled);
+		return enabled;
+	}
+
 	public bool SaveCheckpoint() {
-		Debug.Log("Saving checkpoint...");
+		//Debug.Log("Saving checkpoint...");
 		PlayerPrefs.SetFloat("LeftX", Globals.playerLeft.tileX);
 		PlayerPrefs.SetFloat("LeftY", Globals.playerLeft.tileY);
 		PlayerPrefs.SetFloat("RightX", Globals.playerRight.tileX);
@@ -154,7 +160,7 @@ public class LevelManagerScript : _Mono{
 
 		PlayLevelTheme(leftLevel, rightLevel);
 
-		Debug.Log("Loading levels...");
+		//Debug.Log("Loading levels...");
 		if (leftLevel == null || rightLevel == null) {
 			Debug.LogError("Cannont load null level.");
 			return false;
@@ -163,14 +169,15 @@ public class LevelManagerScript : _Mono{
 		if(reloadPersistent) {
 			_cachedPersistentObjects = GameObject.FindGameObjectsWithTag("Persistent");
 			foreach(GameObject go in _cachedPersistentObjects) {
+				//Debug.Log("Caching: " + go.name);
 				go.transform.parent = null;
 				go.tag = null;
 			}
 		}
-
+		
 		GameObject left = (GameObject)GameObject.Instantiate(leftLevel, Vector3.zero, Quaternion.identity);
 		GameObject right = (GameObject)GameObject.Instantiate(rightLevel, Vector3.zero, Quaternion.identity);
-		
+
 		if ( Utils.FindChildRecursive(left, "Pushblocks(Default)") &&
 		    Utils.FindChildRecursive(right, "Pushblocks(Default)") ) {
 			LinkPushblocks(left, right);
@@ -180,17 +187,9 @@ public class LevelManagerScript : _Mono{
 			LinkSwitches(left, right);
 		}
 
-		if(reloadPersistent) {
-			_cachedPersistentObjects = GameObject.FindGameObjectsWithTag("Persistent");
-			foreach(GameObject go in _cachedPersistentObjects) {
-				Debug.Log("Caching: " + go.name);
-				go.transform.parent = null;
-				go.tag = null;
-			}
-		}
-
 		left.SetActive(false);
 		right.SetActive(false);
+
 		Globals.playerLeft.gameObject.SetActive(false);
 		Globals.playerRight.gameObject.SetActive(false);
 		Globals.roomManager.enabled = false;
@@ -236,6 +235,7 @@ public class LevelManagerScript : _Mono{
 
 	private void FixCachedObjects() {
 		GameObject[] uncachedObjects = GameObject.FindGameObjectsWithTag("Persistent");
+
 		//Debug.LogError(uncachedObjects.Length + "YAYAYAY");
 		foreach(GameObject uncached in uncachedObjects) {
 			string name = uncached.name;
@@ -279,7 +279,7 @@ public class LevelManagerScript : _Mono{
 
 	// Helper function for callback
 	private void FinishMoving() {
-		Debug.Log("Finishing movement...");
+		//Debug.Log("Finishing movement...");
 		Globals.roomManager.MoveCamerasToPoint( new Vector2(rightSpawn.position.x, rightSpawn.position.y));
 		SaveCheckpoint();
 	}

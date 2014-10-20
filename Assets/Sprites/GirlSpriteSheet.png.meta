@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 87078dacdc45544388f96c65888a09c8
+guid: 257d5c206842c504a9429b9d82d08271
 TextureImporter:
   serializedVersion: 2
   mipmaps:
@@ -42,7 +42,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: GirlWalkDown0
+    - name: GirlWalkDown_1
       rect:
         serializedVersion: 2
         x: 0
@@ -50,9 +50,9 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: GirlWalkDown1
+    - name: GirlWalkDown_0
       rect:
         serializedVersion: 2
         x: 256
@@ -60,9 +60,9 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: GirlWalkDown2
+    - name: GirlWalkDown_2
       rect:
         serializedVersion: 2
         x: 512
@@ -70,9 +70,29 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: GirlWalkLeft0
+    - name: GirlSitRight
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1152
+        width: 256
+        height: 384
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GirlSitLeft
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1152
+        width: 256
+        height: 384
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GirlWalkLeft_1
       rect:
         serializedVersion: 2
         x: 0
@@ -80,9 +100,9 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: GirlWalkLeft1
+    - name: GirlWalkLeft_0
       rect:
         serializedVersion: 2
         x: 256
@@ -90,9 +110,9 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: GirlWalkLeft2
+    - name: GirlWalkLeft_2
       rect:
         serializedVersion: 2
         x: 512
@@ -100,9 +120,29 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: GirlWalkUp0
+    - name: GirlGiveGift_0
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 768
+        width: 256
+        height: 384
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GirlGiveGift_1
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 768
+        width: 256
+        height: 384
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GirlWalkUp_1
       rect:
         serializedVersion: 2
         x: 0
@@ -110,9 +150,9 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: GirlWalkUp1
+    - name: GirlWalkUp_0
       rect:
         serializedVersion: 2
         x: 256
@@ -120,9 +160,9 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: GirlWalkUp2
+    - name: GirlWalkUp_2
       rect:
         serializedVersion: 2
         x: 512
@@ -130,9 +170,9 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: GirlWalkRight0
+    - name: GirlWalkRight_1
       rect:
         serializedVersion: 2
         x: 0
@@ -140,9 +180,9 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: GirlWalkRight1
+    - name: GirlWalkRight_0
       rect:
         serializedVersion: 2
         x: 256
@@ -150,17 +190,17 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: GirlWalkRight2
+    - name: GirlWalkRight_2
       rect:
         serializedVersion: 2
-        x: 512
+        x: 515
         y: 0
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

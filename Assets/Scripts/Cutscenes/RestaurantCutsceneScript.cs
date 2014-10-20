@@ -25,6 +25,13 @@ public class RestaurantCutsceneScript : CutsceneScript {
 		
 		CheckPrefabLinks();
 
+		SetupScene();
+
+		PlayAnimation(leftPlayer, "SitRight");
+		PlayAnimation(rightPlayer, "SitLeft");
+
+		yield return new WaitForSeconds(standardBubbleDisplayTime * 2.0f);
+
 		// Girl says "Good chicken"
 		b = ShowSpeechBubble(leftPlayer, plateWithChickenBubble);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 1.5f);
@@ -62,6 +69,10 @@ public class RestaurantCutsceneScript : CutsceneScript {
 
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
+
+		
+		PlayAnimation(leftPlayer, "WalkDownAnimation");
+		PlayAnimation(rightPlayer, "WalkDownAnimation");
 
 		waitTime = Move(leftPlayer, Direction.DOWN);
 		waitTime = Move(rightPlayer, Direction.DOWN);
@@ -147,6 +158,28 @@ public class RestaurantCutsceneScript : CutsceneScript {
 		
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
+
+		float tmp = rightCamera.fader.fadeRate;
+		rightCamera.fader.fadeRate = fadeRate;
+		leftCamera.fader.fadeRate = fadeRate;
+		FadeCameraOut(leftCamera);
+		waitTime = FadeCameraOut(rightCamera);
+
+		yield return new WaitForSeconds(waitTime);
+
+		TearDownScene();
+		leftPlayer.GetComponent<CharacterMovementScript>().canJump = true;
+		rightPlayer.GetComponent<CharacterMovementScript>().canPush = true;
+
+		Move(leftPlayer, Direction.UP, 0);
+		Move(rightPlayer, Direction.UP, 0);
+
+		FadeCameraIn(leftCamera);
+		waitTime = FadeCameraIn(rightCamera);
+		yield return new WaitForSeconds(waitTime);
+
+		rightCamera.fader.fadeRate = tmp;
+		leftCamera.fader.fadeRate = tmp;
 
 		End();
 	}

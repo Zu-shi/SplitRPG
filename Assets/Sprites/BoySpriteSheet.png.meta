@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2c14ba0b00a3747cdb5ada99f061b9a8
+guid: 3dc07a8157f6c8b4d82b786ce626ed3d
 TextureImporter:
   serializedVersion: 2
   mipmaps:
@@ -42,7 +42,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: BoyWalkDown0
+    - name: BoyWalkDown_1
       rect:
         serializedVersion: 2
         x: 0
@@ -50,9 +50,9 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: BoyWalkDown1
+    - name: BoyWalkDown_0
       rect:
         serializedVersion: 2
         x: 256
@@ -60,9 +60,9 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: BoyWalkDown2
+    - name: BoyWalkDown_2
       rect:
         serializedVersion: 2
         x: 512
@@ -70,9 +70,39 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: BoyWalkLeft0
+    - name: BoySitRight
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1152
+        width: 256
+        height: 384
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BoySitLeft
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1152
+        width: 256
+        height: 384
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BoySitVR
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1152
+        width: 256
+        height: 384
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BoyWalkLeft_1
       rect:
         serializedVersion: 2
         x: 0
@@ -80,9 +110,9 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: BoyWalkLeft1
+    - name: BoyWalkLeft_0
       rect:
         serializedVersion: 2
         x: 256
@@ -90,9 +120,9 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: BoyWalkLeft2
+    - name: BoyWalkLeft_2
       rect:
         serializedVersion: 2
         x: 512
@@ -100,9 +130,29 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: BoyWalkUp0
+    - name: BoyGiveGift_0
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 768
+        width: 256
+        height: 384
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BoyGiveGift_1
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 768
+        width: 256
+        height: 384
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BoyWalkUp_1
       rect:
         serializedVersion: 2
         x: 0
@@ -110,9 +160,9 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: BoyWalkUp1
+    - name: BoyWalkUp_0
       rect:
         serializedVersion: 2
         x: 256
@@ -120,9 +170,9 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: BoyWalkUp2
+    - name: BoyWalkUp_2
       rect:
         serializedVersion: 2
         x: 512
@@ -130,9 +180,9 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: BoyWalkRight0
+    - name: BoyWalkRight_1
       rect:
         serializedVersion: 2
         x: 0
@@ -140,9 +190,9 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: BoyWalkRight1
+    - name: BoyWalkRight_0
       rect:
         serializedVersion: 2
         x: 256
@@ -150,9 +200,9 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: BoyWalkRight2
+    - name: BoyWalkRight_2
       rect:
         serializedVersion: 2
         x: 512
@@ -160,7 +210,7 @@ TextureImporter:
         width: 256
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

@@ -233,10 +233,10 @@ public class CharacterMovementScript : MovementScript {
 		BoxCollider2D nextRoom = Globals.roomManager.GetRoomAtPoint(jumpCoords, roomLayer);
 
 		if(currentRoom != nextRoom) { // The room we are in is not the same as the room we will enter.
-			Debug.Log("Rooms are different.");
+			//Debug.Log("Rooms are different.");
 			return true;
 		} else {
-			Debug.Log("Rooms are the same.");
+			//Debug.Log("Rooms are the same.");
 			return false;
 		}
 	}

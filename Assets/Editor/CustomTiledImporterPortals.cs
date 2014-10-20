@@ -9,6 +9,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 
 	private List<string> senders = new List<string>();
 	private List<string> receivers = new List<string>();
+	private List<int> faders = new List<int>();
 	private string pathPrefix = PrefabMapper.PrefabLocation;
 
 	private GameObject senderPrefab;
@@ -36,6 +37,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 						Utils.assert(prefabMap != null);
 						mapName = "";
 					}
+					//Debug.Log("MapName: " + mapName);
 				}
 
 			}
@@ -59,7 +61,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 			//senderPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/SendPortal.prefab", typeof(GameObject)) as GameObject;
 			//receiverPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/ReceivePortal.prefab", typeof(GameObject)) as GameObject;
 			//biPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/BidirectionalPortal.prefab", typeof(GameObject)) as GameObject;
-			loaderPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/LevelLoader.prefab", typeof(GameObject)) as GameObject;
+			loaderPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/TestObjects/Portals/LevelLoader.prefab", typeof(GameObject)) as GameObject;
 		}
 
 		if(parent.name.Contains("Unidirectional Portals") && props.ContainsKey("levelsToLoad")) {
@@ -67,12 +69,20 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 			LevelLoaderScript tmp = gameObject.GetComponent<LevelLoaderScript>();
 			tmp.leftLevel = props["levelsToLoad"].Split(",".ToCharArray())[0];
 			tmp.rightLevel = props["levelsToLoad"].Split(",".ToCharArray())[1];
+			if(props.ContainsKey("canPush"))
+				tmp.canPush = true;
+			if(props.ContainsKey("canJump"))
+				tmp.canJump = true;
+
 			return;
 		}
 		if(parent.name.Contains("Unidirectional Portals") && props.ContainsKey("target")) {
 			gameObject = MakePrefab(gameObject, senderPrefab);
 			senders.Add(gameObject.name);
 			receivers.Add(props["target"]);
+			if(props.ContainsKey("fade")) {
+				faders.Add(receivers.Count - 1);
+			}
 		}
 		if(parent.name.Contains("Unidirectional Portals") && !props.ContainsKey("target")) {
 			gameObject = MakePrefab(gameObject, receiverPrefab);
@@ -109,6 +119,11 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 			}
 
 			sender.GetComponent<PortalSenderScript>().target = receiver.GetComponent<PortalReceiverScript>();
+
+			if(faders.Contains(i)) {
+				sender.GetComponent<PortalSenderScript>().fadeTransition = true;
+			}
+			Debug.LogWarning("Portal connection: " + sender.name + ", " + receiver.name);
 		}
 	}
 

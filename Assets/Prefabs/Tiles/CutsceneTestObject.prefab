@@ -29,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 56.4428329, y: -228.188049, z: 0}
+  m_LocalPosition: {x: 9.46491718, y: 4.55403042, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -57,16 +57,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggered: 0
+  BackgroundPrefab: {fileID: 0}
   standardBubbleDisplayTime: 2
   cameraFadeRate: .100000001
-  girlFaceBubble: {fileID: 0}
-  boyFaceBubble: {fileID: 0}
-  eatingDinerBubble: {fileID: 0}
-  playingVideoGamesBubble: {fileID: 0}
-  sittingOnParkBenchBubble: {fileID: 0}
-  sittingOnTrainBubble: {fileID: 0}
-  sadFaceBubbleLeftTail: {fileID: 0}
-  sadFaceBubbleRightTail: {fileID: 0}
+  girlFaceBubble: {fileID: 100004, guid: 78ad934242688a947a3a9bb0f2ea80cd, type: 2}
+  boyFaceBubble: {fileID: 100004, guid: 6bf20c497e2600c4b8081c5b463c2863, type: 2}
+  eatingDinerBubble: {fileID: 100004, guid: d170781d29e7a7f409f03411f8b59178, type: 2}
+  playingVideoGamesBubble: {fileID: 100004, guid: 1578cdadf8318804f8fbec3431ba308c,
+    type: 2}
+  sittingOnParkBenchBubble: {fileID: 100004, guid: 8dc5eb3cd6689a24295a4e5179117197,
+    type: 2}
+  sittingOnTrainBubble: {fileID: 100004, guid: d92471057e80e634587043f0be764992, type: 2}
+  sadFaceBubbleLeftTail: {fileID: 100004, guid: 39315e497aaa24145979572dc58097a2,
+    type: 2}
+  sadFaceBubbleRightTail: {fileID: 100004, guid: b715e82e06cf5df4dbfa875bb2663c49,
+    type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,14 +94,16 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebb794b581f7dcf4892c86046195355e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   triggered: 0
+  BackgroundPrefab: {fileID: 100000, guid: c1259fd0a5bc8724a8b9a19f7ebf1ff2, type: 2}
   sittingAnimationName: Sitting
   standardBubbleDisplayTime: 1.60000002
+  fadeRate: .00999999978
   askForSeatBubble: {fileID: 100006, guid: 9e908ebc5b7e9484cbed5157f6352c3c, type: 2}
   smileyFaceBubbleLeftTail: {fileID: 100004, guid: e3ca98d0e045b8c4c926209ffcdb05e0,
     type: 2}
@@ -123,7 +130,10 @@ MonoBehaviour:
   iLikeSciFiBubbleLeftTail: {fileID: 100006, guid: 5152e83e91461fc44a52c80b6f1a74a3,
     type: 2}
   spaceSuitBubble: {fileID: 100006, guid: 9464d370acd06d74eb5efa809e17cb8a, type: 2}
-  elipsiesBubble: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf, type: 2}
+  ellipsiesBubbleLeftTail: {fileID: 100004, guid: 02db6c949db560e45a7b169d07552323,
+    type: 2}
+  ellipsiesBubbleRightTail: {fileID: 100004, guid: 91516b638c70b0b4aa98ac59cc56602c,
+    type: 2}
   coffeeShopBubble: {fileID: 100006, guid: dc95033ba87bb884a97dd2fe7acf7f0f, type: 2}
   fivePmBubble: {fileID: 100006, guid: fdbb9f8d6894dd9499b51ca51d24ba87, type: 2}
 --- !u!114 &11400006
@@ -132,32 +142,39 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90a61d22437d2614f9f6dee0c0f4210e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   triggered: 0
+  BackgroundPrefab: {fileID: 0}
   standardBubbleDisplayTime: 2
-  confusionBubble: {fileID: 0}
-  vrHeadSetBubble: {fileID: 0}
-  expensiveBubbleLeftTail: {fileID: 0}
-  expensiveBubbleRightTail: {fileID: 0}
-  smileyFaceBubbleRightTail: {fileID: 0}
-  cyberpunkGameBubble: {fileID: 0}
-  wizardGameBubble: {fileID: 0}
-  playingWithVrBubble: {fileID: 0}
-  angryBubbleLeftTail: {fileID: 0}
-  angryBubbleRightTail: {fileID: 0}
-  breadBubble: {fileID: 0}
-  catFoodBubble: {fileID: 0}
-  newCarBubble: {fileID: 0}
-  exclaimationMarkBubble: {fileID: 0}
-  noNewCarBubble: {fileID: 0}
-  oldCarBubble: {fileID: 0}
-  noOldCarBubble: {fileID: 0}
-  elipsesBubbleLeftTail: {fileID: 0}
-  elipsesBubbleRightTail: {fileID: 0}
+  confusionBubble: {fileID: 100006, guid: fff69e694a1fee448848e02317c592f8, type: 2}
+  vrHeadSetBubble: {fileID: 100006, guid: df354bf89db618d41ba6713974ee3eb5, type: 2}
+  expensiveBubbleLeftTail: {fileID: 100006, guid: b0865331a4f51a14cb6d7b54f043bf27,
+    type: 2}
+  expensiveBubbleRightTail: {fileID: 100006, guid: 70f995818c1c3eb41a73c3560d4bdbd5,
+    type: 2}
+  smileyFaceBubbleRightTail: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
+    type: 2}
+  cyberpunkGameBubble: {fileID: 100006, guid: a15fc47c884d54b4299c78eb75f3435d, type: 2}
+  wizardGameBubble: {fileID: 100006, guid: 11c08fae1ac816a42b8de943387914d1, type: 2}
+  playingWithVrBubble: {fileID: 100006, guid: cb1e242ff48d0f54ebb5dbe09c80acdc, type: 2}
+  angryBubbleLeftTail: {fileID: 100004, guid: 70db5f863aff15d41afda527cdf2c649, type: 2}
+  angryBubbleRightTail: {fileID: 100004, guid: 627b1577921c22b45aee22fade024850, type: 2}
+  breadBubble: {fileID: 100006, guid: 0560aa7735c547b41876c736dadb2f8a, type: 2}
+  catFoodBubble: {fileID: 100006, guid: 2ba54bdaa508ade418b7d57a482bbdd7, type: 2}
+  newCarBubble: {fileID: 100006, guid: 060b9b361d359364eb050307f57ffaab, type: 2}
+  exclaimationMarkBubble: {fileID: 100004, guid: fa8bebcb77fb53042b5821158a9d621e,
+    type: 2}
+  noNewCarBubble: {fileID: 100006, guid: ceccd9ff714e397409517d3c1aefd510, type: 2}
+  oldCarBubble: {fileID: 100006, guid: 11d6af77d133e794499b0348ded07334, type: 2}
+  noOldCarBubble: {fileID: 100006, guid: 665e5e19c91cdb449a046d8ea64aae22, type: 2}
+  elipsesBubbleLeftTail: {fileID: 100004, guid: 02db6c949db560e45a7b169d07552323,
+    type: 2}
+  elipsesBubbleRightTail: {fileID: 100004, guid: 91516b638c70b0b4aa98ac59cc56602c,
+    type: 2}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,6 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggered: 0
+  BackgroundPrefab: {fileID: 0}
   standardBubbleDisplayTime: 2
   plateWithChickenBubble: {fileID: 100004, guid: f2e64d0872582654387c3ed3340572a0,
     type: 2}

@@ -9,7 +9,6 @@ public class CustomTiledImporterObjectPersistence : Tiled2Unity.ICustomTiledImpo
 		//Debug.Log("Handling " + gameObject.name);
 		if(props.ContainsKey("Persistent")) {
 			gameObject.tag = "Persistent";
-			Debug.LogWarning("added persistent objects");
 		}
 	}
 

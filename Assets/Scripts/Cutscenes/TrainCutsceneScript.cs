@@ -23,7 +23,8 @@ public class TrainCutsceneScript : CutsceneScript {
 	public GameObject iLikeSciFiBubbleRightTail;
 	public GameObject iLikeSciFiBubbleLeftTail;
 	public GameObject spaceSuitBubble;
-	public GameObject elipsiesBubble;
+	public GameObject ellipsiesBubbleLeftTail;
+	public GameObject ellipsiesBubbleRightTail;
 	public GameObject coffeeShopBubble;
 	public GameObject fivePmBubble;
 
@@ -36,7 +37,20 @@ public class TrainCutsceneScript : CutsceneScript {
 
 		CheckPrefabLinks();
 
+		SetupScene();
+
+		Move(leftPlayer, Direction.RIGHT, 0);
+		PlayAnimation(leftPlayer, "SitRight");
+		Move(rightPlayer, Direction.UP, 0);
+
 		yield return new WaitForSeconds(standardBubbleDisplayTime * 2.0f);
+
+		// Boy walks to occupied room
+		waitTime = Move(rightPlayer, Direction.LEFT, 5);
+		yield return new WaitForSeconds(waitTime);
+
+		waitTime = Move(rightPlayer, Direction.UP, 0);
+		yield return new WaitForSeconds(waitTime + standardBubbleDisplayTime);
 
 		// Can I sit here?
 		GameObject bubble1 = ShowSpeechBubble(rightPlayer, askForSeatBubble);
@@ -49,8 +63,22 @@ public class TrainCutsceneScript : CutsceneScript {
 		bubble1 = ShowSpeechBubble(leftPlayer, smileyFaceBubbleLeftTail);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
-		// Pause.
 		HideSpeechBubble(bubble1);
+
+		// Boy moves to seat and sits.
+		waitTime = Move(rightPlayer, Direction.UP, 2);
+		yield return new WaitForSeconds(waitTime);
+
+		waitTime = Move(rightPlayer, Direction.RIGHT, 1);
+		yield return new WaitForSeconds(waitTime + standardBubbleDisplayTime / 4.0f);
+
+		// Boy turn around and sit down
+		waitTime = Move(rightPlayer, Direction.LEFT, 0);
+		yield return new WaitForSeconds(waitTime + standardBubbleDisplayTime / 4.0f);
+
+		PlayAnimation(rightPlayer, "SitLeft");
+
+		// Pause.
 		yield return new WaitForSeconds(2.0f * standardBubbleDisplayTime);
 
 		// Do you like the scenery?
@@ -137,6 +165,9 @@ public class TrainCutsceneScript : CutsceneScript {
 		bubble1 = ShowSpeechBubble(rightPlayer, spaceSuitBubble);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
+		float tmp = rightCamera.fader.fadeRate;
+		rightCamera.fader.fadeRate = fadeRate;
+		leftCamera.fader.fadeRate = fadeRate;
 		waitTime = FadeCameraOut(rightCamera);
 		waitTime = FadeCameraOut(leftCamera);
 		yield return new WaitForSeconds(waitTime);
@@ -150,8 +181,15 @@ public class TrainCutsceneScript : CutsceneScript {
 		// Somehow signal the train is stopping.
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
-		waitTime = Move(leftPlayer, Direction.DOWN, 3);
-		waitTime = Move(rightPlayer, Direction.DOWN, 3);
+		PlayAnimation(leftPlayer, "WalkDownAnimation");
+		PlayAnimation(rightPlayer, "WalkDownAnimation");
+
+		waitTime = Move(leftPlayer, Direction.RIGHT);
+		waitTime = Move(rightPlayer, Direction.LEFT);
+		yield return new WaitForSeconds(waitTime);
+
+		waitTime = Move(leftPlayer, Direction.DOWN, 2);
+		waitTime = Move(rightPlayer, Direction.DOWN, 2);
 		yield return new WaitForSeconds(waitTime);
 
 		waitTime = Move(leftPlayer, Direction.LEFT);
@@ -163,14 +201,16 @@ public class TrainCutsceneScript : CutsceneScript {
 		Move(leftPlayer, Direction.RIGHT, 0);
 		Move(rightPlayer, Direction.LEFT, 0);
 
-		bubble1 = ShowSpeechBubble(leftPlayer, elipsiesBubble);
+		bubble1 = ShowSpeechBubble(leftPlayer, ellipsiesBubbleLeftTail);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
 		HideSpeechBubble(bubble1);
-		bubble1 = ShowSpeechBubble(rightPlayer, elipsiesBubble);
+		bubble1 = ShowSpeechBubble(rightPlayer, ellipsiesBubbleRightTail);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
 		HideSpeechBubble(bubble1);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
+
 		bubble1 = ShowSpeechBubble(leftPlayer, coffeeShopBubble);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
@@ -195,17 +235,24 @@ public class TrainCutsceneScript : CutsceneScript {
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
 		HideSpeechBubble(bubble1);
-		Move(leftPlayer, Direction.LEFT, 6);
-		Move(rightPlayer, Direction.RIGHT, 6);
+		Move(leftPlayer, Direction.LEFT, 4);
+		Move(rightPlayer, Direction.RIGHT, 4);
 		yield return new WaitForSeconds(0.5f);
 
 		waitTime = FadeCameraOut(leftCamera);
 		FadeCameraOut(rightCamera);
 		yield return new WaitForSeconds(waitTime);
 
+		Move(leftPlayer, Direction.UP, 0);
+		Move(rightPlayer, Direction.UP, 0);
+		TearDownScene();
+
 		waitTime = FadeCameraIn(leftCamera);
 		FadeCameraIn(rightCamera);
 		yield return new WaitForSeconds(waitTime);
+
+		rightCamera.fader.fadeRate = tmp;
+		leftCamera.fader.fadeRate = tmp;
 
 		End();
 	}
@@ -226,7 +273,8 @@ public class TrainCutsceneScript : CutsceneScript {
 		   || iLikeSciFiBubbleRightTail == null
 		   || iLikeSciFiBubbleLeftTail == null
 		   || spaceSuitBubble == null
-		   || elipsiesBubble == null
+		   || ellipsiesBubbleLeftTail == null
+		   || ellipsiesBubbleRightTail == null
 		   || coffeeShopBubble == null
 		   || fivePmBubble == null
 		   ) {

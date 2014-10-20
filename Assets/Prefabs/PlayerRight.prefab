@@ -35,6 +35,7 @@ GameObject:
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400016}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400018}
   m_Layer: 9
   m_Name: Sprite
   m_TagString: Untagged
@@ -65,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -130}
+  m_LocalPosition: {x: 4.45249939, y: -.631401122, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -79,7 +80,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .569999993, z: -1169.88599}
+  m_LocalPosition: {x: 0, y: .569999993, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -162,7 +163,7 @@ MonoBehaviour:
   moveDirection: 0
   canJump: 0
   fallingInWater: 0
-  splashAnimation: {fileID: 100000, guid: f20c0d8e6eb7c4f15a7876d742e6ae14, type: 2}
+  splashAnimation: {fileID: 100000, guid: 7671f5a16bc9c4aa3b242b7898da9020, type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -201,13 +202,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationName: WalkUpAnimation
-  rate: 10
+  rate: 6
   loop: 1
   sprites:
-  - {fileID: 21300014, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300016, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300014, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300012, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
+  - {fileID: 21300024, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
+  - {fileID: 21300022, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
+  - {fileID: 21300024, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
+  - {fileID: 21300026, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,13 +221,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationName: WalkRightAnimation
-  rate: 10
+  rate: 6
   loop: 1
   sprites:
-  - {fileID: 21300020, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300022, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300020, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300018, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
+  - {fileID: 21300030, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
+  - {fileID: 21300028, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
+  - {fileID: 21300030, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
+  - {fileID: 21300032, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -239,13 +240,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationName: WalkLeftAnimation
-  rate: 10
+  rate: 6
   loop: 1
   sprites:
-  - {fileID: 21300008, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300010, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300008, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300006, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
+  - {fileID: 21300014, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
+  - {fileID: 21300012, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
+  - {fileID: 21300014, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
+  - {fileID: 21300016, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -258,13 +259,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationName: WalkDownAnimation
-  rate: 10
+  rate: 6
   loop: 1
   sprites:
-  - {fileID: 21300002, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300004, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300002, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
-  - {fileID: 21300000, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
+  - {fileID: 21300002, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
+  - {fileID: 21300000, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
+  - {fileID: 21300002, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
+  - {fileID: 21300004, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -276,6 +277,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c1e0e7b83484cd8b218ed51212510a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationName: SitLeft
+  rate: 6
+  loop: 1
+  sprites:
+  - {fileID: 21300008, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -296,7 +313,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2c14ba0b00a3747cdb5ada99f061b9a8, type: 3}
+  m_Sprite: {fileID: 21300002, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21200002
 SpriteRenderer:
