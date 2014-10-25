@@ -52,10 +52,12 @@ public class RestaurantCutsceneScript : CutsceneScript {
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
-		// They stand up infront of the table.
-		Move(rightPlayer, Direction.LEFT, 0);
-		Move(leftPlayer, Direction.RIGHT, 0);
-		yield return new WaitForSeconds(standardBubbleDisplayTime);
+		PlayAnimation(leftPlayer, "WalkDownAnimation");
+		PlayAnimation(rightPlayer, "WalkDownAnimation");
+		
+		waitTime = Move(leftPlayer, Direction.DOWN);
+		waitTime = Move(rightPlayer, Direction.DOWN);
+		yield return new WaitForSeconds(waitTime);
 
 		// Boy says "I got you a present"
 		b = ShowSpeechBubble(rightPlayer, exclaimationMarkBubbleRightTail);
@@ -64,20 +66,16 @@ public class RestaurantCutsceneScript : CutsceneScript {
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 8.0f);
 
+		waitTime = Move(leftPlayer, Direction.RIGHT, 0);
+		waitTime = Move(rightPlayer, Direction.LEFT, 0);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
+
 		b = ShowSpeechBubble(rightPlayer, necklaceBubble);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 1.5f);
 
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
-		
-		PlayAnimation(leftPlayer, "WalkDownAnimation");
-		PlayAnimation(rightPlayer, "WalkDownAnimation");
-
-		waitTime = Move(leftPlayer, Direction.DOWN);
-		waitTime = Move(rightPlayer, Direction.DOWN);
-		yield return new WaitForSeconds(waitTime);
-		
 		waitTime = Move(leftPlayer, Direction.RIGHT);
 		waitTime = Move(rightPlayer, Direction.LEFT);
 		yield return new WaitForSeconds(waitTime + standardBubbleDisplayTime / 2.0f);
