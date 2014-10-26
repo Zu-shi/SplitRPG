@@ -9,6 +9,7 @@ using System.Collections;
 public class CharacterMovementScript : MovementScript {
 
 	public AudioClip walkingSound;
+	public bool playWalkSound = true;
 	public AudioClip wrongBeep;
 	public Direction moveDirection = Direction.NONE;
 	public bool canJump = false;
@@ -63,7 +64,8 @@ public class CharacterMovementScript : MovementScript {
 
 	protected override void StartMoving( Vector2 velocity){
 		base.StartMoving (velocity);
-		Globals.soundManager.PlaySound (walkingSound);
+		if(playWalkSound)
+			Globals.soundManager.PlaySound (walkingSound);
 		//return yield (WaitForSeconds (1.0f))
 	}
 

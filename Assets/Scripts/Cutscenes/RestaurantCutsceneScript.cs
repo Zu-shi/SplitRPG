@@ -81,7 +81,7 @@ public class RestaurantCutsceneScript : CutsceneScript {
 
 		waitTime = Move(leftPlayer, Direction.RIGHT);
 		waitTime = Move(rightPlayer, Direction.LEFT);
-		yield return new WaitForSeconds(waitTime + standardBubbleDisplayTime / 2.0f);
+		yield return new WaitForSeconds(waitTime + standardBubbleDisplayTime / 8.0f);
 
 		// Boy gives present to girl.
 		PlayAnimation(rightPlayer, "GiveGift");
@@ -96,7 +96,7 @@ public class RestaurantCutsceneScript : CutsceneScript {
 
 		// Boy says "It's for jumping"
 		b = ShowSpeechBubble(rightPlayer, jumpingBubble);
-		yield return new WaitForSeconds(standardBubbleDisplayTime);
+		yield return new WaitForSeconds(5f);
 
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 4.0f);
@@ -148,7 +148,7 @@ public class RestaurantCutsceneScript : CutsceneScript {
 
 		// Girl says "It's for heavy things"
 		b = ShowSpeechBubble(leftPlayer, pushingBlocksBubble);
-		yield return new WaitForSeconds(standardBubbleDisplayTime);
+		yield return new WaitForSeconds(5f);
 
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
@@ -182,7 +182,7 @@ public class RestaurantCutsceneScript : CutsceneScript {
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 		
 		HideSpeechBubble(b);
-		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 8.0f);
 
 		float tmp = rightCamera.fader.fadeRate;
 		rightCamera.fader.fadeRate = fadeRate;

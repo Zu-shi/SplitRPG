@@ -16,7 +16,7 @@ public class PortalSenderScript : _Mono {
 			if(teleportDisabled) return;													// We shouldn't be teleporting
 
 			if(Globals.playerLeft.gameObject.layer == this.gameObject.layer) {				// Left player is on us
-				if(Globals.playerLeft.GetComponent<MovementScript>().isMoving) return;		// Don't teleport until they stop moving
+				//if(Globals.playerLeft.GetComponent<MovementScript>().isMoving) return;		// Don't teleport until they stop moving
 				target.MovePlayerHere(Globals.playerLeft, fadeTransition);
 			}
 			else {																			// Right player is on us

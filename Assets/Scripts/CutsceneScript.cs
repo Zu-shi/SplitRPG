@@ -33,6 +33,7 @@ public abstract class CutsceneScript : _Mono {
 		background = Instantiate(BackgroundPrefab, new Vector3(-1000, -1000, 0), Quaternion.identity) as GameObject;
 		leftPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("TransparentFX");
 		rightPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("TransparentFX");
+		leftPlayer.GetComponent<CharacterMovementScript>().playWalkSound = false;
 		leftPlayer.transform.position = background.transform.Find("LeftPlayer").position;
 		rightPlayer.transform.position = background.transform.Find("RightPlayer").position;
 		Globals.gameManager.transform.Find("CameraSpecial").position = background.transform.position + new Vector3(0,0,-10000);
@@ -51,6 +52,7 @@ public abstract class CutsceneScript : _Mono {
 		rightPlayer.transform.position = Globals.levelManager.rightSpawn.position + new Vector3(1f, -1f, 0);
 		leftPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("Left");
 		rightPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("Right");
+		leftPlayer.GetComponent<CharacterMovementScript>().playWalkSound = true;
 		Globals.levelManager.EnableLevels();
 		transform.parent = this.parent;
 		Globals.roomManager.MoveCamerasToPoint(new Vector2(leftPlayer.transform.position.x, leftPlayer.transform.position.y));
