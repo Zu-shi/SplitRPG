@@ -24,6 +24,10 @@ public class RestaurantCutsceneScript : CutsceneScript {
 		
 		CheckPrefabLinks();
 
+		while(leftPlayer.GetComponent<CharacterMovementScript>().isMoving ||
+		      rightPlayer.GetComponent<CharacterMovementScript>().isMoving)
+			yield return null;
+
 		SetupScene();
 
 		PlayAnimation(leftPlayer, "SitRight");

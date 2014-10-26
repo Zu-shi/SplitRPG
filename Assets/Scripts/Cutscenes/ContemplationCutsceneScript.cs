@@ -33,6 +33,8 @@ public class ContemplationCutsceneScript : CutsceneScript {
 		rightCamera.fader.fadeRate = fadeRate;
 		leftCamera.fader.fadeRate = fadeRate;
 
+		yield return new WaitForSeconds(standardBubbleDisplayTime);
+
 		// Girl thinks about boy
 		b = ShowSpeechBubble(leftPlayer, boyFaceBubble);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
