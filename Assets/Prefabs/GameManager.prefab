@@ -450,15 +450,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level1LeftPrefab: {fileID: 100360, guid: 34497236e9ca84f7a874a8f49a4d3a83, type: 2}
-  level1RightPrefab: {fileID: 105706, guid: 3520fdcd1821d4fb8bf366663283dd70, type: 2}
+  level1RightPrefab: {fileID: 101908, guid: 271ca6048560b0b498bf6a91dfa9e844, type: 2}
   level2LeftPrefab: {fileID: 0}
   level2RightPrefab: {fileID: 0}
   level1Theme: {fileID: 8300000, guid: 60dd90af1b12a427ca7edef456d8a6f8, type: 3}
   level2Theme: {fileID: 0}
   debugLocation: 
   levelPrefabs:
-  - {fileID: 100360, guid: 34497236e9ca84f7a874a8f49a4d3a83, type: 2}
-  - {fileID: 105706, guid: 3520fdcd1821d4fb8bf366663283dd70, type: 2}
+  - {fileID: 101560, guid: 54e6eb4b3f9b31d4eaacd3b3f50a12de, type: 2}
+  - {fileID: 101908, guid: 271ca6048560b0b498bf6a91dfa9e844, type: 2}
   - {fileID: 100516, guid: 473de786648a6eb4699c8cd766e0164a, type: 2}
   - {fileID: 100496, guid: a7b40782d5b144b4fbaca3e039fda8ba, type: 2}
   - {fileID: 100376, guid: 57fc9091eb0bb48cab4d91f690e64628, type: 2}

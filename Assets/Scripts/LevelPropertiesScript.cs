@@ -5,7 +5,8 @@ public class LevelPropertiesScript : MonoBehaviour {
 
 	public bool canJump = false;
 	public bool canPushHeavy = false;
-	public bool fallInWater = false;
+	public bool fallInWaterLeft = false;
+	public bool fallInWaterRight = false;
 
 	private CharacterMovementScript rightP, leftP;
 
@@ -21,7 +22,7 @@ public class LevelPropertiesScript : MonoBehaviour {
 	public void Sync() {
 		leftP.canJump = canJump;
 		rightP.canPushHeavy = canPushHeavy;
-		rightP.fallingInWater = fallInWater;
-		leftP.fallingInWater = fallInWater;
+		rightP.fallingInWater = fallInWaterRight;
+		leftP.fallingInWater = fallInWaterLeft;
 	}
 }

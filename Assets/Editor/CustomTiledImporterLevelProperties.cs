@@ -12,8 +12,16 @@ public class CustomTiledImporterLevelProperties : Tiled2Unity.ICustomTiledImport
 				tmp.canJump = true;
 			if(props.ContainsKey("canPushHeavy") && props["canPushHeavy"].ToLower() != "false")
 				tmp.canPushHeavy = true;
-			if(props.ContainsKey("fallInWater") && props["fallInWater"].ToLower() != "false")
-				tmp.fallInWater = true;
+			if(props.ContainsKey("fallInWater") && props["fallInWater"].ToLower() != "none") {
+				string[] args = props["fallInWater"].Split(',');
+				foreach(string arg in args) {
+					if(arg.ToLower() == "left")
+						tmp.fallInWaterLeft = true;
+					else if(arg.ToLower() == "right")
+						tmp.fallInWaterRight = true;
+				}
+
+			}
 		}
 	}
 	
