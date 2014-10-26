@@ -26,7 +26,7 @@ public abstract class CutsceneScript : _Mono {
 	
 	public float fadeRate = 0.01f;
 	
-	private GameObject background;
+	protected GameObject background;
 	private Transform parent;
 	
 	protected void SetupScene() {
@@ -83,6 +83,7 @@ public abstract class CutsceneScript : _Mono {
 		this.callback = callback;
 		Globals.gameManager.GetComponent<PlayerInputScript>().enabled = false;
 		Globals.roomManager.enabled = false;
+		Globals.gameManager.GetComponent<OptionsMenuScript>().enabled = false;
 
 		StartCoroutine("ActionSequence");
 	}
@@ -163,6 +164,7 @@ public abstract class CutsceneScript : _Mono {
 	protected void End() {
 		Globals.gameManager.GetComponent<PlayerInputScript>().enabled = true;
 		Globals.roomManager.enabled = true;
+		Globals.gameManager.GetComponent<OptionsMenuScript>().enabled = true;
 		if(callback != null) {
 			callback();
 		}

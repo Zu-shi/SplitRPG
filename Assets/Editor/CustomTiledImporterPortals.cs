@@ -89,7 +89,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 		}
 
 		if(parent.name.Contains("Bidirectional Portals")) {
-			Debug.Log("Made bidirectional portal");
+			//Debug.Log("Made bidirectional portal");
 			gameObject = MakePrefab(gameObject, biPrefab);
 			senders.Add(gameObject.name);
 			receivers.Add(props["target"]);
@@ -123,7 +123,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 			if(faders.Contains(i)) {
 				sender.GetComponent<PortalSenderScript>().fadeTransition = true;
 			}
-			Debug.LogWarning("Portal connection: " + sender.name + ", " + receiver.name);
+			//Debug.LogWarning("Portal connection: " + sender.name + ", " + receiver.name);
 		}
 	}
 

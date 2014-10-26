@@ -187,6 +187,13 @@ public class LevelManagerScript : _Mono{
 			LinkSwitches(left, right);
 		}
 
+		if(right.GetComponent<LevelPropertiesScript>() != null) {
+			right.GetComponent<LevelPropertiesScript>().Start();
+			right.GetComponent<LevelPropertiesScript>().Sync();
+		}
+		else
+			Debug.LogWarning("No LevelPropertiesScript found on level: " + right.name);
+
 		left.SetActive(false);
 		right.SetActive(false);
 

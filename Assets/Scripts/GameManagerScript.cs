@@ -11,6 +11,9 @@ public class GameManagerScript : MonoBehaviour {
 		rightCamera = Globals.cameraRight;
 		leftPlayer = Globals.playerLeft;
 		rightPlayer = Globals.playerRight;
+
+		Screen.lockCursor = true;
+		Screen.showCursor = false;
 	}
 
 	public void RunDisableTest(){

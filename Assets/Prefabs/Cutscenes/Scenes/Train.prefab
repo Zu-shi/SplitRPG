@@ -269,7 +269,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 122.296539, y: -268.941132, z: 0}
+  m_LocalPosition: {x: -988.843933, y: -995.868408, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -944,7 +944,7 @@ MonoBehaviour:
   defaultOffset: {x: 0, y: 0}
   lockToCameraOffset: {x: 0, y: 0}
   lockToCamera: 0
-  lockVerticalOffset: 1
+  lockVerticalOffset: 0
   runInEditor: 0
 --- !u!114 &11400014
 MonoBehaviour:

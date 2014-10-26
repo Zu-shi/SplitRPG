@@ -194,8 +194,6 @@ public class RestaurantCutsceneScript : CutsceneScript {
 		yield return new WaitForSeconds(waitTime + .5f);
 
 		TearDownScene();
-		leftPlayer.GetComponent<CharacterMovementScript>().canJump = true;
-		rightPlayer.GetComponent<CharacterMovementScript>().canPushHeavy = true;
 
 		Move(leftPlayer, Direction.UP, 0);
 		Move(rightPlayer, Direction.UP, 0);

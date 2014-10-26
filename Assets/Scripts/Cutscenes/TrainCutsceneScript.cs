@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TrainCutsceneScript : CutsceneScript {
 
@@ -26,12 +27,21 @@ public class TrainCutsceneScript : CutsceneScript {
 	public GameObject coffeeShopBubble;
 	public GameObject fivePmBubble;
 
+	private List<GameObject> scrollingObjects = new List<GameObject>();
 	protected override IEnumerator ActionSequence() {
 		float waitTime = 0;
 
 		CheckPrefabLinks();
 
 		SetupScene();
+
+		for(int i = 0; i < background.transform.childCount; i++) {
+			if(BackgroundPrefab.transform.GetChild(i).name == "Train_BG") {
+				for(int j = 0; j < background.transform.GetChild(i).childCount; j++) {
+					scrollingObjects.Add(background.transform.GetChild(i).GetChild(j).gameObject);
+				}
+			}
+		}
 
 		Move(leftPlayer, Direction.RIGHT, 0);
 		PlayAnimation(leftPlayer, "SitRight");
@@ -170,6 +180,21 @@ public class TrainCutsceneScript : CutsceneScript {
 		yield return new WaitForSeconds(waitTime);
 
 		// Somehow signal the train is stopping.
+		bool stop = false;
+		while(!stop) {
+			foreach(GameObject go in scrollingObjects) {
+				go.GetComponent<BackgroundScrollingTextureScript>().passiveMove.x = Mathf.Lerp(
+					go.GetComponent<BackgroundScrollingTextureScript>().passiveMove.x, 0, 1.5f*Time.deltaTime);
+				if(go.GetComponent<BackgroundScrollingTextureScript>().passiveMove.x <= 0.001f) {
+					stop = true;
+				}
+				if(stop) {
+					go.GetComponent<BackgroundScrollingTextureScript>().passiveMove.x = 0;
+				}
+			}
+			yield return null;
+		}
+
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
 		PlayAnimation(leftPlayer, "WalkDownAnimation");
