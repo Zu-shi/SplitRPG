@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class FireManagerScript : MonoBehaviour {
+public class FireManagerScript : _Mono {
 
 	public List<GameObject> fire1 = new List<GameObject>();
 	public List<GameObject> fire2 = new List<GameObject>();

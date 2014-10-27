@@ -133,6 +133,8 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 		tmp.transform.parent = o.transform.parent;
 		tmp.transform.localScale *= 64;
 		tmp.transform.position += 64 * new Vector3(1,-1,0);
+		foreach(Component c in o.GetComponents<_Mono>())
+			tmp.AddComponent(c.GetType());
 		GameObject.DestroyImmediate(o);
 		return tmp;
 	}

@@ -6,7 +6,7 @@ using Tiled2Unity;
 public class CustomTiledImporterLevelProperties : Tiled2Unity.ICustomTiledImporter {
 
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props){
-		if(gameObject.transform.parent == null){
+		if(gameObject != null && gameObject.transform.parent == null){
 			LevelPropertiesScript tmp = gameObject.AddComponent<LevelPropertiesScript>();
 			if(props.ContainsKey("canJump") && props["canJump"].ToLower() != "false")
 				tmp.canJump = true;

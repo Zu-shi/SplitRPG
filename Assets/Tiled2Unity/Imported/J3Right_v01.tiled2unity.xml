@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 10/26/2014 5:31:54 PM-->
+<!--Last exported: 10/26/2014 11:34:30 PM-->
 <Tiled2Unity version="0.9.4.5">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J3Right2" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="J3Right2" sortingLayerName="" sortingOrder="1" />
@@ -404,6 +404,9 @@
       <GameObject name="debugDown" x="4992" y="-3968">
         <BoxCollider2D width="128" height="128" />
       </GameObject>
+      <GameObject name="debugFireTest" x="5760" y="-896">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
     </GameObject>
     <GameObject name="Buttons and Gates">
       <GameObject name="B01" x="5248" y="-4736">
@@ -465,38 +468,47 @@
     </GameObject>
     <GameObject name="Fire">
       <GameObject name="fire" x="2816" y="-3456">
+        <Property name="Persistent" value="" />
         <Property name="level" value="1" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="fire" x="2944" y="-3072">
+        <Property name="Persistent" value="" />
         <Property name="level" value="1" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="fire" x="3072" y="-3200">
+        <Property name="Persistent" value="" />
         <Property name="level" value="1" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="fire" x="3200" y="-3328">
+        <Property name="Persistent" value="" />
         <Property name="level" value="2" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="fire" x="2688" y="-3200">
+        <Property name="Persistent" value="" />
         <Property name="level" value="2" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="fire" x="2944" y="-3456">
+        <Property name="Persistent" value="" />
         <Property name="level" value="2" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="fire" x="2944" y="-3200">
+        <Property name="Persistent" value="" />
         <Property name="level" value="3" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="fire" x="3328" y="-3584">
+        <Property name="Persistent" value="" />
         <Property name="level" value="3" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="fire" x="2560" y="-3328">
+        <Property name="Persistent" value="" />
         <Property name="level" value="3" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
@@ -506,14 +518,17 @@
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="sender1" x="512" y="-1024">
+        <Property name="AddComp" value="FireExtinguisherScript" />
         <Property name="target" value="receiver" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="sender2" x="5760" y="-640">
+        <Property name="AddComp" value="FireExtinguisherScript" />
         <Property name="target" value="receiver" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="sender3" x="7296" y="-4608">
+        <Property name="AddComp" value="FireExtinguisherScript" />
         <Property name="target" value="receiver" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>

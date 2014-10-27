@@ -18,7 +18,7 @@ public class LevelManagerScript : _Mono{
 
 	public GameObject[] levelPrefabs;
 	private List<GameObject> _levelPrefabs;
-	private GameObject[] _cachedPersistentObjects;
+	private List<GameObject> _cachedPersistentObjects = new List<GameObject>();
 
 	public bool loadOnStart;
 
@@ -65,7 +65,7 @@ public class LevelManagerScript : _Mono{
 			}else{
 				Transform t;
 				//Debug.Log(Utils.FindChildRecursive(currentRightLevelPrefab, debugLocation));
-				if( (t = Utils.FindChildRecursive(currentLeftLevelPrefab, debugLocation) ) != null ){
+				if( (t = Utils.FindChildRecursive(currentRightLevelPrefab, debugLocation) ) != null ){
 					return t;
 				}else{
 					Debug.LogWarning("Cannot find debug location " + debugLocation + ". Loading default location.");
@@ -167,7 +167,7 @@ public class LevelManagerScript : _Mono{
 		}
 
 		if(reloadPersistent) {
-			_cachedPersistentObjects = GameObject.FindGameObjectsWithTag("Persistent");
+			_cachedPersistentObjects.AddRange(GameObject.FindGameObjectsWithTag("Persistent"));
 			foreach(GameObject go in _cachedPersistentObjects) {
 				//Debug.Log("Caching: " + go.name);
 				go.transform.parent = null;
@@ -248,6 +248,8 @@ public class LevelManagerScript : _Mono{
 			string name = uncached.name;
 			uncached.name = "___uncached___" + name;
 			GameObject tmp = FindCachedGameObject(name);
+			_cachedPersistentObjects.Remove(tmp);
+
 			tmp.transform.parent = uncached.transform.parent;
 			tmp.tag = "Persistent";
 
@@ -258,11 +260,10 @@ public class LevelManagerScript : _Mono{
 
 			Destroy(uncached);
 		}
-		_cachedPersistentObjects = null;
 	}
 
 	private GameObject FindCachedGameObject(string name) {
-		for(int i = 0; i < _cachedPersistentObjects.Length; i++) {
+		for(int i = 0; i < _cachedPersistentObjects.Count; i++) {
 			if(_cachedPersistentObjects[i].name == name)
 				return _cachedPersistentObjects[i];
 		}
