@@ -15,12 +15,15 @@ public class PortalSenderScript : _Mono {
 		if(Globals.collisionManager.IsPlayerOnTile(tileVector, gameObject.layer)) {			// A player is on us
 			if(teleportDisabled) return;													// We shouldn't be teleporting
 
+			if(gameObject.GetComponent<FireExtinguisherScript>() != null)
+				gameObject.GetComponent<FireExtinguisherScript>().Trigger();
+
 			if(Globals.playerLeft.gameObject.layer == this.gameObject.layer) {				// Left player is on us
-				if(Globals.playerLeft.GetComponent<MovementScript>().isMoving) return;		// Don't teleport until they stop moving
+				//if(Globals.playerLeft.GetComponent<MovementScript>().isMoving) return;		// Don't teleport until they stop moving
 				target.MovePlayerHere(Globals.playerLeft, fadeTransition);
 			}
 			else {																			// Right player is on us
-				if(Globals.playerRight.GetComponent<MovementScript>().isMoving) return;		// Don't teleport until they stop moving
+				//if(Globals.playerRight.GetComponent<MovementScript>().isMoving) return;		// Don't teleport until they stop moving
 				target.MovePlayerHere(Globals.playerRight, fadeTransition);
 			}
 		}

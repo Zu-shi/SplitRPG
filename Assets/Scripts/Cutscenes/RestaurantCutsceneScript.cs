@@ -7,7 +7,6 @@ public class RestaurantCutsceneScript : CutsceneScript {
 	public float standardBubbleDisplayTime = 2.0f;
 
 	public GameObject plateWithChickenBubble;
-	public GameObject thumbsUpBubble;
 	public GameObject smileyFaceBubbleRightTail;
 	public GameObject smileyFaceBubbleLeftTail;
 	public GameObject exclaimationMarkBubbleRightTail;
@@ -25,12 +24,16 @@ public class RestaurantCutsceneScript : CutsceneScript {
 		
 		CheckPrefabLinks();
 
+		while(leftPlayer.GetComponent<CharacterMovementScript>().isMoving ||
+		      rightPlayer.GetComponent<CharacterMovementScript>().isMoving)
+			yield return null;
+
 		SetupScene();
 
 		PlayAnimation(leftPlayer, "SitRight");
 		PlayAnimation(rightPlayer, "SitLeft");
 
-		yield return new WaitForSeconds(standardBubbleDisplayTime * 2.0f);
+		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
 		// Girl says "Good chicken"
 		b = ShowSpeechBubble(leftPlayer, plateWithChickenBubble);
@@ -39,7 +42,7 @@ public class RestaurantCutsceneScript : CutsceneScript {
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 8.0f);
 
-		b = ShowSpeechBubble(leftPlayer, thumbsUpBubble);
+		b = ShowSpeechBubble(leftPlayer, smileyFaceBubbleLeftTail);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 1.5f);
 
 		HideSpeechBubble(b);
@@ -52,10 +55,12 @@ public class RestaurantCutsceneScript : CutsceneScript {
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
-		// They stand up infront of the table.
-		Move(rightPlayer, Direction.LEFT, 0);
-		Move(leftPlayer, Direction.RIGHT, 0);
-		yield return new WaitForSeconds(standardBubbleDisplayTime);
+		PlayAnimation(leftPlayer, "WalkDownAnimation");
+		PlayAnimation(rightPlayer, "WalkDownAnimation");
+		
+		waitTime = Move(leftPlayer, Direction.DOWN);
+		waitTime = Move(rightPlayer, Direction.DOWN);
+		yield return new WaitForSeconds(waitTime);
 
 		// Boy says "I got you a present"
 		b = ShowSpeechBubble(rightPlayer, exclaimationMarkBubbleRightTail);
@@ -64,29 +69,34 @@ public class RestaurantCutsceneScript : CutsceneScript {
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 8.0f);
 
+		waitTime = Move(leftPlayer, Direction.RIGHT, 0);
+		waitTime = Move(rightPlayer, Direction.LEFT, 0);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
+
 		b = ShowSpeechBubble(rightPlayer, necklaceBubble);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 1.5f);
 
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
-		
-		PlayAnimation(leftPlayer, "WalkDownAnimation");
-		PlayAnimation(rightPlayer, "WalkDownAnimation");
-
-		waitTime = Move(leftPlayer, Direction.DOWN);
-		waitTime = Move(rightPlayer, Direction.DOWN);
-		yield return new WaitForSeconds(waitTime);
-		
 		waitTime = Move(leftPlayer, Direction.RIGHT);
 		waitTime = Move(rightPlayer, Direction.LEFT);
-		yield return new WaitForSeconds(waitTime + standardBubbleDisplayTime / 2.0f);
+		yield return new WaitForSeconds(waitTime + standardBubbleDisplayTime / 8.0f);
 
 		// Boy gives present to girl.
-		// Stuff?
+		PlayAnimation(rightPlayer, "GiveGift");
+		yield return new WaitForSeconds(1f);
+
+		PlayAnimation(leftPlayer, "TakeGift");
+		yield return new WaitForSeconds(1f);
+
+		PlayAnimation(rightPlayer, "WalkLeftAnimation");
+		Move(rightPlayer, Direction.LEFT, 0);
+		yield return new WaitForSeconds(standardBubbleDisplayTime);
+
 		// Boy says "It's for jumping"
 		b = ShowSpeechBubble(rightPlayer, jumpingBubble);
-		yield return new WaitForSeconds(standardBubbleDisplayTime);
+		yield return new WaitForSeconds(5f);
 
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 4.0f);
@@ -110,6 +120,9 @@ public class RestaurantCutsceneScript : CutsceneScript {
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 8.0f);
 
+		PlayAnimation(leftPlayer, "WalkRightAnimation");
+		Move(leftPlayer, Direction.RIGHT, 0);
+
 		b = ShowSpeechBubble(leftPlayer, elipsesBubbleLeftTail);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
@@ -123,10 +136,19 @@ public class RestaurantCutsceneScript : CutsceneScript {
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
 		// Girl takes off bracelet and gives to guy.
-		// Stuff?
+		PlayAnimation(leftPlayer, "GiveGift", 1);
+		yield return new WaitForSeconds(1f);
+		
+		PlayAnimation(rightPlayer, "TakeGift", 1);
+		yield return new WaitForSeconds(1f);
+		
+		PlayAnimation(leftPlayer, "WalkRightAnimation");
+		Move(leftPlayer, Direction.RIGHT, 0);
+		yield return new WaitForSeconds(standardBubbleDisplayTime);
+
 		// Girl says "It's for heavy things"
 		b = ShowSpeechBubble(leftPlayer, pushingBlocksBubble);
-		yield return new WaitForSeconds(standardBubbleDisplayTime);
+		yield return new WaitForSeconds(5f);
 
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
@@ -140,6 +162,9 @@ public class RestaurantCutsceneScript : CutsceneScript {
 		
 		b = ShowSpeechBubble(rightPlayer, smileyFaceBubbleRightTail);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 1.5f);
+
+		PlayAnimation(rightPlayer, "WalkLeftAnimation");
+		Move(rightPlayer, Direction.LEFT, 0);
 
 		// Long pause
 		HideSpeechBubble(b);
@@ -157,19 +182,18 @@ public class RestaurantCutsceneScript : CutsceneScript {
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 		
 		HideSpeechBubble(b);
-		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
+		yield return new WaitForSeconds(standardBubbleDisplayTime / 8.0f);
 
 		float tmp = rightCamera.fader.fadeRate;
 		rightCamera.fader.fadeRate = fadeRate;
 		leftCamera.fader.fadeRate = fadeRate;
 		FadeCameraOut(leftCamera);
 		waitTime = FadeCameraOut(rightCamera);
-
-		yield return new WaitForSeconds(waitTime);
+		Move(leftPlayer, Direction.LEFT, 4);
+		Move(rightPlayer, Direction.LEFT, 4);
+		yield return new WaitForSeconds(waitTime + .5f);
 
 		TearDownScene();
-		leftPlayer.GetComponent<CharacterMovementScript>().canJump = true;
-		rightPlayer.GetComponent<CharacterMovementScript>().canPush = true;
 
 		Move(leftPlayer, Direction.UP, 0);
 		Move(rightPlayer, Direction.UP, 0);
@@ -186,7 +210,6 @@ public class RestaurantCutsceneScript : CutsceneScript {
 
 	private bool CheckPrefabLinks() {
 		if(plateWithChickenBubble == null
-		   || thumbsUpBubble == null
 		   || smileyFaceBubbleLeftTail == null
 		   || smileyFaceBubbleRightTail == null
 		   || exclaimationMarkBubbleLeftTail == null

@@ -36,6 +36,9 @@ GameObject:
   - 114: {fileID: 11400016}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400018}
+  - 114: {fileID: 11400024}
+  - 114: {fileID: 11400022}
+  - 114: {fileID: 11400020}
   m_Layer: 9
   m_Name: Sprite
   m_TagString: Untagged
@@ -293,6 +296,56 @@ MonoBehaviour:
   loop: 1
   sprites:
   - {fileID: 21300008, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
+--- !u!114 &11400020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationName: TakeGift
+  rate: 1
+  loop: 0
+  sprites:
+  - {fileID: 21300020, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
+  - {fileID: 21300018, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
+--- !u!114 &11400022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationName: GiveGift
+  rate: 1
+  loop: 0
+  sprites:
+  - {fileID: 21300018, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
+  - {fileID: 21300020, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
+--- !u!114 &11400024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationName: PlayWithVR
+  rate: 6
+  loop: 1
+  sprites:
+  - {fileID: 21300010, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

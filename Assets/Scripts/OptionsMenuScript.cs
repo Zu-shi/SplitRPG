@@ -64,10 +64,14 @@ public class OptionsMenuScript : MonoBehaviour {
 
 		if(pause){
 			s = State.MENU;
+			Screen.showCursor = true;
+			Screen.lockCursor = false;
 			GameObject.Find("PlayerLeft").GetComponent<PlayerControllerScript>().enabled = false;
 			GameObject.Find("PlayerRight").GetComponent<PlayerControllerScript>().enabled = false;
 			GameObject.Find("GameManager").GetComponent<PlayerInputScript>().enabled = false;
 		} else {
+			Screen.showCursor = false;
+			Screen.lockCursor = true;
 			s = State.NONE;
 			GameObject.Find("PlayerLeft").GetComponent<PlayerControllerScript>().enabled = true;
 			GameObject.Find("PlayerRight").GetComponent<PlayerControllerScript>().enabled = true;

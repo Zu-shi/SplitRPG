@@ -55,9 +55,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggered: 0
   BackgroundPrefab: {fileID: 100000, guid: c1259fd0a5bc8724a8b9a19f7ebf1ff2, type: 2}
-  sittingAnimationName: Sitting
-  standardBubbleDisplayTime: 1.60000002
   fadeRate: .00999999978
+  standardBubbleDisplayTime: 2.4000001
   askForSeatBubble: {fileID: 100006, guid: 9e908ebc5b7e9484cbed5157f6352c3c, type: 2}
   smileyFaceBubbleLeftTail: {fileID: 100004, guid: e3ca98d0e045b8c4c926209ffcdb05e0,
     type: 2}

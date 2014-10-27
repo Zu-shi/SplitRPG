@@ -28,35 +28,57 @@ public class FightCutsceneScript : CutsceneScript {
 	
 	protected override IEnumerator ActionSequence() {
 		GameObject b;
+		float waitTime = 0;
 		
 		CheckPrefabLinks();
 
+		SetupScene();
+
+		PlayAnimation(rightPlayer, "PlayWithVR");
+
 		// Girl walks in on boy playing with VR
-		// Stuff?
+		waitTime = Move(leftPlayer, Direction.LEFT, 3);
+		yield return new WaitForSeconds(waitTime);
+
 		// Girl is confused/suprised
 		b = ShowSpeechBubble(leftPlayer, confusionBubble);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
-
+		
 		HideSpeechBubble(b);
+		waitTime = Move(leftPlayer, Direction.LEFT, 3);
+		yield return new WaitForSeconds(waitTime);
+
+		Move(leftPlayer, Direction.UP, 0);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
 		// Boy takes off VR headset
-		// Stuff?
+		PlayAnimation(rightPlayer, "WalkLeftAnimation");
+
+		waitTime = Move(rightPlayer, Direction.LEFT, 2);
+		yield return new WaitForSeconds(waitTime);
+
+		Move(rightPlayer, Direction.DOWN, 0);
+
 		// Boy says "Look, it's so cool!"
 		b = ShowSpeechBubble(rightPlayer, vrHeadSetBubble);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 1.5f);
-		
+
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 8.0f);
-
+		
 		b = ShowSpeechBubble(rightPlayer, expensiveBubbleRightTail);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 1.5f);
-		
+
 		HideSpeechBubble(b);
-		yield return new WaitForSeconds(standardBubbleDisplayTime / 8.0f);
+
+		waitTime = Move(rightPlayer, Direction.DOWN, 2);
+		yield return new WaitForSeconds(waitTime);
+
+		Move(rightPlayer, Direction.RIGHT, 0);
+		Move(leftPlayer, Direction.LEFT, 0);
 
 		b = ShowSpeechBubble(rightPlayer, smileyFaceBubbleRightTail);
-		yield return new WaitForSeconds(standardBubbleDisplayTime / 1.5f);
+		yield return new WaitForSeconds(standardBubbleDisplayTime);
 		
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
@@ -169,7 +191,9 @@ public class FightCutsceneScript : CutsceneScript {
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
 		// Girl storms out.
-		// Stuff?
+		waitTime = Move(leftPlayer, Direction.RIGHT, 8);
+		yield return new WaitForSeconds(waitTime / 2.0f);
+
 		// Guy is angry.
 		b = ShowSpeechBubble(rightPlayer, elipsesBubbleRightTail);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 1.5f);
@@ -183,8 +207,34 @@ public class FightCutsceneScript : CutsceneScript {
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
-		// Guy walks out.
-		// Stuff?
+		// Guy walks out
+		waitTime = Move(rightPlayer, Direction.LEFT, 6);
+		yield return new WaitForSeconds(waitTime / 2.0f);
+
+		float tmp = rightCamera.fader.fadeRate;
+		rightCamera.fader.fadeRate = fadeRate;
+		leftCamera.fader.fadeRate = fadeRate;
+
+		waitTime = FadeCameraOut(rightCamera);
+		FadeCameraOut(leftCamera);
+
+		yield return new WaitForSeconds(waitTime);
+
+		TearDownScene();
+
+		Move(rightPlayer, Direction.UP, 0);
+		Move(leftPlayer, Direction.UP, 0);
+
+		waitTime = FadeCameraIn(rightCamera);
+		FadeCameraIn(leftCamera);
+		yield return new WaitForSeconds(waitTime);
+
+		rightCamera.fader.fadeRate = tmp;
+		leftCamera.fader.fadeRate = tmp;
+
+		leftPlayer.GetComponent<CharacterMovementScript>().canJump = true;
+		rightPlayer.GetComponent<CharacterMovementScript>().canPushHeavy = true;
+
 		End();
 	}
 	

@@ -61,8 +61,8 @@ public class FaderScript : _Mono {
 	/// Dims (partial fade down).
 	/// </summary>
 	/// <param name="callback">Callback.</param>
-	public void Dim(Utils.VoidDelegate callback = null){
-		targetAlpha = .2f;
+	public void Dim(float amount = .2f, Utils.VoidDelegate callback = null){
+		targetAlpha = amount;
 		fadeCallback = callback;
 	}
 

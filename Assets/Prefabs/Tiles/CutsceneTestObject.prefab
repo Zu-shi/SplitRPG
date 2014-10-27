@@ -15,6 +15,7 @@ GameObject:
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400010}
   m_Layer: 8
   m_Name: CutsceneTestObject
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.46491718, y: 4.55403042, z: 0}
+  m_LocalPosition: {x: 89.1241074, y: -454.09967, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,8 +60,7 @@ MonoBehaviour:
   triggered: 0
   BackgroundPrefab: {fileID: 0}
   fadeRate: .00999999978
-  standardBubbleDisplayTime: 2
-  cameraFadeRate: .100000001
+  standardBubbleDisplayTime: 2.4000001
   girlFaceBubble: {fileID: 100004, guid: 78ad934242688a947a3a9bb0f2ea80cd, type: 2}
   boyFaceBubble: {fileID: 100004, guid: 6bf20c497e2600c4b8081c5b463c2863, type: 2}
   eatingDinerBubble: {fileID: 100004, guid: d170781d29e7a7f409f03411f8b59178, type: 2}
@@ -103,8 +103,7 @@ MonoBehaviour:
   triggered: 0
   BackgroundPrefab: {fileID: 100000, guid: c1259fd0a5bc8724a8b9a19f7ebf1ff2, type: 2}
   fadeRate: .00999999978
-  sittingAnimationName: Sitting
-  standardBubbleDisplayTime: 1.60000002
+  standardBubbleDisplayTime: 2.4000001
   askForSeatBubble: {fileID: 100006, guid: 9e908ebc5b7e9484cbed5157f6352c3c, type: 2}
   smileyFaceBubbleLeftTail: {fileID: 100004, guid: e3ca98d0e045b8c4c926209ffcdb05e0,
     type: 2}
@@ -149,9 +148,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggered: 0
-  BackgroundPrefab: {fileID: 0}
+  BackgroundPrefab: {fileID: 100004, guid: dc8fd071f33c40249ac776b1f7ae1652, type: 2}
   fadeRate: .00999999978
-  standardBubbleDisplayTime: 2
+  standardBubbleDisplayTime: 2.4000001
   confusionBubble: {fileID: 100006, guid: fff69e694a1fee448848e02317c592f8, type: 2}
   vrHeadSetBubble: {fileID: 100006, guid: df354bf89db618d41ba6713974ee3eb5, type: 2}
   expensiveBubbleLeftTail: {fileID: 100006, guid: b0865331a4f51a14cb6d7b54f043bf27,
@@ -189,9 +188,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggered: 0
-  BackgroundPrefab: {fileID: 0}
+  BackgroundPrefab: {fileID: 100004, guid: 805c9ef4d0b34e844898eaac9e8cf5a8, type: 2}
   fadeRate: .00999999978
-  standardBubbleDisplayTime: 2
+  standardBubbleDisplayTime: 2.4000001
   plateWithChickenBubble: {fileID: 100004, guid: f2e64d0872582654387c3ed3340572a0,
     type: 2}
   thumbsUpBubble: {fileID: 100004, guid: e149f298a7d70084a82ae58f6beb8795, type: 2}
@@ -210,6 +209,20 @@ MonoBehaviour:
   braceletBubble: {fileID: 100004, guid: 4d2957376c29a59428e4512cbc24c4b6, type: 2}
   pushingBlocksBubble: {fileID: 100004, guid: a7bf459908c8a294ebee4fcd7a717bec, type: 2}
   videoGamesBubble: {fileID: 100006, guid: 37bee24e02cab724789104bc8fcc727e, type: 2}
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 826ff36bc1e4ffe4493dce80e19422bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggered: 0
+  BackgroundPrefab: {fileID: 100004, guid: b3254e42274c25e4abb36e8062c34348, type: 2}
+  fadeRate: .00999999978
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

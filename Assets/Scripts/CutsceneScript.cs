@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 // To use this class, override ActionSequence with a series of calls of methods in this class.
 /// <summary>
@@ -29,13 +30,17 @@ public abstract class CutsceneScript : _Mono {
 	
 	public float fadeRate = 0.01f;
 	
-	private GameObject background;
+	protected GameObject background;
 	private Transform parent;
-	
+	private float oldFadeRate = 0;
+	private bool playing = false;
+	private List<GameObject> bubbles = new List<GameObject>();
+
 	protected void SetupScene() {
 		background = Instantiate(BackgroundPrefab, new Vector3(-1000, -1000, 0), Quaternion.identity) as GameObject;
 		leftPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("TransparentFX");
 		rightPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("TransparentFX");
+		leftPlayer.GetComponent<CharacterMovementScript>().playWalkSound = false;
 		leftPlayer.transform.position = background.transform.Find("LeftPlayer").position;
 		rightPlayer.transform.position = background.transform.Find("RightPlayer").position;
 		Globals.gameManager.transform.Find("CameraSpecial").position = background.transform.position + new Vector3(0,0,-10000);
@@ -54,6 +59,7 @@ public abstract class CutsceneScript : _Mono {
 		rightPlayer.transform.position = Globals.levelManager.rightSpawn.position + new Vector3(1f, -1f, 0);
 		leftPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("Left");
 		rightPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("Right");
+		leftPlayer.GetComponent<CharacterMovementScript>().playWalkSound = true;
 		Globals.levelManager.EnableLevels();
 		transform.parent = this.parent;
 		Globals.roomManager.MoveCamerasToPoint(new Vector2(leftPlayer.transform.position.x, leftPlayer.transform.position.y));
@@ -69,8 +75,24 @@ public abstract class CutsceneScript : _Mono {
 	}
 	
 	public virtual void Update() {
-		if(triggered)
+		if(triggered) {
+			if(Input.GetKeyDown(KeyCode.Escape) && playing) {
+				StopAllCoroutines();
+				TearDownScene();
+				End();
+				PlayAnimation(rightPlayer, "WalkUpAnimation");
+				PlayAnimation(leftPlayer, "WalkUpAnimation");
+				rightPlayer.GetComponentInChildren<SpriteAnimationManagerScript>().PauseAnimation();
+				leftPlayer.GetComponentInChildren<SpriteAnimationManagerScript>().PauseAnimation();
+				rightPlayer.GetComponent<CharacterMovementScript>().StopMovingNow();
+				leftPlayer.GetComponent<CharacterMovementScript>().StopMovingNow();
+				foreach(GameObject bubble in bubbles)
+					Destroy(bubble);
+				PrintBubbleNames();
+				bubbles.Clear();
+			}
 			return;
+		}
 
 		if(Globals.collisionManager.IsPlayerOnTile(tileVector, gameObject.layer)) {
 			triggered = true;
@@ -86,6 +108,11 @@ public abstract class CutsceneScript : _Mono {
 		this.callback = callback;
 		Globals.gameManager.GetComponent<PlayerInputScript>().enabled = false;
 		Globals.roomManager.enabled = false;
+		Globals.gameManager.GetComponent<OptionsMenuScript>().enabled = false;
+		oldFadeRate = leftCamera.fader.fadeRate;
+		leftCamera.fader.fadeRate = fadeRate;
+		rightCamera.fader.fadeRate = fadeRate;
+		playing =true;
 
 		StartCoroutine("ActionSequence");
 	}
@@ -164,8 +191,12 @@ public abstract class CutsceneScript : _Mono {
 	/// End the cutscene with any clean up code and call the callback.
 	/// </summary>
 	protected void End() {
+		playing = false;
 		Globals.gameManager.GetComponent<PlayerInputScript>().enabled = true;
 		Globals.roomManager.enabled = true;
+		Globals.gameManager.GetComponent<OptionsMenuScript>().enabled = true;
+		leftCamera.fader.fadeRate = oldFadeRate;
+		rightCamera.fader.fadeRate = oldFadeRate;
 		if(callback != null) {
 			callback();
 		}
@@ -207,6 +238,7 @@ public abstract class CutsceneScript : _Mono {
 		GameObject bubbleInstance = Instantiate(bubblePrefab, pos, Quaternion.identity) as GameObject;
 		bubbleInstance.name = bubblePrefab.name;
 		ChangeLayerRecursive(bubbleInstance, layer);
+		bubbles.Add(bubbleInstance);
 		return bubbleInstance;
 	}
 
@@ -222,7 +254,15 @@ public abstract class CutsceneScript : _Mono {
 			Debug.LogError("Cannot hide null bubble instance.");
 			return;
 		}
+		bubbles.Remove(bubbleInstance);
+		PrintBubbleNames();
 		Destroy(bubbleInstance);
+	}
+
+	private void PrintBubbleNames() {
+		foreach(GameObject bubble in bubbles) {
+			Debug.Log("Bubble: " + bubble.name);
+		}
 	}
 	
 }

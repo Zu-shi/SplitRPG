@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TrainCutsceneScript : CutsceneScript {
-
-	public string sittingAnimationName;
 
 	[Tooltip("All wait times are some multiple of this.")]
 	public float standardBubbleDisplayTime = 2.0f;
@@ -28,29 +27,34 @@ public class TrainCutsceneScript : CutsceneScript {
 	public GameObject coffeeShopBubble;
 	public GameObject fivePmBubble;
 
+	private List<GameObject> scrollingObjects = new List<GameObject>();
 	protected override IEnumerator ActionSequence() {
 		float waitTime = 0;
-
-		if(sittingAnimationName == null) {
-			Debug.LogError("No sitting animation assigned.");
-		}
 
 		CheckPrefabLinks();
 
 		SetupScene();
 
+		for(int i = 0; i < background.transform.childCount; i++) {
+			if(BackgroundPrefab.transform.GetChild(i).name == "Train_BG") {
+				for(int j = 0; j < background.transform.GetChild(i).childCount; j++) {
+					scrollingObjects.Add(background.transform.GetChild(i).GetChild(j).gameObject);
+				}
+			}
+		}
+
 		Move(leftPlayer, Direction.RIGHT, 0);
 		PlayAnimation(leftPlayer, "SitRight");
 		Move(rightPlayer, Direction.UP, 0);
 
-		yield return new WaitForSeconds(standardBubbleDisplayTime * 2.0f);
+		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
 		// Boy walks to occupied room
 		waitTime = Move(rightPlayer, Direction.LEFT, 5);
 		yield return new WaitForSeconds(waitTime);
 
 		waitTime = Move(rightPlayer, Direction.UP, 0);
-		yield return new WaitForSeconds(waitTime + standardBubbleDisplayTime);
+		yield return new WaitForSeconds(waitTime + .4f);
 
 		// Can I sit here?
 		GameObject bubble1 = ShowSpeechBubble(rightPlayer, askForSeatBubble);
@@ -70,11 +74,7 @@ public class TrainCutsceneScript : CutsceneScript {
 		yield return new WaitForSeconds(waitTime);
 
 		waitTime = Move(rightPlayer, Direction.RIGHT, 1);
-		yield return new WaitForSeconds(waitTime + standardBubbleDisplayTime / 4.0f);
-
-		// Boy turn around and sit down
-		waitTime = Move(rightPlayer, Direction.LEFT, 0);
-		yield return new WaitForSeconds(waitTime + standardBubbleDisplayTime / 4.0f);
+		yield return new WaitForSeconds(waitTime - .1f);
 
 		PlayAnimation(rightPlayer, "SitLeft");
 
@@ -173,12 +173,28 @@ public class TrainCutsceneScript : CutsceneScript {
 		yield return new WaitForSeconds(waitTime);
 
 		HideSpeechBubble(bubble1);
+		yield return new WaitForSeconds(.6f);
 
 		waitTime = FadeCameraIn(rightCamera);
 		waitTime = FadeCameraIn(leftCamera);
 		yield return new WaitForSeconds(waitTime);
 
 		// Somehow signal the train is stopping.
+		bool stop = false;
+		while(!stop) {
+			foreach(GameObject go in scrollingObjects) {
+				go.GetComponent<BackgroundScrollingTextureScript>().passiveMove.x = Mathf.Lerp(
+					go.GetComponent<BackgroundScrollingTextureScript>().passiveMove.x, 0, 1.5f*Time.deltaTime);
+				if(go.GetComponent<BackgroundScrollingTextureScript>().passiveMove.x <= 0.001f) {
+					stop = true;
+				}
+				if(stop) {
+					go.GetComponent<BackgroundScrollingTextureScript>().passiveMove.x = 0;
+				}
+			}
+			yield return null;
+		}
+
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
 		PlayAnimation(leftPlayer, "WalkDownAnimation");

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 10/19/2014 6:50:14 PM-->
+<!--Last exported: 10/19/2014 8:28:36 PM-->
 <Tiled2Unity version="0.9.4.5">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J2Right" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="J2Right" sortingLayerName="" sortingOrder="1" />
@@ -522,6 +522,10 @@
       </GameObject>
       <GameObject name="dest" x="2048" y="-4224">
         <Property name="m" value="" />
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="LevelLoader" x="640" y="-128">
+        <Property name="levelsToLoad" value="J3Left_v01,J3Right_v01" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>

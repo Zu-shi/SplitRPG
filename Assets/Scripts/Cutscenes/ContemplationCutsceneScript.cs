@@ -5,7 +5,6 @@ public class ContemplationCutsceneScript : CutsceneScript {
 	
 	[Tooltip("All wait times are some multiple of this.")]
 	public float standardBubbleDisplayTime = 2.0f;
-	public float cameraFadeRate = 0.1f;
 
 	public GameObject girlFaceBubble;
 	public GameObject boyFaceBubble;
@@ -15,12 +14,26 @@ public class ContemplationCutsceneScript : CutsceneScript {
 	public GameObject sittingOnTrainBubble;
 	public GameObject sadFaceBubbleLeftTail;
 	public GameObject sadFaceBubbleRightTail;
-	
+
+	private void MakeCharactersVisible(bool visible) {
+		leftPlayer.GetComponentInChildren<SpriteRenderer>().enabled = visible;
+		rightPlayer.GetComponentInChildren<SpriteRenderer>().enabled = visible;
+	}
+
 	protected override IEnumerator ActionSequence() {
 		float waitTime = 0;
 		GameObject b, a;
 		
 		CheckPrefabLinks();
+		SetupScene();
+		MakeCharactersVisible(false);
+
+		float tmp = rightCamera.fader.fadeRate;
+
+		rightCamera.fader.fadeRate = fadeRate;
+		leftCamera.fader.fadeRate = fadeRate;
+
+		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
 		// Girl thinks about boy
 		b = ShowSpeechBubble(leftPlayer, boyFaceBubble);
@@ -36,13 +49,6 @@ public class ContemplationCutsceneScript : CutsceneScript {
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
 
-		// Fade down right camera to 50%
-		float tmp = rightCamera.fader.fadeRate;
-		rightCamera.fader.fadeRate = cameraFadeRate;
-		rightCamera.fader.Dim();
-		waitTime = rightCamera.fader.EstimateTime();
-		yield return new WaitForSeconds(waitTime);
-
 		// Girl thinks about things they did together
 		b = ShowSpeechBubble(leftPlayer, eatingDinerBubble);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
@@ -56,13 +62,6 @@ public class ContemplationCutsceneScript : CutsceneScript {
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
-		// Fade down right camera to 50%
-		rightCamera.fader.FadeUp();
-		waitTime = rightCamera.fader.EstimateTime();
-		leftCamera.fader.fadeRate = cameraFadeRate;
-		leftCamera.fader.Dim();
-		yield return new WaitForSeconds(waitTime);
-
 		// Boy thinks about things they did together
 		b = ShowSpeechBubble(rightPlayer, sittingOnParkBenchBubble);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
@@ -72,14 +71,9 @@ public class ContemplationCutsceneScript : CutsceneScript {
 		
 		b = ShowSpeechBubble(rightPlayer, sittingOnTrainBubble);
 		yield return new WaitForSeconds(standardBubbleDisplayTime);
-		
+
 		HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
-
-		// Fade left camera back up
-		leftCamera.fader.FadeUp();
-		waitTime = leftCamera.fader.EstimateTime();
-		yield return new WaitForSeconds(waitTime);
 
 		// Boy and Girl are sad
 		b = ShowSpeechBubble(rightPlayer, sadFaceBubbleRightTail);
@@ -89,9 +83,19 @@ public class ContemplationCutsceneScript : CutsceneScript {
 		HideSpeechBubble(a); HideSpeechBubble(b);
 		yield return new WaitForSeconds(standardBubbleDisplayTime / 2.0f);
 
-		// Cleanup
-		leftCamera.fader.fadeRate = tmp;
+		waitTime = FadeCameraOut(rightCamera);
+		FadeCameraOut(leftCamera);
+		yield return new WaitForSeconds(waitTime);
+
+		TearDownScene();
+		MakeCharactersVisible(true);
+
+		waitTime = FadeCameraIn(rightCamera);
+		FadeCameraIn(leftCamera);
+		yield return new WaitForSeconds(waitTime);
+
 		rightCamera.fader.fadeRate = tmp;
+		leftCamera.fader.fadeRate = tmp;
 
 		End();
 	}
