@@ -15,6 +15,7 @@ public class LevelManagerScript : _Mono{
 	public AudioClip level1Theme;
 	public AudioClip level2Theme;
 	public string debugLocation;
+	public int startingLevel = 1;
 
 	public GameObject[] levelPrefabs;
 	private List<GameObject> _levelPrefabs;
@@ -311,7 +312,8 @@ public class LevelManagerScript : _Mono{
 			LoadSerializedGame();
 		}
 		else {
-			LoadLevels(_levelPrefabs[0], _levelPrefabs[1]);
+			//LoadLevels(_levelPrefabs[0], _levelPrefabs[1]);
+			LoadLevels(_levelPrefabs[(startingLevel - 1) * 2], _levelPrefabs[(startingLevel - 1) * 2 + 1]);
 		}
 	}
 

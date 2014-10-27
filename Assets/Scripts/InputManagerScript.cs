@@ -11,6 +11,7 @@ public class InputManagerScript : MonoBehaviour {
 	private const KeyCode SNAPSHOT_KEY = KeyCode.P;
 	//private KeyCode[] ACTION_KEYS = {KeyCode.Space, KeyCode.LeftControl, KeyCode.Z};
 	private KeyCode[] DIRECTION_SWITCH_KEYS = {KeyCode.Q};
+	private const KeyCode HINT_KEY = KeyCode.H;
 
 	List<Button> _inputs;
 	List<Button> _lastInputs;
@@ -53,10 +54,16 @@ public class InputManagerScript : MonoBehaviour {
 		else if (vIn < -threshhold)
 			_inputs.Add(Button.DOWN);
 
+		if(true){};
+
 		if(Input.GetButtonDown("Activate")){
 			_inputs.Add(Button.ACTION);
 		}
 		
+		if (Input.GetKeyDown (SNAPSHOT_KEY)) {
+			_inputs.Add(Button.HINT);
+		}
+
 		//TO REMOVE DIRECTION_SWITCH_KEYS
 		foreach(KeyCode kc in DIRECTION_SWITCH_KEYS){
 			if(Input.GetKeyDown(kc)){
