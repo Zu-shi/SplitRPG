@@ -32,6 +32,13 @@ public class CharacterMovementScript : MovementScript {
 		}
 	}
 
+	public void StopMovingNow() {
+		moveDirection = Direction.NONE;
+		fastDirectionChangeTimeLeft = 0;
+		moveTimeLeft = 0;
+		waitTimeLeft = 0;
+	}
+
 	protected override void FixedUpdate(){
 		
 		base.FixedUpdate();

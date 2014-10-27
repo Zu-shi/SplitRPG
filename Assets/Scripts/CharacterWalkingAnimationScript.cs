@@ -103,6 +103,7 @@ public class CharacterWalkingAnimationScript : MonoBehaviour {
 			case(Direction.UP): {result  = "WalkUpAnimation"; break;}
 			case(Direction.LEFT): {result = "WalkLeftAnimation"; break;}
 			case(Direction.RIGHT): {result = "WalkRightAnimation"; break;}
+			default: {result  = "WalkUpAnimation"; break;}
 		}
 		return result;
 	}
