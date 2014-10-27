@@ -55,6 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   teleportDisabled: 0
+  fadeTransition: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

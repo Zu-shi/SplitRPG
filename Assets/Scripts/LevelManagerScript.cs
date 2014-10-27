@@ -129,12 +129,26 @@ public class LevelManagerScript : _Mono{
 	
 	private void PlayLevelTheme(GameObject leftLevel, GameObject rightLevel)
 	{
+		//Check and see if music plays on load.
 		Debug.Log("LevelManager PlayLevelTheme()");
 		if(leftLevel == level1LeftPrefab && rightLevel == level1RightPrefab){
-			Globals.soundManager.musicClip = level1Theme;
-			Globals.soundManager.PlayMusic();//(level1Theme);
+			LoadAndPlayClip(level1Theme);
 		}
+		else if(leftLevel == level2LeftPrefab && rightLevel == level2RightPrefab){
+			LoadAndPlayClip(level2Theme);
+		}
+		
 	} 
+
+	private void LoadAndPlayClip(AudioClip ac){
+		if(Globals.soundManager.musicClip != ac){
+			Globals.soundManager.musicClip = ac;
+		}
+
+		if(!Globals.soundManager.isPlaying){
+			Globals.soundManager.PlayMusic();
+		}
+	}
 
 	public bool LoadLevels(string leftLevelName, string rightLevelName, bool reloadPersistent = false) {
 		GameObject left = null;
@@ -338,6 +352,7 @@ public class LevelManagerScript : _Mono{
 				if(pb2.position.Equals(pb.position)){
 					Debug.Log ("Found counterpart " + pb.name);
 					foundLink = true;
+					pb.gameObject.layer = LayerMask.NameToLayer("Default");
 					toDeleteAtPosition.Add(new Vector2(pbs2.x, pbs2.y));
 				}
 			}

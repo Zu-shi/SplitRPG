@@ -17,6 +17,10 @@ public class SoundManagerScript : _Mono {
 	private float fadeRate = 0; // volume / sec
 	private float maxVolume = 1;
 
+	public bool isPlaying {
+		get{return audio.isPlaying;}
+	}
+
 	public float volume {
 		get{
 			return audio.volume;

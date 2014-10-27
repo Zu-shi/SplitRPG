@@ -11,7 +11,7 @@ public class ColorShiftScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		hue += 0.001f;
+		hue += 0.0006f;
 		if (hue > 1f) {
 			hue -= 1f;
 		}

@@ -20,7 +20,10 @@ public abstract class CutsceneScript : _Mono {
 	/// <summary>
 	/// Has this cutscene been triggered yet?
 	/// </summary>
-	public bool triggered = false;
+	 
+	// TODO:CHANGE THIS BACK, give back jumping ability.
+	//public bool triggered = false;
+	private bool triggered = true;
 	
 	public GameObject BackgroundPrefab;
 	

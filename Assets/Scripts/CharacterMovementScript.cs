@@ -106,6 +106,7 @@ public class CharacterMovementScript : MovementScript {
 	protected void CreateSplash(){
 		GameObject sp = Instantiate(splashAnimation, gameObject.transform.position, Quaternion.identity) as GameObject;
 		_Mono m = sp.AddComponent<_Mono>();
+		sp.layer = gameObject.layer;
 		//m.x += Utils.DirectionToVector(moveDirection).x;
 	}
 

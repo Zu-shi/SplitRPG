@@ -57,8 +57,8 @@ MonoBehaviour:
   activatable: 1
   pit: 0
   twin: {fileID: 0}
-  onSprite: {fileID: 21300000, guid: 02abd4ef3315b43f5a854c77d6ee496e, type: 3}
-  offSprite: {fileID: 21300000, guid: d4348a6ed5a164376b110b58aa8c50e2, type: 3}
+  onSprite: {fileID: 21300000, guid: 400bcfb83acff4d0c9fcceec471006f2, type: 3}
+  offSprite: {fileID: 21300000, guid: e418aaa57fb704ce0800833d78f9aff8, type: 3}
   gates: []
 --- !u!114 &11400002
 MonoBehaviour:
@@ -96,7 +96,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 02abd4ef3315b43f5a854c77d6ee496e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 400bcfb83acff4d0c9fcceec471006f2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

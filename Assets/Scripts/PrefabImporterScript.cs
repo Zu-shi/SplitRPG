@@ -132,28 +132,15 @@ public class PrefabImporterScript : MonoBehaviour {
 		sr.sprite = retrieveSpriteByName (map, objname);
 		SaveAndDestory (map, objname, go);
 
-		if(map!="S"){
-			for (int i = 1; i <= 4; i ++) {
-				objname = "Switch";
-				go = getOriginalPrefabOfObject (objname.ToLower ());
-				SwitchScript ss = go.GetComponent<SwitchScript> ();
-				ss.onSprite = retrieveSpriteByName (map, objname + "On");
-				ss.offSprite = retrieveSpriteByName (map, objname + "Off");
-				sr = go.GetComponent<SpriteRenderer> ();
-				sr.sprite = ss.onSprite;
-				SaveAndDestory (map, objname + i.ToString(), go);
-			}
-		}else{
-			for (int i = 1; i <= 4; i ++) {
-				objname = "Switch" + i.ToString();
-				go = getOriginalPrefabOfObject (objname.ToLower ());
-				SwitchScript ss = go.GetComponent<SwitchScript> ();
-				ss.onSprite = retrieveSpriteByName (map, objname + "On");
-				ss.offSprite = retrieveSpriteByName (map, objname + "Off");
-				sr = go.GetComponent<SpriteRenderer> ();
-				sr.sprite = ss.onSprite;
-				SaveAndDestory (map, objname, go);
-			}
+		for (int i = 1; i <= 3; i ++) {
+			objname = "Switch" + i.ToString();
+			go = getOriginalPrefabOfObject (objname.ToLower ());
+			SwitchScript ss = go.GetComponent<SwitchScript> ();
+			ss.onSprite = retrieveSpriteByName (map, objname + "On");
+			ss.offSprite = retrieveSpriteByName (map, objname + "Off");
+			sr = go.GetComponent<SpriteRenderer> ();
+			sr.sprite = ss.onSprite;
+			SaveAndDestory (map, objname, go);
 		}
 
 		for (int i = 1; i <= 3; i ++) {

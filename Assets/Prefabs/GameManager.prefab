@@ -223,7 +223,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 10
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 2
@@ -451,13 +451,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level1LeftPrefab: {fileID: 100360, guid: 34497236e9ca84f7a874a8f49a4d3a83, type: 2}
   level1RightPrefab: {fileID: 105706, guid: 3520fdcd1821d4fb8bf366663283dd70, type: 2}
-  level2LeftPrefab: {fileID: 0}
-  level2RightPrefab: {fileID: 0}
+  level2LeftPrefab: {fileID: 100516, guid: 6e67949b2aaff4878827f78d1bfdb0fa, type: 2}
+  level2RightPrefab: {fileID: 100522, guid: 55f2788b7879f40ccade4d5ec16479f7, type: 2}
   level1Theme: {fileID: 8300000, guid: 60dd90af1b12a427ca7edef456d8a6f8, type: 3}
-  level2Theme: {fileID: 0}
+  level2Theme: {fileID: 8300000, guid: fddeaf0d312d048aea0cca7915a2685b, type: 3}
   debugLocation: 
   levelPrefabs:
-  - {fileID: 100516, guid: 473de786648a6eb4699c8cd766e0164a, type: 2}
+  - {fileID: 100516, guid: 6e67949b2aaff4878827f78d1bfdb0fa, type: 2}
+  - {fileID: 100522, guid: 55f2788b7879f40ccade4d5ec16479f7, type: 2}
+  - {fileID: 100516, guid: 6e67949b2aaff4878827f78d1bfdb0fa, type: 2}
   - {fileID: 100496, guid: a7b40782d5b144b4fbaca3e039fda8ba, type: 2}
   loadOnStart: 1
   preloadedLeftLevel: {fileID: 100732, guid: c3db91af971144e7987b7ec542266ef8, type: 2}

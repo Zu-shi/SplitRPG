@@ -387,7 +387,7 @@ MonoBehaviour:
   runInEditor: 0
   min: -.100000001
   max: .300000012
-  duration: 1.5
+  duration: 2
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
