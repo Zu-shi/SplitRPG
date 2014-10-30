@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-//using UnityEditor;
+using UnityEditor;
 
-//[ExecuteInEditMode]
+[ExecuteInEditMode]
 public class PrefabImporterScript : MonoBehaviour {
-	/*
+
 	public bool convertSpritesToPrefabs = false;
 	public bool J1Left;
 	public bool J1Right;
@@ -62,6 +62,13 @@ public class PrefabImporterScript : MonoBehaviour {
 		sr = go.GetComponent<SpriteRenderer> ();
 		sr.sprite = retrieveSpriteByName (map, objname);
 		go.GetComponent<PushBlockColliderScript> ().pushSound = AssetDatabase.LoadAssetAtPath(PrefabMapper.SoundLocation + map + "Push.wav", typeof(AudioClip)) as AudioClip;
+
+		// add blue particles as child of go
+		GameObject particlePrefab = AssetDatabase.LoadAssetAtPath( "Assets/Prefabs/SimultaneousPBParticles.prefab", typeof(GameObject) ) as GameObject;
+		Utils.assert (particlePrefab != null);
+		GameObject particle = GameObject.Instantiate(particlePrefab) as GameObject;
+		particle.transform.parent = go.transform;
+
 		SaveAndDestory (map, objname, go);
 
 		for (int i = 1; i <= 4; i ++) {
@@ -270,5 +277,5 @@ public class PrefabImporterScript : MonoBehaviour {
 		PrefabUtility.CreatePrefab(PrefabMapper.PrefabLocation + map + "/" + name + ".prefab", go);
 		DestroyImmediate (go);
 	}
-	*/
+
 } 
