@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Tiled2Unity;
 
-[Tiled2Unity.CustomTiledImporter]
+[Tiled2Unity.CustomTiledImporter(Order = 4)]
 public class CustomTiledImporterColorShift : Tiled2Unity.ICustomTiledImporter {
 	
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props){

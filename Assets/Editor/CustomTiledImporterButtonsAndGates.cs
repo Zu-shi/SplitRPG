@@ -7,7 +7,7 @@ using System.Collections;
 //Purpose: Import Tiled maps with gates and buttons specified in the tech doc correctly into the game.
 //Notes: the "visual" property of objects are optional, as long as a default prefab for buttons and gates are specified by the map.
 //Author: Zuoming
-[Tiled2Unity.CustomTiledImporter]
+[Tiled2Unity.CustomTiledImporter(Order = 3)]
 public class CustomTiledImporterButtonsSwitchesAndGates : Tiled2Unity.ICustomTiledImporter {
 
 

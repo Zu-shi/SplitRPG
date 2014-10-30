@@ -4,7 +4,7 @@ using Tiled2Unity;
 using UnityEditor;
 using System.Collections;
 
-[Tiled2Unity.CustomTiledImporter]
+[Tiled2Unity.CustomTiledImporter(Order = 1)]
 class CustomTiledImporterAddObjects : Tiled2Unity.ICustomTiledImporter{
 
 	private string pathPrefix = PrefabMapper.PrefabLocation;

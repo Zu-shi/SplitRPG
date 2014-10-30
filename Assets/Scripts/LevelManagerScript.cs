@@ -8,12 +8,10 @@ using System.Collections.Generic;
 public class LevelManagerScript : _Mono{
 
 	// Only used in editor, copied to _levelPrefabs at start
-	public GameObject level1LeftPrefab;
-	public GameObject level1RightPrefab;
-	public GameObject level2LeftPrefab;
-	public GameObject level2RightPrefab;
 	public AudioClip level1Theme;
 	public AudioClip level2Theme;
+	public AudioClip level3Theme;
+	public AudioClip level4Theme;
 	public string debugLocation;
 	public int startingLevel = 1;
 
@@ -132,12 +130,19 @@ public class LevelManagerScript : _Mono{
 	{
 		//Check and see if music plays on load.
 		Debug.Log("LevelManager PlayLevelTheme()");
-		if(leftLevel == level1LeftPrefab && rightLevel == level1RightPrefab){
+		if(leftLevel == levelPrefabs[0] && rightLevel == levelPrefabs[1]){
 			LoadAndPlayClip(level1Theme);
 		}
-		else if(leftLevel == level2LeftPrefab && rightLevel == level2RightPrefab){
+		else if(leftLevel == levelPrefabs[2] && rightLevel == levelPrefabs[3]){
 			LoadAndPlayClip(level2Theme);
 		}
+		else if(leftLevel == levelPrefabs[4] && rightLevel == levelPrefabs[5]){
+			LoadAndPlayClip(level3Theme);
+		}
+		else if(leftLevel == levelPrefabs[6] && rightLevel == levelPrefabs[7]){
+			LoadAndPlayClip(level4Theme);
+		}
+
 		
 	} 
 

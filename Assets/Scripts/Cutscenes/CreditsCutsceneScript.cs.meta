@@ -2,7 +2,9 @@ fileFormatVersion: 2
 guid: 826ff36bc1e4ffe4493dce80e19422bc
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - BackgroundPrefab: {instanceID: 0}
+  - talkSE: {fileID: 8300000, guid: ab1d1e25db46d46898456d4036820106, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

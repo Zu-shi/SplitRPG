@@ -24,16 +24,16 @@ public abstract class CutsceneScript : _Mono {
 	 
 	// TODO:CHANGE THIS BACK, give back jumping ability.
 	//public bool triggered = false;
-	private bool triggered = true;
+	private bool triggered = false;
 	
 	public GameObject BackgroundPrefab;
-	
+	public AudioClip talkSE;
 	public float fadeRate = 0.01f;
 	
 	protected GameObject background;
 	private Transform parent;
 	private float oldFadeRate = 0;
-	private bool playing = false;
+	private bool playing = true;
 	private List<GameObject> bubbles = new List<GameObject>();
 
 	protected void SetupScene() {
@@ -239,6 +239,7 @@ public abstract class CutsceneScript : _Mono {
 		bubbleInstance.name = bubblePrefab.name;
 		ChangeLayerRecursive(bubbleInstance, layer);
 		bubbles.Add(bubbleInstance);
+		Globals.soundManager.PlaySound(talkSE);
 		return bubbleInstance;
 	}
 

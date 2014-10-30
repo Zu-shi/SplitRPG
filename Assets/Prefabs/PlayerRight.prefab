@@ -162,6 +162,7 @@ MonoBehaviour:
   body:
   - {x: 0, y: 0}
   walkingSound: {fileID: 8300000, guid: fe55a75936473435f8eba8b5b8c6fa5a, type: 3}
+  playWalkSound: 1
   wrongBeep: {fileID: 8300000, guid: 3576cfb536e8f4c52a19ff695d19d99a, type: 3}
   moveDirection: 0
   canJump: 0
@@ -308,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationName: TakeGift
-  rate: 1
+  rate: 3
   loop: 0
   sprites:
   - {fileID: 21300020, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}
@@ -325,7 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationName: GiveGift
-  rate: 1
+  rate: 3
   loop: 0
   sprites:
   - {fileID: 21300018, guid: 3dc07a8157f6c8b4d82b786ce626ed3d, type: 3}

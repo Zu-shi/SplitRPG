@@ -59,9 +59,11 @@ public class InputManagerScript : MonoBehaviour {
 		if(Input.GetButtonDown("Activate")){
 			_inputs.Add(Button.ACTION);
 		}
-		
-		if (Input.GetKeyDown (SNAPSHOT_KEY)) {
+
+
+		if (Input.GetKey (HINT_KEY)) {
 			_inputs.Add(Button.HINT);
+			//Debug.Log("HINT");
 		}
 
 		//TO REMOVE DIRECTION_SWITCH_KEYS

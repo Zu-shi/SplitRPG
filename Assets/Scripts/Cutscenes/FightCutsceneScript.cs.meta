@@ -2,7 +2,28 @@ fileFormatVersion: 2
 guid: 90a61d22437d2614f9f6dee0c0f4210e
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - BackgroundPrefab: {instanceID: 0}
+  - talkSE: {fileID: 8300000, guid: ab1d1e25db46d46898456d4036820106, type: 3}
+  - confusionBubble: {instanceID: 0}
+  - vrHeadSetBubble: {instanceID: 0}
+  - expensiveBubbleLeftTail: {instanceID: 0}
+  - expensiveBubbleRightTail: {instanceID: 0}
+  - smileyFaceBubbleRightTail: {instanceID: 0}
+  - cyberpunkGameBubble: {instanceID: 0}
+  - wizardGameBubble: {instanceID: 0}
+  - playingWithVrBubble: {instanceID: 0}
+  - angryBubbleLeftTail: {instanceID: 0}
+  - angryBubbleRightTail: {instanceID: 0}
+  - breadBubble: {instanceID: 0}
+  - catFoodBubble: {instanceID: 0}
+  - newCarBubble: {instanceID: 0}
+  - exclaimationMarkBubble: {instanceID: 0}
+  - noNewCarBubble: {instanceID: 0}
+  - oldCarBubble: {instanceID: 0}
+  - noOldCarBubble: {instanceID: 0}
+  - elipsesBubbleLeftTail: {instanceID: 0}
+  - elipsesBubbleRightTail: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

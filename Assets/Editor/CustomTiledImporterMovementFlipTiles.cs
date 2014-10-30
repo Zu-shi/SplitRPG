@@ -3,7 +3,7 @@ using UnityEditor;
 using System.Collections.Generic;
 using Tiled2Unity;
 
-[Tiled2Unity.CustomTiledImporter]
+[Tiled2Unity.CustomTiledImporter(Order = 10)]
 public class CustomTiledImporterMovementFlipTiles : Tiled2Unity.ICustomTiledImporter {
 
 	/*

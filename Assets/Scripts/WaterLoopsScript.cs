@@ -6,7 +6,10 @@ public class WaterLoopsScript : MonoBehaviour {
 	public Material[] m;
 	public float speed;
 	private float index = 0f;
-	
+
+	void Start() {
+	}
+
 	// Update is called once per frame
 	void Update () {
 		index += Time.deltaTime * speed * 30;

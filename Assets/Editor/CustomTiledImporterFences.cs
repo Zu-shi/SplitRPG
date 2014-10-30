@@ -2,7 +2,7 @@
 using UnityEditor;
 using System.Collections.Generic;
 
-[Tiled2Unity.CustomTiledImporter]
+[Tiled2Unity.CustomTiledImporter(Order = 5)]
 class CustomTiledImporterFences : Tiled2Unity.ICustomTiledImporter{
 	
 	private const bool DISABLE_IMPORT = false;

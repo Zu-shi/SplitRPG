@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Tiled2Unity;
 
-[Tiled2Unity.CustomTiledImporter]
+[Tiled2Unity.CustomTiledImporter(Order = 2)]
 public class CustomTiledImporterBackgrounds : Tiled2Unity.ICustomTiledImporter {
 
 	private Object prefabToAdd;

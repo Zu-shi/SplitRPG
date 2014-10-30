@@ -106,7 +106,7 @@ public class MovementScript : _Mono {
 
 	protected virtual void StartFall(){	
 		falling = true;
-		Globals.soundManager.PlaySound(fallingSound);
+		//Globals.soundManager(fallingSound);
 		//rigidbody2D.velocity = new Vector2 (0f, 0f);
 	}
 

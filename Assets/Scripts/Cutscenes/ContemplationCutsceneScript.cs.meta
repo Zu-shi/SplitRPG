@@ -2,7 +2,17 @@ fileFormatVersion: 2
 guid: ba23f6bb25e158a40b7c5e011d4c1b8d
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - BackgroundPrefab: {instanceID: 0}
+  - talkSE: {fileID: 8300000, guid: ab1d1e25db46d46898456d4036820106, type: 3}
+  - girlFaceBubble: {instanceID: 0}
+  - boyFaceBubble: {instanceID: 0}
+  - eatingDinerBubble: {instanceID: 0}
+  - playingVideoGamesBubble: {instanceID: 0}
+  - sittingOnParkBenchBubble: {instanceID: 0}
+  - sittingOnTrainBubble: {instanceID: 0}
+  - sadFaceBubbleLeftTail: {instanceID: 0}
+  - sadFaceBubbleRightTail: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

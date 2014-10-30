@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 10/27/2014 2:47:38 PM-->
+<!--Last exported: 10/27/2014 5:57:57 PM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J2Right" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="J2Right" sortingLayerName="" sortingOrder="1" />
@@ -12,7 +12,7 @@
     <Property name="autobond" value="true" />
     <Property name="canJump" value="true" />
     <Property name="canPushHeavy" value="true" />
-    <Property name="fallInWater" value="true" />
+    <Property name="fallInWater" value="left" />
     <Property name="loadPrefab" value="J2_CyberpunkBG" />
     <Property name="map" value="J2Right" />
     <Property name="side" value="Right" />
@@ -488,7 +488,7 @@
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="LevelLoader" x="640" y="-128">
-        <Property name="levelsToLoad" value="J3Left_v01,J3Right_v01" />
+        <Property name="levelsToLoad" value="J3Left_v01_Tiling,J3Right_v01_Tiling" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>

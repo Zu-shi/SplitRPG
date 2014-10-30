@@ -2,7 +2,28 @@ fileFormatVersion: 2
 guid: ebb794b581f7dcf4892c86046195355e
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - BackgroundPrefab: {instanceID: 0}
+  - talkSE: {fileID: 8300000, guid: ab1d1e25db46d46898456d4036820106, type: 3}
+  - askForSeatBubble: {instanceID: 0}
+  - smileyFaceBubbleLeftTail: {instanceID: 0}
+  - smileyFaceBubbleRightTail: {instanceID: 0}
+  - isTheSceneryGoodBubble: {instanceID: 0}
+  - theSceneryIsGoodBubble: {instanceID: 0}
+  - isTheMountainGoodBubble: {instanceID: 0}
+  - theMountainIsGoodBubble: {instanceID: 0}
+  - doYouLikeVideoGamesBubble: {instanceID: 0}
+  - iLikeVideoGamesBubble: {instanceID: 0}
+  - wizardBubble: {instanceID: 0}
+  - dragonBubbleLeftTail: {instanceID: 0}
+  - dragonBubbleRightTail: {instanceID: 0}
+  - iLikeSciFiBubbleRightTail: {instanceID: 0}
+  - iLikeSciFiBubbleLeftTail: {instanceID: 0}
+  - spaceSuitBubble: {instanceID: 0}
+  - ellipsiesBubbleLeftTail: {instanceID: 0}
+  - ellipsiesBubbleRightTail: {instanceID: 0}
+  - coffeeShopBubble: {instanceID: 0}
+  - fivePmBubble: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

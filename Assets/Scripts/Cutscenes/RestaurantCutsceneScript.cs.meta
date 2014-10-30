@@ -2,7 +2,20 @@ fileFormatVersion: 2
 guid: 4ae56c5b6254889419630654f335eab3
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - BackgroundPrefab: {instanceID: 0}
+  - talkSE: {fileID: 8300000, guid: ab1d1e25db46d46898456d4036820106, type: 3}
+  - plateWithChickenBubble: {instanceID: 0}
+  - smileyFaceBubbleRightTail: {instanceID: 0}
+  - smileyFaceBubbleLeftTail: {instanceID: 0}
+  - exclaimationMarkBubbleRightTail: {instanceID: 0}
+  - exclaimationMarkBubbleLeftTail: {instanceID: 0}
+  - necklaceBubble: {instanceID: 0}
+  - jumpingBubble: {instanceID: 0}
+  - elipsesBubbleLeftTail: {instanceID: 0}
+  - braceletBubble: {instanceID: 0}
+  - pushingBlocksBubble: {instanceID: 0}
+  - videoGamesBubble: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

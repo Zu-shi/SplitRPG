@@ -449,22 +449,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1743bb8ac4c3ff844bf200c6c160043a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level1LeftPrefab: {fileID: 100360, guid: 34497236e9ca84f7a874a8f49a4d3a83, type: 2}
-  level1RightPrefab: {fileID: 101908, guid: 271ca6048560b0b498bf6a91dfa9e844, type: 2}
-  level2LeftPrefab: {fileID: 0}
-  level2RightPrefab: {fileID: 0}
   level1Theme: {fileID: 8300000, guid: 60dd90af1b12a427ca7edef456d8a6f8, type: 3}
-  level2Theme: {fileID: 0}
-  debugLocation: debugFireTest
+  level2Theme: {fileID: 8300000, guid: fddeaf0d312d048aea0cca7915a2685b, type: 3}
+  level3Theme: {fileID: 8300000, guid: a93f21cb37f6344c0ac36ee554aee6d9, type: 3}
+  level4Theme: {fileID: 8300000, guid: cc409d1e93653470291ae6310f689be7, type: 3}
+  debugLocation: 0
+  startingLevel: 1
   levelPrefabs:
   - {fileID: 101560, guid: 54e6eb4b3f9b31d4eaacd3b3f50a12de, type: 2}
   - {fileID: 101908, guid: 271ca6048560b0b498bf6a91dfa9e844, type: 2}
-  - {fileID: 100516, guid: 473de786648a6eb4699c8cd766e0164a, type: 2}
-  - {fileID: 100496, guid: a7b40782d5b144b4fbaca3e039fda8ba, type: 2}
-  - {fileID: 100376, guid: 57fc9091eb0bb48cab4d91f690e64628, type: 2}
-  - {fileID: 100366, guid: 3ff0a3569d19341c584a49a105406c6e, type: 2}
-  - {fileID: 100732, guid: c3db91af971144e7987b7ec542266ef8, type: 2}
-  - {fileID: 104406, guid: fae586b1b532a4e26b66fd9d859e9647, type: 2}
+  - {fileID: 100516, guid: 6e67949b2aaff4878827f78d1bfdb0fa, type: 2}
+  - {fileID: 100578, guid: 55f2788b7879f40ccade4d5ec16479f7, type: 2}
+  - {fileID: 100414, guid: ae3a2384210ee9e419dbddb05016ffa8, type: 2}
+  - {fileID: 100494, guid: 8c9965bc9a46240f4873aae31f3176c0, type: 2}
+  - {fileID: 101244, guid: 2f6ef3654952a455facfedd4e6aef994, type: 2}
+  - {fileID: 101184, guid: 6ebd9ced0bc4f4642b850b8d7414025c, type: 2}
   loadOnStart: 1
   preloadedLeftLevel: {fileID: 100732, guid: c3db91af971144e7987b7ec542266ef8, type: 2}
   preloadedRightLevel: {fileID: 104406, guid: fae586b1b532a4e26b66fd9d859e9647, type: 2}
@@ -519,9 +518,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   convertSpritesToPrefabs: 0
   J1Left: 0
-  J1Right: 0
+  J1Right: 1
   J2Left: 0
-  J2Right: 1
+  J2Right: 0
   S: 0
 --- !u!114 &11400026
 MonoBehaviour:

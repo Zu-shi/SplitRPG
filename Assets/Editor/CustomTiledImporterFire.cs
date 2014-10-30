@@ -3,7 +3,8 @@ using UnityEditor;
 using System.Collections.Generic;
 using Tiled2Unity;
 
-[Tiled2Unity.CustomTiledImporter]
+[Tiled2Unity.CustomTiledImporter(Order = 6)]
+
 public class CustomTiledImporterFire : Tiled2Unity.ICustomTiledImporter {
 
 	public List<GameObject> fire1 = new List<GameObject>();

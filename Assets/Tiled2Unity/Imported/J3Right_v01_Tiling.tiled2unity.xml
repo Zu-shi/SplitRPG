@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 10/27/2014 2:24:01 PM-->
+<!--Last exported: 10/27/2014 4:55:55 PM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J3Right2" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="J3Right2" sortingLayerName="" sortingOrder="1" />
@@ -447,7 +447,7 @@
       <GameObject name="debugDown" x="4992" y="-3968">
         <BoxCollider2D width="128" height="128" />
       </GameObject>
-      <GameObject name="debugFireTest" x="5760" y="-896">
+      <GameObject name="debug1" x="5760" y="-768">
         <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>
@@ -578,7 +578,7 @@
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="LevelLoader" x="2944" y="-2816">
-        <Property name="levelsToLoad" value="SanctuaryLeft,SanctuaryRight" />
+        <Property name="levelsToLoad" value="SanctuaryLef_NewTileset,SanctuaryRight_NewTileset" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>
