@@ -14,7 +14,6 @@ public class CharacterMovementScript : MovementScript {
 	public Direction moveDirection = Direction.NONE;
 	public bool canJump = false;
 	public bool fallingInWater;
-	public GameObject splashAnimation;
 	protected int changingDirectionTimeLeft;
 	protected bool _isChangingDirection;
 	private const float wrongBeatWaitTime = 1.0f;
@@ -95,7 +94,7 @@ public class CharacterMovementScript : MovementScript {
 		Invoke("PlayWrongBeep", 0.6f);
 	}
 
-	protected void TurnInvisible(){
+	protected override void TurnInvisible(){
 		gameObject.transform.FindChild("Sprite").GetComponent<_Mono>().alpha = 0f;
 	}
 
@@ -112,10 +111,10 @@ public class CharacterMovementScript : MovementScript {
 		gameObject.transform.FindChild("Sprite").GetComponent<HeightScript>().drawingOrder = DrawingOrder.OBJECTS;
 	}
 
-	protected void CreateSplash(){
+	protected override void CreateSplash(){
 		GameObject sp = Instantiate(splashAnimation, gameObject.transform.position, Quaternion.identity) as GameObject;
 		_Mono m = sp.AddComponent<_Mono>();
-		sp.layer = gameObject.layer;
+		sp.transform.GetChild(0).gameObject.layer = gameObject.layer;
 		//m.x += Utils.DirectionToVector(moveDirection).x;
 	}
 

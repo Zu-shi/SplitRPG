@@ -17,6 +17,8 @@ public class SoundManagerScript : _Mono {
 	private float fadeRate = 0; // volume / sec
 	private float maxVolume = 1;
 
+	private bool hasFocus = true;
+
 	public bool isPlaying {
 		get{return audio.isPlaying;}
 	}
@@ -81,6 +83,7 @@ public class SoundManagerScript : _Mono {
 
 
 	public void Update() {
+
 		if(fading) {
 			fadeTime -= Time.deltaTime;
 			audio.volume -= fadeRate * Time.deltaTime;
@@ -102,7 +105,10 @@ public class SoundManagerScript : _Mono {
 			if(audio.clip != null)
 				audio.Play();
 		}
-
+		
+		//if () AudioListener.pause = true; 
+		//else if (AudioListener.pause) AudioListener.pause = false; 
+		//else return;
 	}
 
 }

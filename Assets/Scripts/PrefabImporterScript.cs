@@ -69,6 +69,7 @@ public class PrefabImporterScript : MonoBehaviour {
 		GameObject particle = GameObject.Instantiate(particlePrefab) as GameObject;
 		particle.transform.parent = go.transform;
 
+
 		SaveAndDestory (map, objname, go);
 
 		for (int i = 1; i <= 4; i ++) {
@@ -161,7 +162,7 @@ public class PrefabImporterScript : MonoBehaviour {
 			SaveAndDestory (map, objname, go);
 		}
 
-		for (int i = 1; i <= 4; i ++) {
+		for (int i = 1; i <= 3; i ++) {
 			if(map!="J1Left"  && map != "J1Right"){
 				objname = "Portal" + i.ToString();
 				go = getOriginalPrefabOfObject (objname.ToLower ());
@@ -170,7 +171,8 @@ public class PrefabImporterScript : MonoBehaviour {
 				//bs.offSprite = retrieveSpriteByName (map, objname + "Off");
 				//sr = go.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer> ();
 				sr = go.GetComponent<SpriteRenderer> ();
-				sr.sprite = retrieveSpriteByName (map, objname);
+				sr.sprite = retrieveSpriteByName (map, objname + "On");
+				DestroyImmediate(go.transform.GetChild(0).gameObject);
 				SaveAndDestory (map, objname, go);
 			}
 		}
@@ -189,7 +191,7 @@ public class PrefabImporterScript : MonoBehaviour {
 			}
 		}
 		
-		for (int i = 1; i <= 4; i ++) {
+		for (int i = 1; i <= 3; i ++) {
 			if(map!="J1Left"  && map != "J1Right"){
 				objname = "ReceivePortal" + i.ToString();
 				go = getOriginalPrefabOfObject (objname.ToLower ());
@@ -217,7 +219,7 @@ public class PrefabImporterScript : MonoBehaviour {
 			SaveAndDestory (map, objname, go);
 		}
 		
-		for (int i = 1; i <= 4; i ++) {
+		for (int i = 1; i <= 3; i ++) {
 			objname = "SwitchGate" + i.ToString();
 			go = getOriginalPrefabOfObject (objname.ToLower());
 			GateScript gs = go.GetComponent<GateScript> ();

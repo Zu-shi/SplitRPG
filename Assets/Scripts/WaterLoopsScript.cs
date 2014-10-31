@@ -15,7 +15,7 @@ public class WaterLoopsScript : MonoBehaviour {
 		index += Time.deltaTime * speed * 30;
 		GetComponent<MeshRenderer>().material = m[Mathf.FloorToInt(index) % m.Length];
 		if(Mathf.FloorToInt(index - Time.deltaTime * speed) != Mathf.FloorToInt(index)){
-			Debug.Log ("MeshRenderer Component is now " + Mathf.FloorToInt(index) % m.Length);
+			//Debug.Log ("MeshRenderer Component is now " + Mathf.FloorToInt(index) % m.Length);
 		}
 	}
 }

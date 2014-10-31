@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Tiled2Unity;
 
 [Tiled2Unity.CustomTiledImporter(Order = 6)]
-
 public class CustomTiledImporterFire : Tiled2Unity.ICustomTiledImporter {
 
 	public List<GameObject> fire1 = new List<GameObject>();
@@ -16,8 +15,11 @@ public class CustomTiledImporterFire : Tiled2Unity.ICustomTiledImporter {
 	private GameObject prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Fire.prefab", typeof(GameObject)) as GameObject;
 	
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props){
-		if(gameObject.transform.parent != null && gameObject.transform.parent.name == "Fire"){
+		if(gameObject.transform.parent != null && gameObject.transform.parent.name == "Fire(Default)"){
 			gameObject = MakePrefab(gameObject, prefab);
+			FireScript fs = gameObject.AddComponent<FireScript>();
+			fs.level = int.Parse(props["level"]);
+
 			if(props["level"] == "1")
 				fire1.Add(gameObject);
 			else if(props["level"] == "2")
@@ -31,9 +33,10 @@ public class CustomTiledImporterFire : Tiled2Unity.ICustomTiledImporter {
 	public void CustomizePrefab(GameObject prefab){
 		if(fire1.Count != 0 || fire2.Count != 0 || fire3.Count != 0) {
 			FireManagerScript tmp = prefab.AddComponent<FireManagerScript>();
-			tmp.fire1 = fire1;
-			tmp.fire2 = fire2;
-			tmp.fire3 = fire3;
+			//Globals.fireLevel = 3;
+			//tmp.fire1 = fire1;
+			//tmp.fire2 = fire2;
+			//tmp.fire3 = fire3;
 		}
 	}
 

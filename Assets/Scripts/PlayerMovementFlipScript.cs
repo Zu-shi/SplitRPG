@@ -7,6 +7,8 @@ public class PlayerMovementFlipScript : _Mono {
 	public 	bool flipY			= false;
 	public 	bool affectLeft		= false;
 	public 	bool affectRight	= false;
+	public 	Sprite lighted;
+	public 	Sprite unlighted;
 
 	private bool leftEntered	= false;
 	private bool rightEntered	= false;
@@ -34,6 +36,12 @@ public class PlayerMovementFlipScript : _Mono {
 			}
 		} else {
 			rightEntered = false;
+		}
+
+		if(Globals.playerRight.GetComponent<PlayerControllerScript>().hasFlipedXMovement){
+			spriteRenderer.sprite = lighted;
+		}else{
+			spriteRenderer.sprite = unlighted;
 		}
 	}
 }

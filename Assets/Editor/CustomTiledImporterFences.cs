@@ -64,6 +64,11 @@ class CustomTiledImporterFences : Tiled2Unity.ICustomTiledImporter{
 							}
 						}
 					}
+					
+					CircleCollider2D cc = tmp.GetChild(i).GetComponent<CircleCollider2D>();
+					if(cc) {
+						MakeFencePost(graphics, cc.center/64 + (Vector2)cc.transform.position );
+					}
 				}
 
 				// Correct for camera offset.
@@ -127,7 +132,7 @@ class CustomTiledImporterFences : Tiled2Unity.ICustomTiledImporter{
 
 			// Make the top bit of the bar.
 			GameObject top = (GameObject)GameObject.Instantiate(fenceVBarTop,
-			                                                    new Vector2(from.x + 0.5f, higher + yoffset),
+			                                                    new Vector2(from.x + 0.5f, higher + yoffset + 1),
 			                                                       Quaternion.identity);
 			top.transform.parent = graphics.transform;
 

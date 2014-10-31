@@ -23,8 +23,10 @@ public class PlayerControllerScript : _Mono {
 	// Disable
 	bool disableCharacter;
 
-	private bool flipXMovement, flipYMovement;
+	private bool _flipXMovement, _flipYMovement;
 	private bool doubleTapToFallInPit = false;
+
+	public bool hasFlipedXMovement{get{return _flipXMovement;}}
 
 	/// <summary>
 	/// Whether Player is ready to recieve input
@@ -36,18 +38,18 @@ public class PlayerControllerScript : _Mono {
 		}
 	}
 
-	public void FlipXMovement() { flipXMovement = !flipXMovement; 
+	public void FlipXMovement() { _flipXMovement = !_flipXMovement; 
 		if(horizontalDirection(characterMovement.moveDirection)) 
 			characterMovement.moveDirection = FlipDirection(characterMovement.moveDirection);
 	}
-	public void FlipYMovement() { flipYMovement = !flipYMovement; characterMovement.moveDirection = FlipDirection(characterMovement.moveDirection);}
+	public void FlipYMovement() { _flipYMovement = !_flipYMovement; characterMovement.moveDirection = FlipDirection(characterMovement.moveDirection);}
 
 	public bool horizontalDirection(Direction d){
 		return (d==Direction.LEFT || d==Direction.RIGHT);
 	}
 
 	void Start () {
-		flipXMovement = flipYMovement = false;
+		_flipXMovement = _flipYMovement = false;
 		allowCommands = true;
 
 		// Game Manager
@@ -75,7 +77,7 @@ public class PlayerControllerScript : _Mono {
 	/// </summary>
 	public void ResetPlayer(){
 		characterMovement.ResetFalling();
-		flipXMovement = flipYMovement = false;
+		//flipXMovement = flipYMovement = false;
 	}
 	
 	void ResetBothPlayers(){
@@ -107,6 +109,10 @@ public class PlayerControllerScript : _Mono {
 			return;
 		}
 
+		if(InputManager.GetButtonDown(Button.RESET)){
+			ResetBothPlayers();
+			return;
+		}
 	}
 
 //	void LateUpdate(){
@@ -218,15 +224,15 @@ public class PlayerControllerScript : _Mono {
 			return;
 		
 		Direction realDir = direction;
-		if(flipXMovement && (direction == Direction.LEFT || direction == Direction.RIGHT))
+		if(_flipXMovement && (direction == Direction.LEFT || direction == Direction.RIGHT))
 		{realDir = FlipDirection(realDir);}
-		if(flipYMovement && (direction == Direction.UP || direction == Direction.DOWN))
+		if(_flipYMovement && (direction == Direction.UP || direction == Direction.DOWN))
 		{realDir = FlipDirection(realDir);}
 
 		Direction otherPlayerRealDir = direction;
-		if(otherPlayer.flipXMovement && (direction == Direction.LEFT || direction == Direction.RIGHT))
+		if(otherPlayer._flipXMovement && (direction == Direction.LEFT || direction == Direction.RIGHT))
 		{otherPlayerRealDir = FlipDirection(otherPlayerRealDir);}
-		if(otherPlayer.flipYMovement && (direction == Direction.UP || direction == Direction.DOWN))
+		if(otherPlayer._flipYMovement && (direction == Direction.UP || direction == Direction.DOWN))
 		{otherPlayerRealDir = FlipDirection(otherPlayerRealDir);}
 
 

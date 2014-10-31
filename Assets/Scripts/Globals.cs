@@ -17,6 +17,8 @@ public class Globals {
 	/// Number of pixels per tile (assuming you imported from Tiled)
 	/// </summary>
 	public const int PIXELS_PER_TILE = 64;
+	
+	public static int fireLevel = 3;
 
 	static PlayerControllerScript _playerLeft = null;
 	public static PlayerControllerScript playerLeft{

@@ -129,18 +129,22 @@ public class LevelManagerScript : _Mono{
 	private void PlayLevelTheme(GameObject leftLevel, GameObject rightLevel)
 	{
 		//Check and see if music plays on load.
-		Debug.Log("LevelManager PlayLevelTheme()");
+		//Debug.LogError("LevelManager PlayLevelTheme()");
 		if(leftLevel == levelPrefabs[0] && rightLevel == levelPrefabs[1]){
 			LoadAndPlayClip(level1Theme);
+			Debug.Log ("Playing level 1 theme");
 		}
 		else if(leftLevel == levelPrefabs[2] && rightLevel == levelPrefabs[3]){
 			LoadAndPlayClip(level2Theme);
+			Debug.Log ("Playing level 2 theme");
 		}
 		else if(leftLevel == levelPrefabs[4] && rightLevel == levelPrefabs[5]){
 			LoadAndPlayClip(level3Theme);
+			Debug.Log ("Playing level 3 theme");
 		}
 		else if(leftLevel == levelPrefabs[6] && rightLevel == levelPrefabs[7]){
 			LoadAndPlayClip(level4Theme);
+			Debug.Log ("Playing level 4 theme");
 		}
 
 		
@@ -149,11 +153,18 @@ public class LevelManagerScript : _Mono{
 	private void LoadAndPlayClip(AudioClip ac){
 		if(Globals.soundManager.musicClip != ac){
 			Globals.soundManager.musicClip = ac;
+			Globals.soundManager.StopMusic();
+			Globals.soundManager.PlayMusic();
 		}
-
+		/*
 		if(!Globals.soundManager.isPlaying){
 			Globals.soundManager.PlayMusic();
 		}
+		
+		Globals.soundManager.musicClip = ac;
+		Globals.soundManager.StopMusic();
+		Globals.soundManager.PlayMusic();
+		*/
 	}
 
 	public bool LoadLevels(string leftLevelName, string rightLevelName, bool reloadPersistent = false) {

@@ -57,6 +57,8 @@ MonoBehaviour:
   flipY: 0
   affectLeft: 1
   affectRight: 1
+  lighted: {fileID: 21300000, guid: 83d6b45d269c74465871a6520dfb8d4d, type: 3}
+  unlighted: {fileID: 21300000, guid: 3095869526c5f4573b17aaf62c6812d9, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,8 +72,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingOrder: 2
   height: 1
+  slightlyMoreAbove: 0
   slightlyAbove: 0
   slightlyBelow: 0
+  slightlyMoreBelow: 0
   editModeRefresh: 0
 --- !u!212 &21200000
 SpriteRenderer:

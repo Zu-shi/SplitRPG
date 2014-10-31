@@ -6,8 +6,10 @@ public class HeightScript : _Mono {
 
 	public DrawingOrder drawingOrder;
 	public int height = 1;
+	public bool slightlyMoreAbove = false;
 	public bool slightlyAbove = false;
 	public bool slightlyBelow = false;
+	public bool slightlyMoreBelow = false;
 
 	public bool editModeRefresh = false;
 

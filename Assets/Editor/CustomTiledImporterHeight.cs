@@ -27,7 +27,8 @@ class CustomTiledImporterHeight : Tiled2Unity.ICustomTiledImporter{
 		{ "Objects(Invisible)", DrawingOrder.OBJECTS },//,
 		{ "Pushblocks(Default)", DrawingOrder.OBJECTS },//,
 		{ "Bidirectional Portals", DrawingOrder.ON_GROUND },//,
-		{ "Unidirectional Portals", DrawingOrder.ON_GROUND }
+		{ "Unidirectional Portals", DrawingOrder.ON_GROUND },
+		{ "Switches and Gates", DrawingOrder.OBJECTS }//,
 		//{ "Switches and Gates", DrawingOrder.OBJECTS },
 		//{ "Buttons and Gates", DrawingOrder.OBJECTS }
 	};

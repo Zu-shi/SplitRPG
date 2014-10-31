@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 311ad40f81589f34f8b5a06ae7e1e4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterTeleportDirection: 2
+  characterTeleportDirection: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -66,8 +66,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingOrder: 2
   height: 0
+  slightlyMoreAbove: 0
   slightlyAbove: 0
   slightlyBelow: 0
+  slightlyMoreBelow: 0
   editModeRefresh: 0
 --- !u!1001 &100100000
 Prefab:

@@ -31,6 +31,7 @@ public class MovementScript : _Mono {
 	// Time it takes to move two spaces in frames (at Unity's fixed time step aka 50 fps)
 	protected const int moveTime = 14;
 	protected const int jumpTime = moveTime;
+	public GameObject splashAnimation;
 	
 	// Time it takes to change direction in frames (at Unity's fixed time step aka 50 fps)
 	protected const int changingDirectionTime = 7;
@@ -51,6 +52,8 @@ public class MovementScript : _Mono {
 	protected Vector2 moveVelocity;
 	
 	protected bool _isMoving;
+	private bool blockFallingInWater = false;
+
 	public bool isMoving{
 		get {
 			return _isMoving;
@@ -58,6 +61,11 @@ public class MovementScript : _Mono {
 	}
 	
 	void Start () {
+		if(LayerMask.LayerToName(gameObject.layer) == "Left"){
+			blockFallingInWater = Globals.playerLeft.GetComponent<CharacterMovementScript>().fallingInWater;
+		}else if(LayerMask.LayerToName(gameObject.layer) == "Right"){
+			blockFallingInWater = Globals.playerRight.GetComponent<CharacterMovementScript>().fallingInWater;
+		}
 
 		//Set character jump height offset
 		if (this.GetType () == typeof(CharacterMovementScript)) {
@@ -87,13 +95,31 @@ public class MovementScript : _Mono {
 		fallObject.localScale = startScale;
 	}
 
-	protected virtual void fallAnimation(){	
-		Vector3 s = fallObject.localScale;
+	protected virtual void fallAnimation(){
+		/*
 		s *= .9f;
 		y -= 0.05f;
 		fallObject.localScale = s;
 
 		totalFallTimer -= 1;
+		checkAndSetFell ();
+		*/
+
+		if(!blockFallingInWater){
+			Vector3 s = fallObject.localScale;
+			s *= .9f;
+			fallObject.gameObject.GetComponent<_Mono>().y -= 0.06f;
+			fallObject.localScale = s;
+			totalFallTimer -= 1;
+		}else{
+			Vector3 s = fallObject.localScale;
+			//s -= 0.03f * Vector3.one;
+			s *= 0.88f;
+			fallObject.gameObject.GetComponent<_Mono>().y -= 0.2f;
+			fallObject.localScale = s;
+			totalFallTimer -= 1;
+		}
+		
 		checkAndSetFell ();
 	}
 
@@ -105,9 +131,34 @@ public class MovementScript : _Mono {
 	}
 
 	protected virtual void StartFall(){	
+		
 		falling = true;
-		//Globals.soundManager(fallingSound);
-		//rigidbody2D.velocity = new Vector2 (0f, 0f);
+		if(blockFallingInWater){
+			gameObject.GetComponent<HeightScript>().slightlyBelow = true;
+			gameObject.GetComponent<HeightScript>().drawingOrder = DrawingOrder.UNDER_GROUND;
+			//base.StartFall ();
+			Invoke ("CreateSplash", 0.1f);
+			Invoke ("Destroy", 0.2f);
+		}else{
+			Globals.soundManager.PlaySound(fallingSound);
+		}
+	}
+
+	protected virtual void CreateSplash(){
+		GameObject sp = Instantiate(splashAnimation, gameObject.transform.position, Quaternion.identity) as GameObject;
+		_Mono m = sp.AddComponent<_Mono>();
+		sp.transform.GetChild(0).gameObject.layer = gameObject.layer;
+
+		if(name == "pushblock1x3"){
+			m.y -= 1f;
+			m.xs *= 2f;
+			m.ys *= 2f;
+		}
+		//m.x += Utils.DirectionToVector(moveDirection).x;
+	}
+
+	protected virtual void TurnInvisible(){
+		gameObject.GetComponent<_Mono>().alpha = 0f;
 	}
 
 	//Check if player will fall, and activate falling sequence if so.

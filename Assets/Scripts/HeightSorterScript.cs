@@ -12,6 +12,7 @@ public class HeightSorterScript : MonoBehaviour {
 	//const float YCAM_FAC = 0.1f;
 	const float YOFF = 0.1f;
 	const float SLIGHT_DIFFERENCE = .01f;
+	const float SLIGHTLY_MORE_DIFFERENCE = .02f;
 
 	/*
 	public float MaxZAtHeight(int height){
@@ -57,6 +58,13 @@ public class HeightSorterScript : MonoBehaviour {
 			slightOffs += SLIGHT_DIFFERENCE;
 		}
 
+		if (obj.slightlyAbove) {
+			slightOffs -= SLIGHTLY_MORE_DIFFERENCE;
+		}
+		
+		if (obj.slightlyBelow) {
+			slightOffs += SLIGHTLY_MORE_DIFFERENCE;
+		}
 		/*
 		Debug.Log (heightOffs);
 		Debug.Log (doOffs);
