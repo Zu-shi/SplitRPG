@@ -53,13 +53,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae56c5b6254889419630654f335eab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggered: 0
   BackgroundPrefab: {fileID: 100004, guid: 805c9ef4d0b34e844898eaac9e8cf5a8, type: 2}
+  talkSE: {fileID: 8300000, guid: ab1d1e25db46d46898456d4036820106, type: 3}
   fadeRate: .00999999978
   standardBubbleDisplayTime: 2
   plateWithChickenBubble: {fileID: 100004, guid: f2e64d0872582654387c3ed3340572a0,
     type: 2}
-  thumbsUpBubble: {fileID: 100004, guid: e149f298a7d70084a82ae58f6beb8795, type: 2}
   smileyFaceBubbleRightTail: {fileID: 100002, guid: a5714bf65db79dd42b507a4c83db57cf,
     type: 2}
   smileyFaceBubbleLeftTail: {fileID: 100004, guid: e3ca98d0e045b8c4c926209ffcdb05e0,
@@ -88,8 +87,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingOrder: 2
   height: 1
+  slightlyMoreAbove: 0
   slightlyAbove: 0
   slightlyBelow: 0
+  slightlyMoreBelow: 0
   editModeRefresh: 0
 --- !u!212 &21200000
 SpriteRenderer:

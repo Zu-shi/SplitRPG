@@ -453,8 +453,10 @@ MonoBehaviour:
   level2Theme: {fileID: 8300000, guid: fddeaf0d312d048aea0cca7915a2685b, type: 3}
   level3Theme: {fileID: 8300000, guid: a93f21cb37f6344c0ac36ee554aee6d9, type: 3}
   level4Theme: {fileID: 8300000, guid: cc409d1e93653470291ae6310f689be7, type: 3}
-  debugLocation: final
-  startingLevel: 2
+  cutsceneTheme1: {fileID: 8300000, guid: 52d3c130ebf604a86885101326784436, type: 3}
+  cutsceneTheme2: {fileID: 0}
+  debugLocation: 
+  startingLevel: 1
   levelPrefabs:
   - {fileID: 101560, guid: 0ca128f4361784610bbafab3e2de5d8e, type: 2}
   - {fileID: 101896, guid: b3689eeee141d4091b9a14fcbbee49f2, type: 2}
@@ -480,7 +482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Music:
   - {fileID: 0}
-  musicClip: {fileID: 0}
+  levelMusicClip: {fileID: 0}
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -520,8 +522,8 @@ MonoBehaviour:
   J1Left: 0
   J1Right: 0
   J2Left: 0
-  J2Right: 1
-  S: 0
+  J2Right: 0
+  S: 1
 --- !u!114 &11400026
 MonoBehaviour:
   m_ObjectHideFlags: 1

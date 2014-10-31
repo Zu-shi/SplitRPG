@@ -32,7 +32,8 @@ public class CustomTiledImporterFire : Tiled2Unity.ICustomTiledImporter {
 	
 	public void CustomizePrefab(GameObject prefab){
 		if(fire1.Count != 0 || fire2.Count != 0 || fire3.Count != 0) {
-			FireManagerScript tmp = prefab.AddComponent<FireManagerScript>();
+			//FireManagerScript tmp = 
+			prefab.AddComponent<FireManagerScript>();
 			//Globals.fireLevel = 3;
 			//tmp.fire1 = fire1;
 			//tmp.fire2 = fire2;

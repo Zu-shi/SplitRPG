@@ -8,7 +8,7 @@ public class CreditsCutsceneScript : CutsceneScript {
 	}
 
 	protected override IEnumerator ActionSequence() {
-		float waitTime = 0;
+		//float waitTime = 0;
 
 		SetupScene();
 

@@ -113,7 +113,7 @@ public class CharacterMovementScript : MovementScript {
 
 	protected override void CreateSplash(){
 		GameObject sp = Instantiate(splashAnimation, gameObject.transform.position, Quaternion.identity) as GameObject;
-		_Mono m = sp.AddComponent<_Mono>();
+		//_Mono m = sp.AddComponent<_Mono>();
 		sp.transform.GetChild(0).gameObject.layer = gameObject.layer;
 		//m.x += Utils.DirectionToVector(moveDirection).x;
 	}

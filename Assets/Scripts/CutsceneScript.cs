@@ -65,6 +65,13 @@ public abstract class CutsceneScript : _Mono {
 		Globals.roomManager.MoveCamerasToPoint(new Vector2(leftPlayer.transform.position.x, leftPlayer.transform.position.y));
 		Globals.gameManager.transform.Find("CameraSpecial").GetComponent<Camera>().cullingMask
 			= LayerMask.GetMask("TransparentFX");
+		Globals.soundManager.LoadAndPlayClip(Globals.soundManager.levelMusicClip);
+		MakeCharactersVisible(true);
+	}
+	
+	public void MakeCharactersVisible(bool visible) {
+		leftPlayer.GetComponentInChildren<SpriteRenderer>().enabled = visible;
+		rightPlayer.GetComponentInChildren<SpriteRenderer>().enabled = visible;
 	}
 
 	public void Start() {

@@ -42,8 +42,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingOrder: 3
   height: 1
+  slightlyMoreAbove: 0
   slightlyAbove: 0
   slightlyBelow: 1
+  slightlyMoreBelow: 0
   editModeRefresh: 0
 --- !u!212 &21200000
 SpriteRenderer:

@@ -124,7 +124,7 @@ public class MovementScript : _Mono {
 	}
 
 	protected virtual void checkAndSetFell(){
-		Vector3 s = fallObject.localScale;
+		//Vector3 s = fallObject.localScale;
 		if (totalFallTimer <= 0) {
 			fell = true;
 		}

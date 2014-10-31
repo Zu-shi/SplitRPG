@@ -6,7 +6,8 @@ public class SoundManagerScript : _Mono {
 
 	[Tooltip("This is a list of all the AudioClips that have music in them and should be played. Music is selected at random from this list.")]
 	public AudioClip[] Music;
-	public AudioClip musicClip;
+	//public AudioClip cutsceneMusicClip;
+	public AudioClip levelMusicClip;
 
 	private List<AudioClip> musicClips;
 	private bool paused = false;  // Indicates if the music has been manually paused
@@ -17,7 +18,7 @@ public class SoundManagerScript : _Mono {
 	private float fadeRate = 0; // volume / sec
 	private float maxVolume = 1;
 
-	private bool hasFocus = true;
+	//private bool hasFocus = true;
 
 	public bool isPlaying {
 		get{return audio.isPlaying;}
@@ -58,9 +59,17 @@ public class SoundManagerScript : _Mono {
 		stopped = true;
 	}
 
-	public void PlayMusic() {
+	public void LoadAndPlayClip(AudioClip ac){
+		if(audio.clip != ac){
+			audio.clip = ac;
+			StopMusic();
+			PlayMusic(ac);
+		}
+	}
+
+	public void PlayMusic(AudioClip ac) {
 		Debug.Log ("SoundManager PlayMusic()");
-		audio.clip = musicClip;
+		audio.clip = ac;
 		audio.Play();
 		if(paused) {
 			audio.Play();

@@ -15,7 +15,6 @@ public class MainMenuScript : _Mono {
 
 	GameObject cloud;
 	FaderScript fader;
-
 	SoundManagerScript soundManager;
 
 	public void Start () {

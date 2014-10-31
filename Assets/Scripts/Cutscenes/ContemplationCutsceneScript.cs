@@ -15,11 +15,6 @@ public class ContemplationCutsceneScript : CutsceneScript {
 	public GameObject sadFaceBubbleLeftTail;
 	public GameObject sadFaceBubbleRightTail;
 
-	private void MakeCharactersVisible(bool visible) {
-		leftPlayer.GetComponentInChildren<SpriteRenderer>().enabled = visible;
-		rightPlayer.GetComponentInChildren<SpriteRenderer>().enabled = visible;
-	}
-
 	protected override IEnumerator ActionSequence() {
 		float waitTime = 0;
 		GameObject b, a;
@@ -88,7 +83,6 @@ public class ContemplationCutsceneScript : CutsceneScript {
 		yield return new WaitForSeconds(waitTime);
 
 		TearDownScene();
-		MakeCharactersVisible(true);
 
 		waitTime = FadeCameraIn(rightCamera);
 		FadeCameraIn(leftCamera);

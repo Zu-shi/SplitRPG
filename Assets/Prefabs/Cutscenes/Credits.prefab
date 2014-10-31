@@ -53,8 +53,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 826ff36bc1e4ffe4493dce80e19422bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggered: 0
   BackgroundPrefab: {fileID: 100004, guid: b3254e42274c25e4abb36e8062c34348, type: 2}
+  talkSE: {fileID: 8300000, guid: ab1d1e25db46d46898456d4036820106, type: 3}
   fadeRate: .00999999978
 --- !u!114 &11400002
 MonoBehaviour:
@@ -69,8 +69,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingOrder: 2
   height: 1
+  slightlyMoreAbove: 0
   slightlyAbove: 0
   slightlyBelow: 0
+  slightlyMoreBelow: 0
   editModeRefresh: 0
 --- !u!212 &21200000
 SpriteRenderer:

@@ -103,8 +103,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingOrder: 3
   height: 1
+  slightlyMoreAbove: 0
   slightlyAbove: 1
   slightlyBelow: 0
+  slightlyMoreBelow: 0
   editModeRefresh: 0
 --- !u!114 &11400002
 MonoBehaviour:
@@ -125,6 +127,7 @@ MonoBehaviour:
   fallingSound: {fileID: 8300000, guid: cb8d18b4c4c694520a24898475b80807, type: 3}
   body:
   - {x: 0, y: 0}
+  splashAnimation: {fileID: 100000, guid: 7671f5a16bc9c4aa3b242b7898da9020, type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,8 +141,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingOrder: 3
   height: 1
+  slightlyMoreAbove: 0
   slightlyAbove: 0
   slightlyBelow: 0
+  slightlyMoreBelow: 0
   editModeRefresh: 0
 --- !u!114 &11400006
 MonoBehaviour:
@@ -163,18 +168,18 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  lengthInSec: 5
+  lengthInSec: .100000001
   startDelay: 0
   speed: 1
   randomSeed: 0
   looping: 1
   prewarm: 0
   playOnAwake: 1
-  moveWithTransform: 1
+  moveWithTransform: 0
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 1.5
+      scalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -207,7 +212,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: .400000006
+      scalar: .100000001
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -399,7 +404,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
       minMaxState: 0
-    gravityModifier: -.109999999
+    gravityModifier: -.0500000007
     inheritVelocity: 0
     maxNumParticles: 1000
   ShapeModule:

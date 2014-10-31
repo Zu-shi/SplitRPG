@@ -4,7 +4,7 @@ using Tiled2Unity;
 
 //Sets a block on a default layer to show up on both sides.
 //Note: switches are actually two seperate objects and thus does not need to be on the defaults layer.
-[Tiled2Unity.CustomTiledImporter(Order = 12)]
+[Tiled2Unity.CustomTiledImporter(Order = int.MaxValue)]
 //NOTE: Must happen after layter
 public class CutstomTiledImporterAssignDefaultLayers : Tiled2Unity.ICustomTiledImporter {
 	

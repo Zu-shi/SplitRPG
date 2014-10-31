@@ -125,7 +125,7 @@ public class PrefabImporterScript : MonoBehaviour {
 		GameObject go;
 		SpriteRenderer sr;
 		string objname;
-		string[] children;
+		//string[] children;
 
 		objname = "Pushblock";
 		go  = getOriginalPrefabOfObject (objname.ToLower());
@@ -166,7 +166,7 @@ public class PrefabImporterScript : MonoBehaviour {
 			if(map!="J1Left"  && map != "J1Right"){
 				objname = "Portal" + i.ToString();
 				go = getOriginalPrefabOfObject (objname.ToLower ());
-				PortalSenderScript bs = go.GetComponent<PortalSenderScript> ();
+				//PortalSenderScript bs = go.GetComponent<PortalSenderScript> ();
 				//bs.onSprite = retrieveSpriteByName (map, objname + "On");
 				//bs.offSprite = retrieveSpriteByName (map, objname + "Off");
 				//sr = go.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer> ();
@@ -181,7 +181,7 @@ public class PrefabImporterScript : MonoBehaviour {
 			if(map!="J1Left"  && map != "J1Right"){
 				objname = "SendPortal" + i.ToString();
 				go = getOriginalPrefabOfObject (objname.ToLower ());
-				PortalSenderScript bs = go.GetComponent<PortalSenderScript> ();
+				//PortalSenderScript bs = go.GetComponent<PortalSenderScript> ();
 				//bs.onSprite = retrieveSpriteByName (map, objname + "On");
 				//bs.offSprite = retrieveSpriteByName (map, objname + "Off");
 				//sr = go.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer> ();
@@ -195,7 +195,7 @@ public class PrefabImporterScript : MonoBehaviour {
 			if(map!="J1Left"  && map != "J1Right"){
 				objname = "ReceivePortal" + i.ToString();
 				go = getOriginalPrefabOfObject (objname.ToLower ());
-				PortalSenderScript bs = go.GetComponent<PortalSenderScript> ();
+				//PortalSenderScript bs = go.GetComponent<PortalSenderScript> ();
 				//bs.onSprite = retrieveSpriteByName (map, objname + "On");
 				//bs.offSprite = retrieveSpriteByName (map, objname + "Off");
 				//sr = go.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer> ();

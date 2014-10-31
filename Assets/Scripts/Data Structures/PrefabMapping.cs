@@ -121,6 +121,7 @@ public static class PrefabMapper {
 	public static Dictionary<string, string> JOURNEY2_RIGHT_PREFABS = new Dictionary<string, string>()
 	{
 		{ "pushblock", "Pushblock" },
+		{ "pushblock2", "Pushblock" },
 		{ "blocker", "Blocker" },
 		{ "switch1", "Switch1" },
 		{ "switch2", "Switch2" },
@@ -146,6 +147,7 @@ public static class PrefabMapper {
 	{
 		{ "pushblock", "Pushblock" },
 		{ "blocker", "Blocker" },
+		{ "blocker2", "Blocker" },
 		{ "switch1", "Switch1" },
 		{ "switch2", "Switch2" },
 		{ "switch3", "Switch3" },

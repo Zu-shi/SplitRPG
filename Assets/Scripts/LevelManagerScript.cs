@@ -12,6 +12,8 @@ public class LevelManagerScript : _Mono{
 	public AudioClip level2Theme;
 	public AudioClip level3Theme;
 	public AudioClip level4Theme;
+	public AudioClip cutsceneTheme1;
+	public AudioClip cutsceneTheme2;
 	public string debugLocation;
 	public int startingLevel = 1;
 
@@ -126,46 +128,33 @@ public class LevelManagerScript : _Mono{
 		rightSpawn.GetComponent<BoxCollider2D>().center = Vector2.zero;
 	}
 	
-	private void PlayLevelTheme(GameObject leftLevel, GameObject rightLevel)
+	private void PlayLevelTheme(GameObject leftLevel, GameObject rightLevel, bool reloadPersistent = false)
 	{
 		//Check and see if music plays on load.
 		//Debug.LogError("LevelManager PlayLevelTheme()");
 		if(leftLevel == levelPrefabs[0] && rightLevel == levelPrefabs[1]){
-			LoadAndPlayClip(level1Theme);
+			if(!reloadPersistent){Globals.soundManager.LoadAndPlayClip(cutsceneTheme1);}
+			Globals.soundManager.levelMusicClip = level1Theme;
 			Debug.Log ("Playing level 1 theme");
 		}
 		else if(leftLevel == levelPrefabs[2] && rightLevel == levelPrefabs[3]){
-			LoadAndPlayClip(level2Theme);
+			if(!reloadPersistent){Globals.soundManager.LoadAndPlayClip(cutsceneTheme1);}
+			Globals.soundManager.levelMusicClip = level2Theme;
 			Debug.Log ("Playing level 2 theme");
 		}
 		else if(leftLevel == levelPrefabs[4] && rightLevel == levelPrefabs[5]){
-			LoadAndPlayClip(level3Theme);
+			if(!reloadPersistent){Globals.soundManager.LoadAndPlayClip(cutsceneTheme1);}
+			Globals.soundManager.levelMusicClip = level3Theme;
 			Debug.Log ("Playing level 3 theme");
 		}
 		else if(leftLevel == levelPrefabs[6] && rightLevel == levelPrefabs[7]){
-			LoadAndPlayClip(level4Theme);
+			if(!reloadPersistent){Globals.soundManager.LoadAndPlayClip(cutsceneTheme1);}
+			Globals.soundManager.levelMusicClip = level4Theme;
 			Debug.Log ("Playing level 4 theme");
 		}
 
 		
 	} 
-
-	private void LoadAndPlayClip(AudioClip ac){
-		if(Globals.soundManager.musicClip != ac){
-			Globals.soundManager.musicClip = ac;
-			Globals.soundManager.StopMusic();
-			Globals.soundManager.PlayMusic();
-		}
-		/*
-		if(!Globals.soundManager.isPlaying){
-			Globals.soundManager.PlayMusic();
-		}
-		
-		Globals.soundManager.musicClip = ac;
-		Globals.soundManager.StopMusic();
-		Globals.soundManager.PlayMusic();
-		*/
-	}
 
 	public bool LoadLevels(string leftLevelName, string rightLevelName, bool reloadPersistent = false) {
 		GameObject left = null;
@@ -189,7 +178,7 @@ public class LevelManagerScript : _Mono{
 
 	public bool LoadLevels(GameObject leftLevel, GameObject rightLevel, bool reloadPersistent = false) {
 
-		PlayLevelTheme(leftLevel, rightLevel);
+		PlayLevelTheme(leftLevel, rightLevel, reloadPersistent);
 
 		//Debug.Log("Loading levels...");
 		if (leftLevel == null || rightLevel == null) {
@@ -369,14 +358,14 @@ public class LevelManagerScript : _Mono{
 		foreach (Transform pb in pushblocksLayerTransform) {
 			PushBlockColliderScript pbs = pb.gameObject.GetComponent<PushBlockColliderScript>();
 			Utils.assert(pbs != null, "Check for BlockColliderScript in the Pushblocks(Default) layer for object " + pb.gameObject.name);
-			Debug.Log ("Found pushblock " + pb.name);
+			//Debug.Log ("Found pushblock " + pb.name);
 			bool foundLink = false;
 			
 			foreach (Transform pb2 in pushblocksLayerTransform2) {
 				PushBlockColliderScript pbs2 = pb2.gameObject.GetComponent<PushBlockColliderScript>();
 				Utils.assert(pbs2 != null, "Check for BlockColliderScript in the Pushblocks(Default) layer for object " + pb2.gameObject.name);
 				if(pb2.position.Equals(pb.position)){
-					Debug.Log ("Found counterpart " + pb.name);
+					//Debug.Log ("Found counterpart " + pb.name);
 					foundLink = true;
 					pb.gameObject.layer = LayerMask.NameToLayer("Default");
 					toDeleteAtPosition.Add(new Vector2(pbs2.x, pbs2.y));

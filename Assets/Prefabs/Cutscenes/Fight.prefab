@@ -53,8 +53,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90a61d22437d2614f9f6dee0c0f4210e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggered: 0
   BackgroundPrefab: {fileID: 100004, guid: dc8fd071f33c40249ac776b1f7ae1652, type: 2}
+  talkSE: {fileID: 8300000, guid: ab1d1e25db46d46898456d4036820106, type: 3}
   fadeRate: .00999999978
   standardBubbleDisplayTime: 2
   confusionBubble: {fileID: 100006, guid: fff69e694a1fee448848e02317c592f8, type: 2}
@@ -95,8 +95,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingOrder: 2
   height: 1
+  slightlyMoreAbove: 0
   slightlyAbove: 0
   slightlyBelow: 0
+  slightlyMoreBelow: 0
   editModeRefresh: 0
 --- !u!212 &21200000
 SpriteRenderer:
