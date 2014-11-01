@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 10/31/2014 6:03:38 PM-->
+<!--Last exported: 10/31/2014 7:25:27 PM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J1Right" sortingLayerName="" sortingOrder="0" />
   <Prefab name="Journey1_v3RightSide" scale="1">

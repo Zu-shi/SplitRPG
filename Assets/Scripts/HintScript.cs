@@ -4,7 +4,7 @@ using System.Collections;
 public class HintScript : _Mono {
 
 	private float r = 15;
-	private float spritefaderade = .01f;
+	private float spritefaderade = 0.2f;
 
 	void Start(){
 		alpha = 0;

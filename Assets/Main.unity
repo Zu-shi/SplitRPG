@@ -119,11 +119,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: startingLevel
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: debugLocation
-      value: debug3
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 11400024, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: J1Left
@@ -347,8 +347,8 @@ MonoBehaviour:
   level4Theme: {fileID: 8300000, guid: a6bf46057769444f6bef9201af65c1ef, type: 3}
   cutsceneTheme1: {fileID: 8300000, guid: 2dfd790bfc48e43168c1acf3b1f56e76, type: 3}
   cutsceneTheme2: {fileID: 8300000, guid: 3b143c7bfe9c64f4591f8a1911648b1e, type: 3}
-  debugLocation: debug3
-  startingLevel: 2
+  debugLocation: 
+  startingLevel: 1
   levelPrefabs:
   - {fileID: 101560, guid: 0ca128f4361784610bbafab3e2de5d8e, type: 2}
   - {fileID: 101896, guid: b3689eeee141d4091b9a14fcbbee49f2, type: 2}
