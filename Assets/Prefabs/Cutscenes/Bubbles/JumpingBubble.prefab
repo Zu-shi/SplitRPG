@@ -9,6 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 212: {fileID: 21200000}
+  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: PictureOfJumping
   m_TagString: Untagged
@@ -78,13 +80,52 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 104.432068, y: -12.8977823, z: 0}
   m_LocalScale: {x: .800000012, y: .800000012, z: 1}
   m_Children:
   - {fileID: 400002}
   - {fileID: 400000}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6c977b087c17647abf1463b2b8191c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationName: Animation
+  rate: 10
+  loop: 1
+  sprites:
+  - {fileID: 21300000, guid: d605e6e1ef60f1f438af77aff33505e7, type: 3}
+  - {fileID: 21300002, guid: d605e6e1ef60f1f438af77aff33505e7, type: 3}
+  - {fileID: 21300004, guid: d605e6e1ef60f1f438af77aff33505e7, type: 3}
+  - {fileID: 21300006, guid: d605e6e1ef60f1f438af77aff33505e7, type: 3}
+  - {fileID: 21300008, guid: d605e6e1ef60f1f438af77aff33505e7, type: 3}
+  - {fileID: 21300010, guid: d605e6e1ef60f1f438af77aff33505e7, type: 3}
+  - {fileID: 21300012, guid: d605e6e1ef60f1f438af77aff33505e7, type: 3}
+  - {fileID: 21300014, guid: d605e6e1ef60f1f438af77aff33505e7, type: 3}
+  - {fileID: 21300016, guid: d605e6e1ef60f1f438af77aff33505e7, type: 3}
+  - {fileID: 21300018, guid: d605e6e1ef60f1f438af77aff33505e7, type: 3}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9961582ec383d1b4e80a55c31a8564b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleAfterOneTimeAnimations: 0
+  destroyAfterOneTimeAnimations: 0
+  playOnAwake: 1
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
