@@ -29,6 +29,8 @@ public class OptionsMenuScript : MonoBehaviour {
 	public void OnGUI() {
 		GUI.skin = optionSkin;
 		GUILayout.BeginArea(new Rect(0,0,Screen.width,Screen.height));
+		GUILayout.BeginHorizontal();
+		GUILayout.FlexibleSpace();
 		GUILayout.BeginVertical();
 		GUILayout.FlexibleSpace();
 
@@ -48,6 +50,8 @@ public class OptionsMenuScript : MonoBehaviour {
 		}
 		GUILayout.FlexibleSpace();
 		GUILayout.EndVertical();
+		GUILayout.FlexibleSpace();
+		GUILayout.EndHorizontal();
 		GUILayout.EndArea();
 
 	}
@@ -175,11 +179,11 @@ public class OptionsMenuScript : MonoBehaviour {
 	}
 
 	private void OnQuit() {
-		GUILayout.BeginHorizontal();
+		GUILayout.BeginHorizontal(GUILayout.Width(150));
 		GUILayout.FlexibleSpace();
+		GUILayout.BeginVertical("box", GUILayout.MaxWidth(Screen.width / 3));
+
 		GUILayout.Label("Are you sure you want to quit?");
-		GUILayout.FlexibleSpace();
-		GUILayout.EndHorizontal();
 
 		GUILayout.BeginHorizontal();
 		GUILayout.FlexibleSpace();
@@ -189,6 +193,11 @@ public class OptionsMenuScript : MonoBehaviour {
 		if(GUILayout.Button("Back", GUILayout.MaxWidth(150))) {
 			s = State.MENU;
 		}
+		GUILayout.FlexibleSpace();
+		GUILayout.EndHorizontal();
+
+		
+		GUILayout.EndVertical();
 		GUILayout.FlexibleSpace();
 		GUILayout.EndHorizontal();
 	}

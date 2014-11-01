@@ -90,6 +90,7 @@ public class MainMenuScript : _Mono {
 			musicFX = PlayerPrefs.GetFloat("MusicVolume", 1);
 			state = State.Options;
 		}
+		GUILayout.Space(50);
 		if( GUILayout.Button( "Quit Game") ) {
 			state = State.QuitGame;
 		}
