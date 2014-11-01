@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startSound: {fileID: 8300000, guid: 21ae538482d95450a853559e68e8c7c1, type: 3}
-  optionSkin: {fileID: 11400000, guid: 9f05f02ef30e345e3b44cc68da936d15, type: 2}
+  optionSkin: {fileID: 11400000, guid: fbf432e1d8b820842a291c6a4d96c0c0, type: 2}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -449,12 +449,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1743bb8ac4c3ff844bf200c6c160043a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level1Theme: {fileID: 8300000, guid: 60dd90af1b12a427ca7edef456d8a6f8, type: 3}
-  level2Theme: {fileID: 8300000, guid: fddeaf0d312d048aea0cca7915a2685b, type: 3}
-  level3Theme: {fileID: 8300000, guid: a93f21cb37f6344c0ac36ee554aee6d9, type: 3}
-  level4Theme: {fileID: 8300000, guid: cc409d1e93653470291ae6310f689be7, type: 3}
-  cutsceneTheme1: {fileID: 8300000, guid: 52d3c130ebf604a86885101326784436, type: 3}
-  cutsceneTheme2: {fileID: 0}
+  level1Theme: {fileID: 8300000, guid: c9be1a1f8d316470fb31d5344c935c81, type: 3}
+  level2Theme: {fileID: 8300000, guid: 777b57ce39dc44c5dbb1dbb8c49205f5, type: 3}
+  level3Theme: {fileID: 8300000, guid: 2dd50767fad02489fb10989aaecf49d3, type: 3}
+  level4Theme: {fileID: 8300000, guid: a6bf46057769444f6bef9201af65c1ef, type: 3}
+  cutsceneTheme1: {fileID: 8300000, guid: 2dfd790bfc48e43168c1acf3b1f56e76, type: 3}
+  cutsceneTheme2: {fileID: 8300000, guid: 3b143c7bfe9c64f4591f8a1911648b1e, type: 3}
   debugLocation: 
   startingLevel: 1
   levelPrefabs:
@@ -518,12 +518,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5d5af2d782c4ea4ab7f5a02e4d4025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  convertSpritesToPrefabs: 0
-  J1Left: 0
-  J1Right: 0
-  J2Left: 0
-  J2Right: 0
-  S: 1
 --- !u!114 &11400026
 MonoBehaviour:
   m_ObjectHideFlags: 1
