@@ -1,16 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FireExtinguisherScript : _Mono {
-
-	public bool triggered = false;
+public class FireExtinguisherScript1 : _Mono {
 
 	public void Trigger() {
-		if(triggered)
+		if(Globals.fire1toggled)
 			return;
 
+		Globals.fire1toggled = true;
 		Debug.Log ("Triggered");
-		triggered = true;
 		if(gameObject.layer == LayerMask.NameToLayer("Right"))
 			GameObject.Find(Globals.levelManager.currentRightLevel).GetComponent<FireManagerScript>().PutOutFires();
 		//else

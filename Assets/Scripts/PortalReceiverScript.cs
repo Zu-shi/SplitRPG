@@ -5,6 +5,7 @@ public class PortalReceiverScript : _Mono {
 
 	[Tooltip("Where the character will land.")]
 	public Direction characterTeleportDirection = Direction.NONE;
+	public AudioClip teleportSound;
 
 	private PortalSenderScript mySender;
 	private bool fadeTransition = false;
@@ -28,6 +29,7 @@ public class PortalReceiverScript : _Mono {
 			this.fadeTransition = fadeTransition;
 		}
 		player.tileVector = tileVector + exitDirection;
+		Globals.soundManager.PlaySound(teleportSound);
 	}
 
 	public void OnTriggerExit2D(Collider2D other) {

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 10/31/2014 8:48:17 AM-->
+<!--Last exported: 10/31/2014 1:22:44 PM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="Sanctuary_Tileset_v2" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="Sanctuary_Tileset_v2" sortingLayerName="" sortingOrder="1" />
@@ -295,16 +295,19 @@
         </EdgeCollider2D>
       </GameObject>
       <GameObject name="mg3b" x="2176" y="-7296">
+        <Property name="persistent" value="" />
         <EdgeCollider2D>
           <Points>0,0 128,0</Points>
         </EdgeCollider2D>
       </GameObject>
       <GameObject name="mg2b" x="2176" y="-7424">
+        <Property name="persistent" value="" />
         <EdgeCollider2D>
           <Points>0,0 128,0</Points>
         </EdgeCollider2D>
       </GameObject>
       <GameObject name="mg1b" x="2176" y="-7552">
+        <Property name="persistent" value="" />
         <EdgeCollider2D>
           <Points>0,0 128,0</Points>
         </EdgeCollider2D>
@@ -501,15 +504,17 @@
     </GameObject>
     <GameObject name="Unidirectional Portals">
       <GameObject name="sender3" x="3456" y="-896">
+        <Property name="fade" value="" />
         <Property name="target" value="receiver123" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="sender2" x="2176" y="-896">
-        <Property name="" value="" />
+        <Property name="fade" value="" />
         <Property name="target" value="receiver123" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="sender1" x="640" y="-896">
+        <Property name="fade" value="" />
         <Property name="target" value="receiver123" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
@@ -966,8 +971,8 @@
       <GameObject name="RectangleObject" x="768" y="-2176">
         <BoxCollider2D width="128" height="128" />
       </GameObject>
-      <GameObject name="RectangleObject" x="6784" y="-4800">
-        <BoxCollider2D width="768" height="384" />
+      <GameObject name="RectangleObject" x="6912" y="-4800">
+        <BoxCollider2D width="640" height="384" />
       </GameObject>
       <GameObject name="RectangleObject" x="8064" y="-4800">
         <BoxCollider2D width="128" height="1152" />
@@ -979,7 +984,7 @@
         <BoxCollider2D width="3456" height="128" />
       </GameObject>
       <GameObject name="RectangleObject" x="5376" y="-4800">
-        <BoxCollider2D width="768" height="384" />
+        <BoxCollider2D width="640" height="384" />
       </GameObject>
       <GameObject name="RectangleObject" x="4736" y="-4800">
         <BoxCollider2D width="128" height="1280" />
@@ -1316,6 +1321,11 @@
       </GameObject>
       <GameObject name="RectangleObject" x="3456" y="-1792">
         <BoxCollider2D width="128" height="768" />
+      </GameObject>
+    </GameObject>
+    <GameObject name="Starting(Debug)">
+      <GameObject name="debug1" x="6400" y="-5312">
+        <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>
   </Prefab>

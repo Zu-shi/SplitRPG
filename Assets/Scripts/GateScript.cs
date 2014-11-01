@@ -52,9 +52,15 @@ public class GateScript : _Mono {
 
 		if ( IsOpen() != IsOpenLastFrame() ) {
 			if(IsOpen()){
-				Globals.soundManager.PlaySound(openSound);
+				if(!Globals.justReloaded){
+					//Debug.Log (Globals.justReloaded);
+					Globals.soundManager.PlaySound(openSound);
+				}
 			}else{
-				Globals.soundManager.PlaySound(closeSound);
+				if(!Globals.justReloaded){
+					//Debug.Log (Globals.justReloaded);
+					Globals.soundManager.PlaySound(closeSound);
+				}
 			}
 		}
 

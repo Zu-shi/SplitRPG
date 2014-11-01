@@ -148,13 +148,17 @@ public class LevelManagerScript : _Mono{
 			Debug.Log ("Playing level 3 theme");
 		}
 		else if(leftLevel == levelPrefabs[6] && rightLevel == levelPrefabs[7]){
-			if(!reloadPersistent){Globals.soundManager.LoadAndPlayClip(cutsceneTheme1);}
+			if(!reloadPersistent){Globals.soundManager.LoadAndPlayClip(cutsceneTheme2);}
 			Globals.soundManager.levelMusicClip = level4Theme;
 			Debug.Log ("Playing level 4 theme");
 		}
 
 		
 	} 
+
+	private void ResetJustReloaded(){
+		Globals.justReloaded = false;
+	}
 
 	public bool LoadLevels(string leftLevelName, string rightLevelName, bool reloadPersistent = false) {
 		GameObject left = null;
@@ -177,7 +181,9 @@ public class LevelManagerScript : _Mono{
 	}
 
 	public bool LoadLevels(GameObject leftLevel, GameObject rightLevel, bool reloadPersistent = false) {
-
+		
+		Globals.justReloaded = true;
+		Invoke("ResetJustReloaded", 2f);
 		PlayLevelTheme(leftLevel, rightLevel, reloadPersistent);
 
 		//Debug.Log("Loading levels...");

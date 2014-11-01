@@ -15,8 +15,14 @@ public class PortalSenderScript : _Mono {
 		if(Globals.collisionManager.IsPlayerOnTile(tileVector, gameObject.layer)) {			// A player is on us
 			if(teleportDisabled) return;													// We shouldn't be teleporting
 
-			if(gameObject.GetComponent<FireExtinguisherScript>() != null)
-				gameObject.GetComponent<FireExtinguisherScript>().Trigger();
+			if(gameObject.GetComponent<FireExtinguisherScript1>() != null)
+				gameObject.GetComponent<FireExtinguisherScript1>().Trigger();
+			
+			if(gameObject.GetComponent<FireExtinguisherScript2>() != null)
+				gameObject.GetComponent<FireExtinguisherScript2>().Trigger();
+			
+			if(gameObject.GetComponent<FireExtinguisherScript3>() != null)
+				gameObject.GetComponent<FireExtinguisherScript3>().Trigger();
 
 			if(Globals.playerLeft.gameObject.layer == this.gameObject.layer) {				// Left player is on us
 				//if(Globals.playerLeft.GetComponent<MovementScript>().isMoving) return;		// Don't teleport until they stop moving

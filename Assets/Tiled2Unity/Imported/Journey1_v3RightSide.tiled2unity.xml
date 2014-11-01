@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 10/31/2014 8:49:28 AM-->
+<!--Last exported: 10/31/2014 6:03:38 PM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J1Right" sortingLayerName="" sortingOrder="0" />
   <Prefab name="Journey1_v3RightSide" scale="1">
@@ -15,6 +15,59 @@
     <GameObject name="Background_1_00">
       <GameObject copy="mesh_[00]_[00]" />
       <Property name="height" value="1" />
+    </GameObject>
+    <GameObject name="Rooms">
+      <GameObject name="RectangleObject" x="1216" y="-1408">
+        <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1216" y="-128">
+        <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="64" y="-128">
+        <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2368" y="-128">
+        <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1216" y="-2688">
+        <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1216" y="-3968">
+        <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1216" y="-5248">
+        <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1216" y="-6528">
+        <BoxCollider2D width="1152" height="1792" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1216" y="-8320">
+        <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="64" y="-9600">
+        <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="64" y="-10880">
+        <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="64" y="-12160">
+        <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1216" y="-12288">
+        <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2368" y="-12288">
+        <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2368" y="-13568">
+        <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="2368" y="-14848">
+        <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="1216" y="-9600">
+        <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
     </GameObject>
     <GameObject name="Starting">
       <GameObject name="starting point" x="2880" y="-15872">
@@ -305,59 +358,6 @@
         </EdgeCollider2D>
       </GameObject>
     </GameObject>
-    <GameObject name="Rooms">
-      <GameObject name="RectangleObject" x="1216" y="-1408">
-        <BoxCollider2D width="1152" height="1280" />
-      </GameObject>
-      <GameObject name="RectangleObject" x="1216" y="-128">
-        <BoxCollider2D width="1152" height="1280" />
-      </GameObject>
-      <GameObject name="RectangleObject" x="64" y="-128">
-        <BoxCollider2D width="1152" height="1280" />
-      </GameObject>
-      <GameObject name="RectangleObject" x="2368" y="-128">
-        <BoxCollider2D width="1152" height="1280" />
-      </GameObject>
-      <GameObject name="RectangleObject" x="1216" y="-2688">
-        <BoxCollider2D width="1152" height="1280" />
-      </GameObject>
-      <GameObject name="RectangleObject" x="1216" y="-3968">
-        <BoxCollider2D width="1152" height="1280" />
-      </GameObject>
-      <GameObject name="RectangleObject" x="1216" y="-5248">
-        <BoxCollider2D width="1152" height="1280" />
-      </GameObject>
-      <GameObject name="RectangleObject" x="1216" y="-6528">
-        <BoxCollider2D width="1152" height="1792" />
-      </GameObject>
-      <GameObject name="RectangleObject" x="1216" y="-8320">
-        <BoxCollider2D width="1152" height="1280" />
-      </GameObject>
-      <GameObject name="RectangleObject" x="64" y="-9600">
-        <BoxCollider2D width="1152" height="1280" />
-      </GameObject>
-      <GameObject name="RectangleObject" x="64" y="-10880">
-        <BoxCollider2D width="1152" height="1280" />
-      </GameObject>
-      <GameObject name="RectangleObject" x="64" y="-12160">
-        <BoxCollider2D width="1152" height="1280" />
-      </GameObject>
-      <GameObject name="RectangleObject" x="1216" y="-12288">
-        <BoxCollider2D width="1152" height="1280" />
-      </GameObject>
-      <GameObject name="RectangleObject" x="2368" y="-12288">
-        <BoxCollider2D width="1152" height="1280" />
-      </GameObject>
-      <GameObject name="RectangleObject" x="2368" y="-13568">
-        <BoxCollider2D width="1152" height="1280" />
-      </GameObject>
-      <GameObject name="RectangleObject" x="2368" y="-14848">
-        <BoxCollider2D width="1152" height="1280" />
-      </GameObject>
-      <GameObject name="RectangleObject" x="1216" y="-9600">
-        <BoxCollider2D width="1152" height="1280" />
-      </GameObject>
-    </GameObject>
     <GameObject name="Switches and Gates">
       <GameObject name="RS12" x="1984" y="-1920">
         <Property name="target" value="RG01, RG02R" />
@@ -469,7 +469,7 @@
       <GameObject name="pushblock" x="1600" y="-8960">
         <BoxCollider2D width="128" height="128" />
       </GameObject>
-      <GameObject name="pushblock" x="1856" y="-7424">
+      <GameObject name="pushblock" x="1856" y="-7296">
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="pushblock" x="1728" y="-6144">
