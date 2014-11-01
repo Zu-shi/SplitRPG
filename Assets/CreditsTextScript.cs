@@ -63,7 +63,7 @@ public class CreditsTextScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if(fadeDir == 1){
 			alpha += fadeRate;
 			if(alpha >= 1){
