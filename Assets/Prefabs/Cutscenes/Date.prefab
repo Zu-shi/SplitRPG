@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackgroundPrefab: {fileID: 100004, guid: 805c9ef4d0b34e844898eaac9e8cf5a8, type: 2}
-  talkSE: {fileID: 8300000, guid: ab1d1e25db46d46898456d4036820106, type: 3}
+  talkSE: {fileID: 8300000, guid: 1658a84987ef9498ab92201c8fcb68d4, type: 3}
   fadeRate: .00999999978
   standardBubbleDisplayTime: 2
   plateWithChickenBubble: {fileID: 100004, guid: f2e64d0872582654387c3ed3340572a0,

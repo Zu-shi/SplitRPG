@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackgroundPrefab: {fileID: 100000, guid: c1259fd0a5bc8724a8b9a19f7ebf1ff2, type: 2}
-  talkSE: {fileID: 8300000, guid: ab1d1e25db46d46898456d4036820106, type: 3}
+  talkSE: {fileID: 8300000, guid: 1658a84987ef9498ab92201c8fcb68d4, type: 3}
   fadeRate: .00999999978
   standardBubbleDisplayTime: 2.4000001
   askForSeatBubble: {fileID: 100006, guid: 9e908ebc5b7e9484cbed5157f6352c3c, type: 2}

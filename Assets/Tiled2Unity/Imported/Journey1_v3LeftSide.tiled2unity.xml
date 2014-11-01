@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 10/31/2014 8:49:05 AM-->
+<!--Last exported: 10/31/2014 7:25:22 PM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J1Left" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="J1Left" sortingLayerName="" sortingOrder="1" />
@@ -23,57 +23,6 @@
     <GameObject name="Background_2_02">
       <GameObject copy="mesh_[02]_[00]" />
       <Property name="height" value="2" />
-    </GameObject>
-    <GameObject name="Objects(Invisible)">
-      <GameObject name="blocker" x="1984" y="-1920">
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="blocker" x="3136" y="-128">
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="blocker" x="2880" y="-14464">
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="blocker" x="2752" y="-12800">
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="blocker" x="1984" y="-13184">
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="blocker" x="2112" y="-13184">
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="blocker" x="576" y="-12800">
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="blocker" x="576" y="-12672">
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="pushblock" x="576" y="-10112">
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="pushblock" x="1856" y="-8064">
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="pushblock" x="1600" y="-7424">
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="pushblock" x="1728" y="-6144">
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="pushblock" x="1728" y="-2816">
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="pushblock" x="1600" y="-4480">
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="blocker" x="3264" y="-768">
-        <Property name="" value="" />
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="pushblock" x="832" y="-10368">
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
     </GameObject>
     <GameObject name="Rooms">
       <GameObject name="RectangleObject" x="1216" y="-1408">
@@ -126,6 +75,69 @@
       </GameObject>
       <GameObject name="RectangleObject" x="1216" y="-8320">
         <BoxCollider2D width="1152" height="1280" />
+      </GameObject>
+    </GameObject>
+    <GameObject name="Objects(Invisible)">
+      <GameObject name="blocker" x="1984" y="-1920">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="blocker" x="3136" y="-128">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="blocker" x="2880" y="-14464">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="blocker" x="2752" y="-12800">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="blocker" x="1984" y="-13184">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="blocker" x="2112" y="-13184">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="blocker" x="576" y="-12800">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="blocker" x="576" y="-12672">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="pushblock" x="576" y="-10112">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="pushblock" x="1856" y="-8064">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="pushblock" x="1600" y="-7424">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="pushblock" x="1728" y="-6144">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="pushblock" x="1728" y="-2816">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="pushblock" x="1600" y="-4480">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="blocker" x="3264" y="-768">
+        <Property name="" value="" />
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="pushblock" x="832" y="-10368">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="blocker" x="1984" y="-12544">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="blocker" x="2112" y="-12544">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="blocker" x="3136" y="-14976">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="pushblock" x="448" y="-10240">
+        <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>
     <GameObject name="Starting">

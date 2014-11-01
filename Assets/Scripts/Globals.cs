@@ -19,6 +19,10 @@ public class Globals {
 	public const int PIXELS_PER_TILE = 64;
 	
 	public static int fireLevel = 3;
+	public static bool justReloaded = false;
+	public static bool fire1toggled = false;
+	public static bool fire2toggled = false;
+	public static bool fire3toggled = false;
 
 	static PlayerControllerScript _playerLeft = null;
 	public static PlayerControllerScript playerLeft{

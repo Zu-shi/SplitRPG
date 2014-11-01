@@ -67,6 +67,8 @@ public abstract class CutsceneScript : _Mono {
 			= LayerMask.GetMask("TransparentFX");
 		Globals.soundManager.LoadAndPlayClip(Globals.soundManager.levelMusicClip);
 		MakeCharactersVisible(true);
+		Globals.justReloaded = true;
+		Globals.levelManager.Invoke("ResetJustReloaded", 2f);
 	}
 	
 	public void MakeCharactersVisible(bool visible) {

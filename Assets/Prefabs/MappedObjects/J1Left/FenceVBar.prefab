@@ -42,8 +42,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingOrder: 3
   height: 1
+  slightlyMoreAbove: 0
   slightlyAbove: 1
   slightlyBelow: 0
+  slightlyMoreBelow: 0
   editModeRefresh: 0
 --- !u!212 &21200000
 SpriteRenderer:
@@ -65,7 +67,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7423772cf4726483199523497b7ab704, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 784f52dcaaec3487ab48ff524725adcd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
