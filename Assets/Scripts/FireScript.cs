@@ -7,6 +7,10 @@ public class FireScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		// prevents bugs
+		transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, 0);
+
 		if(Globals.fireLevel == level - 1){
 			gameObject.SetActive(false);
 		}
