@@ -117,7 +117,7 @@ public class OptionsMenuScript : MonoBehaviour {
 	private void OnOptions() {
 		GUILayout.BeginHorizontal();
 		GUILayout.FlexibleSpace();
-		GUILayout.BeginVertical("box", GUILayout.MaxWidth(Screen.width / 3));
+		GUILayout.BeginVertical("box", GUILayout.MaxWidth(300));
 
 		GUILayout.Label("Options");
 
@@ -155,6 +155,8 @@ public class OptionsMenuScript : MonoBehaviour {
 
 		GUILayout.EndHorizontal();
 
+		GUILayout.BeginHorizontal();
+		GUILayout.FlexibleSpace();
 		if(GUILayout.Button("Apply", GUILayout.MaxWidth(150))) {
 			PlayerPrefs.SetFloat("SoundEffectsVolume", soundFX);
 			PlayerPrefs.SetFloat("MusicVolume", musicFX);
@@ -164,6 +166,8 @@ public class OptionsMenuScript : MonoBehaviour {
 		if(GUILayout.Button("Back", GUILayout.MaxWidth(150))) {
 			s = State.MENU;
 		}
+		GUILayout.FlexibleSpace();
+		GUILayout.EndHorizontal();
 		
 		GUILayout.EndVertical();
 		GUILayout.FlexibleSpace();
