@@ -28,12 +28,9 @@ public class OptionsMenuScript : MonoBehaviour {
 
 	public void OnGUI() {
 		GUI.skin = optionSkin;
-		GUILayout.BeginArea(new Rect(0,-30,Screen.width,Screen.height));
+		GUILayout.BeginArea(new Rect(0,0,Screen.width,Screen.height));
 		GUILayout.BeginVertical();
 		GUILayout.FlexibleSpace();
-		GUILayout.BeginHorizontal();
-		GUILayout.FlexibleSpace();
-		GUILayout.BeginVertical();
 
 		switch(s){
 		case State.NONE:
@@ -49,10 +46,6 @@ public class OptionsMenuScript : MonoBehaviour {
 			OnQuit();
 			break;
 		}
-
-		GUILayout.EndVertical();
-		GUILayout.FlexibleSpace();
-		GUILayout.EndHorizontal();
 		GUILayout.FlexibleSpace();
 		GUILayout.EndVertical();
 		GUILayout.EndArea();
@@ -86,43 +79,34 @@ public class OptionsMenuScript : MonoBehaviour {
 	private void OnMenu() {
 		GUILayout.BeginHorizontal();
 		GUILayout.FlexibleSpace();
-		GUILayout.Label("Menu");
-		GUILayout.FlexibleSpace();
-		GUILayout.EndHorizontal();
+		GUILayout.BeginVertical("box");
 
-		GUILayout.BeginHorizontal(); GUILayout.FlexibleSpace();
+		GUILayout.Label("Menu");
+
 		if(GUILayout.Button("Save Game", GUILayout.MaxWidth(150))) {
 			Debug.Log("Game saves automatically.");
 		}
-		GUILayout.FlexibleSpace(); GUILayout.EndHorizontal();
-		GUILayout.BeginHorizontal(); GUILayout.FlexibleSpace();
 		if(GUILayout.Button("Load Game", GUILayout.MaxWidth(150))) {
 			Debug.Log("Loading serialized game.");
 			Pause(false);
 			Globals.levelManager.LoadSerializedGame();
 		}
-		GUILayout.FlexibleSpace(); GUILayout.EndHorizontal();
-		GUILayout.BeginHorizontal(); GUILayout.FlexibleSpace();
 		if(GUILayout.Button("Options", GUILayout.MaxWidth(150))) {
 			soundFX = PlayerPrefs.GetFloat("SoundEffectsVolume", 1);
 			musicFX = PlayerPrefs.GetFloat("MusicVolume", 1);
 			s = State.OPTIONS;
 		}
-		GUILayout.FlexibleSpace(); GUILayout.EndHorizontal();
 
-		GUILayout.BeginHorizontal();
-		GUILayout.FlexibleSpace();
+		GUILayout.Space(30);
 		if(GUILayout.Button("Back to Game", GUILayout.MaxWidth(150))) {
 			Pause(false);
 		}
-		GUILayout.FlexibleSpace();
-		GUILayout.EndHorizontal();
-
-		GUILayout.BeginHorizontal();
-		GUILayout.FlexibleSpace();
+		GUILayout.Space(10);
 		if(GUILayout.Button("Quit Game", GUILayout.MaxWidth(150))) {
 			s = State.QUIT;
 		}
+
+		GUILayout.EndVertical();
 		GUILayout.FlexibleSpace();
 		GUILayout.EndHorizontal();
 	}
@@ -133,18 +117,14 @@ public class OptionsMenuScript : MonoBehaviour {
 	private void OnOptions() {
 		GUILayout.BeginHorizontal();
 		GUILayout.FlexibleSpace();
-		GUILayout.Label("Options");
-		GUILayout.FlexibleSpace();
-		GUILayout.EndHorizontal();
+		GUILayout.BeginVertical("box", GUILayout.MaxWidth(Screen.width / 3));
 
-		
+		GUILayout.Label("Options");
+
+		GUILayout.Label("Resolution");
+
 		GUILayout.BeginHorizontal();
 		GUILayout.FlexibleSpace();
-		GUILayout.Label("Resolution");
-		GUILayout.FlexibleSpace();
-		GUILayout.EndHorizontal();
-
-		GUILayout.BeginHorizontal(); GUILayout.FlexibleSpace();
 		scrollPos = GUILayout.BeginScrollView(scrollPos, false, true, GUILayout.MaxWidth(150), GUILayout.MinHeight(100));
 		foreach(Resolution res in Screen.resolutions) {
 			if(GUILayout.Button("" + res.width + "x" + res.height)) {
@@ -152,16 +132,10 @@ public class OptionsMenuScript : MonoBehaviour {
 			}
 		}
 		GUILayout.EndScrollView();
-		GUILayout.FlexibleSpace(); GUILayout.EndHorizontal();
-
-		GUILayout.BeginHorizontal();
-		GUILayout.FlexibleSpace();
-		GUILayout.Label("Audio");
 		GUILayout.FlexibleSpace();
 		GUILayout.EndHorizontal();
 
-		GUILayout.BeginHorizontal();
-		GUILayout.FlexibleSpace();
+		GUILayout.BeginHorizontal(GUILayout.ExpandWidth(false));
 
 		GUILayout.BeginVertical();
 		GUILayout.Label("Sound Effects", GUILayout.Height(20));
@@ -175,14 +149,12 @@ public class OptionsMenuScript : MonoBehaviour {
 		GUILayout.EndVertical();
 
 		GUILayout.BeginVertical();
-		GUILayout.Label("" + (int)soundFX, GUILayout.Width(30), GUILayout.Height(_optionsHeight));
-		GUILayout.Label("" + (int)musicFX, GUILayout.Width(30), GUILayout.Height(_optionsHeight));
+		GUILayout.Label(soundFX.ToString("F2"), GUILayout.Width(50), GUILayout.Height(_optionsHeight));
+		GUILayout.Label(musicFX.ToString("F2"), GUILayout.Width(50), GUILayout.Height(_optionsHeight));
 		GUILayout.EndVertical();
 
-		GUILayout.FlexibleSpace();
 		GUILayout.EndHorizontal();
 
-		GUILayout.BeginHorizontal(); GUILayout.FlexibleSpace();
 		if(GUILayout.Button("Apply", GUILayout.MaxWidth(150))) {
 			PlayerPrefs.SetFloat("SoundEffectsVolume", soundFX);
 			PlayerPrefs.SetFloat("MusicVolume", musicFX);
@@ -192,7 +164,10 @@ public class OptionsMenuScript : MonoBehaviour {
 		if(GUILayout.Button("Back", GUILayout.MaxWidth(150))) {
 			s = State.MENU;
 		}
-		GUILayout.FlexibleSpace(); GUILayout.EndHorizontal();
+		
+		GUILayout.EndVertical();
+		GUILayout.FlexibleSpace();
+		GUILayout.EndHorizontal();
 	}
 
 	private void OnQuit() {

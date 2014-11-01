@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startSound: {fileID: 8300000, guid: 21ae538482d95450a853559e68e8c7c1, type: 3}
-  optionSkin: {fileID: 11400000, guid: 9f05f02ef30e345e3b44cc68da936d15, type: 2}
+  optionSkin: {fileID: 11400000, guid: fbf432e1d8b820842a291c6a4d96c0c0, type: 2}
 --- !u!114 &464160810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +248,7 @@ MonoBehaviour:
   cutsceneTheme1: {fileID: 8300000, guid: 52d3c130ebf604a86885101326784436, type: 3}
   cutsceneTheme2: {fileID: 0}
   debugLocation: 
-  startingLevel: 2
+  startingLevel: 1
   levelPrefabs:
   - {fileID: 101560, guid: 0ca128f4361784610bbafab3e2de5d8e, type: 2}
   - {fileID: 101896, guid: b3689eeee141d4091b9a14fcbbee49f2, type: 2}
@@ -942,8 +942,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: startingLevel
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
+      propertyPath: optionSkin
+      value: 
+      objectReference: {fileID: 11400000, guid: fbf432e1d8b820842a291c6a4d96c0c0,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
   m_RootGameObject: {fileID: 464160805}
