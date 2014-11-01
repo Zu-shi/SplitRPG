@@ -248,7 +248,7 @@ MonoBehaviour:
   cutsceneTheme1: {fileID: 8300000, guid: 52d3c130ebf604a86885101326784436, type: 3}
   cutsceneTheme2: {fileID: 0}
   debugLocation: 
-  startingLevel: 1
+  startingLevel: 2
   levelPrefabs:
   - {fileID: 101560, guid: 0ca128f4361784610bbafab3e2de5d8e, type: 2}
   - {fileID: 101896, guid: b3689eeee141d4091b9a14fcbbee49f2, type: 2}
@@ -938,6 +938,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
+      propertyPath: startingLevel
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
