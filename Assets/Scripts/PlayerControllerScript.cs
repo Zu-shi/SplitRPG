@@ -77,6 +77,7 @@ public class PlayerControllerScript : _Mono {
 	/// </summary>
 	public void ResetPlayer(){
 		characterMovement.ResetFalling();
+		DisableMovement(.8f); // disable movement for a bit right when they spawn
 		//flipXMovement = flipYMovement = false;
 	}
 	

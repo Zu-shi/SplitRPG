@@ -1171,7 +1171,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 980741379}
-  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: -.707106888, y: 0, z: 0, w: .707106769}
   m_LocalPosition: {x: -12.1250286, y: -11.7159271, z: -3}
   m_LocalScale: {x: 32.0184021, y: 1, z: 1}
   m_Children: []
@@ -2272,7 +2272,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1370574101}
-  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: -.707106888, y: 0, z: 0, w: .707106769}
   m_LocalPosition: {x: 14.2466927, y: -11.7159271, z: -3}
   m_LocalScale: {x: 32.0184021, y: 1, z: 1}
   m_Children: []
@@ -2495,6 +2495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c7d3a9583a49949bf63dba61704fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skin: {fileID: 11400000, guid: fbf432e1d8b820842a291c6a4d96c0c0, type: 2}
 --- !u!114 &2135246363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2587,5 +2588,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Music:
-  - {fileID: 8300000, guid: e3224963bec8445188beac6921c21fc3, type: 3}
+  - {fileID: 8300000, guid: fbbba4ade36344a43970f67d59c89414, type: 3}
   levelMusicClip: {fileID: 0}
