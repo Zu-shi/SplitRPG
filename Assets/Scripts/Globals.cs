@@ -114,5 +114,16 @@ public class Globals {
 		}
 	}
 
+	
+	static LatentHintManager _latentHintManager = null;
+	public static LatentHintManager latentHintManager {
+		get{
+			if(_latentHintManager == null)
+				_latentHintManager = gameManager.GetComponent<LatentHintManager>();
+			return _latentHintManager;
+		}
+	}
+
+
 
 }

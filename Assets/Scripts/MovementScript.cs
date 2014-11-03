@@ -65,6 +65,8 @@ public class MovementScript : _Mono {
 			blockFallingInWater = Globals.playerLeft.GetComponent<CharacterMovementScript>().fallingInWater;
 		}else if(LayerMask.LayerToName(gameObject.layer) == "Right"){
 			blockFallingInWater = Globals.playerRight.GetComponent<CharacterMovementScript>().fallingInWater;
+		}else{
+			blockFallingInWater = true;
 		}
 
 		//Set character jump height offset
@@ -118,6 +120,7 @@ public class MovementScript : _Mono {
 			fallObject.gameObject.GetComponent<_Mono>().y -= 0.2f;
 			fallObject.localScale = s;
 			totalFallTimer -= 1;
+			alpha -= 0.08f;
 		}
 		
 		checkAndSetFell ();
@@ -150,10 +153,11 @@ public class MovementScript : _Mono {
 		sp.transform.GetChild(0).gameObject.layer = gameObject.layer;
 
 		if(name == "pushblock1x3"){
-			m.y -= 1f;
 			m.xs *= 2f;
 			m.ys *= 2f;
+			m.y -= 3f;
 		}
+		m.y += 2f;
 		//m.x += Utils.DirectionToVector(moveDirection).x;
 	}
 

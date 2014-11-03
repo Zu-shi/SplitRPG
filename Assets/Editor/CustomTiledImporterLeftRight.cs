@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Tiled2Unity;
 
-[Tiled2Unity.CustomTiledImporter(Order = 8)]
+[Tiled2Unity.CustomTiledImporter(Order = int.MaxValue - 1)]
 class CustomTiledImporterLeftRight : Tiled2Unity.ICustomTiledImporter{
 
 	int physicsLayer;

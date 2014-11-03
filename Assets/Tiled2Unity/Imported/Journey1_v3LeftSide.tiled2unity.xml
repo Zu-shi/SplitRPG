@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 10/31/2014 7:25:22 PM-->
+<!--Last exported: 10/31/2014 11:43:45 PM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J1Left" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="J1Left" sortingLayerName="" sortingOrder="1" />
@@ -133,7 +133,7 @@
       <GameObject name="blocker" x="2112" y="-12544">
         <BoxCollider2D width="128" height="128" />
       </GameObject>
-      <GameObject name="blocker" x="3136" y="-14976">
+      <GameObject name="blocker" x="3008" y="-14976">
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="pushblock" x="448" y="-10240">

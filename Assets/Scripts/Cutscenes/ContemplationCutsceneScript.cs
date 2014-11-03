@@ -83,6 +83,13 @@ public class ContemplationCutsceneScript : CutsceneScript {
 		yield return new WaitForSeconds(waitTime);
 
 		TearDownScene();
+		PlayAnimation(leftPlayer, "WalkRightAnimation");
+		PlayAnimation(rightPlayer, "WalkLeftAnimation");
+		rightPlayer.GetComponentInChildren<SpriteAnimationManagerScript>().PauseAnimation();
+		leftPlayer.GetComponentInChildren<SpriteAnimationManagerScript>().PauseAnimation();
+		rightPlayer.GetComponent<CharacterMovementScript>().StopMovingNow();
+		leftPlayer.GetComponent<CharacterMovementScript>().StopMovingNow();
+
 
 		waitTime = FadeCameraIn(rightCamera);
 		FadeCameraIn(leftCamera);
