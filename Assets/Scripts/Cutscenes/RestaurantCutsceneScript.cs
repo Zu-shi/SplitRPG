@@ -194,9 +194,12 @@ public class RestaurantCutsceneScript : CutsceneScript {
 		yield return new WaitForSeconds(waitTime + .5f);
 
 		TearDownScene();
-
-		Move(leftPlayer, Direction.UP, 0);
-		Move(rightPlayer, Direction.UP, 0);
+		PlayAnimation(leftPlayer, "WalkRightAnimation");
+		PlayAnimation(rightPlayer, "WalkLeftAnimation");
+		rightPlayer.GetComponentInChildren<SpriteAnimationManagerScript>().PauseAnimation();
+		leftPlayer.GetComponentInChildren<SpriteAnimationManagerScript>().PauseAnimation();
+		rightPlayer.GetComponent<CharacterMovementScript>().StopMovingNow();
+		leftPlayer.GetComponent<CharacterMovementScript>().StopMovingNow();
 
 		FadeCameraIn(leftCamera);
 		waitTime = FadeCameraIn(rightCamera);

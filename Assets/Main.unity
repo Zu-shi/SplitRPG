@@ -95,6 +95,7 @@ GameObject:
   - 114: {fileID: 464160816}
   - 114: {fileID: 464160819}
   - 114: {fileID: 464160818}
+  - 114: {fileID: 464160820}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -360,6 +361,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetAspectRatio: 1.79999995
+--- !u!114 &464160820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400028, guid: db32add279ece4d9fa748ddb524ae179,
+    type: 2}
+  m_PrefabInternal: {fileID: 590551901}
+  m_GameObject: {fileID: 464160805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4882dc9f284544eb7a1afb5b06f4945f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countdownTimer: 0
 --- !u!1 &516045933
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,6 +532,10 @@ Prefab:
     - target: {fileID: 400000, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400016, guid: db32add279ece4d9fa748ddb524ae179, type: 2}
+      propertyPath: startingLevel
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db32add279ece4d9fa748ddb524ae179, type: 2}

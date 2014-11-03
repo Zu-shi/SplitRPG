@@ -259,9 +259,9 @@ public class TrainCutsceneScript : CutsceneScript {
 		FadeCameraOut(rightCamera);
 		yield return new WaitForSeconds(waitTime);
 
-		Move(leftPlayer, Direction.UP, 0);
-		Move(rightPlayer, Direction.UP, 0);
 		TearDownScene();
+		Move(rightPlayer, Direction.UP, 0);
+		Move(leftPlayer, Direction.UP, 0);
 
 		waitTime = FadeCameraIn(leftCamera);
 		FadeCameraIn(rightCamera);

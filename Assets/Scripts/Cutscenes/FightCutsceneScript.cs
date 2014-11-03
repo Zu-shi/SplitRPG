@@ -219,11 +219,17 @@ public class FightCutsceneScript : CutsceneScript {
 		FadeCameraOut(leftCamera);
 
 		yield return new WaitForSeconds(waitTime);
-
+		
 		TearDownScene();
 
-		Move(rightPlayer, Direction.UP, 0);
-		Move(leftPlayer, Direction.UP, 0);
+		PlayAnimation(leftPlayer, "WalkLeftAnimation");
+		PlayAnimation(rightPlayer, "WalkRightAnimation");
+		rightPlayer.GetComponentInChildren<SpriteAnimationManagerScript>().PauseAnimation();
+		leftPlayer.GetComponentInChildren<SpriteAnimationManagerScript>().PauseAnimation();
+		rightPlayer.GetComponent<CharacterMovementScript>().StopMovingNow();
+		leftPlayer.GetComponent<CharacterMovementScript>().StopMovingNow();
+
+		//PlayAnimation(leftPlayer, "WalkUpAnimation");
 
 		waitTime = FadeCameraIn(rightCamera);
 		FadeCameraIn(leftCamera);
@@ -237,7 +243,6 @@ public class FightCutsceneScript : CutsceneScript {
 
 		End();
 	}
-	
 	private bool CheckPrefabLinks() {
 		if(confusionBubble == null
 		   || vrHeadSetBubble == null

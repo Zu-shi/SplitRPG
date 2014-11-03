@@ -106,6 +106,7 @@ public class PlayerControllerScript : _Mono {
 
 		// Check if we fell
 		if(characterMovement.fell){
+			Globals.latentHintManager.accelerateTimer();
 			ResetBothPlayers();
 			return;
 		}
@@ -242,7 +243,10 @@ public class PlayerControllerScript : _Mono {
 
 		if(!needToWait){
 			if(WillMoveOffScreen(realDir))
+			{
 				walkingOutOfRoom = true;
+				Globals.latentHintManager.resetTimer();
+			}
 
 			//!characterMovement.justMoved
 			if(characterMovement.moveDirection != realDir && !characterMovement.justMoved){

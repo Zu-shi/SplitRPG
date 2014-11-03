@@ -63,6 +63,7 @@ public class InputManagerScript : MonoBehaviour {
 
 
 		if (Input.GetKey (HINT_KEY)) {
+			Globals.latentHintManager.resetTimer();
 			_inputs.Add(Button.HINT);
 			//Debug.Log("HINT");
 		}

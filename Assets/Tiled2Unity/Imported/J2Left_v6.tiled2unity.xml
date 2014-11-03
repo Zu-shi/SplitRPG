@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 10/31/2014 7:25:34 PM-->
+<!--Last exported: 11/1/2014 6:01:07 PM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J2Left" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="J2Left" sortingLayerName="" sortingOrder="1" />
@@ -600,6 +600,14 @@
       </GameObject>
       <GameObject name="FarPortalBReceiver" x="2048" y="-4352">
         <Property name="fade" value="" />
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+    </GameObject>
+    <GameObject name="Gradual Hints">
+      <GameObject name="Gradual Hints" x="4352" y="-3392">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="Gradual Hints" x="1472" y="-4608">
         <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>
