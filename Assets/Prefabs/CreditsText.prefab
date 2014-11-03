@@ -112,12 +112,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textBox: {fileID: 100000}
   contents:
-  - Created by\nMark Gardner\nSome Other Guy\nAnd That One Girl
-  - Writing & Design\nMark Gardner
-  - Art\nMark Gardner\nWhat a Cool Guy
+  - Common Ground
+  - Created by\nMark Gardner\nZuoming Shi\nCindy Trieu\nTyler Wallace
+  - Project Manager\nZuoming Shi
+  - Story & Writing\nMark Gardner\nJorge Rodriguez\nZuoming Shi\nCindy Trieu\nTyler
+    Wallace
+  - Level Design\nZuoming Shi\nMark Gardner\nCindy Trieu\nTyler Wallace
+  - Music\nCesar Manjarrez
+  - Art\nCindy Trieu\nMark Gardner
+  - Programming\nTyler Wallace\nZuoming Shi\nMark Gardner
+  - Sound Effects\nZuoming Shi\nLeafs67\nLightYarn\ndheming\nQuistard
+  - Vocals on "Love.exe"\nDana Alayoubi
+  - Special Thanks\nJorge Rodriguez\nEsteban Guglielmo\nLivio de la Cruz\nKy Tran\nAsher
+    Benter\nJake Long\nEveryone at UA GameDev Club
+  - Thanks for Playing!
   fadeRate: .0500000007
-  sustain: 5
+  sustain: 6
   delay: .5
+  initialDelay: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

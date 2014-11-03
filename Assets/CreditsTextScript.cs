@@ -9,7 +9,7 @@ public class CreditsTextScript : MonoBehaviour {
 	public float fadeRate = .05f;
 	public float sustain = 5f;
 	public float delay = .5f;
-
+	public float initialDelay = 2f;
 
 	TextMesh textMesh;
 
@@ -36,7 +36,7 @@ public class CreditsTextScript : MonoBehaviour {
 
 		textMesh = textBox.GetComponent<TextMesh>();
 
-		FadeInNext();
+		Invoke ("FadeInNext", initialDelay);
 
 		alpha = 0;
 	}
