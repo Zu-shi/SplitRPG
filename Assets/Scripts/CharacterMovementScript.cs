@@ -219,7 +219,9 @@ public class CharacterMovementScript : MovementScript {
 				bool pitInFront = Globals.collisionManager.IsTilePit(xy + directionVector, gameObject.layer);
 				//?
 				bool safeToLand = CanMoveInDirectionWithoutPushSideEffect(xy + directionVector, direction);
-				if (pitInFront && safeToLand && !JumpWillEnterNewRoom(direction)) {
+				//The last statement checks for a pushblock in front of girl.
+				bool pushBlock = !Globals.collisionManager.IsTileBlocking(xy + directionVector, LayerMask.NameToLayer("Default"));
+				if (pitInFront && safeToLand && !JumpWillEnterNewRoom(direction) &&  !pushBlock) {
 					inAir = true;
 					StartMoving(directionVector * moveSpeed * 2);
 				}else{
