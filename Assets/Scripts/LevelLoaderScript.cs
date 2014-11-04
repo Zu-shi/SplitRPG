@@ -13,12 +13,10 @@ public class LevelLoaderScript : _Mono {
 
 	public void Update () {
 		if(Globals.collisionManager.IsPlayerOnTile(tileVector, gameObject.layer)) {			// A player is on us
-			if(canJump)
-				Globals.playerLeft.GetComponent<CharacterMovementScript>().canJump = true;
-			if(canPush)
-				Globals.playerRight.GetComponent<CharacterMovementScript>().canPush = true;
-
-			Globals.levelManager.LoadLevels(leftLevel, rightLevel);
+			if(Globals.readyForTeleport){
+				GoToNextLevel();
+				Globals.readyForTeleport = false;
+			}
 		}
 		if(debugTileVectors) {
 			Debug.Log("Our tile vector: " + tileX + " , " + tileY);
@@ -26,5 +24,14 @@ public class LevelLoaderScript : _Mono {
 			debugTileVectors = false;
 		}
 	
+	}
+
+	public void GoToNextLevel(){
+		if(canJump)
+			Globals.playerLeft.GetComponent<CharacterMovementScript>().canJump = true;
+		if(canPush)
+			Globals.playerRight.GetComponent<CharacterMovementScript>().canPush = true;
+		
+		Globals.levelManager.LoadLevels(leftLevel, rightLevel);
 	}
 }

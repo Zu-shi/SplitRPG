@@ -16,6 +16,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 	private GameObject receiverPrefab;
 	private GameObject biPrefab;
 	private GameObject loaderPrefab;
+	private GameObject readyPrefab;
 	
 	private Dictionary<string, string> prefabMap;
 	private string mapName;
@@ -62,6 +63,7 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 			//receiverPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/ReceivePortal.prefab", typeof(GameObject)) as GameObject;
 			//biPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Portals/BidirectionalPortal.prefab", typeof(GameObject)) as GameObject;
 			loaderPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/TestObjects/Portals/LevelLoader.prefab", typeof(GameObject)) as GameObject;
+			readyPrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/TestObjects/Portals/ReadyToGo.prefab", typeof(GameObject)) as GameObject;
 		}
 
 		if(parent.name.Contains("Unidirectional Portals") && props.ContainsKey("levelsToLoad")) {
@@ -74,6 +76,10 @@ public class CustomPortalImporter : Tiled2Unity.ICustomTiledImporter {
 			if(props.ContainsKey("canJump"))
 				tmp.canJump = true;
 
+			return;
+		}
+		if(parent.name.Contains("Unidirectional Portals") && props.ContainsKey("ready")) {
+			gameObject = MakePrefab(gameObject, readyPrefab);
 			return;
 		}
 		if(parent.name.Contains("Unidirectional Portals") && props.ContainsKey("target")) {

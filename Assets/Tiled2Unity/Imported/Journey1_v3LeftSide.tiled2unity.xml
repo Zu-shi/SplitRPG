@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 11/2/2014 8:24:59 PM-->
+<!--Last exported: 11/3/2014 11:23:44 PM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J1Left" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="J1Left" sortingLayerName="" sortingOrder="1" />
@@ -143,73 +143,6 @@
     <GameObject name="Starting">
       <GameObject name="Starting Point" x="2880" y="-15872">
         <BoxCollider2D width="128" height="128" />
-      </GameObject>
-    </GameObject>
-    <GameObject name="Switches and Gates">
-      <GameObject name="SGAon" x="1472" y="-1792">
-        <EdgeCollider2D>
-          <Points>0,0 128,0</Points>
-        </EdgeCollider2D>
-      </GameObject>
-      <GameObject name="A" x="1472" y="-1920">
-        <Property name="target" value="SGAoff, SGAon" />
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="SGAoff" x="1984" y="-1792">
-        <Property name="reverse" value="true" />
-        <EdgeCollider2D>
-          <Points>0,0 128,0</Points>
-        </EdgeCollider2D>
-      </GameObject>
-      <GameObject name="Final3Left" x="320" y="-384">
-        <Property name="target" value="SGFinal3Left, SG3FinalSelf" />
-        <Property name="visual" value="switch3" />
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="Final1Left" x="2624" y="-512">
-        <Property name="" value="" />
-        <Property name="target" value="SGFinal1Left" />
-        <Property name="visual" value="switch2" />
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="Final2Left" x="1728" y="-896">
-        <Property name="" value="" />
-        <Property name="target" value="SGFinal2Left" />
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="SGFinal3Left" x="1728" y="-256">
-        <Property name="" value="" />
-        <EdgeCollider2D>
-          <Points>0,0 128,0</Points>
-        </EdgeCollider2D>
-      </GameObject>
-      <GameObject name="SGFinal2Left" x="1728" y="-384">
-        <Property name="" value="" />
-        <EdgeCollider2D>
-          <Points>0,0 128,0</Points>
-        </EdgeCollider2D>
-      </GameObject>
-      <GameObject name="SGFinal1Left" x="1728" y="-640">
-        <Property name="" value="" />
-        <EdgeCollider2D>
-          <Points>0,0 128,0</Points>
-        </EdgeCollider2D>
-      </GameObject>
-      <GameObject name="SG3FinalSelf" x="192" y="-1024">
-        <Property name="reverse" value="true" />
-        <EdgeCollider2D>
-          <Points>0,0 128,0</Points>
-        </EdgeCollider2D>
-      </GameObject>
-      <GameObject name="IntroSwitchLeft" x="1728" y="-2304">
-        <Property name="target" value="IntroSwitchGateLeft" />
-        <Property name="visual" value="switch2" />
-        <BoxCollider2D width="128" height="128" />
-      </GameObject>
-      <GameObject name="IntroSwitchGateLeft" x="1728" y="-2176">
-        <EdgeCollider2D>
-          <Points>0,0 128,0</Points>
-        </EdgeCollider2D>
       </GameObject>
     </GameObject>
     <GameObject name="Buttons and Gates">
@@ -706,7 +639,12 @@
         <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>
-    <GameObject name="Unidirectional Portals" />
+    <GameObject name="Unidirectional Portals">
+      <GameObject name="teleportReady" x="1728" y="-128">
+        <Property name="ready" value="" />
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+    </GameObject>
     <GameObject name="Hints">
       <GameObject name="RectangleObject" x="2880" y="-14848">
         <BoxCollider2D width="128" height="128" />
@@ -775,6 +713,73 @@
       </GameObject>
       <GameObject name="RectangleObject" x="1728" y="-768">
         <BoxCollider2D width="128" height="384" />
+      </GameObject>
+    </GameObject>
+    <GameObject name="Switches and Gates">
+      <GameObject name="SGAon" x="1472" y="-1792">
+        <EdgeCollider2D>
+          <Points>0,0 128,0</Points>
+        </EdgeCollider2D>
+      </GameObject>
+      <GameObject name="A" x="1472" y="-1920">
+        <Property name="target" value="SGAoff, SGAon" />
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="SGAoff" x="1984" y="-1792">
+        <Property name="reverse" value="true" />
+        <EdgeCollider2D>
+          <Points>0,0 128,0</Points>
+        </EdgeCollider2D>
+      </GameObject>
+      <GameObject name="Final3Left" x="320" y="-384">
+        <Property name="target" value="SGFinal3Left, SG3FinalSelf" />
+        <Property name="visual" value="switch3" />
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="Final1Left" x="2624" y="-512">
+        <Property name="" value="" />
+        <Property name="target" value="SGFinal1Left" />
+        <Property name="visual" value="switch2" />
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="Final2Left" x="1728" y="-896">
+        <Property name="" value="" />
+        <Property name="target" value="SGFinal2Left" />
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="SGFinal3Left" x="1728" y="-256">
+        <Property name="" value="" />
+        <EdgeCollider2D>
+          <Points>0,0 128,0</Points>
+        </EdgeCollider2D>
+      </GameObject>
+      <GameObject name="SGFinal2Left" x="1728" y="-384">
+        <Property name="" value="" />
+        <EdgeCollider2D>
+          <Points>0,0 128,0</Points>
+        </EdgeCollider2D>
+      </GameObject>
+      <GameObject name="SGFinal1Left" x="1728" y="-640">
+        <Property name="" value="" />
+        <EdgeCollider2D>
+          <Points>0,0 128,0</Points>
+        </EdgeCollider2D>
+      </GameObject>
+      <GameObject name="SG3FinalSelf" x="192" y="-1024">
+        <Property name="reverse" value="true" />
+        <EdgeCollider2D>
+          <Points>0,0 128,0</Points>
+        </EdgeCollider2D>
+      </GameObject>
+      <GameObject name="IntroSwitchLeft" x="1728" y="-2304">
+        <Property name="target" value="IntroSwitchGateLeft" />
+        <Property name="visual" value="switch2" />
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="IntroSwitchGateLeft" x="1728" y="-2176">
+        <EdgeCollider2D>
+          <Points>0,0 128,0</Points>
+        </EdgeCollider2D>
       </GameObject>
     </GameObject>
   </Prefab>

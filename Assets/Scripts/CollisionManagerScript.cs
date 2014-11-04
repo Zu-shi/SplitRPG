@@ -115,6 +115,27 @@ public class CollisionManagerScript : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Gets the ColliderScript of the object that's a pushblocks
+	/// </summary>
+	public ColliderScript GetPushObject(Vector2 tileCoords, int layerOfObject){
+		if (layerOfObject == LayerMask.NameToLayer ("Default")) { 
+			foreach (ColliderScript cs in GetColliderScriptsOnTile(tileCoords, layerOfObject)) {
+				Debug.Log(cs.gameObject.transform.parent.name);
+				Debug.Log (cs.gameObject.GetComponent<PushBlockColliderScript>());
+				if (cs.gameObject.GetComponent<PushBlockColliderScript>() != null && cs.gameObject.layer == LayerMask.NameToLayer ("Default"))
+					return cs;
+			}
+		}
+		/*else {
+			foreach (ColliderScript cs in GetColliderScriptsOnTile(tileCoords, layerOfObject)) {
+				if (cs.gameObject.GetComponent<PushBlockColliderScript>() != null && cs.gameObject.layer == LayerMask.NameToLayer ("Default"))
+					return cs;
+			}
+		}*/
+		return null;
+	}
+
+	/// <summary>
 	/// Gets the ColliderScript of the object that's a pit. Overload that takes a coordinate, a direction, and a layer
 	/// </summary>
 	public ColliderScript GetPitObject(Vector2 tileCoords, Direction direction, int layerOfObject){
@@ -154,6 +175,13 @@ public class CollisionManagerScript : MonoBehaviour {
 	/// </summary>
 	public bool IsTilePit(Vector2 tileCoords, int layerOfObject){
 		return GetPitObject(tileCoords, layerOfObject);
+	}
+
+	/// <summary>
+	/// Is the tile a pushblock?
+	/// </summary>
+	public bool IsTilePushblock(Vector2 tileCoords, int layerOfObject){
+		return GetPushObject(tileCoords, layerOfObject);
 	}
 
 	/// <summary>
@@ -219,6 +247,8 @@ public class CollisionManagerScript : MonoBehaviour {
 			mask = leftLayers;
 		} else if(layerOfObject == LayerMask.NameToLayer("Right")){
 			mask = rightLayers;
+		} else if( layerOfObject == LayerMask.NameToLayer("Default")) {
+			mask = defaultLayers;
 		}
 		Collider2D[] cols = Physics2D.OverlapPointAll(tileCoords, mask);
 		return cols;

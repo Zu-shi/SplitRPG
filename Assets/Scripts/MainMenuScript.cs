@@ -69,6 +69,20 @@ public class MainMenuScript : _Mono {
 		GUILayout.EndArea();
 	}
 
+	private Texture2D MakeTex( int width, int height, Color col )
+	{
+		Color[] pix = new Color[width * height];
+		for( int i = 0; i < pix.Length; ++i )
+		{
+			pix[ i ] = col;
+		}
+		Texture2D result = new Texture2D( width, height );
+		result.SetPixels( pix );
+		result.Apply();
+		return result;
+	}
+
+
 	// ----------------------
 	// OnGUI helper functions
 	// ----------------------
@@ -78,19 +92,24 @@ public class MainMenuScript : _Mono {
 		GUILayout.BeginHorizontal(GUILayout.Width(150));
 		GUILayout.FlexibleSpace();
 		GUILayout.BeginVertical("box", GUILayout.MaxWidth(Screen.width / 3));
-		GUILayout.Label("Main Menu");
+		GUIStyle centeredStyle = new GUIStyle(GUI.skin.label);
+		//GUIStyle currentStyle = new GUIStyle( GUI.skin.box );
+		//currentStyle.normal.background = MakeTex( 2, 2, new Color( 0f, 0f, 0f, 0.5f ) );
+
 		if( GUILayout.Button( "Start Game") ) {
 			state = State.StartGame;
 		}
+		GUILayout.Space(20);
 		if( GUILayout.Button( "Load Game") ) {
 			state = State.LoadGame;
 		}
+		GUILayout.Space(20);
 		if( GUILayout.Button( "Options") ) {
 			soundFX = PlayerPrefs.GetFloat("SoundEffectsVolume", 1);
 			musicFX = PlayerPrefs.GetFloat("MusicVolume", 1);
 			state = State.Options;
 		}
-		GUILayout.Space(50);
+		GUILayout.Space(20);
 		if( GUILayout.Button( "Quit Game") ) {
 			state = State.QuitGame;
 		}
@@ -100,14 +119,16 @@ public class MainMenuScript : _Mono {
 	}
 
 	private void OnStartGame () {
-		GUILayout.BeginHorizontal(GUILayout.Width(150));
+		GUILayout.BeginHorizontal(GUILayout.Width(160));
 		GUILayout.FlexibleSpace();
 		GUILayout.BeginVertical("box", GUILayout.MaxWidth(Screen.width / 3));
 		GUILayout.Label("Are you sure you want to start a new game?");
+		GUILayout.Space(6);
 		if(GUILayout.Button("Start")) {
 			PlayerPrefs.SetString("LoadGame", "false");
 			fader.FadeDown(LoadMainScene);
 		}
+		GUILayout.Space(6);
 		if(GUILayout.Button("Back")) {
 			state = State.Menu;
 		}
@@ -121,14 +142,16 @@ public class MainMenuScript : _Mono {
 	}
 
 	private void OnLoadGame () {
-		GUILayout.BeginHorizontal(GUILayout.Width(150));
+		GUILayout.BeginHorizontal(GUILayout.Width(160));
 		GUILayout.FlexibleSpace();
 		GUILayout.BeginVertical("box", GUILayout.MaxWidth(Screen.width / 3));
 		GUILayout.Label("Are you sure you want to load your saved game?");
+		GUILayout.Space(6);
 		if(GUILayout.Button("Load")) {
 			PlayerPrefs.SetString("LoadGame", "true");
 			fader.FadeDown(LoadMainScene);
 		}
+		GUILayout.Space(6);
 		if(GUILayout.Button("Back")) {
 			state = State.Menu;
 		}
@@ -201,13 +224,15 @@ public class MainMenuScript : _Mono {
 	}
 
 	private void OnQuitGame () {
-		GUILayout.BeginHorizontal(GUILayout.Width(150));
+		GUILayout.BeginHorizontal(GUILayout.Width(160));
 		GUILayout.FlexibleSpace();
 		GUILayout.BeginVertical("box", GUILayout.MaxWidth(Screen.width / 3));
 		GUILayout.Label("Are you sure you want to quit?");
+		GUILayout.Space(6);
 		if(GUILayout.Button("Quit")) {
 			Application.Quit();
 		}
+		GUILayout.Space(6);
 		if(GUILayout.Button("Back")) {
 			state = State.Menu;
 		}

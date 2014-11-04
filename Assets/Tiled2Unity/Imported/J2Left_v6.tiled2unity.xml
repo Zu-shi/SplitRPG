@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 11/2/2014 8:22:52 PM-->
+<!--Last exported: 11/4/2014 12:26:04 AM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J2Left" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="J2Left" sortingLayerName="" sortingOrder="1" />
@@ -100,17 +100,17 @@
       <GameObject name="RectangleObject" x="1280" y="-5504">
         <BoxCollider2D width="128" height="640" />
       </GameObject>
-      <GameObject name="RectangleObject" x="1280" y="-2816">
-        <BoxCollider2D width="128" height="1152" />
+      <GameObject name="RectangleObject" x="1280" y="-2688">
+        <BoxCollider2D width="128" height="1280" />
       </GameObject>
-      <GameObject name="RectangleObject" x="1408" y="-3840">
-        <BoxCollider2D width="256" height="128" />
+      <GameObject name="RectangleObject" x="1408" y="-3712">
+        <BoxCollider2D width="256" height="256" />
       </GameObject>
-      <GameObject name="RectangleObject" x="2048" y="-3840">
-        <BoxCollider2D width="384" height="128" />
+      <GameObject name="RectangleObject" x="2048" y="-3712">
+        <BoxCollider2D width="384" height="256" />
       </GameObject>
-      <GameObject name="RectangleObject" x="2304" y="-3456">
-        <BoxCollider2D width="128" height="512" />
+      <GameObject name="RectangleObject" x="2304" y="-3328">
+        <BoxCollider2D width="128" height="640" />
       </GameObject>
       <GameObject name="RectangleObject" x="0" y="-2304">
         <BoxCollider2D width="128" height="3136" />
@@ -377,7 +377,7 @@
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="RectangleObject" x="1280" y="-2560">
-        <BoxCollider2D width="128" height="256" />
+        <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="RectangleObject" x="1664" y="-128">
         <BoxCollider2D width="128" height="3840" />
@@ -571,8 +571,8 @@
       <GameObject name="RectangleObject" x="1280" y="-3968">
         <BoxCollider2D width="1152" height="128" />
       </GameObject>
-      <GameObject name="RectangleObject" x="2304" y="-3328">
-        <BoxCollider2D width="256" height="128" />
+      <GameObject name="RectangleObject" x="2432" y="-3328">
+        <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>
     <GameObject name="Victory">
@@ -600,6 +600,10 @@
       </GameObject>
       <GameObject name="FarPortalBReceiver" x="2048" y="-4352">
         <Property name="fade" value="" />
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="ReadyToGo" x="1792" y="-128">
+        <Property name="ready" value="" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>

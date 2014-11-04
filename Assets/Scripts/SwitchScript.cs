@@ -31,7 +31,7 @@ public class SwitchScript : ColliderScript {
 	void Start () {
 		if (twin != null) {
 			_toggler = twin._toggler;
-			Debug.Log ("Linked twins");
+			//Debug.Log ("Linked twins");
 		}
 		//if (remainingGates != "") {
 		//	Debug.LogWarning("Gates unconnected to other map detected: " + remainingGates + ". Check DefaultSwitchesConnectorScript.");

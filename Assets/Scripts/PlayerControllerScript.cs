@@ -81,7 +81,7 @@ public class PlayerControllerScript : _Mono {
 		//flipXMovement = flipYMovement = false;
 	}
 	
-	void ResetBothPlayers(){
+	public void ResetBothPlayers(){
 		Globals.levelManager.LoadSerializedGame(true);
 
 
@@ -107,11 +107,6 @@ public class PlayerControllerScript : _Mono {
 		// Check if we fell
 		if(characterMovement.fell){
 			Globals.latentHintManager.accelerateTimer();
-			ResetBothPlayers();
-			return;
-		}
-
-		if(InputManager.GetButtonDown(Button.RESET)){
 			ResetBothPlayers();
 			return;
 		}

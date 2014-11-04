@@ -23,6 +23,7 @@ public class Globals {
 	public static bool fire1toggled = false;
 	public static bool fire2toggled = false;
 	public static bool fire3toggled = false;
+	public static bool readyForTeleport = false;
 
 	static PlayerControllerScript _playerLeft = null;
 	public static PlayerControllerScript playerLeft{
@@ -123,7 +124,15 @@ public class Globals {
 			return _latentHintManager;
 		}
 	}
-
+	
+	static OptionsMenuScript _OptionsManager = null;
+	public static OptionsMenuScript OptionsManager {
+		get{
+			if(_OptionsManager == null)
+				_OptionsManager = gameManager.GetComponent<OptionsMenuScript>();
+			return _OptionsManager;
+		}
+	}
 
 
 }

@@ -15,6 +15,10 @@ public class OptionsMenuScript : MonoBehaviour {
 
 	private State s = State.NONE;
 
+	public bool paused {
+		get{return s != State.NONE;}
+	}
+
 	public void Update() {
 		if(Input.GetKeyDown(KeyCode.Escape)) {
 			if(s == State.NONE) {
@@ -85,27 +89,27 @@ public class OptionsMenuScript : MonoBehaviour {
 		GUILayout.FlexibleSpace();
 		GUILayout.BeginVertical("box");
 
-		GUILayout.Label("Menu");
-
 		if(GUILayout.Button("Save Game", GUILayout.MaxWidth(150))) {
 			Debug.Log("Game saves automatically.");
 		}
+		GUILayout.Space(15);
 		if(GUILayout.Button("Load Game", GUILayout.MaxWidth(150))) {
 			Debug.Log("Loading serialized game.");
 			Pause(false);
 			Globals.levelManager.LoadSerializedGame();
 		}
+		GUILayout.Space(15);
 		if(GUILayout.Button("Options", GUILayout.MaxWidth(150))) {
 			soundFX = PlayerPrefs.GetFloat("SoundEffectsVolume", 1);
 			musicFX = PlayerPrefs.GetFloat("MusicVolume", 1);
 			s = State.OPTIONS;
 		}
 
-		GUILayout.Space(30);
+		GUILayout.Space(15);
 		if(GUILayout.Button("Back to Game", GUILayout.MaxWidth(150))) {
 			Pause(false);
 		}
-		GUILayout.Space(10);
+		GUILayout.Space(15);
 		if(GUILayout.Button("Quit Game", GUILayout.MaxWidth(150))) {
 			s = State.QUIT;
 		}

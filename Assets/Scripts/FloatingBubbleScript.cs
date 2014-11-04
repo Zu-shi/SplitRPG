@@ -18,7 +18,9 @@ public class FloatingBubbleScript : _Mono {
 	
 	// Update is called once per frame
 	void Update () {
-		y = starty + amplitude * Mathf.Sin (counter);
-		counter += Time.deltaTime * Mathf.PI * 2 / period;
+		if(!Globals.OptionsManager.paused){
+			y = starty + amplitude * Mathf.Sin (counter);
+			counter += Time.deltaTime * Mathf.PI * 2 / period;
+		}
 	}
 }

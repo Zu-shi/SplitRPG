@@ -24,6 +24,11 @@ public class PlayerInputScript : MonoBehaviour {
 
 		PollInput();
 
+		if(InputManager.GetButtonDown(Button.RESET)){
+			Globals.playerLeft.GetComponent<PlayerControllerScript>().ResetBothPlayers();
+			return;
+		}
+
 		// Check that both are ready and give the input at same time (prevents desyncs)
 		if(Globals.playerLeft.readyForInput && Globals.playerRight.readyForInput){
 			if(_inputDirection != Direction.NONE){

@@ -20,14 +20,16 @@ public class LatentHintScript : _Mono {
 	
 	// Update is called once per frame
 	void Update () {
-		y = starty + amplitude * Mathf.Sin (counter);
-		counter += Time.deltaTime * Mathf.PI * 2 / period;
-		alpha = initialAlpha * alphaMultiplier;
+		if(!Globals.OptionsManager.paused){
+			y = starty + amplitude * Mathf.Sin (counter);
+			counter += Time.deltaTime * Mathf.PI * 2 / period;
+			alpha = initialAlpha * alphaMultiplier;
 
-		if(Globals.latentHintManager.countdownTimer < 0f){
-			alphaMultiplier = Mathf.Clamp(alphaMultiplier + 0.05f, 0f, 1f);
-		}else{
-			alphaMultiplier = Mathf.Clamp(alphaMultiplier - 0.05f, 0f, 1f);
+			if(Globals.latentHintManager.countdownTimer < 0f){
+				alphaMultiplier = Mathf.Clamp(alphaMultiplier + 0.05f, 0f, 1f);
+			}else{
+				alphaMultiplier = Mathf.Clamp(alphaMultiplier - 0.05f, 0f, 1f);
+			}
 		}
 	}
 }
