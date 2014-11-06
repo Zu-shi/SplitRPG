@@ -124,6 +124,14 @@ public class Globals {
 		}
 	}
 
+	static LineScript _lineScript = null;
+	public static LineScript line {
+		get {
+			if(_lineScript == null)
+				_lineScript = gameManager.transform.Find("LineCamera").Find("Line").GetComponent<LineScript>();
+			return _lineScript;
+		}
+	}
 
 
 }
