@@ -3,7 +3,7 @@ using UnityEditor;
 using System.Collections.Generic;
 using Tiled2Unity;
 
-[Tiled2Unity.CustomTiledImporter]
+[Tiled2Unity.CustomTiledImporter(Order = 50)]
 public class CustomTiledImporterCutscenes : Tiled2Unity.ICustomTiledImporter{
 	private string pathToPrefabs = "Assets/Prefabs/Cutscenes/";
 

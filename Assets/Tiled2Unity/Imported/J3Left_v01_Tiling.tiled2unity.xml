@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 11/3/2014 11:40:01 PM-->
+<!--Last exported: 11/7/2014 2:36:36 AM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J3Left" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="J3Left" sortingLayerName="" sortingOrder="1" />
@@ -514,6 +514,9 @@
         </EdgeCollider2D>
       </GameObject>
       <GameObject name="RectangleObject" x="6272" y="-2944">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="5888" y="-3456">
         <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>

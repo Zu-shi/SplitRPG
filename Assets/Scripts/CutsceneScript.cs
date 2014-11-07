@@ -37,6 +37,7 @@ public abstract class CutsceneScript : _Mono {
 	private List<GameObject> bubbles = new List<GameObject>();
 
 	protected void SetupScene() {
+		Globals.line.LineVisible(false);
 		background = Instantiate(BackgroundPrefab, new Vector3(-1000, -1000, 0), Quaternion.identity) as GameObject;
 		leftPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("TransparentFX");
 		rightPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("TransparentFX");
@@ -54,6 +55,7 @@ public abstract class CutsceneScript : _Mono {
 	}
 	
 	protected void TearDownScene() {
+		Globals.line.LineVisible(true);
 		Destroy(background);
 		leftPlayer.transform.position = Globals.levelManager.leftSpawn.position + new Vector3(1f, -1f, 0);
 		rightPlayer.transform.position = Globals.levelManager.rightSpawn.position + new Vector3(1f, -1f, 0);

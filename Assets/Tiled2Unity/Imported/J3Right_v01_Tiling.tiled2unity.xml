@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 11/3/2014 11:37:38 PM-->
+<!--Last exported: 11/7/2014 2:36:42 AM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="J2Right" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="J2Right" sortingLayerName="" sortingOrder="1" />
@@ -679,16 +679,16 @@
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="sender2" x="5760" y="-640">
+        <Property name="" value="" />
         <Property name="AddComp" value="FireExtinguisherScript2" />
         <Property name="fade" value="" />
-        <Property name="persistent" value="" />
         <Property name="target" value="receiver" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="sender3" x="7808" y="-4224">
+        <Property name="" value="" />
         <Property name="AddComp" value="FireExtinguisherScript3" />
         <Property name="fade" value="" />
-        <Property name="persistent" value="" />
         <Property name="target" value="receiver" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
@@ -720,6 +720,9 @@
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="RectangleObject" x="6144" y="-2816">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="RectangleObject" x="5888" y="-3200">
         <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>

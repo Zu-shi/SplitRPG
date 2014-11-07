@@ -7,7 +7,9 @@ public class CustomTiledImporterObjectPersistence : Tiled2Unity.ICustomTiledImpo
 
 	public void HandleCustomProperties(GameObject gameObject, IDictionary<string, string> props){
 		//Debug.Log("Handling " + gameObject.name);
-		if(props.ContainsKey("Persistent")) {
+		if(props.ContainsKey("Persistent") || props.ContainsKey("persistent") ) {
+			Debug.Log(gameObject.name);
+			Debug.Log(gameObject.transform.parent.name);
 			gameObject.tag = "Persistent";
 		}
 	}

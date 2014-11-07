@@ -76,6 +76,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 658baf07df54f403da7c364c76ee0087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hintLeft: {fileID: 21300000, guid: 7ac52a8e861e74ad886eff2cc5fb2e36, type: 3}
+  hintRight: {fileID: 21300000, guid: 72a21f20b62eb476ea7b6a5eb99d81d5, type: 3}
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -93,7 +95,7 @@ ParticleSystem:
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 4.5
+      scalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1185,7 +1187,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: adac2565c75784420baa53c4d3ab3087, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 72a21f20b62eb476ea7b6a5eb99d81d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

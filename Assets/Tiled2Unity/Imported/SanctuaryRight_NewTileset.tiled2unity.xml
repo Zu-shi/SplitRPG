@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 11/2/2014 7:20:41 PM-->
+<!--Last exported: 11/7/2014 2:36:08 AM-->
 <Tiled2Unity version="0.9.4.3">
   <AssignMaterial mesh="mesh_[00]_[00]" material="Sanctuary_Tileset_v2" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[01]_[00]" material="Sanctuary_Tileset_v2" sortingLayerName="" sortingOrder="1" />
@@ -596,6 +596,7 @@
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="sender4" x="2176" y="-7168">
+        <Property name="fade" value="" />
         <Property name="target" value="receiver4" />
         <BoxCollider2D width="128" height="128" />
       </GameObject>
@@ -655,6 +656,24 @@
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="blocker" x="1792" y="-7424">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="blocker" x="2560" y="-1536">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="blocker" x="1792" y="-1536">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="blocker" x="1024" y="-1536">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="blocker" x="256" y="-1536">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="blocker" x="3072" y="-1536">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="blocker" x="3840" y="-1536">
         <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>
@@ -1411,6 +1430,9 @@
         <BoxCollider2D width="128" height="128" />
       </GameObject>
       <GameObject name="debug2" x="6400" y="-3008">
+        <BoxCollider2D width="128" height="128" />
+      </GameObject>
+      <GameObject name="debug3" x="2176" y="-1536">
         <BoxCollider2D width="128" height="128" />
       </GameObject>
     </GameObject>
