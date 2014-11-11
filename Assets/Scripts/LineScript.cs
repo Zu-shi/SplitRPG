@@ -8,6 +8,7 @@ public class LineScript : _Mono {
 	private float period = 3f;
 	private float startxs;
 	private float counter;
+	private bool fadeDown = false;
 
 	void Start () {
 		startxs = xs;
@@ -24,5 +25,18 @@ public class LineScript : _Mono {
 			xs = startxs + amplitude * Mathf.Sin (counter);
 			counter += Time.deltaTime * Mathf.PI * 2 / period;
 		}
+
+		if(fadeDown){
+			alpha -= 0.01f;
+			if(alpha == 0f){
+				alpha = 1f;
+				fadeDown =false;
+				LineVisible(false);
+			}
+		}
+	}
+
+	public void FadeDown() {
+		fadeDown = true;
 	}
 }

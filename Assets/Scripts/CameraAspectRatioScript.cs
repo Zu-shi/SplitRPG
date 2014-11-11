@@ -42,6 +42,11 @@ public class CameraAspectRatioScript : MonoBehaviour {
 			rightRect.y = (1.0f - scaleHeight) / 2.0f;
 			
 			right.rect = rightRect;
+
+			Rect specialRect = new Rect(0,leftRect.yMin,1,rightRect.height);
+			Globals.gameManager.transform.Find("LineCamera").GetComponent<Camera>().rect = specialRect;
+			Globals.gameManager.transform.Find("CameraSpecial").GetComponent<Camera>().rect = specialRect;
+
 		}
 		else // add pillarbox
 		{
@@ -64,6 +69,11 @@ public class CameraAspectRatioScript : MonoBehaviour {
 			rightRect.y = 0;
 			
 			right.rect = rightRect;
+
+			Rect specialRect = new Rect(rightRect.xMin,0,leftRect.width * 2,1);
+			Globals.gameManager.transform.Find("LineCamera").GetComponent<Camera>().rect = specialRect;
+			Globals.gameManager.transform.Find("CameraSpecial").GetComponent<Camera>().rect = specialRect;
+
 		}
 	}
 }

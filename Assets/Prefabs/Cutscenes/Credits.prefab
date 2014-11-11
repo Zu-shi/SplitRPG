@@ -12,7 +12,7 @@ GameObject:
   - 212: {fileID: 21200000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Credits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,6 +56,7 @@ MonoBehaviour:
   BackgroundPrefab: {fileID: 100004, guid: b3254e42274c25e4abb36e8062c34348, type: 2}
   talkSE: {fileID: 8300000, guid: 1658a84987ef9498ab92201c8fcb68d4, type: 3}
   fadeRate: .00999999978
+  creditsTheme: {fileID: 8300000, guid: 2283f975abf184f4db1c7c928c090c9d, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

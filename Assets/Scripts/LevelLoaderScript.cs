@@ -31,7 +31,8 @@ public class LevelLoaderScript : _Mono {
 			Globals.playerLeft.GetComponent<CharacterMovementScript>().canJump = true;
 		if(canPush)
 			Globals.playerRight.GetComponent<CharacterMovementScript>().canPush = true;
-		
+
+		Globals.line.LineVisible(false);
 		Globals.levelManager.LoadLevels(leftLevel, rightLevel);
 	}
 }

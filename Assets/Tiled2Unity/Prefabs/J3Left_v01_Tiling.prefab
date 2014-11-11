@@ -8286,7 +8286,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 79c25a3a2f71c4f3fb7fd37a6f2343ad, type: 2}
+  - {fileID: 2100000, guid: e9290283c422c489ea039753efa395bb, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -8326,7 +8326,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 79c25a3a2f71c4f3fb7fd37a6f2343ad, type: 2}
+  - {fileID: 2100000, guid: e9290283c422c489ea039753efa395bb, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -13092,7 +13092,7 @@ MonoBehaviour:
   blocking: 1
   activatable: 0
   pit: 0
-  pushSound: {fileID: 0}
+  pushSound: {fileID: 8300000, guid: a1a08f28e36ae4b2ab2254f1ae68478b, type: 3}
   isHeavy: 0
 --- !u!114 &11400340
 MonoBehaviour:

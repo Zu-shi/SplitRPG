@@ -25,6 +25,7 @@ public abstract class CutsceneScript : _Mono {
 	// TODO:CHANGE THIS BACK, give back jumping ability.
 	//public bool triggered = false;
 	private bool triggered = false;
+	protected bool skipable = true;
 	
 	public GameObject BackgroundPrefab;
 	public AudioClip talkSE;
@@ -35,8 +36,14 @@ public abstract class CutsceneScript : _Mono {
 	private float oldFadeRate = 0;
 	private bool playing = true;
 	private List<GameObject> bubbles = new List<GameObject>();
+	private AudioClip leftWalkingSound;
 
 	protected void SetupScene() {
+
+		leftWalkingSound = Globals.playerLeft.GetComponent<CharacterMovementScript>().walkingSound;
+		Globals.playerLeft.GetComponent<CharacterMovementScript>().walkingSound = 
+			Globals.playerRight.GetComponent<CharacterMovementScript>().walkingSound;
+
 		Globals.line.LineVisible(false);
 		background = Instantiate(BackgroundPrefab, new Vector3(-1000, -1000, 0), Quaternion.identity) as GameObject;
 		leftPlayer.transform.Find("Sprite").gameObject.layer = LayerMask.NameToLayer("TransparentFX");
@@ -55,6 +62,7 @@ public abstract class CutsceneScript : _Mono {
 	}
 	
 	protected void TearDownScene() {
+		Globals.playerLeft.GetComponent<CharacterMovementScript>().walkingSound = leftWalkingSound;
 		Globals.line.LineVisible(true);
 		Destroy(background);
 		leftPlayer.transform.position = Globals.levelManager.leftSpawn.position + new Vector3(1f, -1f, 0);
@@ -87,7 +95,7 @@ public abstract class CutsceneScript : _Mono {
 	
 	public virtual void Update() {
 		if(triggered) {
-			if(Input.GetKeyDown(KeyCode.Escape) && playing) {
+			if(Input.GetKeyDown(KeyCode.Escape) && playing && skipable) {
 				StopAllCoroutines();
 				TearDownScene();
 				End();
@@ -177,7 +185,7 @@ public abstract class CutsceneScript : _Mono {
 			Debug.LogError("Object " + player.name + " has no SpriteAnimationManagerScript.");
 			return;
 		}
-		sams.PlayAnimation(animation, 0);
+		sams.PlayAnimation(animation, startIndex);
 	}
 
 	private IEnumerator MoveCoroutine(MovementScript ms, Direction dir, int numTiles) {

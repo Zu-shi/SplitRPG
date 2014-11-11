@@ -5,7 +5,15 @@ public class GameManagerScript : MonoBehaviour {
 
 	CameraScript leftCamera, rightCamera;
 	PlayerControllerScript leftPlayer, rightPlayer;
-	
+	private bool scopingCamera = false;
+
+	void Update () {
+		if(scopingCamera && Globals.cameraLeft.gameObject.GetComponent<Camera>().orthographicSize > 9.51f){
+			Globals.cameraLeft.gameObject.GetComponent<Camera>().orthographicSize -= 0.04f;
+			Globals.cameraRight.gameObject.GetComponent<Camera>().orthographicSize -= 0.04f;
+		}
+	}
+
 	void Start () {
 		leftCamera = Globals.cameraLeft;
 		rightCamera = Globals.cameraRight;
@@ -14,6 +22,10 @@ public class GameManagerScript : MonoBehaviour {
 
 		//Screen.lockCursor = true;
 		//Screen.showCursor = false;
+	}
+
+	public void SetScopeCamera(bool value){
+		scopingCamera = value;
 	}
 
 	public void RunDisableTest(){

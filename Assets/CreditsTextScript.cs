@@ -69,7 +69,9 @@ public class CreditsTextScript : MonoBehaviour {
 			if(alpha >= 1){
 				alpha = 1;
 				fadeDir = 0;
-				Invoke ("FadeOut", sustain);
+				if(currStep != contents.Length - 1){
+					Invoke ("FadeOut", sustain);
+				}
 			}
 		} else if (fadeDir == -1){
 			alpha -= fadeRate;

@@ -148,6 +148,9 @@ public class LevelManagerScript : _Mono{
 			Debug.Log ("Playing level 3 theme");
 		}
 		else if(leftLevel == levelPrefabs[6] && rightLevel == levelPrefabs[7]){
+			//UGLY THIS CODE DOES NOT BELONG HERE
+			Globals.playerLeft.GetComponent<CharacterMovementScript>().walkingSound = Globals.playerRight.GetComponent<CharacterMovementScript>().walkingSound;
+
 			if(!reloadPersistent){Globals.soundManager.LoadAndPlayClip(cutsceneTheme2);}
 			Globals.soundManager.levelMusicClip = level4Theme;
 			Debug.Log ("Playing level 4 theme");
